@@ -1,0 +1,4 @@
+install -g create-react-app
+create-react-app capstone
+cd capstone
+npm start

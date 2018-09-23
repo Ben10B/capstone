@@ -3348,6 +3348,36 @@
 .fnt-size-100 {
   font-size: 100pt; }
 
+.res-fnt-size-1 {
+  font-size: 1vw; }
+
+.res-fnt-size-2 {
+  font-size: 2vw; }
+
+.res-fnt-size-3 {
+  font-size: 3vw; }
+
+.res-fnt-size-4 {
+  font-size: 4vw; }
+
+.res-fnt-size-5 {
+  font-size: 5vw; }
+
+.res-fnt-size-6 {
+  font-size: 6vw; }
+
+.res-fnt-size-7 {
+  font-size: 7vw; }
+
+.res-fnt-size-8 {
+  font-size: 8vw; }
+
+.res-fnt-size-9 {
+  font-size: 9vw; }
+
+.res-fnt-size-10 {
+  font-size: 10vw; }
+
 .column {
   display: flex;
   flex-direction: column;
@@ -3361,6 +3391,36 @@
   padding: 1%; }
   .row * {
     flex: 1; }
+
+.flex-1 {
+  flex: 1; }
+
+.flex-2 {
+  flex: 2; }
+
+.flex-3 {
+  flex: 3; }
+
+.flex-4 {
+  flex: 4; }
+
+.flex-5 {
+  flex: 5; }
+
+.flex-6 {
+  flex: 6; }
+
+.flex-7 {
+  flex: 7; }
+
+.flex-8 {
+  flex: 8; }
+
+.flex-9 {
+  flex: 9; }
+
+.flex-10 {
+  flex: 10; }
 
 @media all and (max-width: 575px) {
   .row {

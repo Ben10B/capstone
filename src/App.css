@@ -1,49 +1,85 @@
-body{
-  /* font-family: "Dosis", sans-serif; */
-  /* font-family:'Nunito', sans-serif; */
-}
 .App {
   text-align: center;
   height: 100vh;
   display: flex;
   flex-direction: row;
+  font-family: "Dosis", sans-serif;
+  /* font-family:'Nunito', sans-serif; */
 }
 
 .App-logo {
   height: 80px;
+  cursor: pointer;
 }
 .App-logo:hover{
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-logo-spin infinite 2.5s linear;
 }
 
 .App-header {
-  background-color: #222;
-  padding: 20px;
+  background: url('Assets/img/Theme Two.png') no-repeat bottom;
   color: white;
   display: flex;
   flex-direction: column;
   flex: 1.5;
 }
-
+.App-header-close {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex: 0.1;
+  transition: flex 1s;
+  background: url('Assets/img/Theme Two.png') no-repeat bottom;
+}
+.App-header-close a:hover, .App-header a:hover{ color: white;
+}
 .App-title {
   font-size: 1.5em;
 }
 
 .App-intro {
+  background: url('Assets/img/Theme Two.png') no-repeat center/cover;
   font-size: large;
   flex: 8.5;
+  overflow: hidden;
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-.App-header-close {
-  background-color: #222;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  flex: 0.1;
-  transition: flex 1s;
+/* App.jsx */
+.pageOpt{
+  text-decoration: none;
+  margin: 4px 0;
+  padding: 4px;
+  transition: background-color 0.5s;
+}
+.active{
+  background-color: rgba(255, 255, 255, 0.315);
+  font-weight: bold;
+}
+.pageOpt:hover{
+  background-color: rgba(255, 255, 255, 0.315);
+  cursor: pointer;
+  box-shadow: 0 0 5px #fff;
+}
+/* Home.jsx */
+.goal{  
+  background-color: rgba(255, 255, 255, 0.062);
+  display: block;
+  font-weight: bold;
+  margin: 2px 0;
+  transition: background-color 0.5s;
+  text-align: center;
+  border: 0;
+}
+.goal:hover{
+  background-color: rgba(255, 255, 255, 0.315);
+  cursor: pointer;
+  box-shadow: 0 0 5px #fff;
+}
+#goalList{
+  height: 75vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

@@ -10,23 +10,40 @@ import Achievements from './Achievements.jsx';
 
 class Header extends Component {
   state = {
-    active: false,
+    active: [[true, 1], [false, 0], [false, 0], [false, 0], [false, 0]],
+    closed: false
   };
-  toggleClass = (isActive) => {
-    this.setState({ active: !isActive });
+  toggleHeader = (isClosed) => {
+    this.setState({ closed: !isClosed });
+  };
+  togglePage = (index, isActive) => {
+    const activeArray = this.state.active;
+    for (let i = 0; i < activeArray.length; i++) {
+      if(i !== index){ activeArray[i][0] = false; activeArray[i][1] = 0; }
+    }
+    if(activeArray[index][1] === 0){
+      activeArray[index][0] = !isActive;
+      activeArray[index][1] = 1;
+    }
+    this.setState({ active: activeArray });
   };
   render(){
     return(
-      <header className={this.state.active ? "App-header" : "App-header-close"}>
-        <img src={logo} alt="logo" className="App-logo"  
-        onClick={() => this.toggleClass(this.state.active)} />
+      <header className={this.state.closed ? "App-header-close" : "App-header"}>
         <h1 className="App-title">Grindin'</h1>
+        <img src={logo} alt="logo" className="App-logo"  
+        onClick={() => this.toggleHeader(this.state.closed)} />
         <ul>
-          <li onClick={() => this.props.click('home')} class="active"><a>Home</a></li>
-          <li onClick={() => this.props.click('profile')}><a>My Profile</a></li>
-          <li onClick={() => this.props.click('sprite')}><a>Customize Sprite</a></li>
-          <li onClick={() => this.props.click('model')}><a>Fogg Model</a></li>
-          <li onClick={() => this.props.click('rewards')}><a>Achievements</a></li>
+          <li className={this.state.active[0][0] ? "pageOpt active" : "pageOpt"} 
+          onClick={() => {this.props.click('home'); this.togglePage(0, this.state.active[0][0])}}><a>Home</a></li>
+          <li className={this.state.active[1][0] ? "pageOpt active" : "pageOpt"} 
+          onClick={() => {this.props.click('profile'); this.togglePage(1, this.state.active[1][0])}}><a>My Profile</a></li>
+          <li className={this.state.active[2][0] ? "pageOpt active" : "pageOpt"} 
+          onClick={() => {this.props.click('sprite'); this.togglePage(2, this.state.active[2][0])}}><a>Customize Sprite</a></li>
+          <li className={this.state.active[3][0] ? "pageOpt active" : "pageOpt"} 
+          onClick={() => {this.props.click('model'); this.togglePage(3, this.state.active[3][0])}}><a>Fogg Model</a></li>
+          <li className={this.state.active[4][0] ? "pageOpt active" : "pageOpt"} 
+          onClick={() => {this.props.click('rewards'); this.togglePage(4, this.state.active[4][0])}}><a>Achievements</a></li>
         </ul>
       </header>
     )
@@ -35,9 +52,6 @@ class Header extends Component {
 
 
 class Body extends Component {
-  constructor(props){
-    super(props);
-  }
   render(){
     if(this.props.page === 'profile'){
       return <Profile/>;

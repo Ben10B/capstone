@@ -62,6 +62,12 @@
         font-size: $size * 1pt;
     }
 }
+//res-fnt-size-: {number}
+@for $size from 1 through 10{
+    .res-fnt-size-#{$size}{
+        font-size: $size * 1vw;
+    }
+}
 //Content flows top > bottom
 .column{
     display: flex;
@@ -77,6 +83,12 @@
     padding: 1%;
     *{
         flex: 1;
+    }
+}
+//flex-: {number}
+@for $flex from 1 through 10{
+    .flex-#{$flex}{
+        flex: $flex;
     }
 }
 @media all and (max-width: 575px){

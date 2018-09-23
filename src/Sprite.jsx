@@ -4,9 +4,9 @@ import './BENstrap-in/css/my.css';
 class Sprite extends Component {
     render() {
         return (
-            <p className="App-intro">
+            <div className="App-intro">
                 Sprite
-            </p>
+            </div>
         );
     }
 }

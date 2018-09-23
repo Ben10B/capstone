@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+    <head>
+        <title>BENstrap-in CSS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/my.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <ul class="bg-primary nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li class="dropdown-nav">
+                    <a href="page1.html">Styles</a>
+                    <div class="dropdown-content">
+                        <a href="page1.html#color">Color</a>
+                        <a href="page1.html#align">Align</a>
+                        <a href="page1.html#containers">Containers</a>
+                        <a href="page1.html#button">Button</a>
+                        <a href="page1.html#sizing">Sizing</a>
+                    </div>
+                </li>
+                <li class="dropdown-nav">
+                    <a href="page2.html">Custom</a>
+                    <div class="dropdown-content">
+                        <a href="page2.html#parallax">Parallax</a>
+                        <a href="page2.html#nav">Nav</a>
+                        <a href="page2.html#dropdown">Dropdown</a>
+                        <a href="page2.html#tooltip">Tooltip</a>
+                        <a href="page2.html#pagination">Pagination</a>
+                        <a href="page2.html#modal">Modal</a>
+                        <a href="page2.html#loader">Loader</a>
+                        <a href="page2.html#indicator">Indicator</a>
+                        <a href="page2.html#scrollTop">Jump Up</a>
+                    </div>
+                </li>
+                <li><a href="page3.html">Transitions</a></li>
+            </ul>
+        </nav>
+        <div class="column txt-center bg-second fnt-white">
+            <h1>BENstrap-in</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+       
+        <div class="row txt-center">
+            <div class="column">
+                <h2>Styling</h2>
+                <p>Wanna know how to use my classes?</p>
+                <form><input type="button" class="btn bg-primary-hvr wdth-100 hght-80" value="Let's go" onclick="window.location.href='page1.html'"></input></form>
+            </div>
+            <div class="column">
+                <h2>Custom Classes</h2>
+                <p>Wanna see how it looks?</p>
+                <form><input type="button" class="btn bg-second-hvr wdth-100 hght-80" value="Let's go" onclick="window.location.href='page2.html'"></input></form>
+            </div>
+            <div class="column">
+                <h2>Transitions</h2>
+                <p>Look at the transitions!</p>
+                <form><input type="button" class="btn bg-third-hvr wdth-100 hght-80" value="Let's go" onclick="window.location.href='page3.html'"></input></form>
+            </div>
+        </div>
+        <div class="row bg-third">
+            <h1 class="fnt-primary">Message of the Day</h1>
+            <p class="fnt-white" id="dailyMessage">Daily message goes here!</p>
+        </div>
+        <!-- Slideshow -->
+        <div class="slideShow-container wdth-100">
+            <div class="mySlides">
+                <img src="img/Ben 5.JPG">
+            </div>
+            <div class="mySlides">
+                <img src="img/Ben 6.JPG">
+            </div>
+            <div class="mySlides">
+                <img src="img/Ben 7.JPG">
+            </div>
+            <a class="prev" onclick="toggle(-1)">&#10094;</a>
+            <a class="next" onclick="toggle(1)">&#10095;</a> 
+            <div class="txt-center margn-bottom-5">
+                <div class="loader-1-2s-20px indicator" onclick="current(1)"></div>
+                <div class="loader-2-2s-20px indicator" onclick="current(2)"></div>
+                <div class="loader-3-2s-20px indicator" onclick="current(3)"></div>
+            </div>
+        </div>
+        <footer class="bg-primary fnt-white">
+            <p>Work Still in Progress...</p>
+        </footer>
+        <script src="js/script.js"></script>
+    </body>
+</html>

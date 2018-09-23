@@ -1,0 +1,235 @@
+@import 'color';
+@import 'font';
+body, html{ height: 100%; 
+}
+// Headings
+$i: 2;
+@for $num from 1 through 6{
+    h#{$num}{
+        font-family: $mainFont;
+        font-weight: 700;
+        font-size: ($textSize + 18) - $i;
+        $i: $i + 2;
+    }
+}
+//Table
+.table {
+    font-family: $bodyFont;
+    border-collapse: collapse;
+    width: 100%;
+    td, th{
+        padding: 8px;
+    }
+    tr:nth-child(even){background-color: #f2f2f2;}
+    tr:hover { background-color: #ddd; }
+    th {
+        font-family: $mainFont;
+        font-size: $textSize + 5pt;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: inherit;
+        background-color: $secondaryColor;
+        color: white;
+    }
+}
+//1% Margins
+p{ margin: 1%;
+}
+//1% Paddings
+header{ padding: 1%;
+}
+//Links
+a{
+    text-decoration: none;
+    &:link{ color: $primaryColor;
+    }
+    &:visited{ color: lighten($primaryColor, 5%);
+    }
+    &:hover{ 
+        color: darken($primaryColor, 0%);
+        cursor: pointer;
+    }
+    &:active{ 
+        color: lighten($thirdColor, 75%);
+    }
+}
+//Navigation links
+.nav{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    overflow: hidden;
+    a{
+        font-family: $mainFont;
+        &:link, &:visited{ 
+            background-color: lighten($primaryColor, 0%);
+            color: white;
+            padding: 22px 33px;
+            // padding: 18px 29px;
+            // padding: 14px 25px;
+            text-align: center; 
+            text-decoration: none;
+            display: inline-block;
+        }
+        &:hover{ text-decoration: overline; }
+        &:hover, &:active{
+            color: $thirdColor;
+            background-color: lighten($primaryColor, 50%);
+        }
+    }
+    .active a{
+        background-color: lighten($primaryColor, 5%);
+        color: white;
+        font-weight: 700;
+    } 
+}
+@media all and (max-width: 575px){
+    .nav{
+        display: flex;
+        flex-direction: column;
+        a{
+            &:link, &:visited{ 
+                display: inherit;
+                padding: 6px 17px;
+            }
+        }
+        .dropdown-nav{
+            float: none;
+            .dropdown-content{
+                position: relative;
+                a{
+                    display: block;
+                    text-align: left;
+                }
+            }    
+        }
+    }
+}
+.sticky{
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+//Navbar    left/right
+//Main      right/left
+$navWidth: 100px;
+@each $side in right, left{
+    .nav-#{$side}{
+        top: 0;
+        @if $side == left{
+            left: 0;
+        }@else if $side == right{
+            right: 0;
+        }
+        width: $navWidth;
+        height: 100vh;
+        overflow-x: hidden;
+        position: fixed;
+        ul{
+            display: flex;
+            flex-direction: column;
+            a{
+                font-family: $mainFont;
+                &:link, &:visited{ 
+                    background-color: lighten($primaryColor, 0%);
+                    color: white;
+                    padding: 14px 25px;
+                    width: 100%;
+                    text-align: $side; 
+                    text-decoration: none;
+                    display: inline-block;
+                }
+                &:hover{ text-decoration: overline; }
+                &:hover, &:active{
+                    color: $thirdColor;
+                    background-color: lighten($primaryColor, 50%);
+                }
+            }
+            .active a{
+                background-color: lighten($primaryColor, 5%);
+                color: white;
+                font-weight: 700;
+            }
+        }
+    }
+    .main-#{$side}{
+        padding-bottom: 5%;
+        @if $side == right{
+            margin-left: $navWidth;
+        }@else if $side == left{
+            margin-right: $navWidth;
+        }
+    }
+}
+//Sidebar
+.sidebar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: $navWidth;
+    height: 100%; 
+    position: fixed;
+    overflow: auto;
+    a{
+        font-family: $mainFont;
+        &:link, &:visited{ 
+            background-color: lighten($secondaryColor, 0%);
+            color: white;
+            width: 100%;
+            padding: 14px 25px;
+            text-align: left; 
+            text-decoration: none;
+            display: inline-block;
+        }
+        &:hover{ text-decoration: overline; }
+        &:hover, &:active{
+            color: $thirdColor;
+            background-color: lighten($primaryColor, 50%);
+        }
+    }
+}
+//Tooltips
+.tooltip {
+    padding: 1%;
+    position: relative;
+    display: inline-block;
+    border: 1px solid #033;
+    background: lighten($primaryColor, 50%);
+    .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        top: 100%;
+        left: 50%;
+        margin-left: -60px;
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent black transparent;
+        }
+    }
+    &:hover .tooltiptext { visibility: visible;
+    }
+}
+//Footer
+footer{ 
+    border-top: 0.1px solid $thirdColor;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: inline-block;
+}
+//Italic
+i {  font-style: italic;
+}

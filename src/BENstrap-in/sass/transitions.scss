@@ -1,0 +1,40 @@
+@import 'mixins';
+@import 'color';
+@each $prop in width, height{
+    @each $color in primary, second, third, white{
+        @for $sec from 0s through 60s{
+            .extnd-#{$prop}-#{$color}-#{$sec} {
+                width: 100px;
+                height: 100px;
+                @include transition($prop, $sec);
+                &:hover{ 
+                    @if($prop == height) { height: 300px; }
+                    @if($prop == width) { width: 300px; }
+                    
+                    @if($color == primary) { background: $primaryColor; }
+                    @if($color == second) { background: $secondaryColor; }
+                    @if($color == third) { background: $thirdColor; }
+                    @if($color == white) { background: white; }
+                }
+            }
+            .extnd-#{$prop}-#{$sec} {
+                width: 100px;
+                height: 100px;
+                @include transition($prop, $sec);
+                &:hover{ 
+                    @if($prop == height) { height: 300px; }
+                    @if($prop == width) { width: 300px; }
+                }
+            }
+            .changeTo-#{$color}-#{$sec} {
+                @include transitionColor($sec);
+                &:hover{ 
+                    @if($color == primary) { background: $primaryColor; }
+                    @if($color == second) { background: $secondaryColor; }
+                    @if($color == third) { background: $thirdColor; }
+                    @if($color == white) { background: white; }
+                }
+            }
+        }
+    }
+}

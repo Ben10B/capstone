@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+    <head>
+        <title>BENstrap-in Customs</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/my.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <ul class="bg-primary nav">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown-nav">
+                    <a href="page1.html">Styles</a>
+                    <div class="dropdown-content">
+                        <a href="page1.html#color">Color</a>
+                        <a href="page1.html#align">Align</a>
+                        <a href="page1.html#containers">Containers</a>
+                        <a href="page1.html#button">Button</a>
+                        <a href="page1.html#sizing">Sizing</a>
+                    </div>
+                </li>
+                <li class="active dropdown-nav">
+                    <a href="page2.html">Custom</a>
+                    <div class="dropdown-content">
+                        <a href="#parallax">Parallax</a>
+                        <a href="#nav">Nav</a>
+                        <a href="#dropdown">Dropdown</a>
+                        <a href="#tooltip">Tooltip</a>
+                        <a href="#pagination">Pagination</a>
+                        <a href="#modal">Modal</a>
+                        <a href="#loader">Loader</a>
+                        <a href="#indicator">Indicator</a>
+                        <a href="#scrollTop">Jump Up</a>
+                    </div>
+                </li>
+                <li><a href="page3.html">Transitions</a></li>
+            </ul>
+        </nav>
+        <div class="column txt-center">
+            <h1>.customClasses { }</h1>
+            <p>Here, you'll see my custom classes. Don't worry. I'll add more in the future. This is all I've got!</p>
+        </div>
+        <!-- Parallax -->
+        <div id="parallax" class="row bg-primary txt-center">
+            <div class="column parallax fnt-white">
+                <img src="img/proudShades.gif"/>
+                <h2>Parallax</h2>
+                <p>I've got a parallax. >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+            </div>
+            <div class="snippet">
+                <h6 class="fnt-white">Example</h6>
+                <pre class="txt-left">
+                <code>
+                    &lt;div class="parallax"&gt;
+                        &lt;img src="img/proudShades.gif"/&gt;
+                    &lt;/div&gt;
+                </code>
+                </pre>
+            </div>
+        </div>
+        <!-- Nav -->
+        <div id="nav" class="column txt-center">
+            <div class="row">
+                <div class="column">
+                    <h2>Navbar</h2>
+                    <p>I've got a navigation bar. >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+                </div>
+                <div class="snippet">
+                    <h6 class="fnt-white">Example</h6>
+                    <pre class="txt-left">
+                    <code>
+                        &lt;ul class="bg-primary nav"&gt;
+                            &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a&gt;Page2&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a&gt;Page3&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a&gt;Page4&lt;/a&gt;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    </code>
+                    <ul class="bg-primary nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Page2</a></li>
+                        <li><a href="#">Page3</a></li>
+                        <li><a href="#">Page4</a></li>
+                    </ul>
+                    </pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h2>Navbar w/Dropdown</h2>
+                    <p>I've got a navigation bar, with a dropdown. >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+                </div>
+                <div class="snippet">
+                    <h6 class="fnt-white">Example</h6>
+                    <pre class="txt-left">
+                    <code>
+                        &lt;ul class="bg-primary nav"&gt;
+                            &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                            &lt;li class="dropdown-nav"&gt;
+                                &lt;a&gt;Page2&lt;/a&gt;
+                                &lt;div class="dropdown-content&gt;
+                                    &lt;a&gt;Section 1&lt;/a&gt;
+                                    &lt;a&gt;Section 2&lt;/a&gt;
+                                &lt;/div&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;&lt;a&gt;Page3&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a&gt;Page4&lt;/a&gt;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    </code>
+                    <ul class="bg-primary nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li class="dropdown-nav">
+                            <a href="#">Page2</a>
+                            <div class="dropdown-content">
+                                <a>Section 1</a>
+                                <a>Section 2</a>
+                            </div>
+                        </li>
+                        <li><a href="#">Page3</a></li>
+                        <li><a href="#">Page4</a></li>
+                    </ul>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <!-- Dropdown -->
+        <div id="dropdown" class="row bg-primary txt-center">
+            <div class="column fnt-white">
+                <h2>Dropdown</h2>
+                <p>I've got a dropdown. >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+            </div>
+            <div class="snippet">
+                <h6 class="fnt-white">Example</h6>
+                <pre class="txt-left">
+                <code>
+                    &lt;div class="dropdown"&gt;
+                        &lt;span&gt;Dropdown&lt;/span&gt;
+                        &lt;div class="dropdown-content"&gt;
+                            &lt;a&gt;Hello World!&lt;/a&gt;
+                            &lt;a&gt;Hello World!&lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                </code>
+                    <div class="dropdown">
+                        <span>Dropdown</span>
+                        <div class="dropdown-content">
+                          <a>Hello World!</a>
+                          <a>Hello World!</a>
+                        </div>
+                    </div>
+                </pre>
+            </div>
+        </div>
+        <!-- Tooltip -->
+        <div id="tooltip" class="row txt-center">
+            <div class="column">
+                <h2>Tooltip</h2>
+                <p>I've got a tooltip. >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+            </div>
+            <div class="snippet">
+                <h6 class="fnt-white">Example</h6>
+                <pre class="txt-left">
+                <code>
+                    &lt;div class="tooltip"&gt;Hover over me
+                        &lt;span class="tooltiptext"&gt;Tooltip text&lt;/span&gt;
+                    &lt;/div&gt;
+                </code>
+                    <div class="tooltip">Hover over me
+                        <span class="tooltiptext">Tooltip text</span>
+                    </div>
+                </pre>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <div id="pagination" class="row bg-primary txt-center">
+            <div class="column fnt-white">
+                <h2>Pagination</h2>
+                <p>I've got a pagination. You know, for navigation. >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+            </div>
+            <div class="snippet">
+                <h6 class="fnt-white">Example</h6>
+                <pre class="txt-left">
+                <code>
+                    &lt;ul class="pagination txt-center"&gt;
+                        &lt;li class="active"&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;2&lt;/li&gt;
+                        &lt;li&gt;3&lt;/li&gt;
+                        &lt;li&gt;4&lt;/li&gt;
+                    &lt;/ul&gt;
+                </code>
+                </pre>
+            </div>
+            <ul class="pagination txt-center margn-bottom">
+                <li class="active"><a href="#">1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+            </ul>
+        </div>
+        <!-- Modal -->
+        <div id="modal" class="row txt-center">
+            <div class="column">
+                <h2>Modal</h2>
+                <p>They say modals are displayed at the top of the page. I disagree! >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+            </div>
+            <div class="column">
+                <button id="modalBtn">Open Modal</button>
+                <div id="myModal" class="modal">
+                    <div class="modal-content-fadeIn-1s">
+                        <div class="modal-header">
+                            <span class="close">&times;</span>
+                            <h1>Header</h1>
+                        </div>
+                        <div class="modal-body">
+                            <p>Some text in the Modal..</p>
+                        </div>
+                        <div class="modal-footer">
+                            <h4>Footer</h4>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="snippet">
+                <h6 class="fnt-white">Example</h6>
+                <pre class="txt-left">
+                <code>
+                    &lt;button id="modalBtn"&gt;Open Modal&lt;/button&gt;
+                    &lt;div id="myModal" class="modal"&gt;
+                        &lt;div class="modal-content-fadeIn-1s"&gt;
+                            &lt;div class="modal-header"&gt;
+                                &lt;span class="close"&gt;&times;&lt;/span&gt;
+                                &lt;h1&gt;Header&lt;/h1&gt;
+                            &lt;/div&gt;
+                            &lt;div class="modal-body"&gt;
+                                &lt;p&gt;Some text in the Modal..&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;div class="modal-footer"&gt;
+                                &lt;h4&gt;Footer&lt;/h4&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                </code>
+                </pre>
+            </div>
+        </div>
+        <!-- Loader -->
+        <div id="loader" class="row bg-primary txt-center">
+            <div class="column fnt-white">
+                <h2>Loader</h2>
+                <p>I've got a loader. To change the number of colors, choose from 1 to 3. You can change the speed of the loader up to 60s. Lastly, adjust the size of the loader from 10px to 100px. >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+            </div>
+            <div class="snippet">
+                <h6 class="fnt-white">Example</h6>
+                <pre class="txt-left">
+                <code class="row">
+                    <div>
+                        &lt;div class="loader-1-1s-10px"&gt;&lt;/div&gt;
+                        <div class="loader-1-1s-10px"></div>
+                    </div>
+                    <div>
+                        &lt;div class="loader-2-5s-25px"&gt;&lt;/div&gt;
+                        <div class="loader-2-5s-25px"></div>
+                    </div>
+                    <div>
+                        &lt;div class="loader-3-10s-50px"&gt;&lt;/div&gt;
+                        <div class="loader-3-10s-50px"></div>
+                    </div>
+                </code>
+                </pre>
+            </div>
+        </div>
+        <!-- Indicator -->
+        <div id="indicator" class="row txt-center">
+            <div class="column">
+                <h2>Indicator</h2>
+                <p>I've got an indicator. >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+            </div>
+            <div class="snippet">
+                <h6 class="fnt-white">Example</h6>
+                <pre class="txt-left">
+                <code class="row">
+                    <div>
+                        &lt;div class="loader-1-2s-15px indicator activeI"&gt;&lt;/div&gt;
+                        <div class="loader-1-2s-15px indicator activeI"></div>
+                    </div>
+                    <div>
+                        &lt;div class="loader-2-2s-15px indicator"&gt;&lt;/div&gt;
+                        <div class="loader-2-2s-15px indicator"></div>
+                    </div>
+                    <div>
+                        &lt;div class="loader-3-2s-15px indicator"&gt;&lt;/div&gt;
+                        <div class="loader-3-2s-15px indicator"></div>
+                    </div>
+                </code>
+                </pre>
+            </div>
+        </div>
+        <!-- ScrollTop -->
+        <div id="scrollTop" class="row bg-primary txt-center margn-bottom-10">
+            <div class="column fnt-white">
+                <h2>Jump Up</h2>
+                <p>I've got a button that will help you get back to the top of the page, by jumping! >>>>>>>>>>>>>>>>>>>>>>>>>></p>
+            </div>
+            <div class="snippet">
+                <h6 class="fnt-white">Example</h6>
+                <pre class="txt-left">
+                <code class="row">
+                    <div>
+                        &lt;button type="button" id="toTopBtn" onclick="topFunction()" class="btn bg-primary-hvr"&gt;Top&lt;/button&gt;
+                        <button type="button" onclick="topFunction()" class="btn bg-primary-hvr">Top</button>
+                    </div>
+                </code>
+                </pre>
+            </div>
+        </div>
+        <!-- Scroll to Top Button -->
+        <button type="button" id="toTopBtn" onclick="topFunction()" class="btn bg-primary-hvr">Top</button>
+        <footer class="row bg-primary fnt-white">
+            <p>Work Still in Progress...</p>
+            <ul class="pagination txt-center">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="page1.html">Styles</a></li>
+                <li class="active"><a href="page2.html">Custom</a></li>
+                <li><a href="page3.html">Transitions</a></li>
+            </ul>
+        </footer>
+        <script src="js/script.js"></script>
+    </body>
+</html>

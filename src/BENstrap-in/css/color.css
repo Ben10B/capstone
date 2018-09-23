@@ -1,0 +1,29 @@
+.bg-primary {
+  background-color: #2a6288; }
+
+.bg-second {
+  background-color: #505050; }
+
+.bg-third {
+  background-color: #000; }
+
+.bg-primary-light {
+  background-color: #c4dced; }
+
+.bg-second-light {
+  background-color: #d0d0d0; }
+
+.bg-third-light {
+  background-color: gray; }
+
+.fnt-primary {
+  color: #2a6288; }
+
+.fnt-second {
+  color: #505050; }
+
+.fnt-white {
+  color: white; }
+
+.fnt-black {
+  color: black; }

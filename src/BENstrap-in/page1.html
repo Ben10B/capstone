@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+    <head>
+        <title>BENstrap-in Styling</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/my.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <ul class="bg-primary nav">
+                <li><a href="index.html">Home</a></li>
+                <li class="active"><a href="#">Styles</a></li>
+                <li class="dropdown-nav">
+                    <a href="page2.html">Custom</a>
+                    <div class="dropdown-content">
+                        <a href="page2.html#parallax">Parallax</a>
+                        <a href="page2.html#nav">Nav</a>
+                        <a href="page2.html#dropdown">Dropdown</a>
+                        <a href="page2.html#tooltip">Tooltip</a>
+                        <a href="page2.html#pagination">Pagination</a>
+                        <a href="page2.html#modal">Modal</a>
+                        <a href="page2.html#loader">Loader</a>
+                        <a href="page2.html#indicator">Indicator</a>
+                        <a href="page2.html#scrollTop">Jump Up</a>
+                    </div>
+                </li>
+                <li><a href="page3.html">Transitions</a></li>
+            </ul>
+        </nav>
+        <ul class="bg-second-light sidebar">
+            <li class="bg-second txt-center fnt-white"><h5>Sections</h5></li>
+            <li><a href="#color">Color</a></li>
+            <li><a href="#align">Align</a></li>
+            <li><a href="#containers">Containers</a></li>
+            <li><a href="#button">Buttons</a></li>
+            <li><a href="#sizing">Sizing</a></li>
+            <!-- <li><a href="#">Other</a></li> -->
+        </ul>
+        <div class="main-right">
+            <div class="column txt-center">
+                <h1>.styling { HTML }</h1>
+                <p>Here, you'll learn how my styling works. Don't worry. I'll add more in the future. This is all I've got!</p>
+            </div>
+            <!-- Color -->
+            <div class="column bg-primary txt-center">
+                <h2 id="color" class="fnt-white">Color</h2>
+                <p>I use 3 colors for my theme. With these classes, you can change the background color as well as the font color.</p>
+                <div class="row">
+                    <div class="column">
+                        <h3>Background Colors</h3>
+                        <p>To change the background color, use the <i class="fnt-white">bg-'color'</i> class.</p>
+                        <div class="snippet">
+                            <h6 class="fnt-white">Example</h6>
+                            <pre class="txt-left">
+                            <code>
+                                &lt;p class="bg-primary"&gt;Primary Color&lt;/p&gt;
+                                <p class="bg-primary">Primary Color</p>
+                                &lt;p class="bg-second"&gt;Secondary Color&lt;/p&gt;
+                                <p class="bg-second">Secondary Color</p>
+                                &lt;p class="bg-third"&gt;Third Color&lt;/p&gt;
+                                <p class="bg-third">Third Color</p>
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h3>Light Background Colors</h3>
+                        <p>To change the background color, use the <i class="fnt-white">bg-'color'-light</i> class.</p>
+                        <div class="snippet">
+                            <h6 class="fnt-white">Example</h6>
+                            <pre class="txt-left">
+                            <code>
+                                &lt;p class="bg-primary-light"&gt;Primary Color&lt;/p&gt;
+                                <p class="bg-primary-light">Light Primary Color</p>
+                                &lt;p class="bg-second-light"&gt;Secondary Color&lt;/p&gt;
+                                <p class="bg-second-light">Light Secondary Color</p>
+                                &lt;p class="bg-third-light"&gt;Third Color&lt;/p&gt;
+                                <p class="bg-third-light">Light Third Color</p>
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h3>Font Colors</h3>
+                        <p>To change the text color, use the <i class="fnt-white">fnt-'color'</i> class.</p>
+                        <div class="snippet">
+                            <h6 class="fnt-white">Example</h6>
+                            <pre class="txt-left">
+                            <code>
+                                &lt;p class="fnt-primary"&gt;Primary Color&lt;/p&gt;
+                                <p class="fnt-primary">Primary Color</p>
+                                &lt;p class="fnt-second"&gt;Secondary Color&lt;/p&gt;
+                                <p class="fnt-second">Second Color</p>
+                                &lt;p class="fnt-white"&gt;White&lt;/p&gt;
+                                <p class="fnt-white">Third Color</p>
+                                &lt;p class="bg-primary fnt-black"&gt;White&lt;/p&gt;
+                                <p class="bg-primary fnt-black">Third Color</p>
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!-- Align -->
+            <div class="column txt-center">
+                <div class="row">
+                    <div class="column">
+                        <h2 id="align">Text-Align</h2>
+                        <p>Aligning text made simple. You're welcome. To align the text, use <i>txt-'position'</i> class.</p>
+                        <div class="snippet">
+                            <h6 class="fnt-white">Example</h6>
+                            <pre class="txt-left">
+                            <code>
+                                &lt;p class="bg-primary txt-left"&gt;Align Left&lt;/p&gt;
+                                <p class="bg-primary txt-left">Align Left</p>
+                                &lt;p class="bg-primary txt-center"&gt;Align Center&lt;/p&gt;
+                                <p class="bg-primary txt-center">Align Center</p>
+                                &lt;p class="bg-primary txt-right"&gt;Align Right&lt;/p&gt;
+                                <p class="bg-primary txt-right">Align Right</p>
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="column">
+                        <h2>Align Self</h2>
+                        <p>To align the target element, use <i>self-'position'</i> class.</p>
+                        <div class="snippet">
+                            <h6 class="fnt-white">Example</h6>
+                            <pre class="txt-left">
+                            <code>
+                                &lt;p class="self-left"&gt;Align Left&lt;/p&gt;
+                                <div>
+                                    <p class="self-left bg-primary" style="width: 150px">Align Left</p>
+                                </div>
+                                &lt;p class="self-center"&gt;Align Center&lt;/p&gt;
+                                <p class="self-center bg-primary" style="width: 150px">Align Center</p>
+                                &lt;p class="self-right"&gt;Align Right&lt;/p&gt;
+                                <div>
+                                    <p class="self-right bg-primary" style="width: 150px">Align Right</p>
+                                </div>
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <!-- Containers -->
+            <div class="column bg-primary txt-center">
+                <h2 id="containers" class="fnt-white">Containers</h2>
+                <p>I have 2 containers. They could use more work, yet they work.</p>
+                <div class="row">
+                    <div class="column">
+                        <h3>Row</h3>
+                        <p>Content in rows should flow from left > right, right? To create a row container, use the <i class="fnt-white">row</i> class.</p>
+                        <div class="snippet">
+                            <h6 class="fnt-white">Example</h6>
+                            <pre class="txt-left">
+                            <code>
+                                &lt;div class="row"&gt;
+                                    &lt;p class="bg-second txt-center"&gt;Left&lt;/p&gt;
+                                    &lt;p class="txt-center"&gt;Center&lt;/p&gt;
+                                    &lt;p class="bg-second txt-center"&gt;Right&lt;/p&gt;
+                                &lt;/div&gt;
+                                <div class="row">
+                                    <p class="bg-second txt-center">Left</p>
+                                    <p class="txt-center">Center</p>
+                                    <p class="bg-second txt-center">Right</p>
+                                </div>
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h3>Column</h3>
+                        <p>Content in columns should flow from top > bottom, right? To create a column container, use the <i class="fnt-white">column</i> class.</p>
+                        <div class="snippet">
+                            <h6 class="fnt-white">Example</h6>
+                            <pre class="txt-left">
+                            <code>
+                                &lt;div class="column"&gt;
+                                    &lt;p class="bg-second txt-center"&gt;Top&lt;/p&gt;
+                                    &lt;p class="txt-center"&gt;Center&lt;/p&gt;
+                                    &lt;p class="bg-second txt-center"&gt;Bottom&lt;/p&gt;
+                                &lt;/div&gt;
+                                <div class="column">
+                                    <p class="bg-second txt-center">Top</p>
+                                    <p class="txt-center">Center</p>
+                                    <p class="bg-second txt-center">Bottom</p>
+                                </div>
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Buttons -->
+            <div class="column txt-center">
+                <div class="row">
+                    <div class="column">
+                        <h2 id="button">Buttons</h2>
+                        <p>I like my buttons. You do too. 4 variations! To style a button, use the <i>btn</i> class. If you want a background color, add the <i>bg-'color'-hvr</i> class.</p>
+                        <div class="snippet">
+                            <h6 class="fnt-white">Example</h6>
+                            <pre class="txt-left">
+                            <code>
+                                &lt;button type="button" class="btn"&gt;Button&lt;/button&gt;
+                                <button type="button" class="btn">Button</button>
+                                &lt;button type="button" class="btn bg-primary-hvr"&gt;Button&lt;/button&gt;
+                                <button type="button" class="btn bg-primary-hvr">Button</button>
+                                &lt;button type="button" class="btn bg-second-hvr"&gt;Button&lt;/button&gt;
+                                <button type="button" class="btn bg-second-hvr">Button</button>
+                                &lt;button type="button" class="btn bg-third-hvr"&gt;Button&lt;/button&gt;
+                                <button type="button" class="btn bg-third-hvr">Button</button>
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Width/Length -->
+            <div class="column bg-primary txt-center">
+                <div class="row">
+                    <div class="column">
+                        <h2 id="sizing" class="fnt-white">Sizing Dimensions</h2>
+                        <p>With these classes, you can adjust the width/height with ease! To adjust the width, use the <i class="fnt-white">wdth-'number'</i> class. If you want to adjust the height, add the <i class="fnt-white">hght-'number'</i> class.</p>
+                        <div class="snippet">
+                            <h6 class="fnt-white">Example</h6>
+                            <pre class="txt-left">
+                            <code>
+                                &lt;div class="bg-primary hght-10 wdth-50"&gt;This could be content.&lt;/div&gt;
+                                <div class="bg-primary hght-10 wdth-50">This could be content.</div>
+                            </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Scroll to Top Button -->
+            <button type="button" id="toTopBtn" onclick="topFunction()" class="btn bg-primary-hvr">Top</button>
+            <footer class="bg-primary fnt-white">
+                <p>Work Still in Progress...</p>
+                <ul class="pagination txt-left">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="page1.html">Styles</a></li>
+                    <li><a href="page2.html">Custom</a></li>
+                    <li><a href="page3.html">Transitions</a></li>
+                </ul>
+            </footer>
+            <script src="js/script.js"></script>
+        </div>   
+    </body>
+</html>

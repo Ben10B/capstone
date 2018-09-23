@@ -1,0 +1,90 @@
+@import 'color';
+@import 'font';
+//txt-: left, right, center
+//aligns text according to position
+@each $align in right, left, center{
+    .txt-#{$align}{
+        text-align: $align;
+    }
+}
+//self-: left, right, center
+//aligns self according to position
+@each $self in right, left, center{
+    .self-#{$self}{
+        align-self: $self;
+    }
+}
+//margn-: top, bottom, left, right
+@each $side in right, left, top, bottom{
+    @for $num from 1 through 100{
+        .margn-#{$side}-#{$num}{
+            @if($side == left){ margin-left: $num * 1%;
+            }
+            @else if($side == top){ margin-top: $num * 1%; 
+            }
+            @else if($side == right){ margin-right: $num * 1%; 
+            }
+            @else if($side == bottom){ margin-bottom: $num * 1%; 
+            }
+        }
+    }
+}
+//padding-: top, bottom, left, right
+@each $side in right, left, top, bottom{
+    @for $num from 1 through 100{
+        .pad-#{$side}-#{$num}{
+            @if($side == left){ padding-left: $num * 1%;
+            }
+            @else if($side == top){ padding-top: $num * 1%; 
+            }
+            @else if($side == right){ padding-right: $num * 1%; 
+            }
+            @else if($side == bottom){ padding-bottom: $num * 1%; 
+            }
+        }
+    }
+}
+//wdth-: {number}
+@for $wdth from 1 through 100{
+    .wdth-#{$wdth}{
+        width: $wdth * 1%;
+    }
+}
+//hght-: {number}
+@for $hght from 1 through 100{
+    .hght-#{$hght}{
+        height: $hght * 1%;
+    }
+}
+//fnt-size-: {number}
+@for $size from 1 through 100{
+    .fnt-size-#{$size}{
+        font-size: $size * 1pt;
+    }
+}
+//Content flows top > bottom
+.column{
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    min-height: 25vh;
+    margin-bottom: 2%;
+}
+//Content flows left > right
+.row{
+    display: flex;
+    flex-direction: row;
+    padding: 1%;
+    *{
+        flex: 1;
+    }
+}
+@media all and (max-width: 575px){
+    .row{ flex-direction: column;
+    }
+}
+//Images
+img{
+    width: 100%;
+    height: auto;
+}

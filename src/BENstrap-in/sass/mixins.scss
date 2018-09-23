@@ -1,0 +1,76 @@
+@mixin border-radius-all($size){
+    border-radius: $size;
+    -moz-border-radius: $size;
+    -webkit-border-radius: $size;
+}
+@mixin transition($prop, $sec){
+    transition-property: $prop, background-color;
+    -moz-transition-property: $prop, background-color;
+    -webkit-transition-property: $prop, background-color;
+
+    transition-duration: $sec;
+    -moz-transition-duration: $sec;
+    -webkit-transition-duration: $sec;
+}
+@mixin transitionColor($sec){
+    transition-property: background-color;
+    -moz-transition-property: background-color;
+    -webkit-transition-property: background-color;
+
+    transition-duration: $sec;
+    -moz-transition-duration: $sec;
+    -webkit-transition-duration: $sec;
+}
+//Modal
+@mixin animateModalTop($sec, $animation){
+    -webkit-animation-duration: $sec;
+    animation-duration: $sec;
+    @if($animation == 'top'){
+        -webkit-animation-name: animatetop;
+        animation-name: animatetop;
+    }
+    @else if($animation == 'fadeIn'){
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+    }
+}
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0;} 
+    to {top:10px; opacity:1;}
+}
+@keyframes animatetop {
+    from {top:-300px; opacity:0;}
+    to {top:0; opacity:1;}
+}
+@-webkit-keyframes fadeIn {
+    from {top:-300px; opacity:0;} 
+    to {top:0; opacity:1;}
+}
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+//Loader
+@mixin animateLoader($sec){
+    -webkit-animation-duration: $sec;
+    animation-duration: $sec;
+    -webkit-animation-name: spin;
+    animation-name: spin;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+@keyframes spin {
+    0% { 
+        -ms-transform: rotate(0deg); 
+        -webkit-transform: rotate(0deg); 
+        transform: rotate(0deg); 
+    }
+    100% { 
+        -ms-transform: rotate(360deg); 
+        -webkit-transform: rotate(360deg); 
+        transform: rotate(360deg); 
+    }
+}
+//Parallax

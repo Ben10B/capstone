@@ -1,0 +1,25 @@
+$primaryColor: rgb(42, 98, 136);
+$secondaryColor: rgb(80, 80, 80);
+$thirdColor: #000;
+
+.bg-primary{ background-color: $primaryColor;
+}
+.bg-second{ background-color: $secondaryColor;
+}
+.bg-third{ background-color: $thirdColor;
+}
+.bg-primary-light{ background-color: lighten($primaryColor, 50%);
+}
+.bg-second-light{ background-color: lighten($secondaryColor, 50%);
+}
+.bg-third-light{ background-color: lighten($thirdColor, 50%);
+}
+
+.fnt-primary{ color: $primaryColor; 
+}
+.fnt-second{ color: $secondaryColor; 
+}
+.fnt-white{ color: white; 
+}
+.fnt-black{ color: black; 
+}

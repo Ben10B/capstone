@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+    <head>
+        <title>BENstrap-in Transitions</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/my.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <ul class="bg-primary nav">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown-nav">
+                    <a href="page1.html">Styles</a>
+                    <div class="dropdown-content">
+                        <a href="page1.html#color">Color</a>
+                        <a href="page1.html#align">Align</a>
+                        <a href="page1.html#containers">Containers</a>
+                        <a href="page1.html#button">Button</a>
+                        <a href="page1.html#sizing">Sizing</a>
+                    </div>
+                </li>
+                <li class="dropdown-nav">
+                    <a href="page2.html">Custom</a>
+                    <div class="dropdown-content">
+                        <a href="page2.html#parallax">Parallax</a>
+                        <a href="page2.html#nav">Nav</a>
+                        <a href="page2.html#dropdown">Dropdown</a>
+                        <a href="page2.html#tooltip">Tooltip</a>
+                        <a href="page2.html#pagination">Pagination</a>
+                        <a href="page2.html#modal">Modal</a>
+                        <a href="page2.html#loader">Loader</a>
+                        <a href="page2.html#indicator">Indicator</a>
+                        <a href="page2.html#scrollTop">Jump Up</a>
+                    </div>
+                </li>
+                <li class="active"><a href="page3.html">Transitions</a></li>
+            </ul>
+        </nav>
+        <div class="column txt-center">
+            <h1>.transitions { }</h1>
+            <p>Here, you'll marvel at my transitions. Don't worry. I'll add more in the future. This is all I've got! FYI, you have to hover to see them.</p>
+        </div>
+        <!-- Width/Height -->
+        <div class="column bg-primary txt-center">
+            <div class="column">
+                <h2 id="button">Extend</h2>
+                <p>If you want to extend the width or height, add the <i class="fnt-white">extnd-'property'-0s</i> class. You can change the duration of the transition up to 60s.</p>
+                <div class="snippet">
+                    <h6 class="fnt-white">Example</h6>
+                    <pre class="txt-left">
+                    <code>
+                        &lt;div class="bg-second extnd-width-4s txt-center fnt-white"&gt;&lt;h1&gt;1&lt;/h1&gt;&lt;/div&gt;
+                        <div class="bg-second extnd-width-4s txt-center fnt-white"><h1>1</h1></div>
+                        &lt;div class="bg-second extnd-height-1s txt-center fnt-white"&gt;&lt;h1&gt;2&lt;/h1&gt;&lt;/div&gt;
+                        <div class="bg-second extnd-height-1s txt-center fnt-white"><h1>2</h1></div>
+                    </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <!-- Change Color -->
+        <div class="column txt-center">
+            <div class="column">
+                <h2 id="button">Change Color</h2>
+                <p>If you want to change the color, add the <i>changeTo-'color'-0s</i> class. You can change the duration of the transition up to 60s.</p>
+                <div class="snippet">
+                    <h6 class="fnt-white">Example</h6>
+                    <pre class="txt-left">
+                    <code>
+                        &lt;div class="bg-primary changeTo-second-2s txt-center fnt-white"&gt;&lt;h1&gt;1&lt;/h1&gt;&lt;/div&gt;
+                        <div class="bg-primary changeTo-second-2s txt-center fnt-white"><h1>1</h1></div>
+                        &lt;div class="bg-second changeTo-third-2s txt-center fnt-white"&gt;&lt;h1&gt;2&lt;/h1&gt;&lt;/div&gt;
+                        <div class="bg-second changeTo-third-2s txt-center fnt-white"><h1>2</h1></div>
+                        &lt;div class="bg-third changeTo-white-2s txt-center fnt-primary"&gt;&lt;h1&gt;3&lt;/h1&gt;&lt;/div&gt;
+                        <div class="bg-third changeTo-white-2s txt-center fnt-primary"><h1>3</h1></div>
+                    </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <!-- Extend & Change Color -->
+        <div class="column bg-primary txt-center">
+            <div class="column">
+                <h2 id="button">Extend & Change Color</h2>
+                <p>If you want to extend AND change the color, add the <i class="fnt-white">extnd-'property'-'color'-0s</i> class. You can change the duration of the transition up to 60s.</p>
+                <div class="snippet">
+                    <h6 class="fnt-white">Example</h6>
+                    <pre class="txt-left">
+                    <code>
+                        &lt;div class="bg-primary extnd-width-second-2s txt-center fnt-white"&gt;&lt;h1&gt;1&lt;/h1&gt;&lt;/div&gt;
+                        <div class="bg-primary extnd-width-second-2s txt-center fnt-white"><h1>1</h1></div>
+                        &lt;div class="bg-third extnd-height-white-2s txt-center fnt-primary"&gt;&lt;h1&gt;2&lt;/h1&gt;&lt;/div&gt;
+                        <div class="bg-third extnd-height-white-2s txt-center fnt-primary"><h1>2</h1></div>
+                    </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        <!-- Scroll to Top Button -->
+        <button type="button" id="toTopBtn" onclick="topFunction()" class="btn bg-primary-hvr">Top</button>
+        <footer class="row bg-primary fnt-white">
+            <p>Work Still in Progress...</p>
+            <ul class="pagination txt-center">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="page1.html">Styles</a></li>
+                <li><a href="page2.html">Custom</a></li>
+                <li class="active"><a href="page3.html">Transitions</a></li>
+            </ul>
+        </footer>
+        <script src="js/script.js"></script>
+    </body>
+</html>

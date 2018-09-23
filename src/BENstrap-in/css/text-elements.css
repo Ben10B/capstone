@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css?family=Dosis");
+@import url("https://fonts.googleapis.com/css?family=Dosis|Open+Sans");
+.bg-primary {
+  background-color: #2a6288; }
+
+.bg-second {
+  background-color: #505050; }
+
+.bg-third {
+  background-color: #000; }
+
+.bg-primary-light {
+  background-color: #c4dced; }
+
+.bg-second-light {
+  background-color: #d0d0d0; }
+
+.bg-third-light {
+  background-color: gray; }
+
+.fnt-primary {
+  color: #2a6288; }
+
+.fnt-second {
+  color: #505050; }
+
+.fnt-white {
+  color: white; }
+
+.fnt-black {
+  color: black; }
+
+body, html {
+  height: 100%; }
+
+h1 {
+  font-family: "Dosis", sans-serif;
+  font-weight: 700;
+  font-size: 28pt; }
+
+h2 {
+  font-family: "Dosis", sans-serif;
+  font-weight: 700;
+  font-size: 26pt; }
+
+h3 {
+  font-family: "Dosis", sans-serif;
+  font-weight: 700;
+  font-size: 24pt; }
+
+h4 {
+  font-family: "Dosis", sans-serif;
+  font-weight: 700;
+  font-size: 22pt; }
+
+h5 {
+  font-family: "Dosis", sans-serif;
+  font-weight: 700;
+  font-size: 20pt; }
+
+h6 {
+  font-family: "Dosis", sans-serif;
+  font-weight: 700;
+  font-size: 18pt; }
+
+.table {
+  font-family: "Open Sans", sans-serif;
+  border-collapse: collapse;
+  width: 100%; }
+  .table td, .table th {
+    padding: 8px; }
+  .table tr:nth-child(even) {
+    background-color: #f2f2f2; }
+  .table tr:hover {
+    background-color: #ddd; }
+  .table th {
+    font-family: "Dosis", sans-serif;
+    font-size: 17pt;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: inherit;
+    background-color: #505050;
+    color: white; }
+
+p {
+  margin: 1%; }
+
+header {
+  padding: 1%; }
+
+a {
+  text-decoration: none; }
+  a:link {
+    color: #2a6288; }
+  a:visited {
+    color: #30709b; }
+  a:hover {
+    color: #2a6288;
+    cursor: pointer; }
+  a:active {
+    color: #bfbfbf; }
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: hidden; }
+  .nav a {
+    font-family: "Dosis", sans-serif; }
+    .nav a:link, .nav a:visited {
+      background-color: #2a6288;
+      color: white;
+      padding: 22px 33px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block; }
+    .nav a:hover {
+      text-decoration: overline; }
+    .nav a:hover, .nav a:active {
+      color: #000;
+      background-color: #c4dced; }
+  .nav .active a {
+    background-color: #30709b;
+    color: white;
+    font-weight: 700; }
+
+@media all and (max-width: 575px) {
+  .nav {
+    display: flex;
+    flex-direction: column; }
+    .nav a:link, .nav a:visited {
+      display: inherit;
+      padding: 6px 17px; }
+    .nav .dropdown-nav {
+      float: none; }
+      .nav .dropdown-nav .dropdown-content {
+        position: relative; }
+        .nav .dropdown-nav .dropdown-content a {
+          display: block;
+          text-align: left; } }
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%; }
+
+.nav-right {
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100vh;
+  overflow-x: hidden;
+  position: fixed; }
+  .nav-right ul {
+    display: flex;
+    flex-direction: column; }
+    .nav-right ul a {
+      font-family: "Dosis", sans-serif; }
+      .nav-right ul a:link, .nav-right ul a:visited {
+        background-color: #2a6288;
+        color: white;
+        padding: 14px 25px;
+        width: 100%;
+        text-align: right;
+        text-decoration: none;
+        display: inline-block; }
+      .nav-right ul a:hover {
+        text-decoration: overline; }
+      .nav-right ul a:hover, .nav-right ul a:active {
+        color: #000;
+        background-color: #c4dced; }
+    .nav-right ul .active a {
+      background-color: #30709b;
+      color: white;
+      font-weight: 700; }
+
+.main-right {
+  padding-bottom: 5%;
+  margin-left: 100px; }
+
+.nav-left {
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100vh;
+  overflow-x: hidden;
+  position: fixed; }
+  .nav-left ul {
+    display: flex;
+    flex-direction: column; }
+    .nav-left ul a {
+      font-family: "Dosis", sans-serif; }
+      .nav-left ul a:link, .nav-left ul a:visited {
+        background-color: #2a6288;
+        color: white;
+        padding: 14px 25px;
+        width: 100%;
+        text-align: left;
+        text-decoration: none;
+        display: inline-block; }
+      .nav-left ul a:hover {
+        text-decoration: overline; }
+      .nav-left ul a:hover, .nav-left ul a:active {
+        color: #000;
+        background-color: #c4dced; }
+    .nav-left ul .active a {
+      background-color: #30709b;
+      color: white;
+      font-weight: 700; }
+
+.main-left {
+  padding-bottom: 5%;
+  margin-right: 100px; }
+
+.sidebar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 100%;
+  position: fixed;
+  overflow: auto; }
+  .sidebar a {
+    font-family: "Dosis", sans-serif; }
+    .sidebar a:link, .sidebar a:visited {
+      background-color: #505050;
+      color: white;
+      width: 100%;
+      padding: 14px 25px;
+      text-align: left;
+      text-decoration: none;
+      display: inline-block; }
+    .sidebar a:hover {
+      text-decoration: overline; }
+    .sidebar a:hover, .sidebar a:active {
+      color: #000;
+      background-color: #c4dced; }
+
+.tooltip {
+  padding: 1%;
+  position: relative;
+  display: inline-block;
+  border: 1px solid #033;
+  background: #c4dced; }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px; }
+    .tooltip .tooltiptext::after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent black transparent; }
+  .tooltip:hover .tooltiptext {
+    visibility: visible; }
+
+footer {
+  border-top: 0.1px solid #000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: inline-block; }
+
+i {
+  font-style: italic; }

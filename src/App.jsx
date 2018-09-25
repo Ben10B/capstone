@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import './BENstrap-in/css/my.css';
 import Home from './Home.jsx';
-import Profile from './Profile.jsx';
+import Account from './Account';
 import Sprite from './Sprite.jsx';
 import Model from './Model.jsx';
 import Achievements from './Achievements.jsx';
@@ -11,10 +11,21 @@ import Achievements from './Achievements.jsx';
 class Header extends Component {
   state = {
     active: [[true, 1], [false, 0], [false, 0], [false, 0], [false, 0]],
-    closed: false
+    closed: false,
+    titles: ['Home', 'My Account', 'My Sprite', 'Fogg Model', 'Achievements'],
   };
   toggleHeader = (isClosed) => {
     this.setState({ closed: !isClosed });
+
+    const titles = this.state.titles;
+    if(!isClosed){
+      for(let i = 0; i < this.state.titles.length; i++){
+        titles[i] = '';
+      }
+    }else{
+      titles[0]='Home'; titles[1]='My Account'; titles[2]='My Sprite'; titles[3]='Fogg Model'; titles[4]='Achievements';
+    }
+    this.setState({titles: titles});
   };
   togglePage = (index, isActive) => {
     const activeArray = this.state.active;
@@ -29,44 +40,59 @@ class Header extends Component {
   };
   render(){
     return(
-      <header className={this.state.closed ? "App-header-close" : "App-header"}>
-        <h1 className="App-title">Grindin'</h1>
+      <header className={this.state.closed ? `App-header-close${this.props.appState.theme}` : `App-header${this.props.appState.theme}`}>
+        <h1 className="App-title res-fnt-size-2">Grindin'</h1>
         <img src={logo} alt="logo" className="App-logo"  
         onClick={() => this.toggleHeader(this.state.closed)} />
         <ul>
-          <li className={this.state.active[0][0] ? "pageOpt active" : "pageOpt"} 
-          onClick={() => {this.props.click('home'); this.togglePage(0, this.state.active[0][0])}}><a>Home</a></li>
-          <li className={this.state.active[1][0] ? "pageOpt active" : "pageOpt"} 
-          onClick={() => {this.props.click('profile'); this.togglePage(1, this.state.active[1][0])}}><a>My Profile</a></li>
-          <li className={this.state.active[2][0] ? "pageOpt active" : "pageOpt"} 
-          onClick={() => {this.props.click('sprite'); this.togglePage(2, this.state.active[2][0])}}><a>Customize Sprite</a></li>
-          <li className={this.state.active[3][0] ? "pageOpt active" : "pageOpt"} 
-          onClick={() => {this.props.click('model'); this.togglePage(3, this.state.active[3][0])}}><a>Fogg Model</a></li>
-          <li className={this.state.active[4][0] ? "pageOpt active" : "pageOpt"} 
-          onClick={() => {this.props.click('rewards'); this.togglePage(4, this.state.active[4][0])}}><a>Achievements</a></li>
+          <li className={this.state.active[0][0] ? `pageOpt active` : `pageOpt`} 
+          onClick={() => {this.props.click('home'); this.togglePage(0, this.state.active[0][0])}}>
+            <i className="fas fa-home"></i>
+            <a>{this.state.titles[0]}</a>
+          </li>
+          <li className={this.state.active[1][0] ? `pageOpt active` : `pageOpt`} 
+          onClick={() => {this.props.click('account'); this.togglePage(1, this.state.active[1][0])}}>
+            <i className="fas fa-user-circle"></i>
+            <a>{this.state.titles[1]}</a>
+          </li>
+          <li className={this.state.active[2][0] ? `pageOpt active` : `pageOpt`} 
+          onClick={() => {this.props.click('sprite'); this.togglePage(2, this.state.active[2][0])}}>
+            <i className="fas fa-user"></i>
+            <a>{this.state.titles[2]}</a>
+          </li>
+          <li className={this.state.active[3][0] ? `pageOpt active` : `pageOpt`} 
+          onClick={() => {this.props.click('model'); this.togglePage(3, this.state.active[3][0])}}>
+            <i className="fab fa-buromobelexperte"></i>
+            <a>{this.state.titles[3]}</a>
+          </li>
+          <li className={this.state.active[4][0] ? `pageOpt active` : `pageOpt`} 
+          onClick={() => {this.props.click('rewards'); this.togglePage(4, this.state.active[4][0])}}>
+            <i className="fas fa-trophy"></i>
+            <a>{this.state.titles[4]}</a>
+          </li>
         </ul>
       </header>
     )
   }
 }
 
-
 class Body extends Component {
+  state = {}
   render(){
-    if(this.props.page === 'profile'){
-      return <Profile/>;
+    if(this.props.appState.page === 'account'){
+      return <Account appState={this.props.appState} click={this.props.click}/>;
     }
-    else if(this.props.page === 'sprite'){
-      return <Sprite/>;
+    else if(this.props.appState.page === 'sprite'){
+      return <Sprite appState={this.props.appState}/>;
     }
-    else if(this.props.page === 'model'){
-      return <Model/>;
+    else if(this.props.appState.page === 'model'){
+      return <Model appState={this.props.appState}/>;
     }
-    else if(this.props.page === 'rewards'){
-      return <Achievements/>;
+    else if(this.props.appState.page === 'rewards'){
+      return <Achievements appState={this.props.appState}/>;
     }
     return (
-      <Home/>
+      <Home appState={this.props.appState}/>
     )
   }
 }
@@ -74,15 +100,19 @@ class Body extends Component {
 class App extends Component {
   state = {
     page: '',
+    theme: '',
   }
   selectPage = (link) => {
     this.setState({ page: link });
   }
+  selectTheme = (t) => {
+    this.setState({ theme: t });
+  }
   render() {
     return (
       <div className="App">
-        <Header click={this.selectPage}/>
-        <Body page={this.state.page}/>
+        <Header appState={this.state} click={this.selectPage}/>
+        <Body appState={this.state} click={this.selectTheme}/>
       </div>
     );
   }

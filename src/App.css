@@ -11,38 +11,59 @@
   height: 80px;
   cursor: pointer;
 }
-.App-logo:hover{
-  animation: App-logo-spin infinite 2.5s linear;
+.App-logo:hover{ animation: App-logo-spin infinite 1s linear;
 }
 
-.App-header {
-  background: url('Assets/img/Theme Two.png') no-repeat bottom;
+.App-header, .App-header-theme1, .App-header-theme2, .App-header-theme3, .App-header-theme4, .App-header-theme5 {
+  background-image: url('Assets/img/Default-Theme.png');
   color: white;
   display: flex;
   flex-direction: column;
   flex: 1.5;
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
-.App-header-close {
+.App-header-close, .App-header-close-theme1, .App-header-close-theme2, .App-header-close-theme3, .App-header-close-theme4, .App-header-close-theme5 {
   color: white;
   display: flex;
   flex-direction: column;
   flex: 0.1;
   transition: flex 1s;
-  background: url('Assets/img/Theme Two.png') no-repeat bottom;
+  background-image: url('Assets/img/Default-Theme.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
-.App-header-close a:hover, .App-header a:hover{ color: white;
+.App-header-close a:hover, .App-header a:hover, 
+.App-header-close-theme1 a:hover, .App-header-theme1 a:hover,
+.App-header-close-theme2 a:hover, .App-header-theme2 a:hover,
+.App-header-close-theme3 a:hover, .App-header-theme3 a:hover,
+.App-header-close-theme4 a:hover, .App-header-theme4 a:hover,
+.App-header-close-theme5 a:hover, .App-header-theme5 a:hover{ color: white;
 }
-.App-title {
-  font-size: 1.5em;
+.App-title { font-size: 1.5em;
 }
 
-.App-intro {
-  background: url('Assets/img/Theme Two.png') no-repeat center/cover;
+.App-intro, .App-intro-theme1, .App-intro-theme2, .App-intro-theme3, .App-intro-theme4, .App-intro-theme5 {
+  background-image: url('Assets/img/Default-Theme.png');
   font-size: large;
   flex: 8.5;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
-
+.App-intro-theme1, .App-header-theme1, .App-header-close-theme1{ background-image: url('Assets/img/Theme-One.png');
+}
+.App-intro-theme2, .App-header-theme2, .App-header-close-theme2{ background-image: url('Assets/img/Theme-Two.png');
+}
+.App-intro-theme3, .App-header-theme3, .App-header-close-theme3{ background-image: url('Assets/img/Theme-Three.png');
+}
+.App-intro-theme4, .App-header-theme4, .App-header-close-theme4{ background-image: url('Assets/img/Theme-Four.png');
+}
+.App-intro-theme5, .App-header-theme5, .App-header-close-theme5{ background-image: url('Assets/img/Theme-Five.png');
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -63,23 +84,73 @@
   cursor: pointer;
   box-shadow: 0 0 5px #fff;
 }
+.App-header a, .App-header-theme1 a, .App-header-theme2 a, .App-header-theme3 a, .App-header-theme4 a, .App-header-theme5 a{
+  margin-left: 4px;
+}
+.App-header-close a, .App-header-close-theme1 a, .App-header-close-theme2 a, .App-header-close-theme3 a, .App-header-close-theme4 a, .App-header-close-theme5 a{
+  margin: 0;
+}
 /* Home.jsx */
-.goal{  
+.goal, .btn1{  
   background-color: rgba(255, 255, 255, 0.062);
   display: block;
   font-weight: bold;
+  font-family: "Dosis", sans-serif;
   margin: 2px 0;
   transition: background-color 0.5s;
   text-align: center;
   border: 0;
+  padding: 5px 0;
 }
-.goal:hover{
+.btn1{
+  transition: font-size 0.2s;
+}
+.goal:hover, .btn1:hover{
   background-color: rgba(255, 255, 255, 0.315);
   cursor: pointer;
   box-shadow: 0 0 5px #fff;
 }
+.btn1:hover{
+  background-color: rgba(0, 143, 197, 0.315);
+  box-shadow: 0 0 5px #008fc5;
+  font-size: 14pt;
+}
 #goalList{
-  height: 75vh;
+  flex: 8;
   overflow-y: auto;
   overflow-x: hidden;
+}
+#dashboard{ flex: 2;
+}
+#headerImg{
+  border: 2px solid #00aeef;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+}
+#headerImg:hover{ box-shadow: 0 0 10px #008fc5;
+}
+@media all and (max-width: 575px){
+  #headerImg{ min-height: 100px;
+  }
+  #goalList{ flex: 6;
+  }
+  #dashboard{ flex: 4;
+  }
+  .btn1:hover{ font-size: 10pt;
+  }
+}
+/* Account.jsx */
+.theme{
+  text-align: center;
+  font-weight: bolder;
+  /* font-size: 20pt; */
+  margin: 5px;
+  padding: 5px;
+  height: 20%;
+  width: 22%;
+}
+.theme:hover{
+  cursor: pointer;
+  box-shadow: 0 0 10px #000;
 }

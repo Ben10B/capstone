@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Ben10B/capstone#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.3.1",
     "express": "^4.16.3",
     "nodemon": "^1.18.4",
     "react": "^16.5.1",

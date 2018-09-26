@@ -1,0 +1,9 @@
+.container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .App .navbar-brand {
+    font-weight: bold;
+  }

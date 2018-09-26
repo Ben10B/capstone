@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import "./Login.css";
+import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 export default class Login extends Component {
   constructor(props) {
@@ -24,6 +23,13 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    try {
+      // await Auth.signIn(this.state.email, this.state.password);
+      this.props.userHasAuthenticated(true);
+      this.props.history.push("/");
+    } catch (e) {
+      alert(e.message);
+    }
   }
 
   render() {
@@ -47,14 +53,13 @@ export default class Login extends Component {
               type="password"
             />
           </FormGroup>
-          <Button
+          <input
             block
             bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
-          >
-            Login
-          </Button>
+            value='Login'
+          />
         </form>
       </div>
     );

@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import './calendar.css';
+import idleF from './Assets/img/Idle-Female.gif';
 
 export default class Calendar extends Component{
     constructor(props){
         super(props);
         let d = new Date();
         this.state = {
+            today: undefined,
             currentMonth: d.getMonth(),
             currentYear: d.getFullYear(),
             currentDay: d.getDate(),
             days: [],
             months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             monthIndex: d.getMonth(),
+            showDETAILS: false,
+            selectedDay: '',
+            statusIndex: undefined,
         }
         this.switchMonths = this.switchMonths.bind(this);
     }
@@ -36,17 +41,27 @@ export default class Calendar extends Component{
         
         return newIndex;
     };
+    showDetails = (day) => {
+        if(day !== undefined){
+            this.setState({ selectedDay: day }, ()=> { console.log(`state: ${this.state.selectedDay}, value: ${day}`); });
+            this.setState({ showDETAILS: true });
+        }
+        else
+            this.setState({ showDETAILS: false });
+    };
     getDays = (currentMonth, currentYear) => {
         let date = new Date();
         if(currentMonth === -1){ currentYear--; currentMonth = 11; }
         if(currentMonth === 12){ currentYear++; currentMonth = 0; }
         date = new Date(currentYear, currentMonth, 1);
+        this.setState({ today: date });
         
         let i = 0;
         let tempDays = [];
         while (date.getMonth() === currentMonth) {
             if(i === 0) tempDays = this.addSpace(date);
-            tempDays.push(<Day key={i} dateString={new Date(date).toUTCString().substring(4, 7)}/>);
+            tempDays.push(<Day key={i} click={this.showDetails}
+                calendarState={this.state} dateString={new Date(date).toUTCString().substring(4, 7)}/>);
             date.setDate(date.getDate() + 1);
             i++;
         }
@@ -62,12 +77,17 @@ export default class Calendar extends Component{
         for(let key in weekdays){
             if(new Date(date).toUTCString().substring(0, 3).toString() === key){
                 for(let d=0; d < weekdays[key]; d++){
-                    temp.push(<Day key={`space${d}`}/>);
+                    temp.push(<Day key={`space${d}`} click={this.showDetails} calendarState={this.state}/>);
                 }
             }
         }
         return temp;
     };
+    updateStatus = (status) => {
+        this.setState({ statusIndex: status }, ()=> { console.log(`state: ${this.state.statusIndex}, value: ${status}`); });
+        // this.getDays(this.state.currentMonth, this.state.currentYear);
+    };
+    
     render() {
         return (
             <div className='calendar-container'>
@@ -98,6 +118,7 @@ export default class Calendar extends Component{
                         </tbody>
                     </table>
                 </div>
+                <Details calendarState={this.state} click={this.updateStatus}/>
             </div>
         );
     }
@@ -106,15 +127,12 @@ class Day extends Component {
     constructor(props){
         super(props);
         this.state = {
-            status: ["complete", "incomplete", "unresolved", "inactive"],
-            statusIndex: 3,
+            status: ["complete", "incomplete", "unresolved", "inactive", "today"],
+            statusIndex: this.props.calendarState.statusIndex,
         }
-        // this.updateStatus = this.updateStatus.bind(this);
     }
-    updateStatus(){
-        return this.state.status[this.state.statusIndex];
-    };
-    componentDidMount(){
+    componentWillMount(){
+        // this.setState({ statusIndex: this.props.statusIndex });
         this.determineStatus();
     };
     componentWillUnmount(){
@@ -125,30 +143,44 @@ class Day extends Component {
         let thisDay = parseInt(d, 10);
         let date = new Date();
         
-        if(thisDay < date.getDate())
+        //Unresolved: days passed that need to be completed
+        if(thisDay <= date.getDate())
             this.setState({ statusIndex: 2 });
-        else if(thisDay > date.getDate()) 
+        //Inactive: days that have yet to come
+        if(thisDay > date.getDate()) 
             this.setState({ statusIndex: 3 });
-        else if(thisDay === date.getDate()){
-            this.setState({ statusIndex: 0 });
+        //Today
+        if(thisDay === date.getDate()){
+            this.setState({ statusIndex: 4 });
         }
-    };
-    showDetails = () => {
     };
     render() {
         return (
-            // <td className={`day ${this.updateStatus}`} 
+            // <td className={`day ${this.props.calendarState.statusIndex}`} 
             <td className={`day ${this.state.status[this.state.statusIndex]}`} 
-            onClick={this.showDetails}>{this.props.dateString}
-                
+                onClick={()=>this.props.click(this.props.dateString)}>
+                    {this.props.dateString}
             </td>
         );
     }
 }
 class Details extends Component {
+    componentWillUnmount(){
+        //clear details
+    };
     render() {
         return (
-            <div className="detail-container"></div>
+            <div className={this.props.calendarState.showDETAILS ? "detail-container flex-2 display-block" : "detail-container flex-2"}>
+                <div className="details row">
+                    <h6 className="detailsHeading">Day {this.props.calendarState.selectedDay}</h6>
+                    <div className="detailImg" style={{ backgroundImage: `url(${idleF})` }}></div>
+                    <div className="row yes-no-container">
+                        <button type="button" onClick={()=>this.props.click('complete')} className="btn1 green"><i className="fas fa-check"></i></button>
+                        <button type="button" onClick={()=>this.props.click('incomplete')} className="btn1 red"><i className="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div className="">Was today Successful?</div>
+            </div>
         );
     }
 }

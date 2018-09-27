@@ -27,6 +27,9 @@
             @else if($side == bottom){ margin-bottom: $num * 1%; 
             }
         }
+        .margn-#{$num}{
+            margin: $num * 1%;
+        }
     }
 }
 //padding-: top, bottom, left, right
@@ -41,6 +44,9 @@
             }
             @else if($side == bottom){ padding-bottom: $num * 1%; 
             }
+        }
+        .pad-#{$num}{
+            padding: $num * 1%;
         }
     }
 }

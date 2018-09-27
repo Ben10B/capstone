@@ -4,34 +4,11 @@ import React, { Component } from 'react';
 import powerUpF from './Assets/img/PowerUp-Female.gif';
 import idleF from './Assets/img/Idle-Female.gif';
 import './App.css';
-import './calendar.css';
 import './BENstrap-in/css/my.css';
-
-// class Calendar extends Component{
-//     render() {
-//         return (
-//             <div className='calendar-container'>
-//                 <div className='calendar'>
-//                     <div id='month'>
-//                         <ul>
-//                             <li id='prev'>&#10094;</li>
-//                             <li id='next'>&#10095;</li>
-//                             <li>
-//                                 <p id='the-month'>September</p>
-//                                 <br/>
-//                                 <span id='the-year'>2018</span>
-//                             </li>
-//                         </ul>
-//                     </div>
-//                     <div id='days'></div>
-//                 </div>
-//                 <div id='event-display'></div>
-//             </div>
-//         );
-//     }
-// }
+import Calendar from './Calendar.jsx';
 
 class Dashboard extends Component {
+    zoomOut = () => { document.getElementById('dashImg').style.backgroundSize = `auto`; };
     hover = () => { document.getElementById('dashImg').style.backgroundImage = `url(${powerUpF})`; };
     leave = () => { document.getElementById('dashImg').style.backgroundImage = `url(${idleF})`; };
     zoomIn = () => { document.getElementById('dashImg').style.backgroundSize = `contain`; };
@@ -66,44 +43,24 @@ class NewGoal extends Component {
 class Goal extends Component {
     render() {
         return (
-            <div className="column">
-                <div className="row">
-                    <span>
-                        <h1>Goal {this.props.nameOfGoal}</h1>
-                    </span>
-                    <button type="button" className="btn1" onClick={()=>this.props.click('')}>Back to Dashboard</button>
-                </div>
+            <div className="row flex-1">
+                <span>
+                    <h1>Goal {this.props.nameOfGoal}</h1>
+                </span>
+                <button type="button" className="btn1" onClick={()=>this.props.click('')}>Back to Dashboard</button>
             </div>
         )
     }
 }
-// const GoalDetail = ({nameOfGoal, clickFunction}) => {
-//     this.handleClick = () => {
-//         clickFunction(nameOfGoal);
-//     }
-//     return (
-//       <div className="goal fnt-white">
-//         <div>
-//             <p onClick={this.handleClick}>Goal {nameOfGoal} </p>
-//             <p>Difficulty: <i>1</i></p>
-//         </div>
-//       </div>
-//     );
-// }
-class GoalDetail extends Component {
-    handleClick = () => {
-        this.props.clickFunction(this.props.nameOfGoal);
-    }
-    render(){
-        return (
-            <div className="goal fnt-white">
-              <div>
-                  <p onClick={this.handleClick}>Goal {this.props.nameOfGoal} </p>
-                  <p>Difficulty: <i>1</i></p>
-              </div>
-            </div>
-        );
-    }
+const GoalDetail = ({nameOfGoal, clickFunction}) => {
+    return (
+      <div className="goal fnt-white">
+        <div onClick={()=>clickFunction(nameOfGoal)}>
+            <p>Goal {nameOfGoal} </p>
+            <p>Difficulty: <i>1</i></p>
+        </div>
+      </div>
+    );
 }
 const GoalList = (props) => {
     var goals = [];
@@ -129,7 +86,7 @@ class Home extends Component {
     };
     showGoal = (name) => {
         this.setState({nameOfGOAL: name});
-        this.setState((prevState) => ({showGOAL: !prevState.showGOAL}));
+        this.setState({showGOAL: !this.state.showGOAL});
     };
     render() {
         if(this.state.createGoal === true){
@@ -143,6 +100,7 @@ class Home extends Component {
             return (
                 <div className={`App-intro${this.props.appState.theme}`}>
                     <Goal nameOfGoal={this.state.nameOfGOAL} click={this.showGoal}/>
+                    <Calendar/>
                 </div>
             );
         }

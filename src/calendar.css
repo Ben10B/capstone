@@ -1,13 +1,3 @@
-/* height */
-::-webkit-scrollbar { height: 2%;
-}
-/* Handle */
-::-webkit-scrollbar-thumb { 
-    box-shadow: inset 0 0 6px #fff; 
-    border-radius: 10px 10px 0px 0px;
-    background-color: #00aeef; 
-  }
-  /* ------------------------------------------------------ */
 .calendar-container{
     flex: 9;
     width: 100%;

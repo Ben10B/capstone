@@ -77,7 +77,7 @@ class Home extends Component {
     state = {
         goals: 22,
         createGoal: false,
-        showGOAL: true,
+        showGOAL: false,
         nameOfGOAL: '',
         sprite: [],
     };

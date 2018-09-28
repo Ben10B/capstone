@@ -7,7 +7,7 @@ export default class Calendar extends Component{
         super(props);
         let d = new Date();
         this.state = {
-            today: undefined,
+            today: d,
             currentMonth: d.getMonth(),
             currentYear: d.getFullYear(),
             currentDay: d.getDate(),
@@ -43,7 +43,8 @@ export default class Calendar extends Component{
     };
     showDetails = (day) => {
         if(day !== undefined){
-            this.setState({ selectedDay: day }, ()=> { console.log(`state: ${this.state.selectedDay}, value: ${day}`); });
+            // this.setState({ selectedDay: day }, ()=> { console.log(`state: ${this.state.selectedDay}, value: ${day}`); });
+            this.setState({ selectedDay: day });
             this.setState({ showDETAILS: true });
         }
         else
@@ -54,7 +55,6 @@ export default class Calendar extends Component{
         if(currentMonth === -1){ currentYear--; currentMonth = 11; }
         if(currentMonth === 12){ currentYear++; currentMonth = 0; }
         date = new Date(currentYear, currentMonth, 1);
-        this.setState({ today: date });
         
         let i = 0;
         let tempDays = [];
@@ -68,6 +68,8 @@ export default class Calendar extends Component{
         this.setState({ days: tempDays });
         this.setState({ monthIndex: currentMonth });
         this.setState({ currentYear: currentYear });
+        if(date.getDate() !== this.state.currentDay)
+            this.setState({ today: date });
     };
     addSpace = (date) => {
         let weekdays = {
@@ -84,6 +86,7 @@ export default class Calendar extends Component{
         return temp;
     };
     updateStatus = (status) => {
+        // The second (optional) parameter is a callback function that will be executed once setState is completed and the component is re-rendered.
         this.setState({ statusIndex: status }, ()=> { console.log(`state: ${this.state.statusIndex}, value: ${status}`); });
         // this.getDays(this.state.currentMonth, this.state.currentYear);
     };
@@ -133,15 +136,22 @@ class Day extends Component {
     }
     componentWillMount(){
         // this.setState({ statusIndex: this.props.statusIndex });
-        this.determineStatus();
+        // this.determineStatus();
     };
     componentWillUnmount(){
         //clear details
+    };
+    componentWillReceiveProps(nextProps){
+        // console.log(nextProps);
+        // console.log(this.props.calendarState.statusIndex);
     };
     determineStatus(){
         let d = this.props.dateString;
         let thisDay = parseInt(d, 10);
         let date = new Date();
+        let month = date.getMonth();
+        let year = date.getFullYear();
+        let date2 = new Date(year, month, thisDay);
         
         //Unresolved: days passed that need to be completed
         if(thisDay <= date.getDate())
@@ -150,7 +160,8 @@ class Day extends Component {
         if(thisDay > date.getDate()) 
             this.setState({ statusIndex: 3 });
         //Today
-        if(thisDay === date.getDate()){
+        if(thisDay === this.props.calendarState.today.getDate()){
+            // console.log(this.props.calendarState.today);
             this.setState({ statusIndex: 4 });
         }
     };

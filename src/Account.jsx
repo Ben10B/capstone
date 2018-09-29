@@ -13,7 +13,12 @@ class Account extends Component {
         return (
             <div className={`App-intro${this.props.appState.theme} pad-top-1`}>
                 <h1 className="flex-2">Account</h1>
-                <span className="flex-8">
+                <div className="flex-4">
+                    <h3>Name</h3>
+                    <h5>Email</h5>
+                    <h5>Password</h5>
+                </div>
+                <span className="flex-4">
                     <h6>Choose a Theme</h6>
                     <div className="row">
                         <div className="theme" style={{ background: `url(${def}) center/cover no-repeat` }}

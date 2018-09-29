@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import logo from './Assets/img/R. 2.svg';
 import './App.css';
 import './BENstrap-in/css/my.css';
 import Home from './Home.jsx';

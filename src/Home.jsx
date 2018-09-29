@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import idleM from './Assets/img/Idle-Male.gif';
 // import powerUpM from './Assets/img/PowerUp-Male.gif';
+import aura from './Assets/img/Aura.gif';
 import powerUpF from './Assets/img/PowerUp-Female.gif';
 import idleF from './Assets/img/Idle-Female.gif';
 import './App.css';
@@ -9,10 +10,10 @@ import Calendar from './Calendar.jsx';
 
 class Dashboard extends Component {
     zoomOut = () => { document.getElementById('dashImg').style.backgroundSize = `auto`; };
-    hover = () => { document.getElementById('dashImg').style.backgroundImage = `url(${powerUpF})`; };
+    hover = () => { document.getElementById('dashImg').style.backgroundImage = `url(${powerUpF}), url(${aura})`; };
     leave = () => { document.getElementById('dashImg').style.backgroundImage = `url(${idleF})`; };
-    zoomIn = () => { document.getElementById('dashImg').style.backgroundSize = `contain`; };
-    zoomOut = () => { document.getElementById('dashImg').style.backgroundSize = `auto`; };
+    zoomIn = () => { document.getElementById('dashImg').style.backgroundSize = `contain, 7em`; };
+    zoomOut = () => { document.getElementById('dashImg').style.backgroundSize = `auto, 3em`; };
     render() {
         return (
             <div id="dashboard" className="row">
@@ -21,7 +22,7 @@ class Dashboard extends Component {
                 <span className="flex-8">
                     <h1>HollowSaiyan</h1>
                     <p>Level: 1</p>
-                    <p>Experience: 0/10</p>
+                    <p>Experience: 0/0</p>
                 </span>
                 <button type="button" className="flex-1 btn1" onClick={this.props.click}>Create Goal</button>
             </div>

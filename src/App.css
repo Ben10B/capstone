@@ -142,9 +142,9 @@
 }
 #dashImg{
   border: 2px solid #00aeef;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto;
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom center, bottom center;
+  background-size: auto, 3em;
 }
 #dashImg:hover{ box-shadow: 0 0 10px #008fc5;
 }

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import Routes from "./Routes";
+import Routes from "./components/Routes";
 // import "./AppTest.css";
 
 class App extends Component {

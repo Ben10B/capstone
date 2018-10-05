@@ -1,5 +1,5 @@
 .Login{
-    background-image: url('Assets/img/Theme-Two.png');
+    background-image: url('../Assets/img/Theme-Two.png');
     height: 100vh;
     display: flex;
     text-align: center;
@@ -9,7 +9,7 @@
 }
 .log-container{
     flex: 10;
-    background-image: url('Assets/img/Idle-Login.png');
+    background-image: url('../Assets/img/Idle-Login.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto;
@@ -42,9 +42,9 @@
     background-position: center;
     background-size: auto;
 }
-#registerImg{ background-image: url('Assets/img/PowerUp-Female.gif');
+#registerImg{ background-image: url('../Assets/img/PowerUp-Female.gif');
 }
-#logonImg{ background-image: url('Assets/img/PowerUp-Male.gif');
+#logonImg{ background-image: url('../Assets/img/PowerUp-Male.gif');
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }

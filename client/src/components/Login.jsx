@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
-import './login.css';
-import './BENstrap-in/css/my.css';
+import '../css/App.css';
+import '../BENstrap-in/css/my.css';
+import '../css/login.css';
+// import Routes from "./Routes.jsx";
+import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
 
 class Register extends Component {
     constructor(props){
@@ -36,12 +38,16 @@ class Logon extends Component {
             password:''
         }
     }
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.history.push("/app");
+    }
     render() {
         return (
             <div className="Logon row">
                 <h1>LOGIN</h1>
                 <div>
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <input type="text" placeholder="USERNAME"/>
                         <input type="text" placeholder="PASSWORD"/>
                         <input type="submit" value="Login"/>
@@ -64,6 +70,7 @@ class Login extends Component {
             <div className={`Login`}>
                 <div className="log-container">
                     <Logon/>
+                    <Link to="./">Home Page</Link>
                     <Register/>
                 </div>
             </div>

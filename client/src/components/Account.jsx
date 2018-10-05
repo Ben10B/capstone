@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
-import './BENstrap-in/css/my.css';
-import def from './Assets/img/Default-Theme.png';
-import theme1 from './Assets/img/Theme-One.png';
-import theme2 from './Assets/img/Theme-Two.png';
-import theme3 from './Assets/img/Theme-Three.png';
-import theme4 from './Assets/img/Theme-Four.png';
-import theme5 from './Assets/img/Theme-Five.png';
+import '../css/App.css';
+import '../BENstrap-in/css/my.css';
+import def from '../Assets/img/Default-Theme.png';
+import theme1 from '../Assets/img/Theme-One.png';
+import theme2 from '../Assets/img/Theme-Two.png';
+import theme3 from '../Assets/img/Theme-Three.png';
+import theme4 from '../Assets/img/Theme-Four.png';
+import theme5 from '../Assets/img/Theme-Five.png';
 
 class Account extends Component {
     render() {

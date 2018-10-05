@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-// import idleM from './Assets/img/Idle-Male.gif';
-// import powerUpM from './Assets/img/PowerUp-Male.gif';
-import aura from './Assets/img/Aura.gif';
-import powerUpF from './Assets/img/PowerUp-Female.gif';
-import idleF from './Assets/img/Idle-Female.gif';
-import './App.css';
-import './BENstrap-in/css/my.css';
-import Calendar from './Calendar.jsx';
+// import idleM from '../Assets/img/Idle-Male.gif';
+// import powerUpM from '../Assets/img/PowerUp-Male.gif';
+import aura from '../Assets/img/Aura.gif';
+import powerUpF from '../Assets/img/PowerUp-Female.gif';
+import idleF from '../Assets/img/Idle-Female.gif';
+import '../css/App.css';
+import '../BENstrap-in/css/my.css';
+import Calendar from './Calendar';
 
 class Dashboard extends Component {
     zoomOut = () => { document.getElementById('dashImg').style.backgroundSize = `auto`; };

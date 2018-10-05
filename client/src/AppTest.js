@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
 // import logo from './logo.svg';
 import logo from './Assets/img/R. 2.svg';
 import './App.css';
@@ -11,9 +12,9 @@ import Achievements from './Achievements.jsx';
 
 class Header extends Component {
   state = {
-    active: [[true, 1], [false, 0], [false, 0], [false, 0], [false, 0]],
+    active: [[true, 1], [false, 0], [false, 0], [false, 0], [false, 0], [false, 0]],
     closed: false,
-    titles: ['Home', 'My Account', 'My Sprite', 'Fogg Model', 'Achievements'],
+    titles: ['Home', 'My Account', 'My Sprite', 'Fogg Model', 'Achievements', 'Logout'],
   };
   toggleHeader = (isClosed) => {
     this.setState({ closed: !isClosed });
@@ -24,7 +25,7 @@ class Header extends Component {
         titles[i] = '';
       }
     }else{
-      titles[0]='Home'; titles[1]='My Account'; titles[2]='My Sprite'; titles[3]='Fogg Model'; titles[4]='Achievements';
+      titles[0]='Home'; titles[1]='My Account'; titles[2]='My Sprite'; titles[3]='Fogg Model'; titles[4]='Achievements'; titles[5]='Logout';
     }
     this.setState({titles: titles});
   };
@@ -47,30 +48,31 @@ class Header extends Component {
         onClick={() => this.toggleHeader(this.state.closed)} />
         <ul>
           <li className={this.state.active[0][0] ? `pageOpt active` : `pageOpt`} 
-          onClick={() => {this.props.click('home'); this.togglePage(0, this.state.active[0][0])}}>
+          onClick={() => {this.togglePage(0, this.state.active[0][0])}}>
             <i className="fas fa-home"></i>
-            <a>{this.state.titles[0]}</a>
+            <Link to="/app">Home</Link>
           </li>
           <li className={this.state.active[1][0] ? `pageOpt active` : `pageOpt`} 
-          onClick={() => {this.props.click('account'); this.togglePage(1, this.state.active[1][0])}}>
+          onClick={() => {this.togglePage(1, this.state.active[1][0])}}>
             <i className="fas fa-user-circle"></i>
-            <a>{this.state.titles[1]}</a>
+            <Link to="/account">My Account</Link>
           </li>
           <li className={this.state.active[2][0] ? `pageOpt active` : `pageOpt`} 
-          onClick={() => {this.props.click('sprite'); this.togglePage(2, this.state.active[2][0])}}>
+          onClick={() => {this.togglePage(2, this.state.active[2][0])}}>
             <i className="fas fa-user"></i>
-            <a>{this.state.titles[2]}</a>
+            <Link to="/sprite">My Sprite</Link>
           </li>
           <li className={this.state.active[3][0] ? `pageOpt active` : `pageOpt`} 
-          onClick={() => {this.props.click('model'); this.togglePage(3, this.state.active[3][0])}}>
+          onClick={() => {this.togglePage(3, this.state.active[3][0])}}>
             <i className="fab fa-buromobelexperte"></i>
-            <a>{this.state.titles[3]}</a>
+            <Link to="/model">Fogg Model</Link>
           </li>
           <li className={this.state.active[4][0] ? `pageOpt active` : `pageOpt`} 
-          onClick={() => {this.props.click('rewards'); this.togglePage(4, this.state.active[4][0])}}>
+          onClick={() => {this.togglePage(4, this.state.active[4][0])}}>
             <i className="fas fa-trophy"></i>
-            <a>{this.state.titles[4]}</a>
+            <Link to="/rewards">Achievements</Link>
           </li>
+          <li className='pageOpt'><Link to="./">Logout</Link></li>
         </ul>
       </header>
     )
@@ -103,6 +105,7 @@ class App extends Component {
     page: '',
     theme: '',
   }
+  
   selectPage = (link) => {
     this.setState({ page: link });
   }
@@ -110,11 +113,40 @@ class App extends Component {
     this.setState({ theme: t });
   }
   render() {
+    const routes = [
+      {
+        path: "/",
+        exact: true,
+        main: () => <Home appState={this.state}/>
+      },
+      {
+        path: "/account",
+        main: () => <Account appState={this.state} click={this.selectTheme}/>
+      },
+      {
+        path: "/sprite",
+        main: () => <Sprite appState={this.state}/>
+      },
+      {
+        path: "/model",
+        main: () => <Model appState={this.state}/>
+      },
+      {
+        path: "/rewards",
+        main: () => <Achievements appState={this.state}/>
+      }
+    ];
     return (
-      <div className="App">
-        <Header appState={this.state} click={this.selectPage}/>
-        <Body appState={this.state} click={this.selectTheme}/>
-      </div>
+      <Router>
+        <div className="App">
+          <Header appState={this.state} click={this.selectPage}/>
+          {/* <Body appState={this.state} click={this.selectTheme}/> */}
+          
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} exact={route.exact} component={route.main}/>
+            ))}
+        </div>
+      </Router>
     );
   }
 }

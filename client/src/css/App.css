@@ -6,7 +6,11 @@
   font-family: "Dosis", sans-serif;
   /* font-family:'Nunito', sans-serif; */
 }
+.Router{
+  margin:0;
+  padding:0;
 
+}
 .App-logo {
   height: 80px;
   cursor: pointer;
@@ -15,7 +19,7 @@
 }
 
 .App-header, .App-header-theme1, .App-header-theme2, .App-header-theme3, .App-header-theme4, .App-header-theme5 {
-  background-image: url('Assets/img/Default-Theme.png');
+  background-image: url('../Assets/img/Default-Theme.png');
   color: white;
   display: flex;
   flex-direction: column;
@@ -29,7 +33,7 @@
   flex-direction: column;
   flex: 0.1;
   transition: flex 1s;
-  background-image: url('Assets/img/Default-Theme.png');
+  background-image: url('../Assets/img/Default-Theme.png');
   background-repeat: no-repeat;
   background-position: bottom;
 }
@@ -44,7 +48,7 @@
 }
 
 .App-intro, .App-intro-theme1, .App-intro-theme2, .App-intro-theme3, .App-intro-theme4, .App-intro-theme5 {
-  background-image: url('Assets/img/Default-Theme.png');
+  background-image: url('../Assets/img/Default-Theme.png');
   font-size: large;
   flex: 8.5;
   overflow: hidden;
@@ -54,15 +58,15 @@
   background-position: center;
   background-size: cover;
 }
-.App-intro-theme1, .App-header-theme1, .App-header-close-theme1{ background-image: url('Assets/img/Theme-One.png');
+.App-intro-theme1, .App-header-theme1, .App-header-close-theme1{ background-image: url('../Assets/img/Theme-One.png');
 }
-.App-intro-theme2, .App-header-theme2, .App-header-close-theme2{ background-image: url('Assets/img/Theme-Two.png');
+.App-intro-theme2, .App-header-theme2, .App-header-close-theme2{ background-image: url('../Assets/img/Theme-Two.png');
 }
-.App-intro-theme3, .App-header-theme3, .App-header-close-theme3{ background-image: url('Assets/img/Theme-Three.png');
+.App-intro-theme3, .App-header-theme3, .App-header-close-theme3{ background-image: url('../Assets/img/Theme-Three.png');
 }
-.App-intro-theme4, .App-header-theme4, .App-header-close-theme4{ background-image: url('Assets/img/Theme-Four.png');
+.App-intro-theme4, .App-header-theme4, .App-header-close-theme4{ background-image: url('../Assets/img/Theme-Four.png');
 }
-.App-intro-theme5, .App-header-theme5, .App-header-close-theme5{ background-image: url('Assets/img/Theme-Five.png');
+.App-intro-theme5, .App-header-theme5, .App-header-close-theme5{ background-image: url('../Assets/img/Theme-Five.png');
 }
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

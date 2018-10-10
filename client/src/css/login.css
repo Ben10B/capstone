@@ -48,6 +48,10 @@
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+.err{
+    max-height: 20px;
+    color: #f00;
+}
 form input[type=text], form input[type=submit]{
     border: 0;
     text-align: center;
@@ -60,7 +64,7 @@ form input[type=text]{
     background-color: rgba(0, 0, 0, 0.603);
 }
 form input[type=submit]{
-    max-height: 30px;
+    /* max-height: 30px; */
     background-color: rgba(0, 145, 197, 0.815);
 }
 form input[type=submit]:hover{

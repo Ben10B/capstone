@@ -149,9 +149,9 @@ class Day extends Component {
         let d = this.props.dateString;
         let thisDay = parseInt(d, 10);
         let date = new Date();
-        let month = date.getMonth();
-        let year = date.getFullYear();
-        let date2 = new Date(year, month, thisDay);
+        // let month = date.getMonth();
+        // let year = date.getFullYear();
+        // let date2 = new Date(year, month, thisDay);
         
         //Unresolved: days passed that need to be completed
         if(thisDay <= date.getDate())

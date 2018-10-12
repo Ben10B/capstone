@@ -25,14 +25,22 @@ class Register extends Component {
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.errors){
-      this.setState({ errors: nextProps.errors });
+        this.setState({ errors: nextProps.errors }, ()=> { console.log(`state: ${this.state.errors}, value: ${nextProps.errors}`); });
     }
+    // for(let i = 0; i < document.getElementById('LogonForm').children.length; i++){
+    //     let child = document.getElementById('LogonForm').children[i];
+    //     if(child.className.includes('err')){
+    //       console.log(child);
+    //       child.style.display = 'none';
+    //     }
+    // }
   }
   onChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
   }
   onSubmit = (e) => {
       e.preventDefault();
+
       const newUser = {
           name: this.state.name,
           email: this.state.email,
@@ -47,7 +55,7 @@ class Register extends Component {
       return (
           <div className="Register row">
               <div id="registerImg"></div>
-              <form noValidate onSubmit={this.onSubmit}>
+              <form id="RegisterForm" noValidate onSubmit={this.onSubmit}>
                   <input type="text" 
                   name="email"
                   placeholder="EMAIL"
@@ -78,7 +86,7 @@ class Register extends Component {
                   {errors.password2 && (<div className="err invalid-feedback">{errors.password2}</div>)}
                   <input type="submit"></input>
               </form>
-              <h1>REGISTER</h1>
+              <span><h1>REGISTER</h1></span>
           </div>
       );
   }

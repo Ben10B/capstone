@@ -17,6 +17,7 @@ class Account extends Component {
                     <h3>Name</h3>
                     <h5>Email</h5>
                     <h5>Password</h5>
+                    <button onClick={this.props.onDeleteClick.bind(this)} className="btn2">Delete Account</button>
                 </div>
                 <span className="flex-4">
                     <h6>Choose a Theme</h6>

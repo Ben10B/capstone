@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './css/App.css';
 import './BENstrap-in/css/my.css';
 import Home from './components/Home';
@@ -6,16 +7,18 @@ import Account from './components/Account';
 import Sprite from './components/Sprite';
 import Model from './components/Model';
 import Achievements from './components/Achievements';
-// import propTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { logoutUser } from './actions/authActions';
 import Header from './components/Header.jsx';
+import Spinner from './components/common/Spinner.jsx';
+// import CreateProfile from './components/create-profile/CreateProfile.jsx';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getCurrentProfile, deleteAccount } from './actions/profileActions';
 
 class Body extends Component {
   state = {}
   render(){
     if(this.props.appState.page === 'account'){
-      return <Account appState={this.props.appState} click={this.props.click}/>;
+      return <Account appState={this.props.appState} click={this.props.click} onDeleteClick={this.props.deleteAccountClick}/>;
     }
     else if(this.props.appState.page === 'sprite'){
       return <Sprite appState={this.props.appState}/>;
@@ -33,9 +36,16 @@ class Body extends Component {
 }
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getCurrentProfile();
+  }
+  onDeleteClick = (e) => {
+    this.props.deleteAccount();
+  }
   state = {
     page: '',
     theme: '',
+    user: {}
   }
   selectPage = (link) => {
     this.setState({ page: link });
@@ -44,23 +54,53 @@ class App extends Component {
     this.setState({ theme: t });
   }
   render() {
+    // const { user } = this.props.auth;
+    const { profile, loading } = this.props.profile;
+
+    let grindinContent;
+    if(profile === null || loading) {
+      grindinContent = <Spinner/>
+    } else { 
+      //Check if logged in user has profile data
+      if(Object.keys(profile).length > 0){
+        grindinContent = (
+          <div className="App">
+            <Header appState={this.state} click={this.selectPage}/>
+            <Body appState={this.state} click={this.selectTheme} deleteAccountClick={this.onDeleteClick}/>
+          </div>
+        )
+      } else {
+        //User is logged in but has no profile
+        //TODO: use Tutorial.js
+        grindinContent = (
+          <div className="App">
+            <Header appState={this.state} click={this.selectPage}/>
+            <div className="flex-8">
+              <Link to="/create-profile">Create Profile</Link>
+            </div>
+            {/* <CreateProfile appState={this.state} click={this.selectTheme}/> */}
+          </div>
+        )
+      }
+    }
+
     return (
-      <div className="App">
-        <Header appState={this.state} click={this.selectPage}/>
-        <Body appState={this.state} click={this.selectTheme}/>
+      <div>
+        {grindinContent}
       </div>
     );
   }
 }
+App.propTypes = {
+  getCurrentProfile: propTypes.func.isRequired,
+  deleteAccount: propTypes.func.isRequired,
+  auth: propTypes.object.isRequired,
+  profile: propTypes.object.isRequired
+};
 
-// App.propTypes = {
-//   logoutUser: propTypes.func.isRequired,
-//   auth: propTypes.object.isRequired
-// }
+const mapStateToProps = state => ({
+  profile: state.profile,
+  auth: state.auth
+});
 
-// const mapStateToProps = (state) => ({
-//   auth: state.auth
-// });
-
-// export default connect(mapStateToProps, { logoutUser })(App);
-export default App;
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(App);

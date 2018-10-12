@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/authActions';
 import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import TextFieldGroup from './common/TextFieldGroup';
 
 class Logon extends Component {
   constructor(props){
@@ -27,14 +27,21 @@ class Logon extends Component {
     }
     if(nextProps.errors){
       this.setState({ errors: nextProps.errors });
+      // this.setState({ errors: nextProps.errors }, ()=> { console.log(`state: ${this.state.errors}, value: ${nextProps.errors}`); });
     }
+    // for(let i = 0; i < document.getElementById('RegisterForm').children.length; i++){
+    //   let child = document.getElementById('RegisterForm').children[i];
+    //   if(child.className.includes('err')){
+    //     console.log(child);
+    //     child.style.display = 'none';
+    //   }
+    // }
   }
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
   onSubmit = (e) => {
       e.preventDefault();
-
       const userData = {
           email: this.state.email,
           password: this.state.password
@@ -47,24 +54,21 @@ class Logon extends Component {
           <div className="Logon row">
               <h1>LOGIN</h1>
               <div>
-                  <form noValidate onSubmit={this.onSubmit}>
-                    <input type="text" 
-                      name="email"
+                  <form id="LogonForm" noValidate onSubmit={this.onSubmit}>
+                    <TextFieldGroup name="email"
                       placeholder="EMAIL"
                       value={this.state.email} onChange={this.onChange}
-                      className={classnames('', {'is-invalid': errors.email})}
+                      error={errors.email}
                     />
                     {errors.email && (<div className="err invalid-feedback">{errors.email}</div>)}
-                    <input type="text" 
-                      name="password"
+                    <TextFieldGroup name="password"
                       placeholder="PASSWORD"
                       value={this.state.password} onChange={this.onChange}
-                      className={classnames('', {'is-invalid': errors.password})}
+                      error={errors.password}
                     />
                     {errors.password && (<div className="err invalid-feedback">{errors.password}</div>)}
                     <input type="submit" value="Login"/>
                   </form>
-                  {/* <p><a>Username?</a><i className="fas fa-arrows-alt-h"></i><a>Password?</a></p> */}
               </div>
               <div id="logonImg"></div>
           </div>

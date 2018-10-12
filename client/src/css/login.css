@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
 }
-.Logon h1, .Register h1{
+.Logon h1, .Register span{
     justify-self: center;
     align-self: center;
 }
@@ -64,7 +64,7 @@ form input[type=text]{
     background-color: rgba(0, 0, 0, 0.603);
 }
 form input[type=submit]{
-    /* max-height: 30px; */
+    min-height: 20px;
     background-color: rgba(0, 145, 197, 0.815);
 }
 form input[type=submit]:hover{
@@ -82,9 +82,11 @@ form input[type=submit]:hover{
     background-color: rgba(0, 145, 197, 0.5);
 }
 @media all and (max-width: 575px){
-    .Register h1{ color: #fff;
+    .Register h1{ 
+        color: #fff;
+        padding-top: 55px;
     }
-    .Logon h1, .Register h1{ padding-top: 5px;
+    .Logon h1{ padding-top: 5px;
     }
     #registerImg, #logonImg{
         width: 100%;

@@ -76,7 +76,7 @@ const GoalList = (props) => {
 }
 class Home extends Component {
     state = {
-        goals: 22,
+        goals: 2,
         createGoal: false,
         showGOAL: false,
         nameOfGOAL: '',

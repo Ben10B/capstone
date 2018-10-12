@@ -5,6 +5,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
 import { withRouter } from 'react-router-dom';
+import { clearCurrentProfile } from '../actions/profileActions';
 
 class Header extends Component {
   state = {
@@ -38,6 +39,7 @@ class Header extends Component {
   }
   onLogoutClick = (e) => {
     e.preventDefault();
+    this.props.clearCurrentProfile();
     this.props.logoutUser(this.props.history);
   }
   render(){
@@ -74,6 +76,7 @@ class Header extends Component {
           </li>
           <li className={`pageOpt`} 
           onClick={this.onLogoutClick.bind(this)}>
+            <i className="fas fa-sign-out-alt"></i>
             <a>{this.state.titles[5]}</a>
           </li>
         </ul>
@@ -91,4 +94,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { logoutUser })(withRouter(Header));
+export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(withRouter(Header));

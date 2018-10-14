@@ -21,6 +21,7 @@ class CreateProfile extends Component {
       status: '',
       skills: '',
       bio: '',
+      gender: '',
       twitter: '',
       facebook: '',
       linkedin: '',
@@ -46,6 +47,7 @@ class CreateProfile extends Component {
       handle: this.state.handle,
       location: this.state.location,
       status: this.state.status,
+      gender: this.state.gender,
       skills: this.state.skills,
       bio: this.state.bio,
       twitter: this.state.twitter,
@@ -136,7 +138,7 @@ class CreateProfile extends Component {
           <small className="d-block pb-3">* = required fields</small>
           <form onSubmit={this.onSubmit}>
             <TextFieldGroup
-              placeholder="* Profile Handle"
+              placeholder="Profile Handle"
               name="handle"
               value={this.state.handle}
               onChange={this.onChange}
@@ -144,7 +146,7 @@ class CreateProfile extends Component {
               info="A unique handle for your profile URL. Your full name, company name, nickname"
             />
             <TextFieldGroup
-              placeholder="* Skills"
+              placeholder="Skills"
               name="skills"
               value={this.state.skills}
               onChange={this.onChange}
@@ -160,6 +162,15 @@ class CreateProfile extends Component {
               options={options}
               error={errors.status}
               info="This will be your sprite's status"
+            />
+            <SelectListGroup
+              placeholder="gender"
+              name="gender"
+              value={this.state.gender}
+              onChange={this.onChange}
+              options={options}
+              error={errors.gender}
+              info="This will be your sprite's gender"
             />
             <TextFieldGroup
               placeholder="Location"

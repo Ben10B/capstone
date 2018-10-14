@@ -25,7 +25,8 @@ class Register extends Component {
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.errors){
-        this.setState({ errors: nextProps.errors }, ()=> { console.log(`state: ${this.state.errors}, value: ${nextProps.errors}`); });
+        this.setState({ errors: nextProps.errors });
+        // this.setState({ errors: nextProps.errors }, ()=> { console.log(`state: ${this.state.errors}, value: ${nextProps.errors}`); });
     }
     // for(let i = 0; i < document.getElementById('LogonForm').children.length; i++){
     //     let child = document.getElementById('LogonForm').children[i];

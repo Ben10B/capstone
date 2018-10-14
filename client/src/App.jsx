@@ -8,14 +8,14 @@ import Sprite from './components/Sprite';
 import Model from './components/Model';
 import Achievements from './components/Achievements';
 import Header from './components/Header.jsx';
+import Profiles from './components/profiles/Profiles.jsx';
 import Spinner from './components/common/Spinner.jsx';
-// import CreateProfile from './components/create-profile/CreateProfile.jsx';
+
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from './actions/profileActions';
 
 class Body extends Component {
-  state = {}
   render(){
     if(this.props.appState.page === 'account'){
       return <Account appState={this.props.appState} click={this.props.click} onDeleteClick={this.props.deleteAccountClick}/>;
@@ -29,8 +29,12 @@ class Body extends Component {
     else if(this.props.appState.page === 'rewards'){
       return <Achievements appState={this.props.appState}/>;
     }
+    else if(this.props.appState.page === 'profiles'){
+      // return <div></div>;
+      return <Profiles profile={this.props.profile} appState={this.props.appState}/>;
+    } 
     return (
-      <Home appState={this.props.appState}/>
+      <Home profile={this.props.profile} appState={this.props.appState}/>
     )
   }
 }
@@ -44,9 +48,9 @@ class App extends Component {
   }
   state = {
     page: '',
-    theme: '',
-    user: {}
+    theme: ''
   }
+ 
   selectPage = (link) => {
     this.setState({ page: link });
   }
@@ -66,7 +70,7 @@ class App extends Component {
         grindinContent = (
           <div className="App">
             <Header appState={this.state} click={this.selectPage}/>
-            <Body appState={this.state} click={this.selectTheme} deleteAccountClick={this.onDeleteClick}/>
+            <Body appState={this.state} profile={profile} click={this.selectTheme} deleteAccountClick={this.onDeleteClick}/>
           </div>
         )
       } else {
@@ -78,7 +82,6 @@ class App extends Component {
             <div className="flex-8">
               <Link to="/create-profile">Create Profile</Link>
             </div>
-            {/* <CreateProfile appState={this.state} click={this.selectTheme}/> */}
           </div>
         )
       }

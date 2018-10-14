@@ -20,7 +20,7 @@ class Dashboard extends Component {
                 <div id="dashImg" className="flex-1" style={{ backgroundImage: `url(${idleF})` }}
                  onMouseEnter={this.hover} onMouseLeave={this.leave} onClick={this.zoomIn} onDoubleClick={this.zoomOut}></div>
                 <span className="flex-8">
-                    <h1>HollowSaiyan</h1>
+                    <h1>{this.props.profile.handle}</h1>
                     <p>Level: 1</p>
                     <p>Experience: 0/0</p>
                 </span>
@@ -107,7 +107,7 @@ class Home extends Component {
         }
         return (
             <div className={`App-intro${this.props.appState.theme}`}>
-                <Dashboard sprite={this.state.sprite} click={this.createGoal}/>
+                <Dashboard profile={this.props.profile} appState={this.props.appState} sprite={this.state.sprite} click={this.createGoal}/>
                 <GoalList state={this.state} click={this.showGoal}/>
             </div>
         );

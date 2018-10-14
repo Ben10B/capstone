@@ -113,7 +113,7 @@
   margin: 0;
 }
 /* Home.jsx */
-.goal, .btn1, .btn2{  
+.goal, .btn1, .delBTN{  
   background-color: rgba(255, 255, 255, 0.062);
   display: block;
   font-weight: bold;
@@ -124,21 +124,23 @@
   border: 0;
   padding: 5px 0;
 }
-.btn1, btn2{
+.btn1, .delBTN{
   transition: font-size 0.2s;
 }
-.goal:hover, .btn1:hover, .bnt2:hover{
+.goal:hover, .btn1:hover, .delBTN:hover{
   background-color: rgba(255, 255, 255, 0.315);
   cursor: pointer;
   box-shadow: 0 0 5px #fff;
 }
-.btn1:hover, .btn2:hover{
+.btn1:hover, .delBTN:hover{
   background-color: rgba(0, 143, 197, 0.315);
   box-shadow: 0 0 5px #008fc5;
   font-size: 14pt;
 }
-.btn2:hover{
-  background-color: rgba(197, 0, 0, 0.315);
+.delBTN{ background-color: rgba(197, 0, 0, 0.267); }
+.fa-user-times, .fa-trash { margin: 0 5px; }
+.delBTN:hover{
+  background-color: rgba(197, 0, 0, 0.445);
   box-shadow: 0 0 5px #c50000;
 }
 #goalList{
@@ -180,6 +182,8 @@
   cursor: pointer;
   box-shadow: 0 0 10px #000;
 }
+/* Header */
+#Header li a { color: #fff; }
 
 @media all and (max-width: 575px){
   

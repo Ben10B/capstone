@@ -7,6 +7,10 @@ const ProfileSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users'
     },
+    gender: {
+        type: String,
+        required: true
+    },
     handle: {
         type: String,
         required: true,
@@ -22,12 +26,10 @@ const ProfileSchema = new Schema({
         type: String
     },
     status: {
-        type: String,
-        required: true
+        type: String
     },
     skills: {
-        type: [String],
-        required: true
+        type: [String]
     },
     bio: {
         type: String

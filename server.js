@@ -8,6 +8,7 @@ const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const post = require('./routes/api/post');
 const sprite = require('./routes/api/sprite');
+const goal = require('./routes/api/goal');
 
 const app = express();
 app.use(cors());
@@ -36,6 +37,7 @@ app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/post', post);
 app.use('/api/sprite', sprite);
+app.use('/api/goal', goal);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {

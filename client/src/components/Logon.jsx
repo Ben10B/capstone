@@ -58,15 +58,15 @@ class Logon extends Component {
                     <TextFieldGroup name="email"
                       placeholder="EMAIL"
                       value={this.state.email} onChange={this.onChange}
-                      error={errors.email}
+                      error={errors.log_email}
                     />
-                    {errors.email && (<div className="err invalid-feedback">{errors.email}</div>)}
+                    {errors.log_email && (<div className="err invalid-feedback">{errors.log_email}</div>)}
                     <TextFieldGroup name="password"
                       placeholder="PASSWORD"
                       value={this.state.password} onChange={this.onChange}
-                      error={errors.password}
+                      error={errors.log_password}
                     />
-                    {errors.password && (<div className="err invalid-feedback">{errors.password}</div>)}
+                    {errors.log_password && (<div className="err invalid-feedback">{errors.log_password}</div>)}
                     <input type="submit" value="Login"/>
                   </form>
               </div>

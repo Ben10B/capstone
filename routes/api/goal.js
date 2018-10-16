@@ -36,6 +36,19 @@ router.get('/:id', (req, res) => {
     );
 });
 
+// @route   GET api/goal/user/:user_id
+// @desc    Get goals by user
+// @access  Public
+router.get('/user/:user_id', (req, res) => {
+  Goal.find({user: req.params.user_id})
+    // .then(goal => console.log(json(goal))
+    .then(goal => res.json(goal)
+    )
+    .catch(err =>
+      res.status(404).json({ nogoalsfound: 'No goals found by that user' })
+    );
+});
+
 // @route   POST api/goal
 // @desc    Create goal
 // @access  Private
@@ -51,14 +64,28 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    const newPost = new Goal({
-      text: req.body.text,
-      name: req.body.name,
-      avatar: req.body.avatar,
-      user: req.user.id
+    // Days
+    days = {};
+    days.sun = req.body.sun;
+    days.mon = req.body.mon;
+    days.tue = req.body.tue;
+    days.wed = req.body.wed;
+    days.th = req.body.th;
+    days.fri = req.body.fri;
+    days.sat = req.body.sat;
+
+    const newGoal = new Goal({
+      title: req.body.title,
+      description: req.body.description,
+      difficulty: req.body.difficulty,
+      date: req.body.date,
+      health: req.body.health,
+      partners: req.body.partners,
+      user: req.user.id,
+      daysOftheWeek: days
     });
 
-    newPost.save().then(post => res.json(post));
+    newGoal.save().then(goal => res.json(goal));
   }
 );
 

@@ -167,6 +167,12 @@
   }
   .btn1:hover{ font-size: 10pt;
   }
+  #Header{
+    flex: 0.1;
+  }
+  #Header a{
+    display: none;
+  }
 }
 /* Account.jsx */
 .theme{

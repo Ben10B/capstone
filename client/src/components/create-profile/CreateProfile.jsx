@@ -122,7 +122,7 @@ class CreateProfile extends Component {
 
     // Select options for status
     const options = [
-      { label: '* Select status', value: 0 },
+      { label: '* Select gender', value: 0 },
       { label: 'Male', value: 'Male' },
       { label: 'Female', value: 'Female' }
     ];
@@ -138,14 +138,15 @@ class CreateProfile extends Component {
           <small className="d-block pb-3">* = required fields</small>
           <form onSubmit={this.onSubmit}>
             <TextFieldGroup
-              placeholder="Profile Handle"
+              placeholder="* Profile Handle"
               name="handle"
               value={this.state.handle}
               onChange={this.onChange}
               error={errors.handle}
               info="A unique handle for your profile URL. Your full name, company name, nickname"
             />
-            <TextFieldGroup
+            {errors.handle && (<div className="err invalid-feedback">{errors.handle}</div>)}
+            {/* <TextFieldGroup
               placeholder="Skills"
               name="skills"
               value={this.state.skills}
@@ -153,16 +154,7 @@ class CreateProfile extends Component {
               error={errors.skills}
               info="Please use comma separated values (eg.
                 HTML,CSS,JavaScript,PHP"
-            />
-            <SelectListGroup
-              placeholder="status"
-              name="status"
-              value={this.state.status}
-              onChange={this.onChange}
-              options={options}
-              error={errors.status}
-              info="This will be your sprite's status"
-            />
+            /> */}
             <SelectListGroup
               placeholder="gender"
               name="gender"

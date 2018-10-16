@@ -172,10 +172,8 @@ class Account extends Component {
                 <h1 className="flex-2">Account</h1>
                 <div className="flex-4">
                     <h3>{profile.user.name}</h3>
-                    <h3>{profile.handle}</h3>
-                    <h5>{profile.gender}</h5>
                     <form onSubmit={this.onSubmit}>
-                        <TextFieldGroup
+                        {/* <TextFieldGroup
                         placeholder="Profile Handle"
                         name="handle"
                         value={this.state.handle}
@@ -183,6 +181,7 @@ class Account extends Component {
                         error={errors.handle}
                         info="A unique handle for your profile URL. Your full name, company name, nickname"
                         />
+                        {errors.handle && (<div className="err invalid-feedback">{errors.handle}</div>)} */}
                         <div className="margn-bottom-3">
                         <div type="button"
                             onClick={() => {

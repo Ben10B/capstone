@@ -7,16 +7,16 @@ module.exports = function validateProfileInput(data) {
   data.handle = !isEmpty(data.handle) ? data.handle : '';
   data.gender = !isEmpty(data.gender) ? data.gender : '';
 
-  if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.handle = 'Handle needs to between 2 and 4 characters';
+  if (!Validator.isLength(data.handle, { min: 2, max: 16 })) {
+    errors.handle = 'Handle needs to between 2 and 16 characters';
   }
 
   if (Validator.isEmpty(data.handle)) {
-    errors.handle = 'Profile handle is required';
+    errors.handle = 'Handle is required';
   }
 
   if (Validator.isEmpty(data.gender)) {
-    errors.gender = 'Profile gender is required';
+    errors.gender = 'Gender is required';
   }
 
   if (!isEmpty(data.website)) {

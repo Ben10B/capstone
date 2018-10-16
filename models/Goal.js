@@ -7,6 +7,10 @@ const GoalSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
+  title: {
+    type: String,
+    required: true
+  },
   description: {
     type: String,
     required: true
@@ -29,6 +33,15 @@ const GoalSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  daysOftheWeek: {
+    sun: { type: Boolean },
+    mon: { type: Boolean },
+    tue: { type: Boolean },
+    wed: { type: Boolean },
+    th: { type: Boolean },
+    fri: { type: Boolean },
+    sat: { type: Boolean },
   }
 });
 

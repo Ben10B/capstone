@@ -109,7 +109,7 @@ router.post(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const { errors, isValid } = validateProfileInput(req.body);
-
+    
     // Check Validation
     if (!isValid) {
       // Return any errors with 400 status

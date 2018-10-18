@@ -58,5 +58,6 @@ export const logoutUser = (history) => dispatch => {
   // Set current user to {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
   //Logout user
-  history.push('/')
+  window.location.href = '/';
+  // history.push('/');
 };

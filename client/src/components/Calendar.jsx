@@ -59,17 +59,19 @@ export default class Calendar extends Component{
         let i = 0;
         let tempDays = [];
         while (date.getMonth() === currentMonth) {
+            //Put empty days prior to day 1
             if(i === 0) tempDays = this.addSpace(date);
-            tempDays.push(<Day key={i} click={this.showDetails}
+            //Add days to tempDays array
+            tempDays.push(<Day key={i} click={this.showDetails} goal={this.props.selectedGoal}
                 calendarState={this.state} dateString={new Date(date).toUTCString().substring(4, 7)}/>);
-            date.setDate(date.getDate() + 1);
-            i++;
+            date.setDate(date.getDate() + 1); //Increase day by 1
+            i++; 
         }
         this.setState({ days: tempDays });
         this.setState({ monthIndex: currentMonth });
         this.setState({ currentYear: currentYear });
-        if(date.getDate() !== this.state.currentDay)
-            this.setState({ today: date });
+        // if(date.getDate() !== this.state.currentDay)
+        //     this.setState({ today: date });
     };
     addSpace = (date) => {
         let weekdays = {
@@ -93,7 +95,7 @@ export default class Calendar extends Component{
     
     render() {
         return (
-            <div className='calendar-container'>
+            <div className='calendar-container flex-9'>
                 <div className='calendar'>
                     <div id='month'>
                         <ul>
@@ -149,9 +151,6 @@ class Day extends Component {
         let d = this.props.dateString;
         let thisDay = parseInt(d, 10);
         let date = new Date();
-        // let month = date.getMonth();
-        // let year = date.getFullYear();
-        // let date2 = new Date(year, month, thisDay);
         
         //Unresolved: days passed that need to be completed
         if(thisDay <= date.getDate())
@@ -165,6 +164,7 @@ class Day extends Component {
             this.setState({ statusIndex: 4 });
         }
     };
+    
     render() {
         return (
             // <td className={`day ${this.props.calendarState.statusIndex}`} 

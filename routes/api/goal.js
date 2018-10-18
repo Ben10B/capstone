@@ -65,24 +65,25 @@ router.post(
     }
 
     // Days
-    days = {};
-    days.sun = req.body.sun;
-    days.mon = req.body.mon;
-    days.tue = req.body.tue;
-    days.wed = req.body.wed;
-    days.th = req.body.th;
-    days.fri = req.body.fri;
-    days.sat = req.body.sat;
+    daysObj = {};
+    daysObj.sun = req.body.sun;
+    daysObj.mon = req.body.mon;
+    daysObj.tue = req.body.tue;
+    daysObj.wed = req.body.wed;
+    daysObj.th = req.body.th;
+    daysObj.fri = req.body.fri;
+    daysObj.sat = req.body.sat;
 
     const newGoal = new Goal({
       title: req.body.title,
       description: req.body.description,
       difficulty: req.body.difficulty,
       date: req.body.date,
-      health: req.body.health,
+      health: 10,
+      maxHealth: 10,
       partners: req.body.partners,
       user: req.user.id,
-      daysOftheWeek: days
+      daysOftheWeek: daysObj
     });
 
     newGoal.save().then(goal => res.json(goal));

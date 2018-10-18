@@ -7,7 +7,7 @@ import theme2 from '../Assets/img/Theme-Two.png';
 import theme3 from '../Assets/img/Theme-Three.png';
 import theme4 from '../Assets/img/Theme-Four.png';
 import theme5 from '../Assets/img/Theme-Five.png';
-import TextFieldGroup from './common/TextFieldGroup';
+// import TextFieldGroup from './common/TextFieldGroup';
 import InputGroup from './common/InputGroup';
 
 import { connect } from 'react-redux';
@@ -214,7 +214,7 @@ class Account extends Component {
                         onClick={()=>this.props.click('-theme5')}>Theme Five</div>
                     </div>
                 </span>
-                <button onClick={this.props.onDeleteClick.bind(this)} className="delBTN"><i className="fas fa-user-times"></i>DELETE ACCOUNT<i className="fas fa-trash"></i></button>
+                <button onClick={this.props.onDeleteClick.bind(this)} className="delBTN"><i className="fas fa-user-times"></i>DELETE ACCOUNT</button>
             </div>
         );
     }

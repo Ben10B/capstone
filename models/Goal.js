@@ -22,6 +22,9 @@ const GoalSchema = new Schema({
   health: {
     type: Number
   },
+  maxHealth: {
+    type: Number
+  },
   partners: [
     {
       user: {
@@ -35,14 +38,21 @@ const GoalSchema = new Schema({
     default: Date.now
   },
   daysOftheWeek: {
-    sun: { type: Boolean },
-    mon: { type: Boolean },
-    tue: { type: Boolean },
-    wed: { type: Boolean },
-    th: { type: Boolean },
-    fri: { type: Boolean },
-    sat: { type: Boolean },
-  }
+    sun: { type: Number },
+    mon: { type: Number },
+    tue: { type: Number },
+    wed: { type: Number },
+    th: { type: Number },
+    fri: { type: Number },
+    sat: { type: Number },
+  },
+  day: [
+    {
+      status: { type: String, default: "inactive" },
+      date: { type: Date },
+      dayOfMonth: { type: String },
+    }
+  ]
 });
 
 module.exports = Goal = mongoose.model('goal', GoalSchema);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/calendar.css';
 import idleF from '../Assets/img/Idle-Female.gif';
+import moment from 'moment';
 
 export default class Calendar extends Component{
     constructor(props){
@@ -16,9 +17,10 @@ export default class Calendar extends Component{
             monthIndex: d.getMonth(),
             showDETAILS: false,
             selectedDay: '',
-            statusIndex: undefined,
+            selectedGoal: this.props.selectedGoal,
         }
         this.switchMonths = this.switchMonths.bind(this);
+        this.getDays = this.getDays.bind(this);
     }
     componentDidMount() { 
         this.getDays(this.state.currentMonth, this.state.currentYear);
@@ -29,16 +31,19 @@ export default class Calendar extends Component{
     switchMonths = (index) => {
         let monthIndex = this.state.monthIndex;
         let newIndex = monthIndex += index;
-        this.getDays(this.navigateCalender(newIndex), this.state.currentYear);
+        let temp = this.navigateCalender(newIndex);
+
+        this.getDays(temp, this.state.currentYear);
     };
     navigateCalender = (index) => {
         let newIndex = 0;
         newIndex = index;
-
+        
         if (index < 0) index = 11;
         else if (index > 11) index = 0;
         document.getElementById('the-month').innerHTML = this.state.months[index];
-        
+
+        this.setState(prevState => {return {monthIndex: prevState.monthIndex = index} });
         return newIndex;
     };
     showDetails = (day) => {
@@ -48,30 +53,41 @@ export default class Calendar extends Component{
             this.setState({ showDETAILS: true });
         }
         else
-            this.setState({ showDETAILS: false });
+        this.setState({ showDETAILS: false });
     };
     getDays = (currentMonth, currentYear) => {
         let date = new Date();
         if(currentMonth === -1){ currentYear--; currentMonth = 11; }
         if(currentMonth === 12){ currentYear++; currentMonth = 0; }
         date = new Date(currentYear, currentMonth, 1);
-        
+        let improvedDate = moment(date, 'YYYY-MM-DD');
+
+        this.setState(prevState => {return {currentMonth: prevState.currentMonth = currentMonth} });
         let i = 0;
         let tempDays = [];
-        while (date.getMonth() === currentMonth) {
-            //Put empty days prior to day 1
+        // console.log(moment(element.date, 'YYYY-MM-DD').toDate());
+        while (improvedDate.month() === currentMonth) {
+            let isValid = false;
+            //Insert empty days prior to day 1
             if(i === 0) tempDays = this.addSpace(date);
             //Add days to tempDays array
-            tempDays.push(<Day key={i} click={this.showDetails} goal={this.props.selectedGoal}
-                calendarState={this.state} dateString={new Date(date).toUTCString().substring(4, 7)}/>);
-            date.setDate(date.getDate() + 1); //Increase day by 1
+            this.state.selectedGoal.days.forEach(element => {
+                if(moment(element.date, 'YYYY-MM-DD').date() === improvedDate.date() && moment(element.date, 'YYYY-MM-DD').month() === improvedDate.month()){
+                    isValid = true;
+                    tempDays.push(<Day key={i} click={this.showDetails} calendarState={this.state} element={element} dateString={improvedDate.date().toString()}/>);
+                }
+            });
+            if(isValid === false){
+                tempDays.push(<Day key={i} click={this.showDetails} calendarState={this.state} dateString={improvedDate.date().toString()}/>);
+            }
+            
+            improvedDate.add(1, 'd'); //Increase day by 1
             i++; 
         }
         this.setState({ days: tempDays });
-        this.setState({ monthIndex: currentMonth });
-        this.setState({ currentYear: currentYear });
-        // if(date.getDate() !== this.state.currentDay)
-        //     this.setState({ today: date });
+        // this.setState({ days: tempDays }, ()=> { console.log(`state: ${this.state.days}, value: ${tempDays}`); });
+        this.setState(prevState => {return {currentYear: prevState.currentYear = currentYear} });
+
     };
     addSpace = (date) => {
         let weekdays = {
@@ -90,7 +106,6 @@ export default class Calendar extends Component{
     updateStatus = (status) => {
         // The second (optional) parameter is a callback function that will be executed once setState is completed and the component is re-rendered.
         this.setState({ statusIndex: status }, ()=> { console.log(`state: ${this.state.statusIndex}, value: ${status}`); });
-        // this.getDays(this.state.currentMonth, this.state.currentYear);
     };
     
     render() {
@@ -128,53 +143,41 @@ export default class Calendar extends Component{
         );
     }
 }
+
 class Day extends Component {
     constructor(props){
         super(props);
         this.state = {
             status: ["complete", "incomplete", "unresolved", "inactive", "today"],
-            statusIndex: this.props.calendarState.statusIndex,
+            dailyGoal: {},
+            isMounted: false,
         }
     }
     componentWillMount(){
-        // this.setState({ statusIndex: this.props.statusIndex });
-        // this.determineStatus();
-    };
+        if(this.props.element !== null){
+            this.setState({ dailyGoal: this.props.element });
+            this.setState({ isMounted: true });
+        }
+    }
     componentWillUnmount(){
         //clear details
+        this.setState({ dailyGoal: {} }); this.setState({ isMounted: false });
     };
     componentWillReceiveProps(nextProps){
-        // console.log(nextProps);
-        // console.log(this.props.calendarState.statusIndex);
-    };
-    determineStatus(){
-        let d = this.props.dateString;
-        let thisDay = parseInt(d, 10);
-        let date = new Date();
-        
-        //Unresolved: days passed that need to be completed
-        if(thisDay <= date.getDate())
-            this.setState({ statusIndex: 2 });
-        //Inactive: days that have yet to come
-        if(thisDay > date.getDate()) 
-            this.setState({ statusIndex: 3 });
-        //Today
-        if(thisDay === this.props.calendarState.today.getDate()){
-            // console.log(this.props.calendarState.today);
-            this.setState({ statusIndex: 4 });
-        }
+
     };
     
     render() {
         return (
-            // <td className={`day ${this.props.calendarState.statusIndex}`} 
-            <td className={`day ${this.state.status[this.state.statusIndex]}`} 
+            <td className={this.state.isMounted ? `day ${this.state.dailyGoal.status}` : "day"} 
                 onClick={()=>this.props.click(this.props.dateString)}>
                     {this.props.dateString}
             </td>
         );
     }
 }
+
+
 class Details extends Component {
     componentWillUnmount(){
         //clear details
@@ -195,3 +198,6 @@ class Details extends Component {
         );
     }
 }
+
+
+

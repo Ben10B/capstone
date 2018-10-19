@@ -6,7 +6,7 @@ export default class Goal extends Component {
   componentDidMount(){
     var progressbar = document.getElementById("progressbar");   
     var pbar_width = 1;
-    var currentHealth = this.props.selectedGoal.health * 10;
+    var currentHealth = (this.props.selectedGoal.health / this.props.selectedGoal.maxHealth) * 100;
     var id = setInterval(frame, 5);
     function frame() {
       if (pbar_width >= currentHealth) {
@@ -26,17 +26,17 @@ export default class Goal extends Component {
             </span>
             <button type="button" className="btn1" onClick={()=>this.props.click('')}>Back to Dashboard</button>
           </div>
-          <ProgressBar health={this.props.selectedGoal.health}/>
+          <ProgressBar progress={this.props.selectedGoal}/>
           <Calendar selectedGoal={this.props.selectedGoal}/>
         </div>
       )
   }
 }
 
-const ProgressBar = ({health}) => {
+const ProgressBar = ({progress}) => {
   return (
     <div className="progressbar-container">
-      <div id="progressbar" className="">{health}/{10}</div>
+      <div id="progressbar" className="">{progress.health}/{progress.maxHealth}</div>
     </div>
   )
 }

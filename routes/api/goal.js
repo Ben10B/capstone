@@ -41,7 +41,6 @@ router.get('/:id', (req, res) => {
 // @access  Public
 router.get('/user/:user_id', (req, res) => {
   Goal.find({user: req.params.user_id})
-    // .then(goal => console.log(json(goal))
     .then(goal => res.json(goal)
     )
     .catch(err =>
@@ -64,29 +63,49 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    // Days
-    daysObj = {};
-    daysObj.sun = req.body.sun;
-    daysObj.mon = req.body.mon;
-    daysObj.tue = req.body.tue;
-    daysObj.wed = req.body.wed;
-    daysObj.th = req.body.th;
-    daysObj.fri = req.body.fri;
-    daysObj.sat = req.body.sat;
-
     const newGoal = new Goal({
       title: req.body.title,
       description: req.body.description,
       difficulty: req.body.difficulty,
       date: req.body.date,
-      health: 10,
-      maxHealth: 10,
       partners: req.body.partners,
       user: req.user.id,
-      daysOftheWeek: daysObj
+      health: req.body.maxHealth,
+      maxHealth: req.body.maxHealth,
+      days: req.body.days,
+      date: req.body.date
     });
 
     newGoal.save().then(goal => res.json(goal));
+  }
+);
+
+// @route   POST api/goal/update
+// @desc    Update goal
+// @access  Private
+router.post(
+  '/update/:id',
+  // passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Goal.findById(req.params.id)
+        .then(goal => {
+          // Check for goal owner
+          if (goal.user.toString() !== req.user.id) {
+            return res
+              .status(401)
+              .json({ notauthorized: 'User not authorized' });
+          }
+
+          // update
+          Goal.findOneAndUpdate(
+            { user: req.user.id },
+            { $set: {} },
+            { new: true }
+            ).then(goal => res.json(goal));
+        })
+        .catch(err => res.status(404).json({ goalnotfound: 'No goal found' }));
+    });
   }
 );
 

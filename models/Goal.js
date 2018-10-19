@@ -37,20 +37,13 @@ const GoalSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  daysOftheWeek: {
-    sun: { type: Number },
-    mon: { type: Number },
-    tue: { type: Number },
-    wed: { type: Number },
-    th: { type: Number },
-    fri: { type: Number },
-    sat: { type: Number },
-  },
-  day: [
+  days: [
     {
       status: { type: String, default: "inactive" },
-      date: { type: Date },
+      year: { type: String },
+      month: { type: String },
       dayOfMonth: { type: String },
+      date: { type: Date },
     }
   ]
 });

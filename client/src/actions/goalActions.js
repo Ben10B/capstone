@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import {
-  ADD_GOAL,
   GET_ERRORS,
   CLEAR_ERRORS,
   GET_GOALS,
@@ -15,18 +14,14 @@ export const addGoal = (goalData, history) => dispatch => {
   dispatch(clearErrors());
   axios
     .post('/api/goal', goalData)
-    .then(res =>
-      dispatch({
-        type: ADD_GOAL,
-        payload: res.data
-      }), history.push('/')
+    .then(res => history.push('/')
     )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
-    );
+    ); 
 };
 
 // Get Goals

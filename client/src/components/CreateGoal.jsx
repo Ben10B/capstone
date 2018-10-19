@@ -37,55 +37,75 @@ class CreateGoal extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
     onCheck = (e) => {
-        // if(e.target.checked === true)
-            this.setState({ [e.target.name]: e.target.value });
-        // else
-        //     this.setState({ [e.target.name]: null });
+        this.setState({ [e.target.name]: e.target.checked });
     }
     onSubmit = (e) => {
         e.preventDefault();
+        const days = this.calendar(this.state.date);
+        const maxHealth = days.length;
         const goalData = {
             title: this.state.title,
             description: this.state.description,
             difficulty: this.state.difficulty,
             partners: this.state.partners,
             date: this.state.date,
-            sun: (this.state.sun) ? 0 : 88,
-            mon: (this.state.mon) ? 1 : 88,
-            tue: (this.state.tue) ? 2 : 88,
-            wed: (this.state.wed) ? 3 : 88,
-            th: (this.state.th) ? 4 : 88,
-            fri: (this.state.fri) ? 5 : 88,
-            sat: (this.state.sat) ? 6 : 88,
+            days: days,
+            sun: this.state.sun,
+            mon: this.state.mon,
+            tue: this.state.tue,
+            wed: this.state.wed,
+            th: this.state.th,
+            fri: this.state.fri,
+            sat: this.state.sat,
+            maxHealth: maxHealth,
         };
-        this.calendar(goalData.date);
-        // console.log(moment().format());
-        
-        // this.props.addGoal(goalData, this.props.history);
+        this.props.addGoal(goalData, this.props.history);
     }
     calendar = (endDate) => {
         let current = new Date();
         let cMonth = current.getMonth();
         let cYear = current.getFullYear();
         let cDay = current.getDate();
-
+        //Get total days between now and then
         let a = moment(new Date(cYear, cMonth, cDay), 'YYYY-MM-DD');
         let b = moment(endDate, 'YYYY-MM-DD');
         let days = b.diff(a, 'days');
-        
+        //Add days to array according to checked weekdays
         let i = 0;
         let tempArray = [];
-        tempArray.push({ status: "inactive", date: a, dayOfMonth: a.date(), });
+        //Add current day to array only if checked weekday matches today's weekday
+        if(((this.state.sun && a.day() === 0) && a.date() === cDay) || ((this.state.mon && a.day() === 1) && a.date() === cDay)
+        || ((this.state.tue && a.day() === 2) && a.date() === cDay) || ((this.state.wed && a.day() === 3) && a.date() === cDay)
+        || ((this.state.th && a.day() === 4) && a.date() === cDay) || ((this.state.fri && a.day() === 5) && a.date() === cDay)
+        || ((this.state.sat && a.day() === 6) && a.date() === cDay))
+            tempArray.push({ status: "inactive", year: a.year(), month: a.month(), dayOfMonth: a.date(), date:  moment(a, 'YYYY-MM-DD') });
+
         while(i < days){
             let newDate = a.add(1, 'days');
-            tempArray.push({ 
-                status: "inactive", 
-                date: newDate, 
-                dayOfMonth: newDate.date(), 
-            });
-            console.log(newDate.date());
+            if(this.state.sun && a.day() === 0){
+                tempArray.push({ status: "inactive", year: newDate.year(), month: newDate.month(), dayOfMonth: newDate.date(), date: moment(newDate, 'YYYY-MM-DD')});
+            }
+            if(this.state.mon && a.day() === 1){
+                tempArray.push({ status: "inactive", year: newDate.year(), month: newDate.month(), dayOfMonth: newDate.date(), date: moment(newDate, 'YYYY-MM-DD') });
+            }
+            if(this.state.tue && a.day() === 2){
+                tempArray.push({ status: "inactive", year: newDate.year(), month: newDate.month(), dayOfMonth: newDate.date(), date: moment(newDate, 'YYYY-MM-DD') });
+            }
+            if(this.state.wed && a.day() === 3){
+                tempArray.push({ status: "inactive", year: newDate.year(), month: newDate.month(), dayOfMonth: newDate.date(), date: moment(newDate, 'YYYY-MM-DD') });
+            }
+            if(this.state.th && a.day() === 4){
+                tempArray.push({ status: "inactive", year: newDate.year(), month: newDate.month(), dayOfMonth: newDate.date(), date: moment(newDate, 'YYYY-MM-DD') });
+            }
+            if(this.state.fri && a.day() === 5){
+                tempArray.push({ status: "inactive", year: newDate.year(), month: newDate.month(), dayOfMonth: newDate.date(), date: moment(newDate, 'YYYY-MM-DD') });
+            }
+            if(this.state.sat && a.day() === 6){
+                tempArray.push({ status: "inactive", year: newDate.year(), month: newDate.month(), dayOfMonth: newDate.date(), date: moment(newDate, 'YYYY-MM-DD') });
+            }
             i++;
         }
+        return tempArray;
     };
     render() {
         const { errors } = this.state;
@@ -123,13 +143,13 @@ class CreateGoal extends Component {
                         {errors.date && (<div className="err invalid-feedback">{errors.date}</div>)}
                         <label>Check DAY(s) you plan to grind.</label>
                         <div className="row" style={{display: 'flex', flexDirection: 'row'}} error={errors.daysOftheWeek}>
-                            <p><input type="checkbox" name="sun" onChange={this.onCheck} value="0"/>Sun</p>
-                            <p><input type="checkbox" name="mon" onChange={this.onCheck} value="1"/>Mon</p>
-                            <p><input type="checkbox" name="tue" onChange={this.onCheck} value="2"/>Tue</p>
-                            <p><input type="checkbox" name="wed" onChange={this.onCheck} value="3"/>Wed</p>
-                            <p><input type="checkbox" name="th" onChange={this.onCheck} value="4"/>Th</p>
-                            <p><input type="checkbox" name="fri" onChange={this.onCheck} value="5"/>Fri</p>
-                            <p><input type="checkbox" name="sat" onChange={this.onCheck} value="6"/>Sat</p>
+                            <p><input type="checkbox" name="sun" onChange={this.onCheck}/>Sun</p>
+                            <p><input type="checkbox" name="mon" onChange={this.onCheck}/>Mon</p>
+                            <p><input type="checkbox" name="tue" onChange={this.onCheck}/>Tue</p>
+                            <p><input type="checkbox" name="wed" onChange={this.onCheck}/>Wed</p>
+                            <p><input type="checkbox" name="th" onChange={this.onCheck}/>Th</p>
+                            <p><input type="checkbox" name="fri" onChange={this.onCheck}/>Fri</p>
+                            <p><input type="checkbox" name="sat" onChange={this.onCheck}/>Sat</p>
                         </div>
                         {errors.daysOftheWeek && (<div className="err invalid-feedback">{errors.daysOftheWeek}</div>)}
                         <input className="btn1" type="submit" value="CREATE GOAL" />

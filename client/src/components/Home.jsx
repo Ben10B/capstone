@@ -45,7 +45,7 @@ const GoalDetail = ({goal, clickFunction, deleteFunction}) => {
         <div className="flex-5" onClick={()=>clickFunction(goal)}>
             <p>Health: <i>{goal.health}/{goal.maxHealth}</i></p>
         </div>
-        <div className="delBTN" onClick={()=>deleteFunction(goal._id)}><i className="fas fa-trash"></i></div>
+        <div className="delBTN" onClick={()=>deleteFunction(goal._id)}><i className="fas fa-trash" style={{padding: '5px'}}></i></div>
       </div>
     );
 }

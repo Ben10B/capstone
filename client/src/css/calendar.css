@@ -17,13 +17,15 @@
     float: left;
     padding-top: 30px;
     padding-left: 20px; 
-    cursor: pointer;   
+    cursor: pointer;
+    color: #fff;   
 }
 #month #next {
     float: right;
     padding-top: 30px;
     padding-right: 20px;
-    cursor: pointer;    
+    cursor: pointer;
+    color: #fff;    
 }
 #the-month, #the-year{ color: #fff;
 }
@@ -44,25 +46,30 @@
     grid-template-columns: repeat(7, auto);
     grid-template-rows: auto repeat(6, auto);
 }
-.day, unresolved{
+.day{
     background-color: rgba(255, 255, 255, 0.322);
     border: 1px solid #000;
 }
-.day:hover{ opacity: 0.8; cursor: pointer;
+.unresolved{ background-color: rgba(119, 93, 83, 0.555); color: #fff;
 }
-.complete{ background-color: rgba(0, 255, 0, 0.788);
+.day:hover{ opacity: 0.8; cursor: not-allowed;
 }
-.incomplete{ background-color: rgba(255, 0, 0, 0.609);
+.complete{ background-color: rgba(0, 255, 0, 0.788); color: #fff;
+}
+.incomplete{ background-color: rgba(255, 0, 0, 0.609); color: #fff;
 }
 .inactive{ background-color: #000; color: #fff;
 }
-.inactive:hover{ opacity: 1; cursor: not-allowed; }
-.today{ 
-    background-image: url('../logo.svg');
+.inactive:hover{ opacity: 0.6; cursor: not-allowed; }
+.unresolved-today{ 
+    background: rgba(119, 93, 83, 0.555) url('../logo.svg');
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto;
-    font-weight: bolder;
+    background-position: top left;
+    background-size: 25%;
+    font-weight: 900;
+    color: #fff;
+}
+.unresolved:hover, .unresolved-today:hover{ cursor: pointer;
 }
 /* -------------------------------------------------------------------- */
 .detail-container{

@@ -62,7 +62,7 @@ router.post(
       // If any errors, send 400 with errors object
       return res.status(400).json(errors);
     }
-
+    
     const newGoal = new Goal({
       title: req.body.title,
       description: req.body.description,

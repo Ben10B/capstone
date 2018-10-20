@@ -78,7 +78,7 @@ class CreateGoal extends Component {
         || ((this.state.tue && a.day() === 2) && a.date() === cDay) || ((this.state.wed && a.day() === 3) && a.date() === cDay)
         || ((this.state.th && a.day() === 4) && a.date() === cDay) || ((this.state.fri && a.day() === 5) && a.date() === cDay)
         || ((this.state.sat && a.day() === 6) && a.date() === cDay))
-            tempArray.push({ status: "inactive", year: a.year(), month: a.month(), dayOfMonth: a.date(), date:  moment(a, 'YYYY-MM-DD') });
+            tempArray.push({ status: "unresolved", year: a.year(), month: a.month(), dayOfMonth: a.date(), date:  moment(a, 'YYYY-MM-DD') });
 
         while(i < days){
             let newDate = a.add(1, 'days');

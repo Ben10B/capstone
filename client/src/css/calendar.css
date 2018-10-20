@@ -69,6 +69,22 @@
     font-weight: 900;
     color: #fff;
 }
+.complete-today{ 
+    background: rgba(0, 255, 0, 0.788) url('../logo.svg');
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: 25%;
+    font-weight: 900;
+    color: #fff;
+}
+.incomplete-today{ 
+    background: rgba(255, 0, 0, 0.609) url('../logo.svg');
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: 25%;
+    font-weight: 900;
+    color: #fff;
+}
 .unresolved:hover, .unresolved-today:hover{ cursor: pointer;
 }
 /* -------------------------------------------------------------------- */

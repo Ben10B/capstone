@@ -16,6 +16,7 @@ export const DELETE_POST = 'DELETE_POST';
 
 export const GOAL_LOADING = 'GOAL_LOADING';
 export const ADD_GOAL = 'ADD_GOAL';
+export const UPDATE_GOAL = 'UPDATE_GOAL';
 export const GET_GOAL = 'GET_GOAL';
 export const GET_GOALS = 'GET_GOALS';
 export const DELETE_GOAL = 'DELETE_GOAL';

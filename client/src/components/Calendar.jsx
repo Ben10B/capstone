@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addGoal } from '../actions/goalActions';
+import { updateGoal } from '../actions/goalActions';
 import propTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import '../css/calendar.css';
 import idleF from '../Assets/img/Idle-Female.gif';
 import moment from 'moment';
@@ -51,7 +50,7 @@ class Calendar extends Component{
         return newIndex;
     };
     showDetails = (day, status) => {
-        if(status === "complete" || status === "incomplete" || status === "unresolved" || status === "unresolved-today"){
+        if(status === "unresolved" || status === "unresolved-today"){
             this.setState({ selectedDay: day });
             this.setState({ showDETAILS: true });
         }
@@ -109,7 +108,16 @@ class Calendar extends Component{
         return temp;
     };
     updateStatus = (status) => {
-        console.log(status);
+        console.log("0"+status);
+        console.log("1"+this.state.selectedDay.status);
+
+        let day = this.state.selectedDay;
+        day.status = status;
+
+        const updatedGoal = this.state.selectedGoal;
+
+        this.props.updateGoal(updatedGoal, updatedGoal._id);
+        this.getDays(this.state.monthIndex, this.state.currentYear);
     };
     
     render() {
@@ -160,7 +168,7 @@ class Day extends Component {
             this.setState(prevState => ({ dailyGoal: prevState.dailyGoal = this.props.element }));
             let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
             if(currentGoalDay.diff(moment().format('YYYY-MM-DD')) > 0){
-                let updateStatus = this.props.element;
+                // let updateStatus = this.props.element;
                 // updateStatus.status = "incomplete";
             }
         }
@@ -171,7 +179,7 @@ class Day extends Component {
             
             let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
             let updateStatus = this.props.element;
-            if(currentGoalDay.format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')){
+            if(currentGoalDay.format('YYYY-MM-DD').isSame(moment().format('YYYY-MM-DD'))){
                 updateStatus.status += "-today";
             }
             else if(currentGoalDay.diff(moment().format('YYYY-MM-DD')) > 0){
@@ -194,6 +202,11 @@ class Day extends Component {
     };
     componentDidMount(){
         if(this.props.yes === "yes"){
+            // let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
+            // let updateStatus = this.props.element;
+            // if(currentGoalDay.format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')){
+            //     updateStatus.status += "-today";
+            // }
         }
     }
     componentWillUnmount(){
@@ -232,7 +245,7 @@ class Details extends Component {
 }
 
 Calendar.propTypes = {
-    addGoal: propTypes.func.isRequired,
+    updateGoal: propTypes.func.isRequired,
 }
   
 const mapStateToProps = (state) => ({
@@ -240,4 +253,4 @@ const mapStateToProps = (state) => ({
 });
   
 
-export default connect(mapStateToProps, { addGoal })(withRouter(Calendar));
+export default connect(mapStateToProps, { updateGoal })(Calendar);

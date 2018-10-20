@@ -6,7 +6,8 @@ import {
   GET_GOALS,
   GET_GOAL,
   GOAL_LOADING,
-  DELETE_GOAL
+  DELETE_GOAL,
+  UPDATE_GOAL
 } from './types';
 
 // Add Goal
@@ -20,6 +21,24 @@ export const addGoal = (goalData, history) => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
+      })
+    ); 
+};
+
+// Update Goal
+export const updateGoal = (goalData, id) => dispatch => {
+  axios
+    .post(`api/goal/update/${id}`, goalData)
+    .then(res => 
+      dispatch({
+        type: UPDATE_GOAL,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: UPDATE_GOAL,
+        payload: null
       })
     ); 
 };

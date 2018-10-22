@@ -3,15 +3,22 @@ const Schema = mongoose.Schema;
 
 //Create Schema
 const SpriteSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+    },
     gender: {
-        type: Boolean,
-        default: true
+        type: String,
     },
     level: {
         type: Number,
         default: 0
     },
     experience: {
+        type: Number,
+        default: 0
+    },
+    experienceLimit: {
         type: Number,
         default: 0
     }

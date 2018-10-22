@@ -67,22 +67,23 @@ class Calendar extends Component{
         this.setState(prevState => {return {currentMonth: prevState.currentMonth = currentMonth} });
         let i = 0;
         let tempDays = [];
+        let tempSelectedGoal = this.state.selectedGoal.days;
         // console.log(moment(element.date, 'YYYY-MM-DD').toDate());
         while (improvedDate.month() === currentMonth) {
             let isValid = false;
             //Put empty days prior to day 1
             if(i === 0) tempDays = this.addSpace(date);
             //Add days to tempDays array
-            this.state.selectedGoal.days.forEach(element => {
-                //If goal equals day pass element to day
-                if(moment(element.date, 'YYYY-MM-DD').date() === improvedDate.date() && moment(element.date, 'YYYY-MM-DD').month() === improvedDate.month()){
+            for(let element in tempSelectedGoal){
+                //If user selected day equals day, pass element to array
+                if(moment(tempSelectedGoal[element].date, 'YYYY-MM-DD').date() === improvedDate.date() && moment(tempSelectedGoal[element].date, 'YYYY-MM-DD').month() === improvedDate.month()){
                     isValid = true;
                     tempDays.push(<Day key={i} click={this.showDetails} calendarState={this.state} yes={"yes"} 
-                        element={element} dateString={improvedDate.date().toString()} date={improvedDate.format('YYYY-MM-DD')}
+                        element={tempSelectedGoal[element]} dateString={improvedDate.date().toString()} date={improvedDate.format('YYYY-MM-DD')}
                     />);
                 }
-            });
-            if(isValid === false){
+            }
+            if(isValid === false){ //Days user didn't select; add to array
                 tempDays.push(<Day key={i} element={{}} click={this.showDetails} calendarState={this.state} yes={"no"} dateString={improvedDate.date().toString()}/>);
             }
             
@@ -167,7 +168,7 @@ class Day extends Component {
         if(prevProps.yes !== this.props.yes){
             this.setState(prevState => ({ dailyGoal: prevState.dailyGoal = this.props.element }));
             let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
-            if(currentGoalDay.diff(moment().format('YYYY-MM-DD')) > 0){
+            if(currentGoalDay.isAfter(moment().format('YYYY-MM-DD'))){
                 // let updateStatus = this.props.element;
                 // updateStatus.status = "incomplete";
             }
@@ -179,14 +180,10 @@ class Day extends Component {
             
             let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
             let updateStatus = this.props.element;
-            if(currentGoalDay.format('YYYY-MM-DD').isSame(moment().format('YYYY-MM-DD'))){
-                updateStatus.status += "-today";
+            if(currentGoalDay.isSameOrBefore(moment().format('YYYY-MM-DD')) 
+                && this.props.element.status !== "complete" && this.props.element.status !== "incomplete"){
+                updateStatus.status = "unresolved";
             }
-            else if(currentGoalDay.diff(moment().format('YYYY-MM-DD')) > 0){
-                // updateStatus.status = "incomplete";
-                // this.setState(prevState => ({ dailyGoal: prevState.dailyGoal = updateStatus }));
-            }
-            
         }
     }
     componentWillReceiveProps(nextProps){
@@ -196,9 +193,7 @@ class Day extends Component {
             } else {
                 this.setState(({ dailyGoal: {} }));
             }
-        } else {
-            this.setState(prevState => ({ dailyGoal: prevState.dailyGoal = {} }));
-        } 
+        }
     };
     componentDidMount(){
         if(this.props.yes === "yes"){
@@ -211,6 +206,11 @@ class Day extends Component {
     }
     componentWillUnmount(){
         this.setState(prevState => ({ dailyGoal: prevState.dailyGoal = {} }));
+        let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
+            let updateStatus = this.props.element;
+            if(currentGoalDay.isSame(moment().format('YYYY-MM-DD'))){
+                updateStatus.status = "unresolved";
+            }
     }
     render() {
         return (

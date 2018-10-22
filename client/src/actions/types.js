@@ -20,3 +20,7 @@ export const UPDATE_GOAL = 'UPDATE_GOAL';
 export const GET_GOAL = 'GET_GOAL';
 export const GET_GOALS = 'GET_GOALS';
 export const DELETE_GOAL = 'DELETE_GOAL';
+
+export const UPDATE_SPRITE = 'UPDATE_SPRITE';
+export const GET_SPRITE = 'GET_SPRITE';
+export const ADD_SPRITE = 'ADD_SPRITE';

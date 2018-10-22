@@ -7,7 +7,7 @@ import {
   GET_GOAL,
   GOAL_LOADING,
   DELETE_GOAL,
-  UPDATE_GOAL
+  UPDATE_GOAL,
 } from './types';
 
 // Add Goal

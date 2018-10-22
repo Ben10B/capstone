@@ -31,21 +31,7 @@ router.get('/', (req, res) => {
 // @access  Public
 router.get('/:id', (req, res) => {
   Goal.findById(req.params.id)
-    .then(goal => { 
-      goal.days.forEach(element => {
-        //if day is today -- unresolved
-        //if day already passed without being updated -- unresolved
-        if(moment(element.date, 'YYYY-MM-DD').isSameOrBefore(moment().format('YYYY-MM-DD')) && element.status !== "complete" && element.status !== "incomplete"){
-          element.status = "unresolved";
-        }
-        // if(moment(element.date, 'YYYY-MM-DD').isSame(moment().format('YYYY-MM-DD'))){
-        //   element.status = "okay";
-        // }
-        goal.save().then(res => res.json(goal));
-      });
-      //Then save
-      return res.json(goal);
-    })
+    .then(goal => res.json(goal))
     .catch(err =>
       res.status(404).json({ nogoalfound: 'No goal found with that ID' })
     );
@@ -115,8 +101,7 @@ router.post('/update/:id', passport.authenticate('jwt', { session: false }),
 // @route   DELETE api/goal/:id
 // @desc    Delete goal
 // @access  Private
-router.delete(
-  '/:id',
+router.delete('/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {

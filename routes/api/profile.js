@@ -12,6 +12,8 @@ const validateEducationInput = require('../../validation/education');
 const Profile = require('../../models/Profile');
 // Load User Model
 const User = require('../../models/User');
+// Load Sprite Model
+const Sprite = require('../../models/Sprite');
 
 // @route   GET api/profile/test
 // @desc    Tests profile route
@@ -290,10 +292,12 @@ router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
-      User.findOneAndRemove({ _id: req.user.id }).then(() =>
-        res.json({ success: true })
-      );
+    Sprite.findOneAndRemove({ user: req.user.id }).then(() => {
+      Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+        User.findOneAndRemove({ _id: req.user.id }).then(() =>
+          res.json({ success: true })
+        );
+      });
     });
   }
 );

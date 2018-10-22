@@ -1,0 +1,7 @@
+#sprite{
+  border-bottom: 1px solid #00aeef;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center, center center;
+  background-size: contain, contain;
+  box-shadow: 0 15px 30px #000;
+}

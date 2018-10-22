@@ -9,6 +9,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import { createProfile } from '../../actions/profileActions';
+import { createSprite } from '../../actions/spriteActions';
 import Header from '../Header.jsx';
 
 class CreateProfile extends Component {
@@ -56,8 +57,10 @@ class CreateProfile extends Component {
       youtube: this.state.youtube,
       instagram: this.state.instagram
     };
-
-    this.props.createProfile(profileData, this.props.history);
+    this.props.createProfile(profileData);
+    
+    const spriteData = { gender: this.state.gender };
+    this.props.createSprite(spriteData, this.props.history);
   }
 
   onChange(e) {
@@ -210,12 +213,14 @@ class CreateProfile extends Component {
 
 CreateProfile.propTypes = {
   profile: PropTypes.object.isRequired,
+  sprite: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  sprite: state.sprite,
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { createProfile })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, createSprite })(withRouter(CreateProfile));

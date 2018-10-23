@@ -30,6 +30,7 @@ class Dashboard extends Component {
                     <h1>{this.props.profile.handle}</h1>
                     <p>Level: {this.props.sprite.level}</p>
                     <p>Experience: {this.props.sprite.experience}/{this.props.sprite.experienceLimit}</p>
+                    <p>Gold: {this.props.sprite.gold}</p>
                 </span>
                 <button type="button" className="flex-1 btn1" onClick={this.props.click}>Create Goal</button>
             </div>

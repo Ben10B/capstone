@@ -24,7 +24,8 @@ class Sprite extends Component {
                 <div className="flex-5 pad-top-2">
                     <h3>Level: {sprite.level}</h3>
                     <h3>Experience: {sprite.experience}/{sprite.experienceLimit}</h3>
-                    <h3>Goals Completed: ...</h3>
+                    <h3>Gold: {sprite.gold}</h3>
+                    <h3>Goals Completed: {sprite.goalsCompleted}</h3>
                 </div>
             </div>
         );

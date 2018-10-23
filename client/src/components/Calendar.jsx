@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateGoal } from '../actions/goalActions';
+import { withRouter } from 'react-router-dom';
+import { updateGoal, deleteGoal } from '../actions/goalActions';
+import { updateSprite } from '../actions/spriteActions';
 import propTypes from 'prop-types';
 import '../css/calendar.css';
 import idleF from '../Assets/img/Idle-Female.gif';
+import idleM from '../Assets/img/Idle-Male.gif';
 import moment from 'moment';
 
 class Calendar extends Component{
@@ -21,6 +24,7 @@ class Calendar extends Component{
             showDETAILS: false,
             selectedDay: '',
             selectedGoal: this.props.selectedGoal,
+            sprite: this.props.sprite.sprite,
         }
         this.switchMonths = this.switchMonths.bind(this);
         this.getDays = this.getDays.bind(this);
@@ -78,7 +82,7 @@ class Calendar extends Component{
                 //If user selected day equals day, pass element to array
                 if(moment(tempSelectedGoal[element].date, 'YYYY-MM-DD').date() === improvedDate.date() && moment(tempSelectedGoal[element].date, 'YYYY-MM-DD').month() === improvedDate.month()){
                     isValid = true;
-                    tempDays.push(<Day key={i} click={this.showDetails} calendarState={this.state} yes={"yes"} 
+                    tempDays.push(<Day key={`${i}.${currentMonth}`} click={this.showDetails} calendarState={this.state} yes={"yes"} 
                         element={tempSelectedGoal[element]} dateString={improvedDate.date().toString()} date={improvedDate.format('YYYY-MM-DD')}
                     />);
                 }
@@ -90,7 +94,7 @@ class Calendar extends Component{
             improvedDate.add(1, 'd'); //Increase day by 1
             i++; 
         }
-        this.setState({ days: tempDays });
+        this.setState(prevState => {return { days: prevState.days = tempDays }});
         this.setState(prevState => {return {currentYear: prevState.currentYear = currentYear} });
 
     };
@@ -109,18 +113,79 @@ class Calendar extends Component{
         return temp;
     };
     updateStatus = (status) => {
-        console.log("0"+status);
-        console.log("1"+this.state.selectedDay.status);
+        console.log(status);
+        const updatedGoal = this.state.selectedGoal;
+        const updatedSprite = this.state.sprite;
+        const diff = this.state.selectedGoal.difficulty;
 
+        //If no, take away health; if yes, give gold
+        if(status === "incomplete") updatedGoal.health = this.dealDamage(diff);
+        else updatedSprite.gold = this.receiveReward();
+
+        //Change status to complete/incomplete
         let day = this.state.selectedDay;
         day.status = status;
 
-        const updatedGoal = this.state.selectedGoal;
+        // console.log(updatedGoal); console.log(updatedSprite);
 
-        this.props.updateGoal(updatedGoal, updatedGoal._id);
-        this.getDays(this.state.monthIndex, this.state.currentYear);
+        //If health is <= 0, delete goal
+        //Else if last day is completed, go to homepage
+        //Else update
+        if(updatedGoal.health <= 0){
+            this.props.deleteGoal(updatedGoal._id);
+            this.props.history.push('/');
+        } else if(updatedGoal.days[updatedGoal.days.length - 1].status === "complete") {
+            this.completeGoal(diff, updatedSprite, updatedGoal);
+        } else {
+            this.props.updateGoal(updatedGoal, updatedGoal._id);
+            this.getDays(this.state.monthIndex, this.state.currentYear);
+        }
     };
-    
+    dealDamage = (diff) => {
+        let maxHealth = this.state.selectedGoal.maxHealth;
+        let health = 0;
+        switch(diff){
+            case 1: health = maxHealth - 1; break;
+            case 2: health = maxHealth - 5; break;
+            case 3: health = maxHealth - 10; break;
+            default: break;
+        }
+        return health;
+    }
+    receiveReward = (diff) => {
+        switch(diff){
+            case 1: return 25;
+            case 2: return 50;
+            case 3: return 100;
+            default: return 0;
+        }
+    }
+    addExp = (diff, updatedSprite) => {
+        let exp = 0;
+        switch(diff){
+            case 1: exp = 10; break;
+            case 2: exp = 20; break;
+            case 3: exp = 40; break;
+            default: break;
+        }
+        updatedSprite.experience += exp;
+
+        if(updatedSprite.experience >= updatedSprite.experienceLimit){
+            //Increase expLimit if achieved
+            updatedSprite.experienceLimit = updatedSprite.experienceLimit * 2; 
+            updatedSprite.level++; //Increase level
+        }
+    }
+    completeGoal = (diff, updatedSprite, updatedGoal) => {
+        this.addExp(diff, updatedSprite); //Add experience
+        updatedSprite.goalsCompleted++; //Increase goal record
+        updatedSprite.gold = Math.round(this.receiveReward(diff) * 1.5); //Add gold * bonus
+        
+        // console.log(updatedSprite);
+        this.props.updateSprite(updatedSprite, updatedSprite._id);
+        this.props.deleteGoal(updatedGoal._id);
+        this.props.history.push('/');
+    }
     render() {
         return (
             <div className='calendar-container flex-9'>
@@ -164,44 +229,18 @@ class Day extends Component {
             dailyGoal: {},
         }
     }
-    componentDidUpdate(prevProps) {
-        if(prevProps.yes !== this.props.yes){
-            this.setState(prevState => ({ dailyGoal: prevState.dailyGoal = this.props.element }));
-            let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
-            if(currentGoalDay.isAfter(moment().format('YYYY-MM-DD'))){
-                // let updateStatus = this.props.element;
-                // updateStatus.status = "incomplete";
-            }
-        }
-    }
     componentWillMount() {
         if(this.props.yes === "yes"){
             this.setState(prevState => ({ dailyGoal: prevState.dailyGoal = this.props.element }));
             
             let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
             let updateStatus = this.props.element;
-            if(currentGoalDay.isSameOrBefore(moment().format('YYYY-MM-DD')) 
-                && this.props.element.status !== "complete" && this.props.element.status !== "incomplete"){
+            if(currentGoalDay.isSame(moment().format('YYYY-MM-DD'))){
+                updateStatus.status = "unresolved-today";
+            }
+            else if(currentGoalDay.isBefore(moment().format('YYYY-MM-DD'))){
                 updateStatus.status = "unresolved";
             }
-        }
-    }
-    componentWillReceiveProps(nextProps){
-        if(nextProps.monthIndex !== this.props.calendarState.monthIndex){
-            if(this.props.yes === "yes"){
-                this.setState({ dailyGoal: this.props.element });
-            } else {
-                this.setState(({ dailyGoal: {} }));
-            }
-        }
-    };
-    componentDidMount(){
-        if(this.props.yes === "yes"){
-            // let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
-            // let updateStatus = this.props.element;
-            // if(currentGoalDay.format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')){
-            //     updateStatus.status += "-today";
-            // }
         }
     }
     componentWillUnmount(){
@@ -232,7 +271,7 @@ class Details extends Component {
             <div className={this.props.calendarState.showDETAILS ? "detail-container flex-2 display-block" : "detail-container flex-2"}>
                 <div className="details row">
                     <h6 className="detailsHeading">Day {this.props.calendarState.selectedDay.dayOfMonth}</h6>
-                    <div className="detailImg" style={{ backgroundImage: `url(${idleF})` }}></div>
+                    <div className="detailImg" style={{ backgroundImage: `url(${(this.props.calendarState.sprite.gender === "Female") ? idleF : idleM})` }}></div>
                     <div className="row yes-no-container">
                         <button type="button" onClick={()=>this.props.click('complete')} className="btn1 green"><i className="fas fa-check"></i></button>
                         <button type="button" onClick={()=>this.props.click('incomplete')} className="btn1 red"><i className="fas fa-times"></i></button>
@@ -246,11 +285,13 @@ class Details extends Component {
 
 Calendar.propTypes = {
     updateGoal: propTypes.func.isRequired,
+    deleteGoal: propTypes.func.isRequired,
+    updateSprite: propTypes.func.isRequired,
 }
   
 const mapStateToProps = (state) => ({
-    goal: state.goal
+    goal: state.goal,
+    sprite: state.sprite
 });
   
-
-export default connect(mapStateToProps, { updateGoal })(Calendar);
+export default connect(mapStateToProps, { updateGoal, deleteGoal, updateSprite })(withRouter(Calendar));

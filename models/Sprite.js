@@ -21,6 +21,14 @@ const SpriteSchema = new Schema({
     experienceLimit: {
         type: Number,
         default: 0
+    },
+    gold: {
+        type: Number,
+        default: 0
+    },
+    goalsCompleted: {
+        type: Number,
+        default: 0
     }
 });
 module.exports = Sprite = mongoose.model('sprite', SpriteSchema);

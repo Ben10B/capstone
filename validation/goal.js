@@ -1,5 +1,6 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
+const moment = require('moment');
 
 module.exports = function validateGoalInput(data) {
   let errors = {};
@@ -47,6 +48,14 @@ module.exports = function validateGoalInput(data) {
     errors.date = 'Date field is required';
   }
 
+  const tempDate = moment(data.date, 'YYYY-MM-DD');
+  const today = moment().format('YYYY-MM-DD');
+  if(tempDate.diff(today, 'days') > 60){
+    errors.date = 'Choose a date less than or equal to 60 days from now '+tempDate.diff(today, 'days');
+  }
+  if(tempDate.isBefore(today)){
+    errors.date = 'Choose a date starting from today to 60 days from now';
+  }
   return {
     errors,
     isValid: isEmpty(errors)

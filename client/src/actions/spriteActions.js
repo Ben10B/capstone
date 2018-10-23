@@ -22,9 +22,9 @@ export const createSprite = (spriteData, history) => dispatch => {
 };
 
 // Update Sprite
-export const updateSprite = (goalData, id) => dispatch => {
+export const updateSprite = (spriteData, id) => dispatch => {
   axios
-    .post(`api/sprite/update/${id}`, goalData)
+    .post(`api/sprite/update/${id}`, spriteData)
     .then(res => 
       dispatch({
         type: UPDATE_SPRITE,

@@ -47,12 +47,20 @@ router.get('/user/:user_id', (req, res) => {
       );
 });
 
-// @route   PUT api/sprite/:id/complete
-// @desc    Increase experience
+// @route   POST api/sprite/update/:id
+// @desc    Update sprite
 // @access  Public
-router.put('/:id', (req, res) => {
+router.post('/update/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   Sprite.findById(req.params.id)
-    .then(sprite => res.json(sprite))
+    .then(sprite => {
+      if(sprite){
+        Sprite.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: req.body },
+          { new: true },
+        ).then(sprite => res.json(sprite));
+      }
+    })
     .catch(err =>
       res.status(404).json({ nospritefound: 'No sprite found with that ID' })
     );

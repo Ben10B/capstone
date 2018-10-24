@@ -3,10 +3,16 @@ import Calendar from './Calendar';
 import '../css/goal.css';
 
 export default class Goal extends Component {
+  state = { selectedGoal: this.props.selectedGoal }
+  
   componentDidMount(){
+    this.updateProgressBar(this.props.selectedGoal.health);
+  }
+  updateProgressBar = (newHealth, updatedGoal) => {
+    if(updatedGoal !== undefined) this.setState({ selectedGoal: updatedGoal});
     var progressbar = document.getElementById("progressbar");   
     var pbar_width = 1;
-    var currentHealth = (this.props.selectedGoal.health / this.props.selectedGoal.maxHealth) * 100;
+    var currentHealth = (newHealth / this.state.selectedGoal.maxHealth) * 100;
     var id = setInterval(frame, 5);
     function frame() {
       if (pbar_width >= currentHealth) {
@@ -26,8 +32,8 @@ export default class Goal extends Component {
             </span>
             <button type="button" className="btn1" onClick={()=>this.props.click('')}>Back to Dashboard</button>
           </div>
-          <ProgressBar progress={this.props.selectedGoal}/>
-          <Calendar selectedGoal={this.props.selectedGoal}/>
+          <ProgressBar progress={this.state.selectedGoal}/>
+          <Calendar selectedGoal={this.props.selectedGoal} updatePB={this.updateProgressBar}/>
         </div>
       )
   }

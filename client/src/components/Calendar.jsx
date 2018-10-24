@@ -88,7 +88,8 @@ class Calendar extends Component{
                 }
             }
             if(isValid === false){ //Days user didn't select; add to array
-                tempDays.push(<Day key={i} element={{}} click={this.showDetails} calendarState={this.state} yes={"no"} dateString={improvedDate.date().toString()}/>);
+                tempDays.push(<Day key={i} element={{}} click={this.showDetails} calendarState={this.state} yes={"no"}
+                    dateString={improvedDate.date().toString()} date={improvedDate.format('YYYY-MM-DD')}/>);
             }
             
             improvedDate.add(1, 'd'); //Increase day by 1
@@ -119,7 +120,7 @@ class Calendar extends Component{
         const diff = this.state.selectedGoal.difficulty;
 
         //If no, take away health; if yes, give gold
-        if(status === "incomplete") updatedGoal.health = this.dealDamage(diff);
+        if(status === "incomplete"){ updatedGoal.health = this.dealDamage(diff); this.props.updatePB(updatedGoal.health, updatedGoal); }
         else updatedSprite.gold = this.receiveReward();
 
         //Change status to complete/incomplete
@@ -130,7 +131,7 @@ class Calendar extends Component{
 
         //If health is <= 0, delete goal
         //Else if last day is completed, go to homepage
-        //Else update
+        //Else update sprite and goal
         if(updatedGoal.health <= 0){
             this.props.deleteGoal(updatedGoal._id);
             this.props.history.push('/');
@@ -138,6 +139,7 @@ class Calendar extends Component{
             this.completeGoal(diff, updatedSprite, updatedGoal);
         } else {
             this.props.updateGoal(updatedGoal, updatedGoal._id);
+            this.props.updateSprite(updatedSprite, updatedSprite._id);
             this.getDays(this.state.monthIndex, this.state.currentYear);
         }
     };
@@ -227,33 +229,33 @@ class Day extends Component {
         super(props);
         this.state = {
             dailyGoal: {},
+            isToday: '',
         }
     }
     componentWillMount() {
+        let currentGoalDay = moment(this.props.date, 'YYYY-MM-DD');
+        if(currentGoalDay.isSame(moment().format('YYYY-MM-DD'))){
+            this.setState({ isToday: '-today'});
+        }
         if(this.props.yes === "yes"){
             this.setState(prevState => ({ dailyGoal: prevState.dailyGoal = this.props.element }));
             
-            let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
+            let currentGoalDay2 = moment(this.props.element.date, 'YYYY-MM-DD');
             let updateStatus = this.props.element;
-            if(currentGoalDay.isSame(moment().format('YYYY-MM-DD'))){
-                updateStatus.status = "unresolved-today";
-            }
-            else if(currentGoalDay.isBefore(moment().format('YYYY-MM-DD'))){
+            // if(currentGoalDay.isSame(moment().format('YYYY-MM-DD'))){
+            //     updateStatus.status = "unresolved";
+            //     this.setState({ isToday: '-today'});
+            // }
+            if(currentGoalDay2.isSameOrBefore(moment().format('YYYY-MM-DD')) 
+                && this.props.element.status !== "complete" && this.props.element.status !== "incomplete"){
                 updateStatus.status = "unresolved";
             }
-        }
-    }
-    componentWillUnmount(){
-        this.setState(prevState => ({ dailyGoal: prevState.dailyGoal = {} }));
-        let currentGoalDay = moment(this.props.element.date, 'YYYY-MM-DD');
-            let updateStatus = this.props.element;
-            if(currentGoalDay.isSame(moment().format('YYYY-MM-DD'))){
-                updateStatus.status = "unresolved";
-            }
+        } 
     }
     render() {
         return (
-            <td className={(this.props.yes === "yes") ? `day ${this.state.dailyGoal.status}` : "day"} 
+            // <td className={(this.props.yes === "yes") ? `day ${this.state.dailyGoal.status}${this.state.isToday}` : "day"} 
+            <td className={`day ${this.state.dailyGoal.status}${this.state.isToday}`} 
                 onClick={()=>this.props.click(this.props.element, this.state.dailyGoal.status)}>
                     {this.props.dateString}
             </td>

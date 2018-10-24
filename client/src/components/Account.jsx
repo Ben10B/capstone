@@ -7,7 +7,7 @@ import theme2 from '../Assets/img/Theme-Two.png';
 import theme3 from '../Assets/img/Theme-Three.png';
 import theme4 from '../Assets/img/Theme-Four.png';
 import theme5 from '../Assets/img/Theme-Five.png';
-// import TextFieldGroup from './common/TextFieldGroup';
+import TextAreaFieldGroup from './common/TextAreaFieldGroup';
 import InputGroup from './common/InputGroup';
 
 import { connect } from 'react-redux';
@@ -182,16 +182,24 @@ class Account extends Component {
                         info="A unique handle for your profile URL. Your full name, company name, nickname"
                         />
                         {errors.handle && (<div className="err invalid-feedback">{errors.handle}</div>)} */}
+                        <TextAreaFieldGroup
+                            placeholder="Short Bio"
+                            name="bio"
+                            value={this.state.bio}
+                            onChange={this.onChange}
+                            error={errors.bio}
+                            info="Tell us a little about yourself"
+                        />
                         <div className="margn-bottom-3">
-                        <div type="button"
-                            onClick={() => {
-                                this.setState(prevState => ({
-                                displaySocialInputs: !prevState.displaySocialInputs
-                            }));
-                            }}
-                            className="btn1"
-                        >Edit Social Network Links
-                        </div>
+                            <div type="button"
+                                onClick={() => {
+                                    this.setState(prevState => ({
+                                    displaySocialInputs: !prevState.displaySocialInputs
+                                }));
+                                }}
+                                className="btn1"
+                            >Edit Social Network Links
+                            </div>
                         </div>
                         {socialInputs}
                         <input type="submit" value="Save" className="btn" />

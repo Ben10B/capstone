@@ -61,6 +61,7 @@
 .inactive{ background-color: #000; color: #fff;
 }
 .inactive:hover{ opacity: 0.6; cursor: not-allowed; }
+
 .unresolved-today{ 
     background: rgba(119, 93, 83, 0.555) url('../logo.svg');
     background-repeat: no-repeat;

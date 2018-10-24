@@ -39,7 +39,7 @@ class Dashboard extends Component {
 }
 const GoalDetail = ({goal, clickFunction, deleteFunction}) => {
     return (
-      <div className="goal fnt-white row">
+      <div className="goal fnt-white">
         <div className="flex-5" onClick={()=>clickFunction(goal)}>
             <p>{goal.title} </p>
             <p>Difficulty: <i>{goal.difficulty}</i></p>

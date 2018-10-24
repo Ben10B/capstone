@@ -19,21 +19,21 @@ class ProfileItem extends Component {
           <div className="flex-6">
             <h3>{profile.handle}</h3>
             <p>
-              {profile.gender}{' '}
-              {isEmpty(profile.company) ? null : (
+              {profile.bio}{' '}
+              {/* {isEmpty(profile.company) ? null : (
                 <span>at {profile.company}</span>
-              )}
+              )} */}
             </p>
             <p>
               {isEmpty(profile.location) ? null : (
-                <span>{profile.location}</span>
+                <span>From: {profile.location}</span>
               )}
             </p>
-            <Link to={`/profile/${profile.handle}`} className="btn btn-info">
+            <Link to={`/profile/${profile.handle}`} className="btn1">
               View Profile
             </Link>
           </div>
-          <div className="flex-2">
+          {/* <div className="flex-2">
             <h4>Skill Set</h4>
             <ul className="list-group">
               {profile.skills.slice(0, 4).map((skill, index) => (
@@ -43,7 +43,7 @@ class ProfileItem extends Component {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     );

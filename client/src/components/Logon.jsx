@@ -27,15 +27,7 @@ class Logon extends Component {
     }
     if(nextProps.errors){
       this.setState({ errors: nextProps.errors });
-      // this.setState({ errors: nextProps.errors }, ()=> { console.log(`state: ${this.state.errors}, value: ${nextProps.errors}`); });
     }
-    // for(let i = 0; i < document.getElementById('RegisterForm').children.length; i++){
-    //   let child = document.getElementById('RegisterForm').children[i];
-    //   if(child.className.includes('err')){
-    //     console.log(child);
-    //     child.style.display = 'none';
-    //   }
-    // }
   }
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -43,8 +35,8 @@ class Logon extends Component {
   onSubmit = (e) => {
       e.preventDefault();
       const userData = {
-          email: this.state.email,
-          password: this.state.password
+          email: this.state.email.trim(),
+          password: this.state.password.trim()
       };
       this.props.loginUser(userData);
   }

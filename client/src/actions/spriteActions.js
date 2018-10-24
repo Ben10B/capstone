@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {
-  // ADD_SPRITE,
+  ADD_SPRITE,
   GET_SPRITE,
   UPDATE_SPRITE,
   GET_ERRORS,
@@ -11,7 +11,10 @@ import {
 export const createSprite = (spriteData, history) => dispatch => {
   axios
     .post('/api/sprite', spriteData)
-    .then(res => history.push('/home')
+    .then(res => dispatch({
+      type: ADD_SPRITE,
+      payload: res.data
+    })
     )
     .catch(err =>
       dispatch({

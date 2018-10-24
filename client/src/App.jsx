@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Account from './components/Account';
 import Sprite from './components/Sprite';
 import Model from './components/Model';
+import Tutorial from './components/Tutorial';
 import Achievements from './components/Achievements';
 import Header from './components/Header.jsx';
 import Profiles from './components/profiles/Profiles.jsx';
@@ -25,6 +26,9 @@ class Body extends Component {
     }
     else if(this.props.appState.page === 'model'){
       return <Model appState={this.props.appState}/>;
+    }
+    else if(this.props.appState.page === 'teach'){
+      return <Tutorial appState={this.props.appState}/>;
     }
     else if(this.props.appState.page === 'rewards'){
       return <Achievements appState={this.props.appState}/>;
@@ -47,7 +51,7 @@ class App extends Component {
     this.props.deleteAccount();
   }
   state = {
-    page: '',
+    page: 'model',
     theme: ''
   }
  
@@ -78,7 +82,7 @@ class App extends Component {
         //TODO: use Tutorial.js
         grindinContent = (
           <div className="App">
-            <Header appState={this.state} click={this.selectPage}/>
+            <Header appState={this.state} profile={profile} click={this.selectPage}/>
             <div className="flex-8">
               <Link to="/create-profile">Create Profile</Link>
             </div>

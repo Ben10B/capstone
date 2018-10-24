@@ -9,9 +9,9 @@ import { clearCurrentProfile } from '../actions/profileActions';
 
 class Header extends Component {
   state = {
-    active: [[true, 1], [false, 0], [false, 0], [false, 0], [false, 0], [false, 0], [false, 0]],
+    active: [[true, 1], [false, 0], [false, 0], [false, 0], [false, 0], [false, 0], [false, 0], [false, 0]],
     closed: false,
-    titles: ['Home', 'My Account', 'My Sprite', 'Fogg Model', 'Achievements', 'View Profiles', 'Feed', 'Logout'],
+    titles: ['Home', 'My Account', 'My Sprite', 'Fogg Model', 'Tutorial', 'Achievements', 'View Profiles', 'Feed', 'Logout'],
   };
   toggleHeader = (isClosed) => {
     this.setState({ closed: !isClosed });
@@ -19,10 +19,13 @@ class Header extends Component {
     const titles = this.state.titles;
     if(!isClosed){
       for(let i = 0; i < this.state.titles.length; i++){
+        this.setState({ [`tempTitles${i}`]: titles[i] });
         titles[i] = '';
       }
     }else{
-      titles[0]='Home'; titles[1]='My Account'; titles[2]='My Sprite'; titles[3]='Fogg Model'; titles[4]='Achievements'; titles[5]='View Profiles'; titles[6]='Feed'; titles[7]='Logout';
+      for(let i = 0; i < this.state.titles.length; i++){
+        titles[i] = this.state[`tempTitles${i}`];
+      }
     }
     this.setState({titles: titles});
   }
@@ -43,12 +46,10 @@ class Header extends Component {
     this.props.logoutUser(this.props.history);
   }
   render(){
-    return(
-      <header id="Header" className={this.state.closed ? `App-header-close${this.props.appState.theme}` : `App-header${this.props.appState.theme}`}>
-        <h1 className="App-title res-fnt-size-2">Grindin'</h1>
-        <img src={logo} alt="logo" className="App-logo"  
-        onClick={() => this.toggleHeader(this.state.closed)} />
-        <ul>
+    const { profile } = this.props.profile;
+    let privateLinks;
+    if(Object.keys(profile).length > 0){
+      privateLinks = (<div>
           <li className={this.state.active[0][0] ? `pageOpt active` : `pageOpt`} 
           onClick={() => {this.props.click('home'); this.togglePage(0, this.state.active[0][0])}}>
             <i className="fas fa-home"></i>
@@ -66,28 +67,41 @@ class Header extends Component {
           </li>
           <li className={this.state.active[3][0] ? `pageOpt active` : `pageOpt`} 
           onClick={() => {this.props.click('model'); this.togglePage(3, this.state.active[3][0])}}>
-            <i className="fab fa-buromobelexperte"></i>
+            <i className="fas fa-flask"></i>
             <a>{this.state.titles[3]}</a>
           </li>
           <li className={this.state.active[4][0] ? `pageOpt active` : `pageOpt`} 
-          onClick={() => {this.props.click('rewards'); this.togglePage(4, this.state.active[4][0])}}>
-            <i className="fas fa-trophy"></i>
+          onClick={() => {this.props.click('teach'); this.togglePage(4, this.state.active[4][0])}}>
+            <i className="fas fa-list-ol"></i>
             <a>{this.state.titles[4]}</a>
           </li>
           <li className={this.state.active[5][0] ? `pageOpt active` : `pageOpt`} 
-          onClick={() => {this.props.click('profiles'); this.togglePage(5, this.state.active[5][0])}}>
+          onClick={() => {this.props.click('rewards'); this.togglePage(5, this.state.active[5][0])}}>
+            <i className="fas fa-trophy"></i>
+            <a>{this.state.titles[5]}</a>
+          </li>
+          {/* <li className={this.state.active[6][0] ? `pageOpt active` : `pageOpt`} 
+          onClick={() => {this.props.click('profiles'); this.togglePage(6, this.state.active[6][0])}}>
             <i className="fas fa-users"></i>
-            {/* <a>{this.state.titles[5]}</a> */}
-            <Link to={`/profiles`}>{this.state.titles[5]}</Link>
+            <Link to={`/profiles`}>{this.state.titles[6]}</Link>
           </li>
-          <li className={this.state.active[6][0] ? `pageOpt active` : `pageOpt`}>
+          <li className={this.state.active[7][0] ? `pageOpt active` : `pageOpt`}>
             <i className="fas fa-comments"></i>
-            <Link to={`/feed`}>{this.state.titles[6]}</Link>
-          </li>
+            <Link to={`/feed`}>{this.state.titles[7]}</Link>
+          </li> */}
+      </div>)
+    }
+    return(
+      <header id="Header" className={this.state.closed ? `App-header-close${this.props.appState.theme}` : `App-header${this.props.appState.theme}`}>
+        <h1 className="App-title res-fnt-size-2">Grindin'</h1>
+        <img src={logo} alt="logo" className="App-logo"  
+        onClick={() => this.toggleHeader(this.state.closed)} />
+        <ul>
+          {privateLinks}
           <li className={`pageOpt`} 
           onClick={this.onLogoutClick.bind(this)}>
             <i className="fas fa-sign-out-alt"></i>
-            <a>{this.state.titles[7]}</a>
+            <a>{this.state.titles[8]}</a>
           </li>
         </ul>
       </header>
@@ -97,10 +111,12 @@ class Header extends Component {
 
 Header.propTypes = {
   logoutUser: propTypes.func.isRequired,
-  auth: propTypes.object.isRequired
+  auth: propTypes.object.isRequired,
+  profile: propTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
+  profile: state.profile,
   auth: state.auth
 });
 

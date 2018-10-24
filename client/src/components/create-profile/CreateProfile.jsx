@@ -45,22 +45,22 @@ class CreateProfile extends Component {
     e.preventDefault();
 
     const profileData = {
-      handle: this.state.handle,
-      location: this.state.location,
+      handle: this.state.handle.trim(),
+      location: this.state.location.trim(),
       status: this.state.status,
       gender: this.state.gender,
       skills: this.state.skills,
-      bio: this.state.bio,
-      twitter: this.state.twitter,
-      facebook: this.state.facebook,
-      linkedin: this.state.linkedin,
-      youtube: this.state.youtube,
-      instagram: this.state.instagram
+      bio: this.state.bio.trim(),
+      twitter: this.state.twitter.trim(),
+      facebook: this.state.facebook.trim(),
+      linkedin: this.state.linkedin.trim(),
+      youtube: this.state.youtube.trim(),
+      instagram: this.state.instagram.trim()
     };
-    this.props.createProfile(profileData);
+    this.props.createProfile(profileData, this.props.history);
     
     const spriteData = { gender: this.state.gender };
-    this.props.createSprite(spriteData, this.props.history);
+    this.props.createSprite(spriteData);
   }
 
   onChange(e) {

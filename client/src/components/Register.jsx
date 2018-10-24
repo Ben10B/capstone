@@ -85,7 +85,7 @@ class Register extends Component {
                   className={classnames('', {'is-invalid': errors.password2})}
                   />
                   {errors.password2 && (<div className="err invalid-feedback">{errors.password2}</div>)}
-                  <input type="submit"></input>
+                  <input type="submit" value="Register"></input>
               </form>
               <span><h1>REGISTER</h1></span>
           </div>

@@ -1,14 +1,16 @@
 import React from 'react';
 import spinner from './spinner.gif';
+import load1 from './Loading.gif';
+import load2 from './Loading(Fast).gif';
 import theme2 from '../../Assets/img/Theme-Two.png';
 
 export default () => {
   return (
-    <div>
+    <div style={{ width: '200px', margin: 'auto', display: 'block' }}>
       <img
         // className="flex-10"
-        src={spinner}
-        style={{ width: '200px', margin: 'auto', display: 'block', background: `url(${theme2}) center/cover no-repeat` }}
+        src={load1}
+        style={{ width: '200px', margin: 'auto', display: 'block' }}
         alt="Loading..."
       />
     </div>

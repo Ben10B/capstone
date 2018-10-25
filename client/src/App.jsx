@@ -51,7 +51,7 @@ class App extends Component {
     this.props.deleteAccount();
   }
   state = {
-    page: 'model',
+    page: '',
     theme: ''
   }
  

@@ -23,7 +23,7 @@ class Posts extends Component {
     }
 
     return (
-      <div className="column">
+      <div className="feedPage">
       <Link to="/home" className="btn1">Back to Home</Link>
         <div className="container">
           <PostForm />

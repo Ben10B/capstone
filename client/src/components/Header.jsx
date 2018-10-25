@@ -4,7 +4,7 @@ import logo from '../Assets/img/R. 2.svg';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom'; 
 import { clearCurrentProfile } from '../actions/profileActions';
 
 class Header extends Component {
@@ -84,11 +84,11 @@ class Header extends Component {
           onClick={() => {this.props.click('profiles'); this.togglePage(6, this.state.active[6][0])}}>
             <i className="fas fa-users"></i>
             <Link to={`/profiles`}>{this.state.titles[6]}</Link>
-          </li>
+          </li> */}
           <li className={this.state.active[7][0] ? `pageOpt active` : `pageOpt`}>
             <i className="fas fa-comments"></i>
             <Link to={`/feed`}>{this.state.titles[7]}</Link>
-          </li> */}
+          </li>
       </div>)
     }
     return(

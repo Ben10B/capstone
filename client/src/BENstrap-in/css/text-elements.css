@@ -238,9 +238,7 @@ a {
 .tooltip {
   padding: 1%;
   position: relative;
-  display: inline-block;
-  border: 1px solid #033;
-  background: #c4dced; }
+  display: inline-block; }
   .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;

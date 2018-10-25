@@ -18,7 +18,8 @@
   color: #777;
   font-weight: bold;
   float: right;
-  margin-left: 5px;
+  margin-right: 15px;
+  font-size: medium;
 }
 .activeACC:after {
   content: "\2212";

@@ -118,7 +118,7 @@
   flex-direction: row;
   min-height: 50px;
 }
-.goal, .btn1, .delBTN{  
+.goal, .btn1, .likeBTN, .delBTN{  
   background-color: rgba(255, 255, 255, 0.062);
   font-weight: bold;
   font-family: "Dosis", sans-serif;
@@ -127,11 +127,12 @@
   text-align: center;
   border: 0;
   padding: 5px 5px;
+  outline: none;
 }
 .btn1, .delBTN{
   transition: font-size 0.2s; display: block;
 }
-.goal:hover, .btn1:hover, .delBTN:hover{
+.goal:hover, .btn1:hover, .likeBTN:hover, .delBTN:hover{
   background-color: rgba(255, 255, 255, 0.315);
   cursor: pointer;
   box-shadow: 0 0 5px #fff;
@@ -199,4 +200,19 @@
 
 @media all and (max-width: 575px){
   
+}
+/* PostItem & Post*/
+.feedPage, .post{
+  flex: 10;
+  height: 100vh;
+  display: flex;
+  color: white;
+  flex-direction: column;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../Assets/img/Theme-Two.png');
+}
+.feedPage .btn1, .post .btn1{
+  color: white;
 }

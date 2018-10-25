@@ -1,8 +1,7 @@
 import React from 'react';
-import spinner from './spinner.gif';
+// import spinner from './spinner.gif';
 import load1 from './Loading.gif';
-import load2 from './Loading(Fast).gif';
-import theme2 from '../../Assets/img/Theme-Two.png';
+// import load2 from './Loading(Fast).gif';
 
 export default () => {
   return (

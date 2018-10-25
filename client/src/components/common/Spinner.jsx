@@ -6,7 +6,7 @@ import theme2 from '../../Assets/img/Theme-Two.png';
 
 export default () => {
   return (
-    <div style={{ width: '200px', margin: 'auto', display: 'block' }}>
+    <div>
       <img
         // className="flex-10"
         src={load1}

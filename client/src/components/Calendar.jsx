@@ -121,7 +121,7 @@ class Calendar extends Component{
 
         //If no, take away health; if yes, give gold
         if(status === "incomplete"){ updatedGoal.health = this.dealDamage(diff); this.props.updatePB(updatedGoal.health, updatedGoal); }
-        else updatedSprite.gold = this.receiveReward();
+        else updatedSprite.gold += this.receiveReward(diff);
 
         //Change status to complete/incomplete
         let day = this.state.selectedDay;
@@ -181,7 +181,7 @@ class Calendar extends Component{
     completeGoal = (diff, updatedSprite, updatedGoal) => {
         this.addExp(diff, updatedSprite); //Add experience
         updatedSprite.goalsCompleted++; //Increase goal record
-        updatedSprite.gold = Math.round(this.receiveReward(diff) * 1.5); //Add gold * bonus
+        updatedSprite.gold += Math.round(this.receiveReward(diff) * 1.5); //Add gold * bonus
         
         // console.log(updatedSprite);
         this.props.updateSprite(updatedSprite, updatedSprite._id);

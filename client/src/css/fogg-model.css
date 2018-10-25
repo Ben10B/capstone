@@ -1,0 +1,54 @@
+.accordion{
+  min-height: 50px;
+  width: 100%;
+  background-color: #555;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  transition: 0.4s;
+  outline: none;
+  font-weight: bold;
+}
+
+.activeACC, .accordion:hover{
+  background-color: #333;
+}
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+.activeACC:after {
+  content: "\2212";
+}
+.panel{
+  max-height: 0;
+  overflow: hidden;
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+  padding: 0 15px;
+  transition: max-height 0.2s ease-out;
+}
+
+.blue-acc{ background-color: #00f;
+}.blue-acc:hover{ background-color: #00d; }
+
+.red-acc{ background-color: #f00;
+}.red-acc:hover{ background-color: #d00; }
+
+.green-acc{ background-color: #0f0;
+}.green-acc:hover{ background-color: #0d0; }
+
+#imgModel{
+  max-height: 40%;
+  max-width: 40%;
+  justify-self: center;
+  align-self: center;
+}
+
+#foggDescription{
+ font-weight: bold;
+}

@@ -1,0 +1,9 @@
+.hint{ 
+  margin-left: 5px;
+  transition: color 0.8s;
+}
+.hint:hover{ 
+  opacity: 0.6;
+  color: #fff;
+  /* color: #00aeef; */
+}

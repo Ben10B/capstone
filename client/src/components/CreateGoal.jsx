@@ -15,7 +15,7 @@ class CreateGoal extends Component {
       description: '',
       difficulty: '',
       partners: {},
-      date: null,
+      date: moment().format('YYYY-MM-DD'),
       sun: false,
       mon: false,
       tue: false,
@@ -150,7 +150,7 @@ class CreateGoal extends Component {
             <label>Estimated End Date
               <i className="far fa-question-circle hint" title="The day you plan to finish!"></i>
             </label>
-            <input name="date" type="date" onChange={this.onChange} error={errors.date} />
+            <input name="date" type="date" onChange={this.onChange} error={errors.date} value={this.state.date}/>
             {errors.date && (<div className="err invalid-feedback">{errors.date}</div>)}
             <label>Check DAY(s) You Plan to Grind
               <i className="far fa-question-circle hint" title="These repeat every week!"></i>

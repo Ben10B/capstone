@@ -133,11 +133,11 @@ class Calendar extends Component {
     //Else if last day is completed, go to homepage
     //Else update sprite and goal
     if (updatedGoal.health <= 0) {
-      // this.props.deleteGoal(updatedGoal._id);
       updatedGoal.result = "INCOMPLETE";
       this.props.updateGoal(updatedGoal, updatedGoal._id);
       this.props.history.push('/');
     } else if (updatedGoal.days[updatedGoal.days.length - 1].status === "complete") {
+      updatedGoal.result = "COMPLETE";
       this.completeGoal(diff, updatedSprite, updatedGoal);
     } else {
       this.props.updateGoal(updatedGoal, updatedGoal._id);
@@ -173,8 +173,10 @@ class Calendar extends Component {
       default: break;
     }
     updatedSprite.experience += exp;
-
-    if (updatedSprite.experience >= updatedSprite.experienceLimit) {
+    //if overflow equals true, loop again
+    while (updatedSprite.experience >= updatedSprite.experienceLimit) {
+      //Decrease exp by limit
+      updatedSprite.experience -= updatedSprite.experienceLimit;
       //Increase expLimit if achieved
       updatedSprite.experienceLimit = updatedSprite.experienceLimit * 2;
       updatedSprite.level++; //Increase level
@@ -187,7 +189,7 @@ class Calendar extends Component {
 
     // console.log(updatedSprite);
     this.props.updateSprite(updatedSprite, updatedSprite._id);
-    this.props.deleteGoal(updatedGoal._id);
+    this.props.updateGoal(updatedGoal, updatedGoal._id);
     this.props.history.push('/');
   }
   render() {

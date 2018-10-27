@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
 // @desc    Get goals by user
 // @access  Public
 router.get('/user/:user_id', (req, res) => {
-  Goal.find({ user: req.params.user_id })
+  Goal.find({ user: req.params.user_id, result: 'Grindin' }).sort({ date: -1 })
     .then(goal => res.json(goal)
     )
     .catch(err =>
@@ -110,18 +110,21 @@ router.post(
 // @access  Private
 router.post('/update/:id', passport.authenticate('jwt', { session: false }), 
 (req, res) => {
-  let goalFields = req.body;
-  return res.json(goalFields);
-  // Goal.findById(req.params.id)
-  //   .then(goal => {
-  //     if(goal){
-  //       Goal.findOneAndUpdate(
-  //         { user: req.user.id },
-  //         { $set: goalFields },
-  //         { new: true },
-  //       ).then(goal => res.json(goal));
-  //     }
-  //   });
+  Goal.updateOne(
+    { _id: req.params.id },
+    { 
+      title: req.body.title,
+      result: req.body.result,
+      description: req.body.description,
+      difficulty: req.body.difficulty,
+      date: req.body.date,
+      partners: req.body.partners,
+      health: req.body.health,
+      maxHealth: req.body.maxHealth,
+      days: req.body.days,
+    }
+  ).then(goal => res.json(goal))
+  .catch(err => res.status(404).json({ goalnotfound: 'No goal found' }));
 });
 
 // @route   DELETE api/goal/:id

@@ -9,7 +9,6 @@ import Model from './components/Model';
 import Tutorial from './components/Tutorial';
 import Achievements from './components/Achievements';
 import Header from './components/Header.jsx';
-import Profiles from './components/profiles/Profiles.jsx';
 import Spinner from './components/common/Spinner.jsx';
 
 import propTypes from 'prop-types';
@@ -33,10 +32,9 @@ class Body extends Component {
     else if(this.props.appState.page === 'rewards'){
       return <Achievements appState={this.props.appState}/>;
     }
-    else if(this.props.appState.page === 'profiles'){
-      // return <div></div>;
-      return <Profiles profile={this.props.profile} appState={this.props.appState}/>;
-    } 
+    // else if(this.props.appState.page === 'profiles'){
+    //   return <Profiles profile={this.props.profile} appState={this.props.appState}/>;
+    // } 
     return (
       <Home profile={this.props.profile} appState={this.props.appState}/>
     )

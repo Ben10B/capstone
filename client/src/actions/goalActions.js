@@ -38,7 +38,7 @@ export const updateGoal = (goalData, id) => dispatch => {
     .catch(err =>
       dispatch({
         type: UPDATE_GOAL,
-        payload: null
+        payload: err.response.data
       })
     ); 
 };

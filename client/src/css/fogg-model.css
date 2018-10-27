@@ -1,3 +1,7 @@
+.Model{
+
+}
+
 .accordion{
   min-height: 50px;
   width: 100%;
@@ -44,8 +48,8 @@
 }.green-acc:hover{ background-color: #0d0; }
 
 #imgModel{
-  max-height: 40%;
-  max-width: 40%;
+  max-height: 30%;
+  max-width: 30%;
   justify-self: center;
   align-self: center;
 }

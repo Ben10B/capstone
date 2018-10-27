@@ -188,13 +188,22 @@
   /* font-size: 20pt; */
   margin: 5px;
   padding: 5px;
-  height: 20%;
-  width: 22%;
+  max-height: 20%;
+  max-width: 22%;
+  background-repeat: no-repeat;
 }
 .theme:hover{
   cursor: pointer;
   box-shadow: 0 0 10px #000;
 }
+@media all and (max-width: 575px){
+  .themeDiv{
+    flex-direction: row;
+    /* background-color: red; */
+    flex-wrap: wrap;
+  }
+}
+
 /* Header */
 #Header li a { color: #fff; }
 

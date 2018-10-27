@@ -169,9 +169,8 @@ class Account extends Component {
         }
         return (
             <div className={`App-intro${this.props.appState.theme} pad-top-1`}>
-                <h1 className="flex-2">Account</h1>
+                <h1 className="flex-2">{profile.user.name}</h1>
                 <div className="flex-4">
-                    <h3>{profile.user.name}</h3>
                     <form onSubmit={this.onSubmit}>
                         {/* <TextFieldGroup
                         placeholder="Profile Handle"
@@ -207,18 +206,18 @@ class Account extends Component {
                 </div>
                 <span className="flex-3">
                     <h6>Choose a Theme</h6>
-                    <div className="row">
-                        <div className="theme" style={{ background: `url(${def}) center/cover no-repeat` }}
+                    <div className="row themeDiv">
+                        <div className="theme" style={{ background: `url(${def}) center/cover` }}
                         onClick={()=>this.props.click('')}>Default</div>
-                        <div className="theme" style={{ background: `url(${theme1}) center/cover no-repeat` }}
+                        <div className="theme" style={{ background: `url(${theme1}) center/cover` }}
                         onClick={()=>this.props.click('-theme1')}>Theme One</div>
-                        <div className="theme" style={{ background: `url(${theme2}) center/cover no-repeat` }}
+                        <div className="theme" style={{ background: `url(${theme2}) center/cover` }}
                         onClick={()=>this.props.click('-theme2')}>Theme Two</div>
-                        <div className="theme" style={{ background: `url(${theme3}) center/cover no-repeat` }}
+                        <div className="theme" style={{ background: `url(${theme3}) center/cover` }}
                         onClick={()=>this.props.click('-theme3')}>Theme Three</div>
-                        <div className="theme" style={{ background: `url(${theme4}) center/cover no-repeat` }}
+                        <div className="theme" style={{ background: `url(${theme4}) center/cover` }}
                         onClick={()=>this.props.click('-theme4')}>Theme Four</div>
-                        <div className="theme" style={{ background: `url(${theme5}) center/cover no-repeat` }}
+                        <div className="theme" style={{ background: `url(${theme5}) center/cover` }}
                         onClick={()=>this.props.click('-theme5')}>Theme Five</div>
                     </div>
                 </span>

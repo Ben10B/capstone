@@ -4,7 +4,7 @@ import logo from '../Assets/img/R. 2.svg';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
-import { withRouter, Link } from 'react-router-dom'; 
+import { withRouter } from 'react-router-dom'; 
 import { clearCurrentProfile } from '../actions/profileActions';
 
 class Header extends Component {
@@ -45,6 +45,14 @@ class Header extends Component {
     this.props.clearCurrentProfile();
     this.props.logoutUser(this.props.history);
   }
+  onfeedClick = (e) => {
+    e.preventDefault();
+    this.props.history.push('/feed');
+  }
+  onProfilesClick = (e) => {
+    e.preventDefault();
+    this.props.history.push('/profiles');
+  }
   render(){
     const { profile } = this.props.profile;
     let privateLinks;
@@ -81,13 +89,14 @@ class Header extends Component {
             <a>{this.state.titles[5]}</a>
           </li>
           {/* <li className={this.state.active[6][0] ? `pageOpt active` : `pageOpt`} 
-          onClick={() => {this.props.click('profiles'); this.togglePage(6, this.state.active[6][0])}}>
+          onClick={this.onProfilesClick.bind(this)}>
             <i className="fas fa-users"></i>
-            <Link to={`/profiles`}>{this.state.titles[6]}</Link>
+            <a to={`/profiles`}>{this.state.titles[6]}</a>
           </li> */}
-          <li className={this.state.active[7][0] ? `pageOpt active` : `pageOpt`}>
+          <li className={this.state.active[7][0] ? `pageOpt active` : `pageOpt`}
+          onClick={this.onfeedClick.bind(this)}>
             <i className="fas fa-comments"></i>
-            <Link to={`/feed`}>{this.state.titles[7]}</Link>
+            <a>{this.state.titles[7]}</a>
           </li>
       </div>)
     }

@@ -5,7 +5,7 @@ import load1 from './Loading.gif';
 
 export default () => {
   return (
-    <div>
+    <div style={{ height: '100vh' }}>
       <img
         // className="flex-10"
         src={load1}

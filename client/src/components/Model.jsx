@@ -14,9 +14,9 @@ class Model extends Component {
   }
   render() {
     return (
-      <div className={`App-intro${this.props.appState.theme} pad-top-1`}>
+      <div className={`App-intro${this.props.appState.theme} Model pad-top-1`}>
         <h2>B=MAP</h2>
-        <div className="column">
+        <div className="column hght-100">
           <img id="imgModel" src={foggModel} alt="https://www.behaviormodel.org/index_files/fogg-behavior-model-updated.png"/>
           <p id="foggDescription">
             'B=MAP' is a simple equation! 'B' is the Behavior that can be changed or added. All 3 factors must be present for this to work.

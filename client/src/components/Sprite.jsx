@@ -16,11 +16,12 @@ class Sprite extends Component {
     leave = () => { document.getElementById('sprite').style.backgroundImage = `url(${(this.props.sprite.gender === "Female") ? idleF : idleM})`; };
     render() {
         const { sprite } = this.props.sprite;
+        const { profile } = this.props.profile;
         return (
             <div className={`App-intro${this.props.appState.theme} pad-top-1`}>
-                <h1 className="flex-1">Sprite</h1>
+                <h1 className="flex-1">{profile.handle}</h1>
                 <div id="sprite" className="flex-4" onMouseEnter={this.hover} onMouseLeave={this.leave}
-                style={{ backgroundImage: `url(${(this.props.sprite.gender === "Female") ? idleF : idleM})` }}></div>
+                style={{ backgroundImage: `url(${(sprite.gender === "Female") ? idleF : idleM})` }}></div>
                 <div className="flex-5 pad-top-2">
                     <h3>Level: {sprite.level}</h3>
                     <h3>Experience: {sprite.experience}/{sprite.experienceLimit}</h3>
@@ -35,10 +36,12 @@ class Sprite extends Component {
 Sprite.propTypes = {
     getSpriteByUser: propTypes.func.isRequired,
     sprite: propTypes.object.isRequired,
+    profile: propTypes.object.isRequired,
 }
   
 const mapStateToProps = (state) => ({
     sprite: state.sprite,
+    profile: state.profile,
 });
 
 export default connect(mapStateToProps, { getSpriteByUser })(withRouter(Sprite));

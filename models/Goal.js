@@ -45,7 +45,11 @@ const GoalSchema = new Schema({
       dayOfMonth: { type: String },
       date: { type: Date },
     }
-  ]
+  ],
+  result: {
+    type: String,
+    default: 'Grindin'
+  }
 });
 
 module.exports = Goal = mongoose.model('goal', GoalSchema);

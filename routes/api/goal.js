@@ -41,7 +41,31 @@ router.get('/:id', (req, res) => {
 // @desc    Get goals by user
 // @access  Public
 router.get('/user/:user_id', (req, res) => {
-  Goal.find({user: req.params.user_id})
+  Goal.find({ user: req.params.user_id })
+    .then(goal => res.json(goal)
+    )
+    .catch(err =>
+      res.status(404).json({ nogoalsfound: 'No goals found by that user' })
+    );
+});
+
+// @route   GET api/goal/user/:user_id
+// @desc    Get completed goals by user
+// @access  Public
+router.get('/user/:user_id', (req, res) => {
+  Goal.find({ user: req.params.user_id, result: 'COMPLETE' }).sort({ date: -1 })
+    .then(goal => res.json(goal)
+    )
+    .catch(err =>
+      res.status(404).json({ nogoalsfound: 'No goals found by that user' })
+    );
+});
+
+// @route   GET api/goal/user/:user_id
+// @desc    Get incompleted goals by user
+// @access  Public
+router.get('/user/:user_id', (req, res) => {
+  Goal.find({ user: req.params.user_id, result: 'INCOMPLETE' }).sort({ date: -1 })
     .then(goal => res.json(goal)
     )
     .catch(err =>
@@ -86,16 +110,18 @@ router.post(
 // @access  Private
 router.post('/update/:id', passport.authenticate('jwt', { session: false }), 
 (req, res) => {
-  Goal.findById(req.params.id)
-    .then(goal => {
-      if(goal){
-        Goal.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: req.body },
-          { new: true },
-        ).then(goal => res.json(goal));
-      }
-    });
+  let goalFields = req.body;
+  return res.json(goalFields);
+  // Goal.findById(req.params.id)
+  //   .then(goal => {
+  //     if(goal){
+  //       Goal.findOneAndUpdate(
+  //         { user: req.user.id },
+  //         { $set: goalFields },
+  //         { new: true },
+  //       ).then(goal => res.json(goal));
+  //     }
+  //   });
 });
 
 // @route   DELETE api/goal/:id

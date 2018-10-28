@@ -14,7 +14,7 @@ class Calendar extends Component {
     super(props);
     let d = new Date();
     this.state = {
-      today: d,
+      today: moment().format('YYYY-MM-DD'),
       currentMonth: d.getMonth(),
       currentYear: d.getFullYear(),
       currentDay: d.getDate(),
@@ -238,7 +238,7 @@ class Day extends Component {
   }
   componentWillMount() {
     let currentGoalDay = moment(this.props.date, 'YYYY-MM-DD');
-    if (currentGoalDay.isSame(moment().format('YYYY-MM-DD'))) {
+    if (currentGoalDay.isSame(this.props.calendarState.today)) {
       this.setState({ isToday: '-today' });
     }
     if (this.props.yes === "yes") {
@@ -246,10 +246,6 @@ class Day extends Component {
 
       let currentGoalDay2 = moment(this.props.element.date, 'YYYY-MM-DD');
       let updateStatus = this.props.element;
-      // if(currentGoalDay.isSame(moment().format('YYYY-MM-DD'))){
-      //     updateStatus.status = "unresolved";
-      //     this.setState({ isToday: '-today'});
-      // }
       if (currentGoalDay2.isSameOrBefore(moment().format('YYYY-MM-DD'))
         && this.props.element.status !== "complete" && this.props.element.status !== "incomplete") {
         updateStatus.status = "unresolved";
@@ -258,7 +254,6 @@ class Day extends Component {
   }
   render() {
     return (
-      // <td className={(this.props.yes === "yes") ? `day ${this.state.dailyGoal.status}${this.state.isToday}` : "day"} 
       <td className={`day ${this.state.dailyGoal.status}${this.state.isToday}`}
         onClick={() => this.props.click(this.props.element, this.state.dailyGoal.status)}>
         {this.props.dateString}

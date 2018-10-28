@@ -15,12 +15,14 @@ class Model extends Component {
   render() {
     return (
       <div className={`App-intro${this.props.appState.theme} Model pad-top-1`}>
-        <h2>B=MAP</h2>
-        <div className="column hght-100">
+        <div className="column">
+          <h2>B=MAP</h2>
           <img id="imgModel" src={foggModel} alt="https://www.behaviormodel.org/index_files/fogg-behavior-model-updated.png"/>
           <p id="foggDescription">
             'B=MAP' is a simple equation! 'B' is the Behavior that can be changed or added. All 3 factors must be present for this to work.
           </p>
+        </div>
+        <div className="column">
           <button className="accordion" onClick={this.toggle}>Motivation</button>
           <span className="panel">
             <p>serves as the primary driver to persuade and prompt a desired reaction.</p>

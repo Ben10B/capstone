@@ -42,7 +42,7 @@ if(localStorage.jwtToken) {
 ReactDOM.render(
     <Provider store={ store }>
         <Router>
-            <div>
+            <div id="level1">
                 <Route exact path="/" component={Login} />
                 <Route exact path="/profiles" component={Profiles}/>
                 <Route exact path="/profile/:handle" component={Profile}/>

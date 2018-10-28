@@ -5,3 +5,28 @@
   background-size: 7em, contain;
   box-shadow: 0 15px 30px #000;
 }
+@media all and (max-height: 565px){
+  #sprite{
+    background-size: 6em, contain;
+  }
+}
+@media all and (max-height: 480px){
+  #sprite{
+    background-size: 5em, contain;
+  }
+}
+@media all and (max-height: 388px){
+  #sprite{
+    background-size: 4em, contain;
+  }
+}
+@media all and (max-height: 320px){
+  #sprite{
+    background-size: 3em, contain;
+  }
+}
+@media all and (max-height: 275px){
+  #sprite{
+    background-size: 10%, contain;
+  }
+}

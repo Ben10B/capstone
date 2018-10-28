@@ -52,8 +52,23 @@
   max-width: 30%;
   justify-self: center;
   align-self: center;
+  cursor: pointer;
 }
 
 #foggDescription{
  font-weight: bold;
+}
+.vid{
+  min-width: 75px;
+  min-height: 50px;
+  justify-self: center;
+  align-self: center;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  transition: box-shadow .5s;
+}
+.vid:hover, .img:hover{
+  box-shadow: 0 0 10px #000;
 }

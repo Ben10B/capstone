@@ -14,7 +14,7 @@ class Header extends Component {
     titles: ['Home', 'My Account', 'My Sprite', 'Fogg Model', 'Tutorial', 'Achievements', 'View Profiles', 'Feed', 'Logout'],
   };
   componentDidMount(){
-    if(this.props.profile.profile.theme !== undefined)
+    if(this.props.profile.profile !== null && this.props.profile.profile.theme !== undefined)
       this.props.renderTheme(this.props.profile.profile.theme);
   }
   toggleHeader = (isClosed) => {
@@ -60,7 +60,7 @@ class Header extends Component {
   render(){
     const { profile } = this.props.profile;
     let privateLinks;
-    if(Object.keys(profile).length > 0){
+    if(profile !== null && Object.keys(profile).length > 0){
       privateLinks = (<div>
           <li className={this.state.active[0][0] ? `pageOpt active` : `pageOpt`} 
           onClick={() => {this.props.click('home'); this.togglePage(0, this.state.active[0][0])}}>

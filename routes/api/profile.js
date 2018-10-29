@@ -16,6 +16,8 @@ const User = require('../../models/User');
 const Sprite = require('../../models/Sprite');
 // Load Goal Model
 const Goal = require('../../models/Goal');
+// Load Post Model
+const Post = require('../../models/Post');
 
 // @route   GET api/profile/test
 // @desc    Tests profile route
@@ -295,7 +297,7 @@ router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Goal.find({ user: req.user.id }).then(() => {
+    // Goal.find({ user: req.user.id }).then(() => {
       Sprite.findOneAndRemove({ user: req.user.id }).then(() => {
         Profile.findOneAndRemove({ user: req.user.id }).then(() => {
           User.findOneAndRemove({ _id: req.user.id }).then(() =>
@@ -303,7 +305,7 @@ router.delete(
           );
         });
       });
-    });
+    // });
   }
 );
 

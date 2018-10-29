@@ -1,11 +1,11 @@
 .Login{
-    background-image: url('../Assets/img/Theme-Two.png');
+    background: url('../Assets/img/Grindin2.png'), url('../Assets/img/Theme-Two.png');
     height: 100vh;
     display: flex;
     text-align: center;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-size: cover;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center center, top;
+    background-size: contain, cover;
     overflow: hidden;
 }
 .log-container{

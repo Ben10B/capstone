@@ -43,7 +43,7 @@ class Body extends Component {
 
 class App extends Component {
   state = {
-    page: 'teach',
+    page: '',
     theme: ''
   }
   

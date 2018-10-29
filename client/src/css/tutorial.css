@@ -1,0 +1,28 @@
+#subjectSelection{
+  font-weight: bold;
+}
+.subjectContainer{
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 50px #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 5px;
+}
+.subjectContainer h4, .subjectContainer details{
+  margin-bottom: 5px;
+}
+.subjectContainer details{
+  
+}
+.subjectContainer strong{
+  color: #00aeef;
+  font-weight: bolder;
+}
+@media all and (max-height: 388px){
+  #subjectSelection{
+    padding-bottom: 10px;
+  }
+}

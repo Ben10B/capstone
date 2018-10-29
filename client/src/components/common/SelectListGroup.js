@@ -19,7 +19,7 @@ const SelectListGroup = ({ name, value, error, info, onChange, options }) => {
         onChange={onChange}
       >
         {selectOptions}
-      </select>
+      </select><br/>
       {info && <small className="form-text text-muted">{info}</small>}
       {error && <div className="err invalid-feedback">{error}</div>}
     </div>

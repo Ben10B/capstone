@@ -19,7 +19,7 @@ module.exports = function validateGoalInput(data) {
   data.sat = (data.sat) ? data.sat : false;
 
   if (!Validator.isLength(data.title, { min: 2, max: 22 })) {
-    errors.title = 'Title must be between 2 and 22 characters';
+    errors.title = 'Title must be between 2 and 30 characters';
   }
 
   if (Validator.isEmpty(data.title)) {

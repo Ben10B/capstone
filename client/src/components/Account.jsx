@@ -26,6 +26,7 @@ class Account extends Component {
           status: '',
           skills: '',
           bio: '',
+          theme: '',
           gender: '',
           twitter: '',
           facebook: '',
@@ -90,8 +91,11 @@ class Account extends Component {
           
     }
     onChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
-      }
+      this.setState({ [e.target.name]: e.target.value });
+    }
+    onClickTheme(value) {
+      this.setState({ theme: value });
+    }
     onSubmit(e) {
         e.preventDefault();
     
@@ -102,6 +106,7 @@ class Account extends Component {
           gender: this.state.gender,
           skills: this.state.skills,
           bio: this.state.bio,
+          theme: this.state.theme,
           twitter: this.state.twitter,
           facebook: this.state.facebook,
           linkedin: this.state.linkedin,
@@ -201,26 +206,27 @@ class Account extends Component {
                             </div>
                         </div>
                         {socialInputs}
+                        <span className="">
+                          <h6>Choose a Theme</h6>
+                          <div className="row themeDiv">
+                              <div name="theme" className="theme" style={{ background: `url(${def}) center/cover` }}
+                              onClick={()=>{this.props.click('')}} onChange={()=>this.onClickTheme('-theme')}>Default</div>
+                              <div name="theme" className="theme" style={{ background: `url(${theme1}) center/cover` }}
+                              onClick={()=>{this.props.click('-theme1'); this.onClickTheme('-theme1')}}>Theme One</div>
+                              <div name="theme" className="theme" style={{ background: `url(${theme2}) center/cover` }}
+                              onClick={()=>{this.props.click('-theme2'); this.onClickTheme('-theme2')}}>Theme Two</div>
+                              <div name="theme" className="theme" style={{ background: `url(${theme3}) center/cover` }}
+                              onClick={()=>{this.props.click('-theme3'); this.onClickTheme('-theme3')}}>Theme Three</div>
+                              <div name="theme" className="theme" style={{ background: `url(${theme4}) center/cover` }}
+                              onClick={()=>{this.props.click('-theme4'); this.onClickTheme('-theme4')}}>Theme Four</div>
+                              <div name="theme" className="theme" style={{ background: `url(${theme5}) center/cover` }}
+                              onClick={()=>{this.props.click('-theme5'); this.onClickTheme('-theme5')}}>Theme Five</div>
+                            </div>
+                        </span>
                         <input type="submit" value="Save" className="btn" />
                     </form>
                 </div>
-                <span className="flex-3">
-                    <h6>Choose a Theme</h6>
-                    <div className="row themeDiv">
-                        <div className="theme" style={{ background: `url(${def}) center/cover` }}
-                        onClick={()=>this.props.click('')}>Default</div>
-                        <div className="theme" style={{ background: `url(${theme1}) center/cover` }}
-                        onClick={()=>this.props.click('-theme1')}>Theme One</div>
-                        <div className="theme" style={{ background: `url(${theme2}) center/cover` }}
-                        onClick={()=>this.props.click('-theme2')}>Theme Two</div>
-                        <div className="theme" style={{ background: `url(${theme3}) center/cover` }}
-                        onClick={()=>this.props.click('-theme3')}>Theme Three</div>
-                        <div className="theme" style={{ background: `url(${theme4}) center/cover` }}
-                        onClick={()=>this.props.click('-theme4')}>Theme Four</div>
-                        <div className="theme" style={{ background: `url(${theme5}) center/cover` }}
-                        onClick={()=>this.props.click('-theme5')}>Theme Five</div>
-                    </div>
-                </span>
+                
                 <button onClick={this.props.onDeleteClick.bind(this)} className="delBTN"><i className="fas fa-user-times"></i>DELETE ACCOUNT</button>
             </div>
         );

@@ -42,21 +42,25 @@ class Body extends Component {
 }
 
 class App extends Component {
+  state = {
+    page: 'teach',
+    theme: ''
+  }
+  
   componentDidMount() {
     this.props.getCurrentProfile();
   }
   onDeleteClick = (e) => {
     this.props.deleteAccount();
   }
-  state = {
-    page: '',
-    theme: ''
-  }
  
   selectPage = (link) => {
     this.setState({ page: link });
   }
   selectTheme = (t) => {
+    this.setState({ theme: t });
+  }
+  renderTheme = (t) => {
     this.setState({ theme: t });
   }
   render() {
@@ -71,7 +75,7 @@ class App extends Component {
       if(Object.keys(profile).length > 0){
         grindinContent = (
           <div className="App">
-            <Header appState={this.state} click={this.selectPage}/>
+            <Header appState={this.state} click={this.selectPage} renderTheme={this.renderTheme}/>
             <Body appState={this.state} profile={profile} click={this.selectTheme} deleteAccountClick={this.onDeleteClick}/>
           </div>
         )
@@ -80,7 +84,7 @@ class App extends Component {
         //TODO: use Tutorial.js
         grindinContent = (
           <div className="App">
-            <Header appState={this.state} profile={profile} click={this.selectPage}/>
+            <Header appState={this.state} profile={profile} click={this.selectPage} renderTheme={this.renderTheme}/>
             <div className="flex-8">
               <Link to="/create-profile">Create Profile</Link>
             </div>

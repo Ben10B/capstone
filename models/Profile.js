@@ -16,8 +16,9 @@ const ProfileSchema = new Schema({
         required: true,
         max: 40
     },
-    company: {
-        type: String
+    theme: {
+        type: String,
+        default: ''
     },
     website: {
         type: String

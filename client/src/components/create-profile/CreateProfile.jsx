@@ -132,8 +132,8 @@ class CreateProfile extends Component {
 
     return (
       <div className="App">
-        <Header appState={{theme: '-theme2'}}/>
-        <div className="flex-8 create-profile">
+        <Header appState={{theme: ''}}/>
+        <div className={`App-intro flex-8 create-profile`}>
           <h1 className="display-4 text-center">Create Your Profile</h1>
           <p className="lead text-center">
             Let's setup your profile

@@ -14,7 +14,8 @@ class Header extends Component {
     titles: ['Home', 'My Account', 'My Sprite', 'Fogg Model', 'Tutorial', 'Achievements', 'View Profiles', 'Feed', 'Logout'],
   };
   componentDidMount(){
-    this.props.renderTheme(this.props.profile.profile.theme);
+    if(this.props.profile.profile.theme !== undefined)
+      this.props.renderTheme(this.props.profile.profile.theme);
   }
   toggleHeader = (isClosed) => {
     this.setState({ closed: !isClosed });

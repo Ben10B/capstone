@@ -84,9 +84,9 @@ class App extends Component {
         //TODO: use Tutorial.js
         grindinContent = (
           <div className="App">
-            <Header appState={this.state} profile={profile} click={this.selectPage} renderTheme={this.renderTheme}/>
-            <div className="flex-8">
-              <Link to="/create-profile">Create Profile</Link>
+            <Header appState={this.state} click={this.selectPage} renderTheme={this.renderTheme}/>
+            <div className={`App-intro${this.state.theme} flex-8 pad-top-1`}>
+              <Link className="likeBTN" to="/create-profile">Create Profile</Link>
             </div>
           </div>
         )

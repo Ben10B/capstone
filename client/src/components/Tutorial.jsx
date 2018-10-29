@@ -56,6 +56,7 @@ const Title = () => {
         <p><i className="fas fa-check"></i> "Write a comedy romance book"</p>
       </div>
       <details>
+        <summary>Click for more details</summary>
         Setting a goal that’s too broad will be difficult to gauge success. 
         This may happen when a person doesn’t really know what they want or how to set a goal properly. 
         For example, “I want to write a book” is too general.
@@ -77,6 +78,7 @@ const Description = () => {
         <p><i className="fas fa-check"></i> "I will write 1 chapter a week."</p>
       </div>
       <details>
+        <summary>Click for more details</summary> 
         This comes down with what you're capable of doing currently.
         It takes baby steps before you can jump.
         Next, explain the steps you'll take to reach your goal.
@@ -98,6 +100,7 @@ const Difficulty = () => {
         <p><i className="fas fa-check"></i> Easy, Medium, or Hard</p>
       </div>
       <details>
+        <summary>Click for more details</summary>
         This plays into the whole game element of the website. 
         <hr/>
         The higher the difficulty, the more damage, gold, and experience you receive!
@@ -115,6 +118,7 @@ const Date = () => {
         <p><i className="fas fa-check"></i> {moment().format('MMM Do YY')} and Onwards</p>
       </div>
       <details>
+        <summary>Click for more details</summary>
         It may be difficult to know when to finish. 
         That's okay. 
         <hr/>
@@ -133,6 +137,7 @@ const Days = () => {
         <p><i className="fas fa-check"></i> Su, M, T, W, Th, F, and/or Sa</p>
       </div>
       <details>
+        <summary>Click for more details</summary>
         Choose the days you feel comfortable to work on. 
         <hr/>
         You will be able to update each day every time you view your goal.

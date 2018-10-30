@@ -30,7 +30,7 @@ class Post extends Component {
     }
 
     return (
-      <div className="post column">
+      <div className="post">
         <Link to="/feed" className="btn1">
           Back To Feed
         </Link>

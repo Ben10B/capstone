@@ -297,15 +297,15 @@ router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    // Goal.find({ user: req.user.id }).then(() => {
-      Sprite.findOneAndRemove({ user: req.user.id }).then(() => {
-        Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+    Sprite.findOneAndRemove({ user: req.user.id }).then(() => {
+      Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+        Goal.findById({ user: req.user.id }).then(() => {
           User.findOneAndRemove({ _id: req.user.id }).then(() =>
             res.json({ success: true })
           );
         });
       });
-    // });
+    });
   }
 );
 

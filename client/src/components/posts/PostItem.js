@@ -5,6 +5,9 @@ import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { deletePost, addLike, removeLike } from '../../actions/postActions';
 
+import idleF from '../../Assets/img/Idle-Female.gif';
+import idleM from '../../Assets/img/Idle-Male.gif';
+
 class PostItem extends Component {
   onDeleteClick(id) {
     this.props.deletePost(id);
@@ -28,24 +31,21 @@ class PostItem extends Component {
   }
 
   render() {
-    const { post, auth, showActions } = this.props;
+    const { post, auth, showActions, profile } = this.props;
 
     return (
-      <div className="card card-body mb-3">
-        <div className="row">
-          <div className="col-md-2">
-            <a href="profile.html">
-              <img
-                className="rounded-circle d-none d-md-block"
-                src={post.avatar}
-                alt=""
-              />
-            </a>
+      <div>
+        <div className="row card">
+          <div className="">
+            <div className="flex-2" 
+            style={{ backgroundImage: `url(${(profile.gender === 'Female') ? idleF : idleM})`,
+              backgroundRepeat: 'no-repeat', backgroundSize: 'auto', backgroundPosition: 'center'
+            }}/>
             <br />
             <p className="text-center">{post.name}</p>
           </div>
-          <div className="col-md-10">
-            <p className="lead">{post.text}</p>
+          <div className="">
+            <p className="">{post.text}</p>
             {showActions ? (
               <span>
                 <button
@@ -66,6 +66,7 @@ class PostItem extends Component {
                 >
                   <i className="text-secondary fas fa-thumbs-down" />
                 </button>
+                {/* <p>() Has replied</p> */}
                 <Link to={`/post/${post._id}`} className="btn1">
                   Comments
                 </Link>
@@ -96,11 +97,13 @@ PostItem.propTypes = {
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 export default connect(mapStateToProps, { deletePost, addLike, removeLike })(

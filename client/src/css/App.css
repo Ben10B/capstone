@@ -221,7 +221,7 @@
 /* PostItem & Post*/
 .feedPage, .post{
   flex: 10;
-  height: 100vh;
+  min-height: 100%;
   display: flex;
   color: white;
   flex-direction: column;
@@ -230,6 +230,15 @@
   background-size: cover;
   background-image: url('../Assets/img/Theme-Two.png');
 }
+.post{
+  padding: 1%;
+  min-height: 100vh;
+}
 .feedPage .btn1, .post .btn1{
   color: white;
+}
+.card{
+  margin: 2px 5%;
+  background-color: rgba(0, 0, 0, 0.192);
+  border-radius: 5px;
 }

@@ -6,7 +6,7 @@ import load1 from './Loading.gif';
 export default () => {
   return (
     <div style={{ height: '100vh', backgroundImage: `url(${load1})`,
-      backgroundRepeat: 'no-repeat', backgroundSize: '50%', backgroundPosition: 'center center', }}>
+      backgroundRepeat: 'no-repeat', backgroundSize: '45%', backgroundPosition: 'center center', }}>
       {/* <img
         // className="flex-10"
         src={load1}

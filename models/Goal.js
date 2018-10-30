@@ -22,6 +22,12 @@ const GoalSchema = new Schema({
   health: {
     type: Number
   },
+  reward: {
+    type: String
+  },
+  punishment: {
+    type: String
+  },
   maxHealth: {
     type: Number
   },

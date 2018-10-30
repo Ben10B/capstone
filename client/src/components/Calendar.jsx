@@ -88,7 +88,7 @@ class Calendar extends Component {
         }
       }
       if (isValid === false) { //Days user didn't select; add to array
-        tempDays.push(<Day key={i} element={{}} click={this.showDetails} calendarState={this.state} yes={"no"}
+        tempDays.push(<Day key={`${i}.${currentMonth}`} element={{}} click={this.showDetails} calendarState={this.state} yes={"no"}
           dateString={improvedDate.date().toString()} date={improvedDate.format('YYYY-MM-DD')} />);
       }
 

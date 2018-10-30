@@ -114,6 +114,7 @@ class Calendar extends Component {
     return temp;
   };
   updateStatus = (status) => {
+    this.setState({ showDETAILS: false });
     console.log(status);
     const updatedGoal = this.state.selectedGoal;
     const updatedSprite = this.state.sprite;

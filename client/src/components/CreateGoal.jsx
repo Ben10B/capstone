@@ -123,7 +123,7 @@ class CreateGoal extends Component {
             <label>TITLE
               <i className="far fa-question-circle hint" title="Try to keep short. It helps narrowing your focus."></i>
             </label>
-            <TextFieldGroup name="title"
+            <TextFieldGroup name="title" type="text"
               placeholder="Ex: Prevent cavities."
               value={this.state.title} onChange={this.onChange}
               error={errors.title}
@@ -132,7 +132,7 @@ class CreateGoal extends Component {
             <label>DESCRIPTION
               <i className="far fa-question-circle hint" title="Be specific."></i>
             </label>
-            <TextFieldGroup name="description"
+            <TextFieldGroup name="description" type="text"
               placeholder="Ex: I will floss and brush my teeth at night."
               value={this.state.description} onChange={this.onChange}
               error={errors.description}

@@ -66,7 +66,9 @@ class PostItem extends Component {
                 >
                   <i className="text-secondary fas fa-thumbs-down" />
                 </button>
-                {/* <p>() Has replied</p> */}
+                {post.comments.length !== 0 ? (
+                  <p>({post.comments.length}) Has replied</p>
+                ) : (<p>No replies</p>)}
                 <Link to={`/post/${post._id}`} className="btn1">
                   Comments
                 </Link>

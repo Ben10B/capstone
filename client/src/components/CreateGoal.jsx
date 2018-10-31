@@ -119,7 +119,7 @@ class CreateGoal extends Component {
           <button type="button" className="btn1" onClick={this.props.click}>Back to Dashboard</button>
         </div>
         <div>
-          <form className="column" noValidate onSubmit={this.onSubmit}>
+          <form className="column cgForm" noValidate onSubmit={this.onSubmit}>
             <label>TITLE
               <i className="far fa-question-circle hint" title="Try to keep short. It helps narrowing your focus."></i>
             </label>

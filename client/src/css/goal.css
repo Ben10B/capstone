@@ -30,3 +30,7 @@
 .display-none {
 display: none;
 }
+
+.z-index{
+  z-index: 10;
+}

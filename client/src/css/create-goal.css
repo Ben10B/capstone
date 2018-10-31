@@ -1,4 +1,4 @@
-form input[type=text]{
+.cgform input[type=text]{
   border: 0;
   text-align: center;
   min-height: 30px;

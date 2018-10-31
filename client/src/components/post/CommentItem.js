@@ -31,7 +31,7 @@ class CommentItem extends Component {
               <button
                 onClick={this.onDeleteClick.bind(this, postId, comment._id)}
                 type="button"
-                className="btn btn-danger mr-1"
+                className="delBTN"
               >
                 <i className="fas fa-times" />
               </button>
@@ -47,11 +47,11 @@ CommentItem.propTypes = {
   deleteComment: PropTypes.func.isRequired,
   comment: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { deleteComment })(CommentItem);

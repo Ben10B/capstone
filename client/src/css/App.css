@@ -172,7 +172,7 @@
 #dashImg:hover{ box-shadow: 0 0 10px #008fc5;
 }
 @media all and (max-width: 575px){
-  #dashImg{ min-height: 5%;
+  #dashImg{ min-height: 30%;
   }
   #goalList{ flex: 6;
   }

@@ -53,7 +53,7 @@ class Logon extends Component {
                       error={errors.log_email}
                     />
                     {errors.log_email && (<div className="err invalid-feedback">{errors.log_email}</div>)}
-                    <TextFieldGroup name="password"
+                    <TextFieldGroup name="password" type="password"
                       placeholder="PASSWORD"
                       value={this.state.password} onChange={this.onChange}
                       error={errors.log_password}

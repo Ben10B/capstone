@@ -67,14 +67,14 @@ class Register extends Component {
             className={classnames('', { 'is-invalid': errors.name })}
           />
           {errors.name && (<div className="err invalid-feedback">{errors.name}</div>)}
-          <input type="text"
+          <input type="password"
             name="password"
             placeholder="PASSWORD"
             value={this.state.password} onChange={this.onChange}
             className={classnames('', { 'is-invalid': errors.password })}
           />
           {errors.password && (<div className="err invalid-feedback">{errors.password}</div>)}
-          <input type="text"
+          <input type="password"
             name="password2"
             placeholder="CONFIRM PASSWORD"
             value={this.state.password2} onChange={this.onChange}

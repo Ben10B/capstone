@@ -54,7 +54,7 @@
     color: #f00;
     font-weight: bold;
 }
-form input[type=text], form input[type=submit]{
+form input[type=text], form input[type=password], form input[type=submit]{
     border: 0;
     text-align: center;
     max-height: 30px;
@@ -63,7 +63,7 @@ form input[type=text], form input[type=submit]{
     color: #fff;
     outline: none;
 }
-form input[type=text]{
+form input[type=text], form input[type=password]{
     background-color: rgba(0, 0, 0, 0.603);
 }
 form input[type=submit]{

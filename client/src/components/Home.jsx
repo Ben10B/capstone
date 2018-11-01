@@ -24,7 +24,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div id="dashboard" className="row">
-                <div id="dashImg" className="flex-1" style={{ backgroundImage: `url(${(this.props.sprite.gender === "Female") ? idleF : idleM})` }}
+                <div id="dashImg" className="flex-1" style={{ backgroundImage: `url(${(this.props.sprite.gender !== undefined && this.props.sprite.gender === "Female") ? idleF : idleM})` }}
                  onMouseEnter={this.hover} onMouseLeave={this.leave} onClick={this.zoomIn} onDoubleClick={this.zoomOut}></div>
                 <span className="flex-8">
                     <h1>{this.props.profile.handle}</h1>

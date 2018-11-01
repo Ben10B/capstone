@@ -16,3 +16,9 @@
   color: #fff;
   /* color: #00aeef; */
 }
+.checkboxes{
+  display: flex;
+  flex-direction: row;
+}
+.checkboxes p{ flex: 1;
+}

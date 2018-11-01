@@ -201,15 +201,6 @@ class CreateGoal extends Component {
               placeholder="Ex: I will do the cinnamon challenge."
               value={this.state.punishment} onChange={this.onChange}
             />
-            {/* <label className="margn-top-1">DIFFICULTY
-              <i className="far fa-question-circle hint" title="This affects your health, gold, and experience!"></i>
-            </label>
-            <div className="row" style={{ display: 'flex', flexDirection: 'row' }} error={errors.difficulty}>
-              <p><input type="radio" name="difficulty" value="1" onChange={this.onChange} />Easy</p>
-              <p><input type="radio" name="difficulty" value="2" onChange={this.onChange} />Medium</p>
-              <p><input type="radio" name="difficulty" value="3" onChange={this.onChange} />Hard</p>
-            </div>
-            {errors.difficulty && (<div className="err invalid-feedback">{errors.difficulty}</div>)} */}
             <label>*Estimated End Date
               <i className="far fa-question-circle hint" title="The day you plan to finish!"></i>
             </label>
@@ -226,7 +217,7 @@ class CreateGoal extends Component {
                   <p className="btn1" onClick={this.switchDays}>Custom</p>
                 </div>
               ) : (
-                <div className="row">
+                <div className="checkboxes">
                   <p><input type="checkbox" name="sun" onChange={this.onCheck} />Sun</p>
                   <p><input type="checkbox" name="mon" onChange={this.onCheck} />Mon</p>
                   <p><input type="checkbox" name="tue" onChange={this.onCheck} />Tue</p>

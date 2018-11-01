@@ -297,13 +297,25 @@ router.delete(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
+    Goal.find({ user: req.user.id}).then(goals => {
+      // goals.splice(0, goals.length);
+      goals.forEach(goal => {
+        // Delete
+        goal.remove();
+      });
+    }).catch(err => res.status(404).json({ goalsnotfound: 'No goals found' }));
+    Post.find({ user: req.user.id}).then(posts => {
+      // goals.splice(0, goals.length);
+      posts.forEach(post => {
+        // Delete
+        post.remove();
+      });
+    }).catch(err => res.status(404).json({ postsnotfound: 'No posts found' }));
     Sprite.findOneAndRemove({ user: req.user.id }).then(() => {
       Profile.findOneAndRemove({ user: req.user.id }).then(() => {
-        Goal.findById({ user: req.user.id }).then(() => {
-          User.findOneAndRemove({ _id: req.user.id }).then(() =>
-            res.json({ success: true })
-          );
-        });
+        User.findOneAndRemove({ _id: req.user.id }).then(() =>
+          res.json({ success: true })
+        );
       });
     });
   }

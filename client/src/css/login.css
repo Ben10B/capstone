@@ -52,6 +52,7 @@
 .err{
     max-height: 20px;
     color: #f00;
+    font-weight: bold;
 }
 form input[type=text], form input[type=submit]{
     border: 0;

@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
 // @access  Public
 router.get('/user/:user_id', (req, res) => {
   Goal.find({ user: req.params.user_id, result: 'Grindin' }).sort({ date: -1 })
-    .then(goal => res.json(goal)
+    .then(goals => res.json(goals)
     )
     .catch(err =>
       res.status(404).json({ nogoalsfound: 'No goals found by that user' })
@@ -100,10 +100,28 @@ router.post(
       health: req.body.maxHealth,
       maxHealth: req.body.maxHealth,
       days: req.body.days,
-      date: req.body.date
+      date: req.body.date,
+      result: 'Grindin'
     });
 
     newGoal.save().then(goal => res.json(goal));
+  }
+);
+
+// @route   POST api/goal/check
+// @desc    Check goal for validation
+// @access  Private
+router.post(
+  '/check',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateGoalInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+      // If any errors, send 400 with errors object
+      return res.status(400).json(errors);
+    } else return res.json({isValid: true});
   }
 );
 

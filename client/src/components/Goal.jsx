@@ -107,9 +107,9 @@ class Goal extends Component {
     let maxHealth = this.state.selectedGoal.maxHealth;
     let health = 0;
     switch (diff) {
-      case 1: health = maxHealth - 1; break;
-      case 2: health = maxHealth - 5; break;
-      case 3: health = maxHealth - 10; break;
+      case 1: health = maxHealth - diff; break;
+      case 2: health = maxHealth - diff; break;
+      case 3: health = maxHealth - diff; break;
       default: break;
     }
     return health;
@@ -220,10 +220,10 @@ const Confirmation = ({show, close, sprite, update, status, selectedGoal}) => {
         <div className="row yes-no-container">
           <button type="button" 
           onClick={() => {update(status); close();}} 
-          className="btn1 green"><i className="fas fa-check"></i></button>
+          className="btn1 green">YAY</button>
           <button type="button" 
           onClick={() => close()} 
-          className="btn1 red"><i className="fas fa-times"></i></button>
+          className="btn1 red">NAY</button>
         </div>
       </div>
     </div>

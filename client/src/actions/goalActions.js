@@ -7,6 +7,8 @@ import {
   GET_GOAL,
   GOAL_LOADING,
   DELETE_GOAL,
+  CHECK_GOAL,
+  CHECK_GOAL_ERR,
   UPDATE_GOAL,
 } from './types';
 
@@ -39,6 +41,29 @@ export const updateGoal = (goalData, id) => dispatch => {
       dispatch({
         type: UPDATE_GOAL,
         payload: err.response.data
+      })
+    ); 
+};
+
+// Check Goal
+export const checkGoal = (goalData) => dispatch => {
+  dispatch(clearErrors());
+  axios
+    .post(`api/goal/check`, goalData)
+    .then(res => 
+      dispatch({
+        type: CHECK_GOAL,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      }),
+      dispatch({
+        type: CHECK_GOAL_ERR,
+        // payload: res.data
       })
     ); 
 };

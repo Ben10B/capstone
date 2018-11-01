@@ -40,18 +40,14 @@ module.exports = function validateGoalInput(data) {
     errors.description = 'Description field is required';
   }
 
-  if (data.difficulty <= 0) {
-    errors.difficulty = 'Difficulty field is required';
-  }
-
   if (Validator.isEmpty(data.date)) {
     errors.date = 'Date field is required';
   }
 
   const tempDate = moment(data.date, 'YYYY-MM-DD');
   const today = moment().format('YYYY-MM-DD');
-  if(tempDate.diff(today, 'days') > 60){
-    errors.date = 'Choose a date less than or equal to 60 days from now '+tempDate.diff(today, 'days');
+  if(tempDate.diff(today, 'days') > 59){
+    errors.date = 'Max number of days is 59. Go back '+(tempDate.diff(today, 'days')-59)+' days.';
   }
   if(tempDate.isBefore(today)){
     errors.date = 'Choose a date starting from today to 60 days from now';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addGoal } from '../actions/goalActions';
+import { addGoal, checkGoal } from '../actions/goalActions';
 import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from './common/TextFieldGroup';
@@ -13,7 +13,9 @@ class CreateGoal extends Component {
     this.state = {
       title: '',
       description: '',
-      difficulty: '',
+      difficulty: 0,
+      reward: '',
+      punishment: '',
       partners: {},
       date: moment().format('YYYY-MM-DD'),
       sun: false,
@@ -23,31 +25,59 @@ class CreateGoal extends Component {
       th: false,
       fri: false,
       sat: false,
-      errors: {}
-
+      custom: false,
+      errors: {},
+      show: false,
+      numberOfDays: 0,
+      message: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+  componentDidUpdate(prevProps, prevState){
+    if (this.props.errors !== prevProps.errors) {
+      this.setState({ errors: this.props.errors });
     }
+    if (this.props.goal.isValid !== prevProps.goal.isValid && this.props.goal.isValid === true){
+      this.showModal();
+    }
+  }
+  showModal = () => {
+    this.setState({ show: true });
+  }
+  hideModal = () => {
+    this.setState({ show: false });
   }
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
   onCheck = (e) => {
-    this.setState({ [e.target.name]: e.target.checked });
+    if(e.target.name === 'weekends'){
+      this.setState({ sat: e.target.checked });
+      this.setState({ sun: e.target.checked });
+    } else if(e.target.name === 'weekdays'){
+      this.setState({ mon: e.target.checked });
+      this.setState({ tue: e.target.checked });
+      this.setState({ wed: e.target.checked });
+      this.setState({ th: e.target.checked });
+      this.setState({ fri: e.target.checked });
+    } else {
+      this.setState({ [e.target.name]: e.target.checked });
+    }
+  }
+  switchDays = () => {
+    this.setState({ custom: !this.state.custom});
   }
   onSubmit = (e) => {
     e.preventDefault();
     const days = this.calendar(this.state.date);
     const maxHealth = days.length;
+    this.setState({numberOfDays: maxHealth});
+    let diff = this.calcDifficulty(maxHealth);
     const goalData = {
       title: this.state.title,
       description: this.state.description,
-      difficulty: this.state.difficulty,
+      difficulty: diff,
       partners: this.state.partners,
       date: this.state.date,
       days: days,
@@ -60,7 +90,9 @@ class CreateGoal extends Component {
       sat: this.state.sat,
       maxHealth: maxHealth,
     };
-    this.props.addGoal(goalData, this.props.history);
+    
+    this.props.checkGoal(goalData);
+    this.setState({goalData: goalData});
   }
   calendar = (endDate) => {
     let current = new Date();
@@ -106,8 +138,23 @@ class CreateGoal extends Component {
       }
       i++;
     }
+    
     return tempArray;
   };
+  calcDifficulty = (numOfDays) => {
+    if(numOfDays <= 14) { 
+      this.setState({difficulty: 1});
+      this.setState({message: `The lowest difficulty.`}); return 1;
+    }
+    else if(numOfDays > 14 && numOfDays <= 31){
+      this.setState({difficulty: 2});
+      this.setState({message: `The Second Highest Difficulty.`}); return 2;
+    }
+    else if(numOfDays > 31 && numOfDays <= 60){
+      this.setState({difficulty: 3});
+      this.setState({message: `THE HIGHEST DIFFICULTY.`}); return 3;
+    } 
+  }
   render() {
     const { errors } = this.state;
     return (
@@ -118,9 +165,11 @@ class CreateGoal extends Component {
           </span>
           <button type="button" className="btn1" onClick={this.props.click}>Back to Dashboard</button>
         </div>
+        <Details show={this.state.show} handleClose={this.hideModal} cgState={this.state}
+          addGoal={()=>this.props.addGoal(this.state.goalData, this.props.history)} data={this.state.goalData}/>
         <div>
           <form className="column cgForm" noValidate onSubmit={this.onSubmit}>
-            <label>TITLE
+            <label>*TITLE
               <i className="far fa-question-circle hint" title="Try to keep short. It helps narrowing your focus."></i>
             </label>
             <TextFieldGroup name="title" type="text"
@@ -129,7 +178,7 @@ class CreateGoal extends Component {
               error={errors.title}
             />
             {errors.title && (<div className="err invalid-feedback">{errors.title}</div>)}
-            <label>DESCRIPTION
+            <label>*DESCRIPTION
               <i className="far fa-question-circle hint" title="Be specific."></i>
             </label>
             <TextFieldGroup name="description" type="text"
@@ -138,7 +187,21 @@ class CreateGoal extends Component {
               error={errors.description}
             />
             {errors.description && (<div className="err invalid-feedback">{errors.description}</div>)}
-            <label className="margn-top-1">DIFFICULTY
+            <label>Reward
+              <i className="far fa-question-circle hint" title="Something you might reward yourself."></i>
+            </label>
+            <TextFieldGroup name="reward" type="text"
+              placeholder="Ex: I will buy a large meatlovers pizza."
+              value={this.state.reward} onChange={this.onChange}
+            />
+            <label>Punishment
+              <i className="far fa-question-circle hint" title="Something you don't wanna do."></i>
+            </label>
+            <TextFieldGroup name="punishment" type="text"
+              placeholder="Ex: I will do the cinnamon challenge."
+              value={this.state.punishment} onChange={this.onChange}
+            />
+            {/* <label className="margn-top-1">DIFFICULTY
               <i className="far fa-question-circle hint" title="This affects your health, gold, and experience!"></i>
             </label>
             <div className="row" style={{ display: 'flex', flexDirection: 'row' }} error={errors.difficulty}>
@@ -146,23 +209,34 @@ class CreateGoal extends Component {
               <p><input type="radio" name="difficulty" value="2" onChange={this.onChange} />Medium</p>
               <p><input type="radio" name="difficulty" value="3" onChange={this.onChange} />Hard</p>
             </div>
-            {errors.difficulty && (<div className="err invalid-feedback">{errors.difficulty}</div>)}
-            <label>Estimated End Date
+            {errors.difficulty && (<div className="err invalid-feedback">{errors.difficulty}</div>)} */}
+            <label>*Estimated End Date
               <i className="far fa-question-circle hint" title="The day you plan to finish!"></i>
             </label>
             <input name="date" type="date" onChange={this.onChange} error={errors.date} value={this.state.date}/>
             {errors.date && (<div className="err invalid-feedback">{errors.date}</div>)}
-            <label>Check DAY(s) You Plan to Grind
+            <label>*Check DAY(s) You Plan to Grind
               <i className="far fa-question-circle hint" title="These repeat every week!"></i>
             </label>
             <div className="row" style={{ display: 'flex', flexDirection: 'row' }} error={errors.daysOftheWeek}>
-              <p><input type="checkbox" name="sun" onChange={this.onCheck} />Sun</p>
-              <p><input type="checkbox" name="mon" onChange={this.onCheck} />Mon</p>
-              <p><input type="checkbox" name="tue" onChange={this.onCheck} />Tue</p>
-              <p><input type="checkbox" name="wed" onChange={this.onCheck} />Wed</p>
-              <p><input type="checkbox" name="th" onChange={this.onCheck} />Th</p>
-              <p><input type="checkbox" name="fri" onChange={this.onCheck} />Fri</p>
-              <p><input type="checkbox" name="sat" onChange={this.onCheck} />Sat</p>
+              {this.state.custom === false ? (
+                <div className="row">
+                  <p><input type="checkbox" name="weekends" onChange={this.onCheck} />Weekends</p>
+                  <p><input type="checkbox" name="weekdays" onChange={this.onCheck} />Weekdays</p>
+                  <p className="btn1" onClick={this.switchDays}>Custom</p>
+                </div>
+              ) : (
+                <div className="row">
+                  <p><input type="checkbox" name="sun" onChange={this.onCheck} />Sun</p>
+                  <p><input type="checkbox" name="mon" onChange={this.onCheck} />Mon</p>
+                  <p><input type="checkbox" name="tue" onChange={this.onCheck} />Tue</p>
+                  <p><input type="checkbox" name="wed" onChange={this.onCheck} />Wed</p>
+                  <p><input type="checkbox" name="th" onChange={this.onCheck} />Th</p>
+                  <p><input type="checkbox" name="fri" onChange={this.onCheck} />Fri</p>
+                  <p><input type="checkbox" name="sat" onChange={this.onCheck} />Sat</p>
+                  <p className="btn1" onClick={this.switchDays}><i className="fas fa-angle-right"></i></p>
+                </div>
+              )}
             </div>
             {errors.daysOftheWeek && (<div className="err invalid-feedback">{errors.daysOftheWeek}</div>)}
             <input className="btn1" type="submit" value="CREATE GOAL" />
@@ -173,15 +247,69 @@ class CreateGoal extends Component {
   }
 }
 
+const Details = ({handleClose, show, cgState, addGoal, data}) => {
+  const showHideClassName = show ? 'detail-container modal display-block' : 'detail-container modal display-none';
+  this.receiveReward = (diff) => {
+    switch (diff) {
+      case 1: return 25;
+      case 2: return 50;
+      case 3: return 100;
+      default: return 0;
+    }
+  }
+  this.addExp = (diff) => {
+    switch (diff) {
+      case 1: return 10;
+      case 2: return 20;
+      case 3: return 40;
+      default: break;
+    }
+  }
+  return (
+    <div className={showHideClassName}>
+      <div className="details modal-main column">
+        <h4 className="detailsHeading">Overview</h4>
+        <div className="row">
+          <div className="column">
+            <p>Title: {cgState.title}</p>
+            <p>Description: {cgState.description}</p>
+            {cgState.reward ? (<p>Reward: {cgState.reward}</p>) : ''}
+            {cgState.punishment ? (<p>Punishment: {cgState.punishment}</p>) : ''}
+          </div>
+          <div className="column">
+            <p>Difficulty: {cgState.difficulty}</p>
+            <p>Total Day(s): {cgState.numberOfDays}</p>
+            <p>Daily Reward: +{this.receiveReward(cgState.difficulty)} Gold</p>
+            <p>Daily Penalty: -{cgState.difficulty} HP</p>
+            <p>Goal Completion: {this.addExp(cgState.difficulty)} EXP, {this.receiveReward(cgState.difficulty)} Gold * BONUS</p>
+          </div>
+          {/* <div>
+            <p>{cgState.message}</p>
+          </div> */}
+        </div>
+        <div className="row yes-no-container">
+          <button type="button" 
+          onClick={addGoal} 
+          className="btn1 green"><i className="fas fa-check"></i> Looks good</button>
+          <button type="button" 
+          onClick={handleClose} 
+          className="btn1 red"><i className="fas fa-times"></i> Nah</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 CreateGoal.propTypes = {
   addGoal: propTypes.func.isRequired,
+  checkGoal: propTypes.func.isRequired,
   goal: propTypes.object.isRequired,
-  errors: propTypes.object.isRequired
+  errors: propTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => ({
   goal: state.goal,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(mapStateToProps, { addGoal })(withRouter(CreateGoal));
+export default connect(mapStateToProps, { addGoal, checkGoal })(withRouter(CreateGoal));

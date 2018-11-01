@@ -3,13 +3,16 @@ import {
   GET_GOALS,
   GET_GOAL,
   DELETE_GOAL,
+  CHECK_GOAL,
+  CHECK_GOAL_ERR,
   GOAL_LOADING
 } from '../actions/types';
 
 const initialState = {
   goals: [],
   goal: {},
-  loading: false
+  loading: false,
+  isValid: null,
 };
 
 export default function(state = initialState, action) {
@@ -35,6 +38,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         goals: [action.payload, ...state.goals]
+      };
+    case CHECK_GOAL:
+      return {
+        ...state,
+        isValid: true
+      };
+    case CHECK_GOAL_ERR:
+      return {
+        ...state,
+        isValid: false
       };
     case DELETE_GOAL:
       return {

@@ -195,6 +195,11 @@ summary{ outline: none;
   }
 }
 /* Account.jsx */
+.themeDiv{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .theme{
   text-align: center;
   font-weight: bolder;
@@ -211,9 +216,7 @@ summary{ outline: none;
 }
 @media all and (max-width: 575px){
   .themeDiv{
-    flex-direction: row;
-    /* background-color: red; */
-    flex-wrap: wrap;
+    
   }
 }
 

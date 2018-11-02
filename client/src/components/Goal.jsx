@@ -21,6 +21,7 @@ class Goal extends Component {
     selectedGoal: this.props.selectedGoal,
     show: false,
     showConfirmWindow: false,
+    showGoalResult: false,
     confirmation: false, 
     selectedDay: null,
     calendarState: null,
@@ -54,6 +55,12 @@ class Goal extends Component {
   }
   hideConfirm = () => {
     this.setState({ showConfirmWindow: false });
+  }
+  showGoalResult = () => {
+    this.setState({ showGoalResult: true });
+  }
+  hideGoalResult = () => {
+    this.setState({ showGoalResult: false });
   }
   updateProgressBar = (newHealth, updatedGoal) => {
     if(updatedGoal !== undefined) this.setState({ selectedGoal: updatedGoal});
@@ -91,14 +98,18 @@ class Goal extends Component {
     //Else update sprite and goal
     if (updatedGoal.health <= 0) {
       updatedGoal.result = "INCOMPLETE";
-      this.props.updateGoal(updatedGoal, updatedGoal._id);
-      this.props.history.push('/');
+      // this.props.updateGoal(updatedGoal, updatedGoal._id);
+      // this.props.history.push('/');
+      this.setState({resultGoal: updatedGoal});
+      this.showGoalResult();
     } else if (updatedGoal.days[updatedGoal.days.length - 1].status === "complete") {
       updatedGoal.result = "COMPLETE";
-      this.completeGoal(diff, updatedSprite, updatedGoal);
+      // this.completeGoal(diff, updatedSprite, updatedGoal);
+      this.setState({resultGoal: updatedGoal});
+      this.showGoalResult();
     } else {
-      this.props.updateGoal(updatedGoal, updatedGoal._id);
-      this.props.updateSprite(updatedSprite, updatedSprite._id);
+      // this.props.updateGoal(updatedGoal, updatedGoal._id);
+      // this.props.updateSprite(updatedSprite, updatedSprite._id);
       this.setState({updateCalendar: true});
     }
     this.setState({ show: false });
@@ -166,7 +177,7 @@ class Goal extends Component {
             {this.state.selectedGoal.punishment ? 
               <details><summary>PENALTY</summary> {this.state.selectedGoal.punishment}</details> : ''}
           </div>
-          <GoalResult show={false} sprite={sprite}/>
+          <GoalResult show={this.state.showGoalResult} close={this.hideGoalResult} sprite={sprite} goal={this.state.resultGoal}/>
           <Confirmation show={this.state.showConfirmWindow} close={this.hideConfirm} sprite={sprite} 
             update={this.updateStatus} status={this.state.status} selectedGoal={this.state.selectedGoal}/>
           <Details show={this.state.show} handleClose={this.hideDetails}

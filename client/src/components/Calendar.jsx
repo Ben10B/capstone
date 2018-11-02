@@ -34,6 +34,7 @@ class Calendar extends Component {
   componentWillUpdate(){
     if(this.props.updateCal === true){
       this.getDays(this.state.monthIndex, this.state.currentYear);
+      this.props.calUpdated();
     }
   }
   switchMonths = (index) => {

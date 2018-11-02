@@ -62,6 +62,9 @@ class Goal extends Component {
   hideGoalResult = () => {
     this.setState({ showGoalResult: false });
   }
+  calendarUpdated = () => {
+    this.setState({updateCalendar: false});
+  }
   updateProgressBar = (newHealth, updatedGoal) => {
     if(updatedGoal !== undefined) this.setState({ selectedGoal: updatedGoal});
     var progressbar = document.getElementById("progressbar");   
@@ -185,7 +188,8 @@ class Goal extends Component {
             showCW={this.showConfirm}
           />
           <ProgressBar progress={this.state.selectedGoal}/>
-          <Calendar selectedGoal={this.props.selectedGoal} updateCal={this.state.updateCalendar} showModalClick={this.showDetails}/>
+          <Calendar selectedGoal={this.props.selectedGoal} updateCal={this.state.updateCalendar}
+           showModalClick={this.showDetails} calUpdated={this.calendarUpdated}/>
         </div>
       )
   }

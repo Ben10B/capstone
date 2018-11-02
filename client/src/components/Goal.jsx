@@ -8,7 +8,7 @@ import damagedF from '../Assets/img/Damaged-Female.png';
 import damagedM from '../Assets/img/Damaged-Male.png';
 import yesF from '../Assets/img/Completed-Female.png';
 import yesM from '../Assets/img/Completed-Male.png';
-import { GoalResult, LevelUp } from './modals/Modals';
+import { GoalResult } from './modals/Modals';
 
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -101,15 +101,11 @@ class Goal extends Component {
     //Else update sprite and goal
     if (updatedGoal.health <= 0) {
       updatedGoal.result = "INCOMPLETE";
-      this.props.updateGoal(updatedGoal, updatedGoal._id);
-      this.props.history.push('/');
-      // this.setState({resultGoal: updatedGoal});
-      // this.showGoalResult();
+      this.setState({resultGoal: updatedGoal});
+      this.showGoalResult();
     } else if (updatedGoal.days[updatedGoal.days.length - 1].status === "complete") {
       updatedGoal.result = "COMPLETE";
       this.completeGoal(diff, updatedSprite, updatedGoal);
-      // this.setState({resultGoal: updatedGoal});
-      // this.showGoalResult();
     } else {
       this.props.updateGoal(updatedGoal, updatedGoal._id);
       this.props.updateSprite(updatedSprite, updatedSprite._id);
@@ -152,6 +148,7 @@ class Goal extends Component {
       //Increase expLimit if achieved
       updatedSprite.experienceLimit = updatedSprite.experienceLimit * 2;
       updatedSprite.level++; //Increase level
+      updatedSprite.newLevel = "yes";
     }
   }
   completeGoal = (diff, updatedSprite, updatedGoal) => {
@@ -159,9 +156,8 @@ class Goal extends Component {
     updatedSprite.goalsCompleted++; //Increase goal record
     updatedSprite.gold += Math.round(this.receiveReward(diff) * 1.5); //Add gold * bonus
 
-    this.props.updateSprite(updatedSprite, updatedSprite._id);
-    this.props.updateGoal(updatedGoal, updatedGoal._id);
-    this.props.history.push('/');
+    this.setState({resultGoal: updatedGoal});
+    this.showGoalResult();
   }
   render() {
     const { sprite } = this.props.sprite;
@@ -180,14 +176,18 @@ class Goal extends Component {
             {this.state.selectedGoal.punishment ? 
               <details><summary>PENALTY</summary> {this.state.selectedGoal.punishment}</details> : ''}
           </div>
-          <GoalResult show={this.state.showGoalResult} close={this.hideGoalResult} sprite={sprite} goal={this.state.resultGoal}/>
+          {/* Opens modal when goal is completed or failed; updates goal and sprite */}
+          <GoalResult show={this.state.showGoalResult} close={this.hideGoalResult} sprite={sprite} goal={this.state.resultGoal}
+            history={this.props.history} updateSprite={this.props.updateSprite} updateGoal={this.props.updateGoal}/>
+          {/* Opens modal when user responds to the Details modal */}
           <Confirmation show={this.state.showConfirmWindow} close={this.hideConfirm} sprite={sprite} 
             update={this.updateStatus} status={this.state.status} selectedGoal={this.state.selectedGoal}/>
+          {/* Opens modal when user clicks on day */}
           <Details show={this.state.show} handleClose={this.hideDetails}
             calendarState={this.state.calendarState} selectedDay={this.state.selectedDay}
             showCW={this.showConfirm}
           />
-          <ProgressBar progress={this.state.selectedGoal}/>
+          <ProgressBar progress={this.props.selectedGoal}/>
           <Calendar selectedGoal={this.props.selectedGoal} updateCal={this.state.updateCalendar}
            showModalClick={this.showDetails} calUpdated={this.calendarUpdated}/>
         </div>

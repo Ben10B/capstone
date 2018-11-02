@@ -1,6 +1,6 @@
 import React from 'react';
-import yesF from '../../Assets/img/Completed-Female.png';
-import yesM from '../../Assets/img/Completed-Male.png';
+import yesF from '../../Assets/img/Passed-Female.png';
+import yesM from '../../Assets/img/Passed-Male.png';
 import noF from '../../Assets/img/Incompleted-Female.png';
 import noM from '../../Assets/img/Incompleted-Male.png';
 

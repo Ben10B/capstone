@@ -116,7 +116,7 @@ class Calendar extends Component {
   };
   render() {
     return (
-      <div className='calendar-container flex-9'>
+      <div className='calendar-container'>
         <div className='calendar'>
           <div id='month'>
             <ul>

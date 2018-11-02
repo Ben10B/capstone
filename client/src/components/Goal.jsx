@@ -8,6 +8,7 @@ import damagedF from '../Assets/img/Damaged-Female.png';
 import damagedM from '../Assets/img/Damaged-Male.png';
 import yesF from '../Assets/img/Completed-Female.png';
 import yesM from '../Assets/img/Completed-Male.png';
+import { GoalResult, LevelUp } from './modals/Modals';
 
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -25,13 +26,15 @@ class Goal extends Component {
     calendarState: null,
     sprite: this.props.sprite.sprite,
     updateCalendar: false,
+    resultSprite: {},
+    resultGoal: {},
     status: ''
   }
   
   componentDidMount(){
     this.updateProgressBar(this.props.selectedGoal.health);
   }
-  showModal = (day, status, calendarState) => {
+  showDetails = (day, status, calendarState) => {
     this.setState({updateCalendar: false});
 
     if (status === "unresolved" || status === "unresolved-today") {
@@ -42,7 +45,7 @@ class Goal extends Component {
     else
       this.setState({ show: false });
   }
-  hideModal = () => {
+  hideDetails = () => {
     this.setState({ show: false });
   }
   showConfirm = (status) => {
@@ -68,8 +71,6 @@ class Goal extends Component {
     }
   }
   updateStatus = (status) => {
-    console.log(status);
-
     const updatedGoal = this.state.selectedGoal;
     const updatedSprite = this.state.sprite;
     const diff = this.state.selectedGoal.difficulty;
@@ -77,8 +78,7 @@ class Goal extends Component {
     //If no, take away health; if yes, give gold
     if (status === "incomplete") { 
       updatedGoal.health = this.dealDamage(diff); this.updateProgressBar(updatedGoal.health, updatedGoal); 
-    }
-    else {
+    } else {
       updatedSprite.gold += this.receiveReward(diff);
     }
 
@@ -145,7 +145,6 @@ class Goal extends Component {
     updatedSprite.goalsCompleted++; //Increase goal record
     updatedSprite.gold += Math.round(this.receiveReward(diff) * 1.5); //Add gold * bonus
 
-    // console.log(updatedSprite);
     this.props.updateSprite(updatedSprite, updatedSprite._id);
     this.props.updateGoal(updatedGoal, updatedGoal._id);
     this.props.history.push('/');
@@ -153,24 +152,29 @@ class Goal extends Component {
   render() {
     const { sprite } = this.props.sprite;
       return (
-        <div className={`App-intro${this.props.appState.theme}`}>
-          <div className="row flex-1">
+        <div className="">
+          <div className="row">
             <span>
                 <h1>{this.props.selectedGoal.title}</h1>
             </span>
             <button type="button" className="btn1" onClick={()=>this.props.click('')}>Back to Dashboard</button>
           </div>
-          <div>
+          <div className="">
             {this.state.selectedGoal.description}
+            {this.state.selectedGoal.reward ? 
+              <details><summary>REWARD</summary> {this.state.selectedGoal.reward}</details> : ''}
+            {this.state.selectedGoal.punishment ? 
+              <details><summary>PENALTY</summary> {this.state.selectedGoal.punishment}</details> : ''}
           </div>
+          <GoalResult show={false} sprite={sprite}/>
           <Confirmation show={this.state.showConfirmWindow} close={this.hideConfirm} sprite={sprite} 
             update={this.updateStatus} status={this.state.status} selectedGoal={this.state.selectedGoal}/>
-          <Details show={this.state.show} handleClose={this.hideModal}
+          <Details show={this.state.show} handleClose={this.hideDetails}
             calendarState={this.state.calendarState} selectedDay={this.state.selectedDay}
             showCW={this.showConfirm}
           />
           <ProgressBar progress={this.state.selectedGoal}/>
-          <Calendar selectedGoal={this.props.selectedGoal} updateCal={this.state.updateCalendar} showModalClick={this.showModal}/>
+          <Calendar selectedGoal={this.props.selectedGoal} updateCal={this.state.updateCalendar} showModalClick={this.showDetails}/>
         </div>
       )
   }
@@ -189,7 +193,7 @@ const Details = ({handleClose, show, calendarState, selectedDay, showCW}) => {
           backgroundImage: `url(${isCalendarNull ? '' :
           (calendarState.sprite.gender === "Female") ? idleF : idleM})` }}
         ></div>
-        <div className="row yes-no-container">
+        <div className="yes-no-container">
           <button type="button" 
           onClick={() => showCW('complete')} 
           className="btn1 green"><i className="fas fa-check"></i></button>
@@ -202,28 +206,47 @@ const Details = ({handleClose, show, calendarState, selectedDay, showCW}) => {
     </div>
   );
 }
-
 const Confirmation = ({show, close, sprite, update, status, selectedGoal}) => {
   const showHideClassName = show ? 'detail-container modal display-block z-index' : 'detail-container modal display-none';
+  this.showEXP = (diff) => {
+    switch (diff) {
+      case 1: return 10;
+      case 2: return 20;
+      case 3: return 40;
+      default: return 0;
+    }
+  }
+  this.showReward = (diff) => {
+    switch (diff) {
+      case 1: return 25;
+      case 2: return 50;
+      case 3: return 100;
+      default: return 0;
+    }
+  }
   return (
     <div className={showHideClassName}>
       <div className="details modal-main row">
         {(status === 'complete') ? 
-          <div className="">Are you sure it was successful?</div> : 
-          <div className="">Are you sure it wasn't successful?</div>}
+          <div className="">
+            <p>Are you sure it was successful?</p>
+            <p>+{this.showReward(selectedGoal.difficulty)} Gold</p>
+            <p>+{this.showEXP(selectedGoal.difficulty)} EXP</p>
+          </div> : 
+          <div className=""><p>Are you sure it wasn't successful?</p><p>-{selectedGoal.difficulty}HP</p></div>}
         <div className="detailImg" 
         style={{ backgroundImage: `url(${status === 'complete' ? 
           ((sprite.gender === "Female") ? yesF : yesM) :
           ((sprite.gender === "Female") ? damagedF : damagedM)
         })` }}
         ></div>
-        <div className="row yes-no-container">
+        <div className="yes-no-container">
           <button type="button" 
           onClick={() => {update(status); close();}} 
-          className="btn1 green">YAY</button>
+          className="btn1 green">YES</button>
           <button type="button" 
           onClick={() => close()} 
-          className="btn1 red">NAY</button>
+          className="btn1 red">OOPS, NAH</button>
         </div>
       </div>
     </div>

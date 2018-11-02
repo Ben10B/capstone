@@ -92,7 +92,7 @@
     }
 }
 //flex-: {number}
-@for $flex from 1 through 10{
+@for $flex from 0 through 10{
     .flex-#{$flex}{
         flex: $flex;
     }

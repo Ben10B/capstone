@@ -77,6 +77,8 @@ class CreateGoal extends Component {
     const goalData = {
       title: this.state.title,
       description: this.state.description,
+      reward: this.state.reward,
+      punishment: this.state.punishment,
       difficulty: diff,
       partners: this.state.partners,
       date: this.state.date,

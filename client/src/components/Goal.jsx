@@ -98,18 +98,18 @@ class Goal extends Component {
     //Else update sprite and goal
     if (updatedGoal.health <= 0) {
       updatedGoal.result = "INCOMPLETE";
-      // this.props.updateGoal(updatedGoal, updatedGoal._id);
-      // this.props.history.push('/');
-      this.setState({resultGoal: updatedGoal});
-      this.showGoalResult();
+      this.props.updateGoal(updatedGoal, updatedGoal._id);
+      this.props.history.push('/');
+      // this.setState({resultGoal: updatedGoal});
+      // this.showGoalResult();
     } else if (updatedGoal.days[updatedGoal.days.length - 1].status === "complete") {
       updatedGoal.result = "COMPLETE";
-      // this.completeGoal(diff, updatedSprite, updatedGoal);
-      this.setState({resultGoal: updatedGoal});
-      this.showGoalResult();
+      this.completeGoal(diff, updatedSprite, updatedGoal);
+      // this.setState({resultGoal: updatedGoal});
+      // this.showGoalResult();
     } else {
-      // this.props.updateGoal(updatedGoal, updatedGoal._id);
-      // this.props.updateSprite(updatedSprite, updatedSprite._id);
+      this.props.updateGoal(updatedGoal, updatedGoal._id);
+      this.props.updateSprite(updatedSprite, updatedSprite._id);
       this.setState({updateCalendar: true});
     }
     this.setState({ show: false });

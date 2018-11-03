@@ -106,6 +106,44 @@ export const getGoalsByUser = (user_id) => dispatch => {
     );
 };
 
+// Get Goals By User That're Completed
+export const getCompletedGoalsByUser = (user_id) => dispatch => {
+  dispatch(setGoalLoading());
+  axios
+    .get(`/api/goal/user/${user_id}/completed`)
+    .then(res =>
+      dispatch({
+        type: GET_GOALS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_GOALS,
+        payload: null
+      })
+    );
+};
+
+// Get Goals By User That're Incompleted
+export const getIncompletedGoalsByUser = (user_id) => dispatch => {
+  dispatch(setGoalLoading());
+  axios
+    .get(`/api/goal/user/${user_id}/incompleted`)
+    .then(res =>
+      dispatch({
+        type: GET_GOALS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_GOALS,
+        payload: null
+      })
+    );
+};
+
 // Get Goal
 export const getGoal = id => dispatch => {
   dispatch(setGoalLoading());

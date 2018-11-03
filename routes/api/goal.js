@@ -52,7 +52,7 @@ router.get('/user/:user_id', (req, res) => {
 // @route   GET api/goal/user/:user_id
 // @desc    Get completed goals by user
 // @access  Public
-router.get('/user/:user_id', (req, res) => {
+router.get('/user/:user_id/completed', (req, res) => {
   Goal.find({ user: req.params.user_id, result: 'COMPLETE' }).sort({ date: -1 })
     .then(goal => res.json(goal)
     )
@@ -64,7 +64,7 @@ router.get('/user/:user_id', (req, res) => {
 // @route   GET api/goal/user/:user_id
 // @desc    Get incompleted goals by user
 // @access  Public
-router.get('/user/:user_id', (req, res) => {
+router.get('/user/:user_id/incompleted', (req, res) => {
   Goal.find({ user: req.params.user_id, result: 'INCOMPLETE' }).sort({ date: -1 })
     .then(goal => res.json(goal)
     )
@@ -76,9 +76,7 @@ router.get('/user/:user_id', (req, res) => {
 // @route   POST api/goal
 // @desc    Create goal
 // @access  Private
-router.post(
-  '/',
-  passport.authenticate('jwt', { session: false }),
+router.post('/', passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const { errors, isValid } = validateGoalInput(req.body);
 
@@ -111,9 +109,7 @@ router.post(
 // @route   POST api/goal/check
 // @desc    Check goal for validation
 // @access  Private
-router.post(
-  '/check',
-  passport.authenticate('jwt', { session: false }),
+router.post( '/check', passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const { errors, isValid } = validateGoalInput(req.body);
 

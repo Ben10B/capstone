@@ -179,6 +179,28 @@ summary{ outline: none;
 }
 #dashImg:hover{ box-shadow: 0 0 10px #008fc5;
 }
+.sortingDiv{
+  display: flex;
+  flex-direction: row;
+}
+.sortingDiv p{ font-weight: bold;
+}
+.sortingDiv *{ flex: 1;
+}
+#sort1, #sort2, #sort3{ transform: scale(1.1);
+}
+#sort1{
+  background-color: rgba(0, 143, 197, 0.315);
+  box-shadow: 0 0 5px #008fc5;
+}
+#sort2{
+  background-color: rgba(0, 255, 0, 0.315);
+  box-shadow: 0 0 5px #0f0;
+}
+#sort3{
+  background-color: rgba(197, 0, 0, 0.445);
+  box-shadow: 0 0 5px #c50000;
+}
 @media all and (max-width: 575px){
   #dashImg{ min-height: 30%;
   }

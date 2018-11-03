@@ -185,7 +185,7 @@ summary{ outline: none;
 }
 .sortingDiv p{ font-weight: bold;
 }
-.sortingDiv *{ flex: 1;
+.sortingDiv *{ flex: 1; outline: none;
 }
 #sort1, #sort2, #sort3{ transform: scale(1.1);
 }

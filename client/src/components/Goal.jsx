@@ -9,6 +9,7 @@ import damagedM from '../Assets/img/Damaged-Male.png';
 import yesF from '../Assets/img/Completed-Female.png';
 import yesM from '../Assets/img/Completed-Male.png';
 import { GoalResult } from './modals/Modals';
+import moment from 'moment';
 
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -37,7 +38,7 @@ class Goal extends Component {
   }
   showDetails = (day, status, calendarState) => {
     this.setState({updateCalendar: false});
-
+    console.log(day);
     if (status === "unresolved" || status === "unresolved-today") {
       this.setState({ selectedDay: day });
       this.setState({ calendarState: calendarState });
@@ -58,9 +59,6 @@ class Goal extends Component {
   }
   showGoalResult = () => {
     this.setState({ showGoalResult: true });
-  }
-  hideGoalResult = () => {
-    this.setState({ showGoalResult: false });
   }
   calendarUpdated = () => {
     this.setState({updateCalendar: false});
@@ -177,7 +175,7 @@ class Goal extends Component {
               <details><summary>PENALTY</summary> {this.state.selectedGoal.punishment}</details> : ''}
           </div>
           {/* Opens modal when goal is completed or failed; updates goal and sprite */}
-          <GoalResult show={this.state.showGoalResult} close={this.hideGoalResult} sprite={sprite} goal={this.state.resultGoal}
+          <GoalResult show={this.state.showGoalResult} sprite={sprite} goal={this.state.resultGoal}
             history={this.props.history} updateSprite={this.props.updateSprite} updateGoal={this.props.updateGoal}/>
           {/* Opens modal when user responds to the Details modal */}
           <Confirmation show={this.state.showConfirmWindow} close={this.hideConfirm} sprite={sprite} 
@@ -203,7 +201,7 @@ const Details = ({handleClose, show, calendarState, selectedDay, showCW}) => {
     <div className={showHideClassName}>
       <div className="details modal-main row">
         <div className="">Was today Successful?</div>
-        <h6 className="detailsHeading">Day {isDayNull ? '' : selectedDay.dayOfMonth}</h6>
+        <h6 className="detailsHeading">{isDayNull ? '' : `${moment(selectedDay.date, 'YYYY-MM-DD').format('MMM Do')}`}</h6>
         <div className="detailImg" style={{ 
           backgroundImage: `url(${isCalendarNull ? '' :
           (calendarState.sprite.gender === "Female") ? idleF : idleM})` }}

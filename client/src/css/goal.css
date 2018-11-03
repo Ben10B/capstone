@@ -54,7 +54,12 @@ display: none;
 #LevelUp{
   background: #fff;
 }
-#lvlImage{
-  height: 10px;
-  width: 10px;
+#LevelUp button{ 
+  border: 1px solid transparent;
+  border-left-color: #000;
+  border-right-color: #000;
+  transition: background-color 0.5s, transform 0.5s;
+}
+#LevelUp button:hover{
+  transform: scale(1.1);
 }

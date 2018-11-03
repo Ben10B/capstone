@@ -7,7 +7,7 @@ import powerUpM from '../../Assets/img/PowerUp-Male.gif';
 // import aura from '../../Assets/img/Aura.gif';
 import powerUpF from '../../Assets/img/PowerUp-Female.gif';
 
-export const GoalResult = ({show, close, sprite, goal, history, updateSprite, updateGoal}) => {
+export const GoalResult = ({show, sprite, goal, history, updateSprite, updateGoal}) => {
   const showHideClassName = show ? 'detail-container modal display-block z-index' : 'detail-container modal display-none';
   let goalResult = (goal.result === "INCOMPLETE") ? 'GoalResult-Incomplete' : 'GoalResult-Complete';
   let showLvlUp = false;

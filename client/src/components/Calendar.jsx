@@ -84,13 +84,13 @@ class Calendar extends Component {
         //If user selected day equals day, pass element to array
         if (moment(tempSelectedGoal[element].date, 'YYYY-MM-DD').date() === improvedDate.date() && moment(tempSelectedGoal[element].date, 'YYYY-MM-DD').month() === improvedDate.month()) {
           isValid = true;
-          tempDays.push(<Day key={`${i}.${currentMonth}`} showModalClick={this.props.showModalClick} click={this.showDetails} calendarState={this.state} yes={"yes"}
+          tempDays.push(<Day key={`${i}.${currentMonth}`} showModalClick={this.props.showModalClick} calendarState={this.state} yes={"yes"}
             element={tempSelectedGoal[element]} dateString={improvedDate.date().toString()} date={improvedDate.format('YYYY-MM-DD')}
           />);
         }
       }
       if (isValid === false) { //Days user didn't select; add to array
-        tempDays.push(<Day key={`${i}.${currentMonth}`} element={{}} showModalClick={this.props.showModalClick} click={this.showDetails} calendarState={this.state} yes={"no"}
+        tempDays.push(<Day key={`${i}.${currentMonth}`} element={{}} showModalClick={this.props.showModalClick} calendarState={this.state} yes={"no"}
           dateString={improvedDate.date().toString()} date={improvedDate.format('YYYY-MM-DD')} />);
       }
 

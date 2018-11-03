@@ -136,14 +136,15 @@ summary{ outline: none;
   font-weight: bold;
   font-family: "Dosis", sans-serif;
   margin: 2px 0;
-  transition: background-color 0.5s;
+  transition: background-color 0.5s, transform 0.5s;
   text-align: center;
   border: 0;
   padding: 5px 5px;
   outline: none;
 }
 .btn1, .delBTN{
-  transition: font-size 0.2s; display: block;
+  /* transition: font-size 0.2s;  */
+  display: block;
 }
 .goal:hover, .btn1:hover, .likeBTN:hover, .delBTN:hover{
   background-color: rgba(255, 255, 255, 0.315);
@@ -153,7 +154,9 @@ summary{ outline: none;
 .btn1:hover, .delBTN:hover{
   background-color: rgba(0, 143, 197, 0.315);
   box-shadow: 0 0 5px #008fc5;
-  font-size: 14pt;
+  /* font-size: 14pt; */
+}
+.btn1:hover{transform: scale(1.1);
 }
 .delBTN{ background-color: rgba(197, 0, 0, 0.267); }
 .fa-user-times, .fa-trash { margin: 0 5px; }
@@ -229,6 +232,7 @@ summary{ outline: none;
 /* PostItem & Post*/
 .feedPage, .post{
   flex: 10;
+  overflow-x: hidden;
   min-height: 100%;
   display: flex;
   color: white;

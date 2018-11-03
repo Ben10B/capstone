@@ -183,7 +183,9 @@ summary{ outline: none;
   display: flex;
   flex-direction: row;
 }
-.sortingDiv p{ font-weight: bold;
+.sortingDiv p{ 
+  font-weight: bold;
+  text-align: center;
 }
 .sortingDiv *{ flex: 1; outline: none;
 }

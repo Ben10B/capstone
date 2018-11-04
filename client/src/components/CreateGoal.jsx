@@ -161,7 +161,7 @@ class CreateGoal extends Component {
     const { errors } = this.state;
     return (
       <div className="column">
-        <div className="row">
+        <div className="row margn-bottom-3">
           <span>
             <h1>Goal Creation</h1>
           </span>

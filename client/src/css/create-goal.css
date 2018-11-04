@@ -1,3 +1,17 @@
+.cgForm label{
+  margin-top: 1.5%;
+}
+.cgForm input[type=date]{
+  border: 0;
+  text-align: center;
+  min-height: 30px;
+  min-width: 50%;
+  border-radius: 50px;
+  margin: 0 5%;
+  outline: none;
+  justify-self: center;
+  align-self: center;
+}
 .cgForm input[type=text]{
   border: 0;
   text-align: center;
@@ -21,4 +35,12 @@
   flex-direction: row;
 }
 .checkboxes p{ flex: 1;
+}
+::-webkit-input-placeholder { font-size: smaller; /* Chrome/Opera/Safari */
+}
+::-moz-placeholder { font-size: smaller; /* Firefox 19+ */
+}
+:-ms-input-placeholder { font-size: smaller; /* IE 10+ */
+}
+:-moz-placeholder { font-size: smaller; /* Firefox 18- */
 }

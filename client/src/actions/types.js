@@ -26,3 +26,5 @@ export const DELETE_GOAL = 'DELETE_GOAL';
 export const UPDATE_SPRITE = 'UPDATE_SPRITE';
 export const GET_SPRITE = 'GET_SPRITE';
 export const ADD_SPRITE = 'ADD_SPRITE';
+
+export const GET_ACHIEVEMENTS = 'GET_ACHIEVEMENTS';

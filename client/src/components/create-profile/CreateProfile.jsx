@@ -59,7 +59,9 @@ class CreateProfile extends Component {
     };
     this.props.createProfile(profileData, this.props.history);
     
-    const spriteData = { gender: this.state.gender };
+    const spriteData = { gender: this.state.gender,
+      achievements: { name: 'New Grinder', acquired: true }
+    };
     this.props.createSprite(spriteData);
   }
 

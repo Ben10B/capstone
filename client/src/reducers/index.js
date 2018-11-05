@@ -5,6 +5,7 @@ import profileReducer from './profileReducer';
 import postReducer from './postReducer';
 import goalReducer from './goalReducer';
 import spriteReducer from './spriteReducer';
+import rewardReducer from './rewardReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   profile: profileReducer,
   post: postReducer,
   goal: goalReducer,
-  sprite: spriteReducer
+  sprite: spriteReducer,
+  reward: rewardReducer,
 });

@@ -19,7 +19,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Sprite Works' }));
 router.get('/', (req, res) => {
     Sprite.find()
       .then(sprite => res.json(sprite))
-      .catch(err => res.status(404).json({ nopostsfound: 'No sprites found' }));
+      .catch(err => res.status(404).json({ nospritefound: 'No sprites found' }));
 });
 
 // @route   Post api/sprite

@@ -85,7 +85,12 @@ class App extends Component {
         grindinContent = (
           <div className="App">
             <Header appState={this.state} click={this.selectPage} renderTheme={this.renderTheme}/>
-            <div className={`App-intro${this.state.theme} flex-8 pad-top-1`}>
+            <div className={`App-intro${this.state.theme} flex-8 pad-top-10`}>
+              <h1>Welcome to Grindin' Goals!</h1>
+              <p>The purpose of this application is to help you stay motivated in completing your
+                goals with a gaming element to it. In the future, you can join your friends' goals.
+              </p>
+              <h6>Let's Start GRINDIN'!!</h6>
               <Link className="likeBTN" to="/create-profile">Create Profile</Link>
             </div>
           </div>

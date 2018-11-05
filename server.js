@@ -9,6 +9,7 @@ const profile = require('./routes/api/profile');
 const post = require('./routes/api/post');
 const sprite = require('./routes/api/sprite');
 const goal = require('./routes/api/goal');
+const rewards = require('./routes/api/achievements');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors());
 //body parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
 
 //DB Config
 const db = require('./config/keys').mongoURI;
@@ -40,6 +42,7 @@ app.use('/api/profile', profile);
 app.use('/api/post', post);
 app.use('/api/sprite', sprite);
 app.use('/api/goal', goal);
+app.use('/api/rewards', rewards);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {

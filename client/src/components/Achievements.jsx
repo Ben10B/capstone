@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import '../css/achievements.css';
+// import r1 from '../Assets/img/C. 1Goal.svg';
 
 const Reward = ({achievement, sprite}) => {
   let styleAcquired = 'reward locked';
@@ -16,6 +17,7 @@ const Reward = ({achievement, sprite}) => {
   return (
     <div className={styleAcquired}>
       <div style={{backgroundImage: `url(${achievement.location})`}}></div>
+      {/* <img src={r1} alt=""/> */}
       <p>{achievement.name}</p>
     </div>
   );

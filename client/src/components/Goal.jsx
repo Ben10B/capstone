@@ -152,6 +152,9 @@ class Goal extends Component {
   completeGoal = (diff, updatedSprite, updatedGoal) => {
     this.addExp(diff, updatedSprite); //Add experience
     updatedSprite.goalsCompleted++; //Increase goal record
+    if(updatedSprite.goalsCompleted === 1){
+      updatedSprite.achievements.push({name: 'Complete 1 Goal', acquired: true});
+    }
     updatedSprite.gold += Math.round(this.receiveReward(diff) * 1.5); //Add gold * bonus
 
     this.setState({resultGoal: updatedGoal});

@@ -1,0 +1,28 @@
+#reward-container{
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(auto, auto);
+}
+/* .reward{} */
+.reward div{
+  min-width: 100px;
+  min-height: 100px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+.locked{
+  opacity: 0.1;
+}
+.unlocked{
+  opacity: 1;
+}
+@media all and (max-width: 575px){
+  .reward{
+    font-size: 2vw;
+  }
+  .reward div{
+    min-width: 50px;
+    min-height: 50px;
+  }
+}

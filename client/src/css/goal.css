@@ -63,3 +63,29 @@ display: none;
 #LevelUp button:hover{
   transform: scale(1.1);
 }
+
+.detail-container{
+  display: none;
+  background-color: rgba(255, 255, 255, 0.507);
+}
+.details textarea{
+  overflow-y: hidden;
+}
+.detailImg{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  padding: 5% 0;
+}
+
+@media all and (max-width: 500px){
+  .detailImg{
+      padding: 8% 0;
+  }
+  .detail-container{
+      overflow: auto;
+  }
+}
+.display-block{
+  display: block;
+}

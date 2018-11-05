@@ -21,6 +21,7 @@ class Goal extends Component {
   state = { 
     selectedGoal: this.props.selectedGoal,
     show: false,
+    reviewDay: false,
     showConfirmWindow: false,
     showGoalResult: false,
     confirmation: false, 
@@ -32,23 +33,25 @@ class Goal extends Component {
     resultGoal: {},
     status: ''
   }
-  
   componentDidMount(){
     this.updateProgressBar(this.props.selectedGoal.health);
   }
   showDetails = (day, status, calendarState) => {
     this.setState({updateCalendar: false});
-    console.log(day);
+    // console.log(status);
     if (status === "unresolved" || status === "unresolved-today") {
       this.setState({ selectedDay: day });
       this.setState({ calendarState: calendarState });
       this.setState({ show: true });
     }
-    else
-      this.setState({ show: false });
+    if (status === "complete" || status === "incomplete" || status === "complete-today" || status === "incomplete-today") {
+      this.setState({ selectedDay: day });
+      this.setState({ reviewDay: true });
+    }
   }
   hideDetails = () => {
     this.setState({ show: false });
+    this.setState({ reviewDay: false });
   }
   showConfirm = (status) => {
     this.setState({ showConfirmWindow: true });
@@ -170,7 +173,7 @@ class Goal extends Component {
             </span>
             <button type="button" className="btn1" onClick={()=>this.props.click('')}>Back to Dashboard</button>
           </div>
-          <div className="">
+          <div className="pad-2">
             {this.state.selectedGoal.description}
             {this.state.selectedGoal.reward ? 
               <details><summary>REWARD</summary> {this.state.selectedGoal.reward}</details> : ''}
@@ -188,6 +191,8 @@ class Goal extends Component {
             calendarState={this.state.calendarState} selectedDay={this.state.selectedDay}
             showCW={this.showConfirm}
           />
+          <Review show={this.state.reviewDay} handleClose={this.hideDetails} selectedDay={this.state.selectedDay}
+            sprite={sprite} />
           <ProgressBar progress={this.props.selectedGoal}/>
           <Calendar selectedGoal={this.props.selectedGoal} updateCal={this.state.updateCalendar}
            showModalClick={this.showDetails} calUpdated={this.calendarUpdated}/>
@@ -200,11 +205,20 @@ const Details = ({handleClose, show, calendarState, selectedDay, showCW}) => {
   const showHideClassName = show ? 'detail-container modal display-block' : 'detail-container modal display-none';
   const isCalendarNull = (calendarState === null) ? true : false;
   const isDayNull = (selectedDay === null) ? true : false;
+
+  this.onChange=(e)=>{
+    selectedDay.details = e.target.value;
+  }
   return (
     <div className={showHideClassName}>
       <div className="details modal-main row">
-        <div className="">Was today Successful?</div>
         <h6 className="detailsHeading">{isDayNull ? '' : `${moment(selectedDay.date, 'YYYY-MM-DD').format('MMM Do')}`}</h6>
+        <div className="">Was today Successful?
+          <textarea name="details"
+            placeholder="OPTIONAL: As a reminder, write some details about today."
+            onChange={this.onChange}
+          />
+        </div>
         <div className="detailImg" style={{ 
           backgroundImage: `url(${isCalendarNull ? '' :
           (calendarState.sprite.gender === "Female") ? idleF : idleM})` }}
@@ -275,7 +289,28 @@ const ProgressBar = ({progress}) => {
     </div>
   )
 }
-
+const Review = ({show, handleClose, selectedDay, sprite}) => {
+  const showHideClassName = show ? 'detail-container modal display-block' : 'detail-container modal display-none';
+  const isDayNull = (selectedDay === null) ? true : false;
+  const status = (selectedDay === null) ? null : selectedDay.status;
+  return (
+    <div className={showHideClassName}>
+      <div className="details modal-main row">
+        <div>
+          <h6 className="detailsHeading">{isDayNull ? '' : `${moment(selectedDay.date, 'YYYY-MM-DD').format('MMM Do')}`}</h6>
+          <div>{(selectedDay === null) ? "Nothing written" : selectedDay.details}</div>
+        </div>
+        <div className="detailImg" 
+        style={{ backgroundImage: `url(${status === 'complete' ? 
+          ((sprite.gender === "Female") ? yesF : yesM) :
+          ((sprite.gender === "Female") ? damagedF : damagedM)
+        })` }}
+        ></div>
+        <button className="btn1" onClick={handleClose}> Close </button>
+      </div>
+    </div>
+  );
+}
 Goal.propTypes = {
   updateGoal: propTypes.func.isRequired,
   deleteGoal: propTypes.func.isRequired,

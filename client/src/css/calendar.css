@@ -1,58 +1,58 @@
 .calendar-container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .calendar{
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 #month{
-    background-color: rgba(0, 0, 0, 0.445);
-    padding: 10px 0px;
-    text-align: center;
+  background-color: rgba(0, 0, 0, 0.445);
+  padding: 10px 0px;
+  text-align: center;
 }
 #month #prev {
-    float: left;
-    padding-top: 30px;
-    padding-left: 20px; 
-    cursor: pointer;
-    color: #fff;   
+  float: left;
+  padding-top: 30px;
+  padding-left: 20px; 
+  cursor: pointer;
+  color: #fff;   
 }
 #month #next {
-    float: right;
-    padding-top: 30px;
-    padding-right: 20px;
-    cursor: pointer;
-    color: #fff;    
+  float: right;
+  padding-top: 30px;
+  padding-right: 20px;
+  cursor: pointer;
+  color: #fff;    
 }
 #the-month, #the-year{ color: #fff;
 }
 .table { 
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 .table tr{ 
-    justify-self: center;
-    align-self: center;
-    overflow-x: auto;
+  justify-self: center;
+  align-self: center;
+  overflow-x: auto;
 }
 .table tr:hover { background-color: inherit; 
 }
 #days{
-    display: grid;
-    grid-template-columns: repeat(7, auto);
-    grid-template-rows: auto repeat(6, auto);
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  grid-template-rows: auto repeat(6, auto);
 }
 .day{
-    background-color: rgba(255, 255, 255, 0.322);
-    border: 1px solid #000;
+  background-color: rgba(255, 255, 255, 0.322);
+  border: 1px solid #000;
 }
 .unresolved{ background-color: rgba(119, 93, 83, 0.555); color: #fff;
 }
-.day:hover{ opacity: 0.8; cursor: not-allowed;
+.day:hover{ opacity: 0.8; 
 }
 .complete{ background-color: rgba(0, 255, 0, 0.788); color: #fff;
 }
@@ -92,31 +92,8 @@
     font-weight: 900;
     color: #fff;
 }
-.unresolved:hover, .unresolved-today:hover{ cursor: pointer;
+.unresolved:hover, .unresolved-today:hover,
+ .complete:hover, .complete-today:hover,
+ .incomplete:hover, .incomplete-today:hover{ cursor: pointer;
 }
 /* -------------------------------------------------------------------- */
-.detail-container{
-    display: none;
-    background-color: rgba(255, 255, 255, 0.507);
-}
-/* .details{
-    
-} */
-.detailImg{
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto;
-    padding: 5% 0;
-}
-
-@media all and (max-width: 500px){
-    .detailImg{
-        padding: 8% 0;
-    }
-    .detail-container{
-        overflow: auto;
-    }
-}
-.display-block{
-    display: block;
-}

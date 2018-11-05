@@ -109,7 +109,7 @@ class Calendar extends Component {
     for (let key in weekdays) {
       if (new Date(date).toUTCString().substring(0, 3).toString() === key) {
         for (let d = 0; d < weekdays[key]; d++) {
-          temp.push(<Day key={`space${d}`} click={this.showDetails} element={{}} yes={"no"} calendarState={this.state} />);
+          temp.push(<Day key={`space${d}`} showModalClick={this.props.showModalClick} element={{}} yes={"no"} calendarState={this.state} />);
         }
       }
     }

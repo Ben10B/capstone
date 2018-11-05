@@ -6,7 +6,7 @@ import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import '../css/achievements.css';
-// import r1 from '../Assets/img/Twin Swords.svg';
+// import r1 from '../Assets/img/C. 1Goal.svg';
 
 const Reward = ({achievement, sprite}) => {
   let styleAcquired = 'reward locked';
@@ -27,6 +27,12 @@ class Achievements extends Component {
   componentWillMount(){
     this.props.getRewards();
   }
+  componentDidMount() {
+    var req = require.context("../Assets/img", false, /.*\.*$/);
+    req.keys().forEach(function(key){
+      req(key);
+    });
+ }
   render() {
     const { achievements } = this.props.reward;
     const { sprite } = this.props.sprite;
@@ -37,7 +43,8 @@ class Achievements extends Component {
     return (
       <div className={`App-intro${this.props.appState.theme} pad-top-1`}>
         <h1>Achievements</h1>
-        <h4>More Incoming..</h4>
+        <h4>In Progress..</h4>
+        {/* <h4>More Incoming..</h4> */}
         <span id="reward-container" className="">
           {rewards}
         </span>

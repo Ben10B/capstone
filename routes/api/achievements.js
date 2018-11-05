@@ -24,14 +24,14 @@ router.get('/', (req, res) => {
 // @route   Post api/rewards/new
 // @desc    Create reward; don't forget to change to get method
 // @access  Private
-router.post('/new', (req, res) => {
+router.get('/new', (req, res) => {
   var img = {};
   // img.data = fs.readFileSync(`~/../client/src/Assets/img/Grindin.png`);
   // img.contentType = `image/png`;
   const reward = {
-    name: 'Completed 1 Goal',
     // img: img,
-    location: '/static/media/C.%201Goal.85bdad05.svg',
+    "name": "Partner Up!",
+    "location": "/static/media/Twin%20Swords.21cabe00.svg",
   }
   new Achievements(reward).save().then(reward => res.json(reward));
 });

@@ -6,7 +6,7 @@ import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import '../css/achievements.css';
-// import r1 from '../Assets/img/C. 1Goal.svg';
+// import r1 from '../Assets/img/Twin Swords.svg';
 
 const Reward = ({achievement, sprite}) => {
   let styleAcquired = 'reward locked';

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addGoal, checkGoal } from '../actions/goalActions';
+import { updateSprite } from '../actions/spriteActions';
 import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import TextFieldGroup from './common/TextFieldGroup';
@@ -159,6 +160,7 @@ class CreateGoal extends Component {
   }
   render() {
     const { errors } = this.state;
+    const { sprite } = this.props.sprite;
     return (
       <div className="column">
         <div className="row margn-bottom-3">
@@ -167,8 +169,8 @@ class CreateGoal extends Component {
           </span>
           <button type="button" className="btn1" onClick={this.props.click}>Back to Dashboard</button>
         </div>
-        <Details show={this.state.show} handleClose={this.hideModal} cgState={this.state}
-          addGoal={()=>this.props.addGoal(this.state.goalData, this.props.history)} data={this.state.goalData}/>
+        <Details show={this.state.show} handleClose={this.hideModal} cgState={this.state} updateSprite={this.props.updateSprite}
+          addGoal={()=>this.props.addGoal(this.state.goalData, this.props.history)} sprite={sprite}/>
         <div>
           <form className="column cgForm" noValidate onSubmit={this.onSubmit}>
             <label>*TITLE
@@ -240,7 +242,7 @@ class CreateGoal extends Component {
   }
 }
 
-const Details = ({handleClose, show, cgState, addGoal, data}) => {
+const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) => {
   const showHideClassName = show ? 'detail-container modal display-block' : 'detail-container modal display-none';
   this.receiveReward = (diff) => {
     switch (diff) {
@@ -282,7 +284,14 @@ const Details = ({handleClose, show, cgState, addGoal, data}) => {
         </div>
         <div className="row yes-no-container">
           <button type="button" 
-          onClick={addGoal} 
+          onClick={()=>{
+            addGoal();
+            sprite.goalsCreated++;
+            if(sprite.goalsCreated === 1){
+              sprite.achievements.push({name: 'Create 1 Goal', acquired: true});
+              updateSprite(sprite, sprite._id);
+            }
+          }} 
           className="btn1 green"><i className="fas fa-check"></i> Looks good</button>
           <button type="button" 
           onClick={handleClose} 
@@ -295,6 +304,7 @@ const Details = ({handleClose, show, cgState, addGoal, data}) => {
 
 CreateGoal.propTypes = {
   addGoal: propTypes.func.isRequired,
+  updateSprite: propTypes.func.isRequired,
   checkGoal: propTypes.func.isRequired,
   goal: propTypes.object.isRequired,
   errors: propTypes.object.isRequired,
@@ -302,7 +312,8 @@ CreateGoal.propTypes = {
 
 const mapStateToProps = (state) => ({
   goal: state.goal,
+  sprite: state.sprite,
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { addGoal, checkGoal })(withRouter(CreateGoal));
+export default connect(mapStateToProps, { addGoal, checkGoal, updateSprite })(withRouter(CreateGoal));

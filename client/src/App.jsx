@@ -91,7 +91,7 @@ class App extends Component {
                 goals with a gaming element to it. In the future, you can join your friends' goals.
               </p>
               <h6>Let's Start GRINDIN'!!</h6>
-              <Link className="likeBTN" to="/create-profile">Create Profile</Link>
+              <Link className="likeBTN margn-1" to="/create-profile">Create Profile</Link>
             </div>
           </div>
         )

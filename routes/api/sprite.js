@@ -31,7 +31,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     gender: req.body.gender,
     level: 1, 
     experience: 0, 
-    experienceLimit: 10 
+    experienceLimit: 10,
+    achievements: req.body.achievements
   });
   newSprite.save().then(newSprite => res.json(newSprite));
 });

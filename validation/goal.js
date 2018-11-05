@@ -52,6 +52,10 @@ module.exports = function validateGoalInput(data) {
   if(tempDate.isBefore(today)){
     errors.date = 'Choose a date starting from today to 60 days from now';
   }
+
+  if (data.maxHealth === 0) {
+    errors.daysOftheWeek = `Make sure you selected a weekday that is within your date.`;
+  }
   return {
     errors,
     isValid: isEmpty(errors)

@@ -43,13 +43,11 @@ class CreateProfile extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
     const profileData = {
       handle: this.state.handle.trim(),
       location: this.state.location.trim(),
       status: this.state.status,
       gender: this.state.gender,
-      skills: this.state.skills,
       bio: this.state.bio.trim(),
       twitter: this.state.twitter.trim(),
       facebook: this.state.facebook.trim(),
@@ -58,9 +56,13 @@ class CreateProfile extends Component {
       instagram: this.state.instagram.trim()
     };
     this.props.createProfile(profileData, this.props.history);
-    
-    const spriteData = { gender: this.state.gender,
-      achievements: { name: 'New Grinder', acquired: true }
+    const newReward = [ {} ];
+    newReward[0].name = 'New Grinder';
+    newReward[0].acquired = true;
+
+    const spriteData = { 
+      gender: this.state.gender,
+      achievements: newReward
     };
     this.props.createSprite(spriteData);
   }
@@ -194,7 +196,7 @@ class CreateProfile extends Component {
                     displaySocialInputs: !prevState.displaySocialInputs
                   }));
                 }}
-                className="btn btn-light"
+                className="likeBTN"
               >
                 Add Social Network Links
                     </button>

@@ -26,6 +26,10 @@ const SpriteSchema = new Schema({
     type: Number,
     default: 0
   },
+  goalsCreated: {
+    type: Number,
+    default: 0
+  },
   goalsCompleted: {
     type: Number,
     default: 0

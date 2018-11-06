@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import '../css/App.css';
-import '../BENstrap-in/css/my.css';
+import '../css/account.css';
 import def from '../Assets/img/Default-Theme.png';
 import theme1 from '../Assets/img/Theme-One.png';
 import theme2 from '../Assets/img/Theme-Two.png';
@@ -33,6 +32,7 @@ class Account extends Component {
       linkedin: '',
       youtube: '',
       instagram: '',
+      view: 'edit',
       errors: {}
     };
 
@@ -90,6 +90,9 @@ class Account extends Component {
     });
 
   }
+  changeView = (opt) => {
+    this.setState({ view: opt });
+  }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -125,7 +128,7 @@ class Account extends Component {
     const { profile } = this.props.profile;
     const { errors, displaySocialInputs } = this.state;
     let socialInputs;
-
+    let view;
     if (displaySocialInputs) {
       socialInputs = (
         <div>
@@ -172,54 +175,68 @@ class Account extends Component {
         </div>
       );
     }
+    if (this.state.view === 'edit') {
+      view = (<div id="edit">
+        <h1>{profile.user.name}</h1>
+        <form onSubmit={this.onSubmit}>
+          <label>BIO</label>
+          <TextAreaFieldGroup placeholder="Short Bio"
+            name="bio"
+            value={this.state.bio}
+            onChange={this.onChange}
+            error={errors.bio} // info="Tell us a little about yourself"
+          />
+          <div className="margn-top-3 margn-bottom-3">
+            <div type="button"
+              onClick={() => {
+                this.setState(prevState => ({
+                  displaySocialInputs: !prevState.displaySocialInputs
+                }));
+              }}
+              className="btn1"
+            >Edit Social Network Links
+              </div>
+          </div>
+          {socialInputs}
+          <span className="">
+            <h6>Choose a Theme</h6>
+            <div className="themeDiv">
+              <div name="theme" className="theme" style={{ background: `url(${def}) center/cover` }}
+                onClick={() => { this.props.click('') }} onChange={() => this.onClickTheme('-theme')}>Default</div>
+              <div name="theme" className="theme" style={{ background: `url(${theme1}) center/cover` }}
+                onClick={() => { this.props.click('-theme1'); this.onClickTheme('-theme1') }}>Theme One</div>
+              <div name="theme" className="theme" style={{ background: `url(${theme2}) center/cover` }}
+                onClick={() => { this.props.click('-theme2'); this.onClickTheme('-theme2') }}>Theme Two</div>
+              <div name="theme" className="theme" style={{ background: `url(${theme3}) center/cover` }}
+                onClick={() => { this.props.click('-theme3'); this.onClickTheme('-theme3') }}>Theme Three</div>
+              <div name="theme" className="theme" style={{ background: `url(${theme4}) center/cover` }}
+                onClick={() => { this.props.click('-theme4'); this.onClickTheme('-theme4') }}>Theme Four</div>
+              <div name="theme" className="theme" style={{ background: `url(${theme5}) center/cover` }}
+                onClick={() => { this.props.click('-theme5'); this.onClickTheme('-theme5') }}>Theme Five</div>
+            </div>
+          </span>
+          <input type="submit" value="Save" className="btn1"/>
+        </form>
+        <button onClick={this.props.onDeleteClick.bind(this)} className="delBTN"><i className="fas fa-user-times"></i>DELETE ACCOUNT</button>
+      </div>);
+    } else {
+      view = (<div id="friends">
+        <h1>Friends List</h1>
+      </div>);
+    }
     return (
       <div className={`App-intro${this.props.appState.theme} pad-top-1`}>
-        <h1 className="flex-2">{profile.user.name}</h1>
-        <div className="flex-4">
-          <form onSubmit={this.onSubmit}>
-            <label>BIO</label>
-            <TextAreaFieldGroup
-              placeholder="Short Bio"
-              name="bio"
-              value={this.state.bio}
-              onChange={this.onChange}
-              error={errors.bio}
-              info="Tell us a little about yourself"
-            />
-            <div className="margn-bottom-3">
-              <div type="button"
-                onClick={() => {
-                  this.setState(prevState => ({
-                    displaySocialInputs: !prevState.displaySocialInputs
-                  }));
-                }}
-                className="btn1"
-              >Edit Social Network Links
-                            </div>
-            </div>
-            {socialInputs}
-            <span className="">
-              <h6>Choose a Theme</h6>
-              <div className="themeDiv">
-                <div name="theme" className="theme" style={{ background: `url(${def}) center/cover` }}
-                  onClick={() => { this.props.click('') }} onChange={() => this.onClickTheme('-theme')}>Default</div>
-                <div name="theme" className="theme" style={{ background: `url(${theme1}) center/cover` }}
-                  onClick={() => { this.props.click('-theme1'); this.onClickTheme('-theme1') }}>Theme One</div>
-                <div name="theme" className="theme" style={{ background: `url(${theme2}) center/cover` }}
-                  onClick={() => { this.props.click('-theme2'); this.onClickTheme('-theme2') }}>Theme Two</div>
-                <div name="theme" className="theme" style={{ background: `url(${theme3}) center/cover` }}
-                  onClick={() => { this.props.click('-theme3'); this.onClickTheme('-theme3') }}>Theme Three</div>
-                <div name="theme" className="theme" style={{ background: `url(${theme4}) center/cover` }}
-                  onClick={() => { this.props.click('-theme4'); this.onClickTheme('-theme4') }}>Theme Four</div>
-                <div name="theme" className="theme" style={{ background: `url(${theme5}) center/cover` }}
-                  onClick={() => { this.props.click('-theme5'); this.onClickTheme('-theme5') }}>Theme Five</div>
-              </div>
-            </span>
-            <input type="submit" value="Save" className="btn" />
-          </form>
-        </div>
-
-        <button onClick={this.props.onDeleteClick.bind(this)} className="delBTN"><i className="fas fa-user-times"></i>DELETE ACCOUNT</button>
+        <ul className="card row">
+          <li className={(this.state.view === 'edit') ? 'pageOpt active' : 'pageOpt'} onClick={() => this.changeView('edit')}>
+            <i className="fas fa-id-card-alt"></i>
+            <a> Edit Profile</a>
+          </li>
+          <li className={(this.state.view === 'friends') ? 'pageOpt active' : 'pageOpt'} onClick={() => this.changeView('friends')}>
+            <i className="fas fa-address-book"></i>
+            <a> Friends</a>
+          </li>
+        </ul>
+        {view}
       </div>
     );
   }

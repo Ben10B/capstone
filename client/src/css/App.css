@@ -222,31 +222,7 @@ summary{ outline: none;
     display: none;
   }
 }
-/* Account.jsx */
-.themeDiv{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.theme{
-  text-align: center;
-  font-weight: bolder;
-  /* font-size: 20pt; */
-  margin: 5px;
-  padding: 5px;
-  max-height: 20%;
-  max-width: 22%;
-  background-repeat: no-repeat;
-}
-.theme:hover{
-  cursor: pointer;
-  box-shadow: 0 0 10px #000;
-}
-@media all and (max-width: 575px){
-  .themeDiv{
-    
-  }
-}
+
 
 /* Header */
 #Header li a { color: #fff; }

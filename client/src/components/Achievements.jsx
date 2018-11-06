@@ -43,8 +43,7 @@ class Achievements extends Component {
     return (
       <div className={`App-intro${this.props.appState.theme} pad-top-1`}>
         <h1>Achievements</h1>
-        <h4>In Progress..</h4>
-        {/* <h4>More Incoming..</h4> */}
+        <h4>More Incoming..</h4>
         <span id="reward-container" className="">
           {rewards}
         </span>

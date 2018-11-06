@@ -19,7 +19,7 @@ class Profiles extends Component {
       profileItems = <Spinner />;
     } else {
       if (profiles.length > 0) {
-        profileItems = profiles.map(profile => (<ProfileItem key={profile._id} profile={profile}/>));
+        profileItems = profiles.map(profile => (<ProfileItem key={profile._id} profile={profile} />));
       } else {
         profileItems = <h4>No profiles found...</h4>;
       }
@@ -27,18 +27,12 @@ class Profiles extends Component {
 
     return (
       <div className="profiles">
-        <div className="container">
-          <div className="">
-            <div className="col-md-12">
-              <h1 className="display-4 text-center">Grinder Profiles</h1>
-              <Link to="/home" className="btn1">Back to home</Link>
-              <p className="lead text-center">
-                Grind with other hustlas!
-              </p>
-              {profileItems}
-            </div>
-          </div>
-        </div>
+        <h1 className="txt-center">Grinder Profiles</h1>
+        <Link to="/home" className="btn1">Back to home</Link>
+        <p className="lead txt-center">
+          Grind with other hustlas!
+          </p>
+        {profileItems}
       </div>
     );
   }

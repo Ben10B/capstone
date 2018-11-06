@@ -10,7 +10,7 @@ class ProfileItem extends Component {
     const { profile } = this.props;
 
     return (
-      <div className="card card-body bg-light mb-3">
+      <div className="card">
         <div className="row">
           <div className="flex-2" 
           style={{ backgroundImage: `url(${(profile.gender === 'Female') ? idleF : idleM})`,
@@ -19,10 +19,7 @@ class ProfileItem extends Component {
           <div className="flex-6">
             <h3>{profile.handle}</h3>
             <p>
-              {profile.bio}{' '}
-              {/* {isEmpty(profile.company) ? null : (
-                <span>at {profile.company}</span>
-              )} */}
+              {profile.bio}
             </p>
             <p>
               {isEmpty(profile.location) ? null : (
@@ -33,17 +30,6 @@ class ProfileItem extends Component {
               View Profile
             </Link>
           </div>
-          {/* <div className="flex-2">
-            <h4>Skill Set</h4>
-            <ul className="list-group">
-              {profile.skills.slice(0, 4).map((skill, index) => (
-                <li key={index} className="list-group-item">
-                  <i className="fa fa-check pr-1" />
-                  {skill}
-                </li>
-              ))}
-            </ul>
-          </div> */}
         </div>
       </div>
     );

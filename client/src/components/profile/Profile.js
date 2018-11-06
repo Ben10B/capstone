@@ -27,15 +27,8 @@ class Profile extends Component {
       profileContent = <Spinner />;
     } else {
       profileContent = (
-        <div>
-          <div className="row">
-            <div className="col-md-6">
-              <Link to="/profiles" className="btn1">
-                Back To Profiles
-              </Link>
-            </div>
-            <div className="col-md-6" />
-          </div>
+        <div className="column">
+          <Link to="/profiles" className="btn1"> Back To Profiles </Link>
           <ProfileHeader profile={profile} />          
         </div>
       );
@@ -43,11 +36,7 @@ class Profile extends Component {
 
     return (
       <div className="profile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">{profileContent}</div>
-          </div>
-        </div>
+        {profileContent}
       </div>
     );
   }

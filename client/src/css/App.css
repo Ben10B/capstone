@@ -1,7 +1,8 @@
+#root, #level1{ height: 100%;
+}
 .App {
   text-align: center;
   height: 100vh;
-  /* height: 100%; */
   display: flex;
   flex-direction: row;
   font-family: "Dosis", sans-serif;
@@ -254,7 +255,7 @@ summary{ outline: none;
   
 }
 /* PostItem & Post & Profiles*/
-.feedPage, .post, .profiles{
+.feedPage, .post, .profiles, .profile{
   flex: 10;
   overflow-x: hidden;
   min-height: 100%;
@@ -264,13 +265,13 @@ summary{ outline: none;
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('../Assets/img/Theme-Two.png');
+  background-image: url('../Assets/img/Default-Theme.png');
 }
 .post{
   padding: 1%;
   min-height: 100vh;
 }
-.feedPage .btn1, .post .btn1{
+.feedPage .btn1, .post .btn1, .profiles .btn1, .profile .btn1{
   color: white;
 }
 .card{
@@ -279,4 +280,19 @@ summary{ outline: none;
   border-radius: 5px;
   justify-items: center;
   align-items: center;
+}
+.profile-image{
+  border: 1px solid #000;
+  min-width: 75px;
+  min-height: 50px;
+  border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+@media all and (max-width: 575px){
+  .profile-image{
+    min-width: 75px;
+    min-height: 75px;
+  }
 }

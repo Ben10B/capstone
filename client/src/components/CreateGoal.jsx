@@ -75,6 +75,7 @@ class CreateGoal extends Component {
     const maxHealth = days.length;
     this.setState({numberOfDays: maxHealth});
     let diff = this.calcDifficulty(maxHealth);
+    const { sprite } = this.props.sprite;
     const goalData = {
       title: this.state.title,
       description: this.state.description,
@@ -92,6 +93,7 @@ class CreateGoal extends Component {
       fri: this.state.fri,
       sat: this.state.sat,
       maxHealth: maxHealth,
+      level: sprite.level,
     };
     
     this.props.checkGoal(goalData);
@@ -173,6 +175,7 @@ class CreateGoal extends Component {
           addGoal={()=>this.props.addGoal(this.state.goalData, this.props.history)} sprite={sprite}/>
         <div>
           <form className="column cgForm" noValidate onSubmit={this.onSubmit}>
+            {errors.other && (<div className="err invalid-feedback">{errors.other}</div>)}
             <label>*TITLE
               <i className="far fa-question-circle hint" title="Try to keep short. It helps narrowing your focus."></i>
             </label>

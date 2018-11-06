@@ -56,6 +56,13 @@ module.exports = function validateGoalInput(data) {
   if (data.maxHealth === 0) {
     errors.daysOftheWeek = `Make sure you selected a weekday that is within your date.`;
   }
+  //Check sprite's level
+  if(data.level <= 2 && data.difficulty > 1){
+    errors.other = `Your level is too low to tackle ${data.maxHealth} days. Try 14 days.`;
+  }
+  else if(data.level <= 5 && data.difficulty > 2){
+    errors.other = `Your level is too low to tackle ${data.maxHealth} days. Try 31 days.`;
+  }
   return {
     errors,
     isValid: isEmpty(errors)

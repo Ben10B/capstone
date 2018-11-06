@@ -92,11 +92,11 @@ class Header extends Component {
             <i className="fas fa-trophy"></i>
             <a>{this.state.titles[5]}</a>
           </li>
-          {/* <li className={this.state.active[6][0] ? `pageOpt active` : `pageOpt`} 
+          <li className={this.state.active[6][0] ? `pageOpt active` : `pageOpt`} 
           onClick={this.onProfilesClick.bind(this)}>
             <i className="fas fa-users"></i>
             <a to={`/profiles`}>{this.state.titles[6]}</a>
-          </li> */}
+          </li>
           <li className={this.state.active[7][0] ? `pageOpt active` : `pageOpt`}
           onClick={this.onfeedClick.bind(this)}>
             <i className="fas fa-comments"></i>

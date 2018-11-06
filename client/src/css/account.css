@@ -1,0 +1,56 @@
+#edit, #friends{
+  padding: 1%;
+  margin: 2px 5%;
+  background-color: rgba(0, 0, 0, 0.192);
+}
+#edit > h1, #friends > h1{ margin: 1% 0;
+}
+#edit button, #edit form input[type=submit]{
+  color: #fff;
+  display: block;
+  margin: auto;
+}
+#edit form{ margin-bottom: 25%;
+}
+.themeDiv{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+.theme{
+  text-align: center;
+  font-weight: bolder;
+  margin: 5px;
+  padding: 5px;
+  max-height: 20%;
+  max-width: 22%;
+  background-repeat: no-repeat;
+}
+.theme:hover{
+  cursor: pointer;
+  box-shadow: 0 0 10px #000;
+}
+.pageOpt, a:hover{ color: #fff;
+}
+.pageOpt{
+  text-decoration: none;
+  margin: 4px 0;
+  padding: 4px;
+  transition: background-color 0.5s;
+}
+.active{
+  background-color: rgba(255, 255, 255, 0.315);
+  font-weight: bold;
+}
+.pageOpt:hover{
+  background-color: rgba(255, 255, 255, 0.315);
+  cursor: pointer;
+  box-shadow: 0 0 5px #fff;
+}
+@media all and (max-width: 575px){
+  /* .themeDiv{
+    
+  } */
+}

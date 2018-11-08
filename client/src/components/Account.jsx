@@ -267,12 +267,15 @@ class Friend extends Component {
         <p>{this.props.friend.profile.handle}</p>
         {(this.props.friend.request && this.props.friend.requestAccepted === undefined) ? (
           <div>
-            <button className="likeBTN" onClick={()=>this.props.accept(this.props.friend.profile.handle)}>Accept</button>
+            <button className="likeBTN margn-right-1" onClick={()=>this.props.accept(this.props.friend.profile.handle)}>Accept</button>
             <button className="delBTN" onClick={()=>this.props.decline(this.props.friend.profile.handle)}>Decline</button>
           </div>
         ) : 
           (this.props.friend.requestAccepted) ? (
-            <div><button className="btn1">Friends</button></div>
+            <div>
+              <button className="btn1 margn-right-1">Friends</button>
+              <button className="delBTN" onClick={()=>this.props.decline(this.props.friend.profile.handle)}>Remove Friend</button>
+            </div>
           ) : (
             <div><button className="btn1">Waiting...</button></div>
           )

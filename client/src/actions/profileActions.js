@@ -6,7 +6,11 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
+  FRIEND_REQUEST,
+  ACCEPT_FRIEND_REQUEST,
+  DECLINE_FRIEND_REQUEST,
+  GET_PROFILE_BY_HANDLE,
 } from './types';
 
 // Get current profile
@@ -35,13 +39,67 @@ export const getProfileByHandle = handle => dispatch => {
     .get(`/api/profile/handle/${handle}`)
     .then(res =>
       dispatch({
-        type: GET_PROFILE,
+        type: GET_PROFILE_BY_HANDLE,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_PROFILE,
+        type: GET_PROFILE_BY_HANDLE,
+        payload: null
+      })
+    );
+};
+
+// Send Friend Request
+export const sendFriendRequest = (handle, userID) => dispatch => {
+  axios
+    .post(`/api/profile/handle/${handle}/requestby/${userID}`)
+    .then(res =>
+      dispatch({
+        type: FRIEND_REQUEST,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: FRIEND_REQUEST,
+        payload: null
+      })
+    );
+};
+
+// Accept Request
+export const acceptFriendRequest = (handle) => dispatch => {
+  axios
+    .post(`/api/profile/accept/${handle}`)
+    .then(res =>
+      dispatch({
+        type: ACCEPT_FRIEND_REQUEST,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: ACCEPT_FRIEND_REQUEST,
+        payload: null
+      })
+    );
+};
+
+// Decline Request
+export const declineFriendRequest = (handle) => dispatch => {
+  axios
+    .post(`/api/profile/decline/${handle}`)
+    .then(res =>
+      dispatch({
+        type: DECLINE_FRIEND_REQUEST,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: DECLINE_FRIEND_REQUEST,
         payload: null
       })
     );

@@ -12,7 +12,7 @@ import InputGroup from './common/InputGroup';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { editProfile } from '../actions/profileActions';
+import { editProfile, acceptFriendRequest, declineFriendRequest } from '../actions/profileActions';
 import isEmpty from '../validation/is-empty';
 
 class Account extends Component {
@@ -119,6 +119,12 @@ class Account extends Component {
 
     this.props.editProfile(profileData, this.props.history);
   }
+  acceptRequest = (handle) => {
+    this.props.acceptFriendRequest(handle);
+  }
+  declineRequest = (handle) => {
+    this.props.declineFriendRequest(handle);
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -129,6 +135,7 @@ class Account extends Component {
     const { errors, displaySocialInputs } = this.state;
     let socialInputs;
     let view;
+    let friends;
     if (displaySocialInputs) {
       socialInputs = (
         <div>
@@ -175,6 +182,12 @@ class Account extends Component {
         </div>
       );
     }
+    if(profile.friends.length > 0) {
+      friends = profile.friends.map(friend => (
+        <Friend key={friend._id} friend={friend} accept={this.acceptRequest} decline={this.declineRequest}/>
+      ));
+    } else { friends = <div>No Friends Yet</div>}
+
     if (this.state.view === 'edit') {
       view = (<div id="edit">
         <h1>{profile.user.name}</h1>
@@ -220,9 +233,14 @@ class Account extends Component {
         <button onClick={this.props.onDeleteClick.bind(this)} className="delBTN"><i className="fas fa-user-times"></i>DELETE ACCOUNT</button>
       </div>);
     } else {
-      view = (<div id="friends">
+      view = (
+      <div id="friends">
         <h1>Friends List</h1>
-      </div>);
+        <div>
+          {friends}
+        </div>
+      </div>
+      );
     }
     return (
       <div className={`App-intro${this.props.appState.theme} pad-top-1`}>
@@ -242,10 +260,34 @@ class Account extends Component {
   }
 }
 
+class Friend extends Component {
+  render(){
+    return (
+      <div className="friend">
+        <p>{this.props.friend.profile.handle}</p>
+        {(this.props.friend.request && this.props.friend.requestAccepted === undefined) ? (
+          <div>
+            <button className="likeBTN" onClick={()=>this.props.accept(this.props.friend.profile.handle)}>Accept</button>
+            <button className="delBTN" onClick={()=>this.props.decline(this.props.friend.profile.handle)}>Decline</button>
+          </div>
+        ) : 
+          (this.props.friend.requestAccepted) ? (
+            <div><button className="btn1">Friends</button></div>
+          ) : (
+            <div><button className="btn1">Waiting...</button></div>
+          )
+        }
+        
+      </div>
+    );
+  }
+}
 Account.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  editProfile: PropTypes.func.isRequired
+  editProfile: PropTypes.func.isRequired,
+  acceptFriendRequest: PropTypes.func.isRequired,
+  declineFriendRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -253,4 +295,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { editProfile })(withRouter(Account));
+export default connect(mapStateToProps, { editProfile, acceptFriendRequest, declineFriendRequest })(withRouter(Account));

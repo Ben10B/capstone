@@ -7,37 +7,46 @@ import idleM from '../../Assets/img/Idle-Male.gif';
 
 class ProfileItem extends Component {
   render() {
-    const { profile } = this.props;
-
+    const { profile, profileitem } = this.props;
+    let item;
+    if(profile !== null){
+      if(profileitem._id !== profile._id){
+        item = (
+          <div className="row">
+            <div className="flex-2" 
+            style={{ backgroundImage: `url(${(profileitem.gender === 'Female') ? idleF : idleM})`,
+              backgroundRepeat: 'no-repeat', backgroundSize: 'auto', backgroundPosition: 'center'
+            }}/>
+            <div className="flex-6">
+              <h3>{profileitem.handle}</h3>
+              <p>
+                {profileitem.bio}
+              </p>
+              <p>
+                {isEmpty(profileitem.location) ? null : (
+                  <span>From: {profileitem.location}</span>
+                )}
+              </p>
+              <Link to={`/profile/${profileitem.handle}`} className="btn1">
+                View Profile
+              </Link>
+            </div>
+          </div>
+        );
+      }
+    }
+    
     return (
       <div className="card">
-        <div className="row">
-          <div className="flex-2" 
-          style={{ backgroundImage: `url(${(profile.gender === 'Female') ? idleF : idleM})`,
-            backgroundRepeat: 'no-repeat', backgroundSize: 'auto', backgroundPosition: 'center'
-          }}/>
-          <div className="flex-6">
-            <h3>{profile.handle}</h3>
-            <p>
-              {profile.bio}
-            </p>
-            <p>
-              {isEmpty(profile.location) ? null : (
-                <span>From: {profile.location}</span>
-              )}
-            </p>
-            <Link to={`/profile/${profile.handle}`} className="btn1">
-              View Profile
-            </Link>
-          </div>
-        </div>
+        {item}
       </div>
     );
   }
 }
 
 ProfileItem.propTypes = {
-  profile: PropTypes.object.isRequired
+  profileitem: PropTypes.object.isRequired,
+  // profile: PropTypes.object.isRequired
 };
 
 export default ProfileItem;

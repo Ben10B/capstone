@@ -4,7 +4,7 @@ import image from '../../Assets/img/Idle-Login.png';
 
 class ProfileHeader extends Component {
   render() {
-    const { profile } = this.props;
+    const { profileHandle } = this.props;
 
     return (
       <div className="row">
@@ -12,63 +12,63 @@ class ProfileHeader extends Component {
           <div className="profile-image" 
             style={{ backgroundImage: `url(${image})`}} />
           <div className="txt-center">
-            <h1 className="display-4 txt-center">{profile.user.name}</h1>
-            {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
+            <h1 className="display-4 txt-center">{profileHandle.user.name}</h1>
+            {isEmpty(profileHandle.location) ? null : <p>{profileHandle.location}</p>}
             <p>
-              {isEmpty(profile.website) ? null : (
+              {isEmpty(profileHandle.website) ? null : (
                 <a
                   className="text-white p-2"
-                  href={profile.website}
+                  href={profileHandle.website}
                   target="_blank"
                 >
                   <i className="fas fa-globe fa-2x" />
                 </a>
               )}
 
-              {isEmpty(profile.social && profile.social.twitter) ? null : (
+              {isEmpty(profileHandle.social && profileHandle.social.twitter) ? null : (
                 <a
                   className="text-white p-2"
-                  href={profile.social.twitter}
+                  href={profileHandle.social.twitter}
                   target="_blank"
                 >
                   <i className="fab fa-twitter fa-2x" />
                 </a>
               )}
 
-              {isEmpty(profile.social && profile.social.facebook) ? null : (
+              {isEmpty(profileHandle.social && profileHandle.social.facebook) ? null : (
                 <a
                   className="text-white p-2"
-                  href={profile.social.facebook}
+                  href={profileHandle.social.facebook}
                   target="_blank"
                 >
                   <i className="fab fa-facebook fa-2x" />
                 </a>
               )}
 
-              {isEmpty(profile.social && profile.social.linkedin) ? null : (
+              {isEmpty(profileHandle.social && profileHandle.social.linkedin) ? null : (
                 <a
                   className="text-white p-2"
-                  href={profile.social.linkedin}
+                  href={profileHandle.social.linkedin}
                   target="_blank"
                 >
                   <i className="fab fa-linkedin fa-2x" />
                 </a>
               )}
 
-              {isEmpty(profile.social && profile.social.youtube) ? null : (
+              {isEmpty(profileHandle.social && profileHandle.social.youtube) ? null : (
                 <a
                   className="text-white p-2"
-                  href={profile.social.youtube}
+                  href={profileHandle.social.youtube}
                   target="_blank"
                 >
                   <i className="fab fa-youtube fa-2x" />
                 </a>
               )}
 
-              {isEmpty(profile.social && profile.social.instagram) ? null : (
+              {isEmpty(profileHandle.social && profileHandle.social.instagram) ? null : (
                 <a
                   className="text-white p-2"
-                  href={profile.social.instagram}
+                  href={profileHandle.social.instagram}
                   target="_blank"
                 >
                   <i className="fab fa-instagram fa-2x" />
@@ -76,6 +76,13 @@ class ProfileHeader extends Component {
               )}
             </p>
           </div>
+          
+          {(this.props.request === '' && this.props.request2 === '') ?
+            <button className="likeBTN" onClick={this.props.requestClick}>Send Friend Request</button>:""
+          }
+          {(this.props.request === 'pending' || this.props.request2 === 'pending') ? <button className="btn1">Pending Request</button>:""}
+          {this.props.request === 'linked' ? <button className="btn1">Friends</button>:""}
+          
         </div>
       </div>
     );

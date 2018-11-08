@@ -4,22 +4,23 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 import ProfileItem from './ProfileItem';
-import { getProfiles } from '../../actions/profileActions';
+import { getProfiles, getCurrentProfile } from '../../actions/profileActions';
 
 class Profiles extends Component {
   componentDidMount() {
+    this.props.getCurrentProfile();
     this.props.getProfiles();
   }
 
   render() {
-    const { profiles, loading } = this.props.profile;
+    const {profile, profiles, loading } = this.props.profile;
     let profileItems;
 
     if (profiles === null || loading) {
       profileItems = <Spinner />;
     } else {
       if (profiles.length > 0) {
-        profileItems = profiles.map(profile => (<ProfileItem key={profile._id} profile={profile} />));
+        profileItems = profiles.map(profileitem => (<ProfileItem key={profileitem._id} profile={profile} profileitem={profileitem} />));
       } else {
         profileItems = <h4>No profiles found...</h4>;
       }
@@ -40,6 +41,7 @@ class Profiles extends Component {
 
 Profiles.propTypes = {
   getProfiles: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
@@ -47,4 +49,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { getProfiles })(withRouter(Profiles));
+export default connect(mapStateToProps, { getProfiles, getCurrentProfile })(withRouter(Profiles));

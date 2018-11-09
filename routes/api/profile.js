@@ -72,6 +72,7 @@ router.get('/handle/:handle', (req, res) => {
 
   Profile.findOne({ handle: req.params.handle })
     .populate('user', ['name', 'avatar'])
+    .deepPopulate('friends.profile')
     .then(profile => {
       if (!profile) {
         errors.noprofile = 'There is no profile for this user';
@@ -191,6 +192,7 @@ router.post('/accept/:handle', passport.authenticate('jwt', { session: false }),
           // Accept user in requestee's friend list
           for (var i = 0; i < profile.friends.length; i++) {
             if (profile.friends[i].profile.toString() === user_profile._id.toString()) {
+              profile.friends[i].request = false;
               profile.friends[i].requestAccepted = true;
             }
           }
@@ -208,14 +210,16 @@ router.post('/accept/:handle', passport.authenticate('jwt', { session: false }),
       //Find requester; user
       Profile.findOne({ user: req.user.id })
         .populate('user', ['name'])
+        .deepPopulate('friends.profile')
         .then(user_profile => {
           // Accept requestee in user's friend list
           for (var i = 0; i < user_profile.friends.length; i++) {
-            if (user_profile.friends[i].profile.toString() === profile._id.toString()) {
+            if (user_profile.friends[i].profile._id.toString() === profile._id.toString()) {
               user_profile.friends[i].request = false;
               user_profile.friends[i].requestAccepted = true;
             }
           }
+          // console.log(user_profile)
           user_profile.save().then(profile => res.json(profile));
         }).catch(err => res.status(404).json({ err: 'Can not find your profile' }));
     })
@@ -230,6 +234,7 @@ router.get('/user/:user_id', (req, res) => {
 
   Profile.findOne({ user: req.params.user_id })
     .populate('user', ['name'])
+    .deepPopulate('friends.profile')
     .then(profile => {
       if (!profile) {
         errors.noprofile = 'There is no profile for this user';

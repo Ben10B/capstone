@@ -10,7 +10,7 @@ import TextAreaFieldGroup from './common/TextAreaFieldGroup';
 import InputGroup from './common/InputGroup';
 
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { editProfile, acceptFriendRequest, declineFriendRequest } from '../actions/profileActions';
 import isEmpty from '../validation/is-empty';
@@ -273,6 +273,9 @@ class Friend extends Component {
         ) : 
           (this.props.friend.requestAccepted) ? (
             <div>
+              <Link to={`/profile/${this.props.friend.profile.handle}`} className="btn1 margn-right-1">
+                View Profile
+              </Link>
               <button className="btn1 margn-right-1">Friends</button>
               <button className="delBTN" onClick={()=>this.props.decline(this.props.friend.profile.handle)}>Remove Friend</button>
             </div>

@@ -44,3 +44,29 @@
 }
 :-moz-placeholder { font-size: smaller; /* Firefox 18- */
 }
+.prospect{
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: auto;
+  color: #fff;
+  padding: 2%;
+  box-shadow: 0 0 2px #000;
+}
+.prospect:hover{
+  cursor: pointer;
+  /* background-color: rgba(0, 0, 0, 0.836); */
+  background-color: rgba(0, 225, 0, 0.836);
+  box-shadow: 0 0 10px #000;
+}
+.prospect:hover::after{
+  content: ' \2713';
+}
+.selected{
+  background-color: rgba(0, 225, 0, 0.836);
+}
+.selected:hover{
+  background-color: rgba(225, 0, 0, 0.836);
+}
+.selected:hover::after{
+  content: ' X';
+}

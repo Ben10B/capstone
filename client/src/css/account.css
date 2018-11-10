@@ -64,6 +64,8 @@
   justify-content: center;
   align-content: center;
 }
+.friend a{ color: #fff;
+}
 .friend button:hover{ color: #fff;
 }
 @media all and (max-width: 575px){

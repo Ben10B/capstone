@@ -17,7 +17,7 @@ class CreateGoal extends Component {
       difficulty: 0,
       reward: '',
       punishment: '',
-      partners: {},
+      partners: [],
       date: moment().format('YYYY-MM-DD'),
       sun: false,
       mon: false,
@@ -29,6 +29,7 @@ class CreateGoal extends Component {
       custom: false,
       errors: {},
       show: false,
+      addFriends: false,
       numberOfDays: 0,
       message: '',
     };
@@ -48,6 +49,31 @@ class CreateGoal extends Component {
   }
   hideModal = () => {
     this.setState({ show: false });
+  }
+  showFriends = () =>{
+    this.setState({addFriends: true});
+  }
+  hideFriends = () =>{
+    this.setState({addFriends: false});
+  }
+  recruit = (handle) => {
+    let list = this.state.partners;
+    if(list.length !== 0){
+      for(var i =0; i < list.length; i++){
+        if(list[i] === handle){
+          list.splice(i, 1);
+          document.getElementById(handle).classList.remove('selected');
+        }
+        else{
+          list.push(handle);
+          document.getElementById(handle).classList.add('selected');
+        }
+      }
+    } else {
+      list.push(handle);
+      document.getElementById(handle).classList.add('selected');
+    }
+    this.setState({partners: list});
   }
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -163,16 +189,16 @@ class CreateGoal extends Component {
   render() {
     const { errors } = this.state;
     const { sprite } = this.props.sprite;
-    return (
-      <div className="column">
-        <div className="row margn-bottom-3">
-          <span>
-            <h1>Goal Creation</h1>
-          </span>
-          <button type="button" className="btn1" onClick={this.props.click}>Back to Dashboard</button>
-        </div>
-        <Details show={this.state.show} handleClose={this.hideModal} cgState={this.state} updateSprite={this.props.updateSprite}
-          addGoal={()=>this.props.addGoal(this.state.goalData, this.props.history)} sprite={sprite}/>
+    const { profile } = this.props.profile;
+    let view;
+    let friends;
+    if(profile.friends.length > 0) {
+      friends = profile.friends.map(friend => (
+        <button key={friend._id} className="btn1 prospect" id={friend.profile.handle} onClick={()=>this.recruit(friend.profile.handle)}>{friend.profile.handle}</button>
+      ));
+    } else { friends = <div>No Friends Yet</div>}
+    if(!this.state.addFriends){
+      view = (
         <div>
           <form className="column cgForm" noValidate onSubmit={this.onSubmit}>
             {errors.other && (<div className="err invalid-feedback">{errors.other}</div>)}
@@ -211,7 +237,7 @@ class CreateGoal extends Component {
             <label>*Estimated End Date
               <i className="far fa-question-circle hint" title="The day you plan to finish!"></i>
             </label>
-            <input name="date" type="date" onChange={this.onChange} error={errors.date} value={this.state.date}/>
+            <input name="date" type="date" onChange={this.onChange} error={errors.date} value={this.state.date} />
             {errors.date && (<div className="err invalid-feedback">{errors.date}</div>)}
             <label>*Check DAY(s) You Plan to Grind
               <i className="far fa-question-circle hint" title="These repeat every week!"></i>
@@ -224,22 +250,44 @@ class CreateGoal extends Component {
                   <p className="btn1" onClick={this.switchDays}>Custom</p>
                 </div>
               ) : (
-                <div className="checkboxes">
-                  <p><input type="checkbox" name="sun" onChange={this.onCheck} />Sun</p>
-                  <p><input type="checkbox" name="mon" onChange={this.onCheck} />Mon</p>
-                  <p><input type="checkbox" name="tue" onChange={this.onCheck} />Tue</p>
-                  <p><input type="checkbox" name="wed" onChange={this.onCheck} />Wed</p>
-                  <p><input type="checkbox" name="th" onChange={this.onCheck} />Th</p>
-                  <p><input type="checkbox" name="fri" onChange={this.onCheck} />Fri</p>
-                  <p><input type="checkbox" name="sat" onChange={this.onCheck} />Sat</p>
-                  <p className="btn1" onClick={this.switchDays}><i className="fas fa-angle-right"></i></p>
-                </div>
-              )}
+                  <div className="checkboxes">
+                    <p><input type="checkbox" name="sun" onChange={this.onCheck} />Sun</p>
+                    <p><input type="checkbox" name="mon" onChange={this.onCheck} />Mon</p>
+                    <p><input type="checkbox" name="tue" onChange={this.onCheck} />Tue</p>
+                    <p><input type="checkbox" name="wed" onChange={this.onCheck} />Wed</p>
+                    <p><input type="checkbox" name="th" onChange={this.onCheck} />Th</p>
+                    <p><input type="checkbox" name="fri" onChange={this.onCheck} />Fri</p>
+                    <p><input type="checkbox" name="sat" onChange={this.onCheck} />Sat</p>
+                    <p className="btn1" onClick={this.switchDays}><i className="fas fa-angle-right"></i></p>
+                  </div>
+                )}
             </div>
             {errors.daysOftheWeek && (<div className="err invalid-feedback">{errors.daysOftheWeek}</div>)}
+            <div className="btn1" onClick={this.showFriends}>Add Friends</div>
             <input className="btn1" type="submit" value="CREATE GOAL" />
           </form>
         </div>
+      );
+    } else {
+      view = (<div>
+        <label>Friends</label>
+        <div className="pad-5">
+          {friends}
+        </div>
+        <div className="btn1 margn-3" onClick={this.hideFriends}>Hide Friends</div>
+      </div>);
+    }
+    return (
+      <div className="column">
+        <div className="margn-bottom-3">
+          <span className="row">
+            <h1>Goal Creation</h1>
+            <button type="button" className="btn1" onClick={this.props.click}>Back to Dashboard</button>
+          </span>
+        </div>
+        <Details show={this.state.show} handleClose={this.hideModal} cgState={this.state} updateSprite={this.props.updateSprite}
+          addGoal={()=>this.props.addGoal(this.state.goalData, this.props.history)} sprite={sprite}/>
+        {view}
       </div>
     )
   }
@@ -281,9 +329,12 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
             <p>Daily Penalty: -{cgState.difficulty} HP</p>
             <p>Goal Completion: {this.addExp(cgState.difficulty)} EXP, {this.receiveReward(cgState.difficulty)} Gold * BONUS</p>
           </div>
-          {/* <div>
-            <p>{cgState.message}</p>
-          </div> */}
+          {cgState.partners === 0 ? "" : (
+            <div>
+              <label>Friends</label>
+              {cgState.partners.map(friend => (<p key={friend}>{friend}</p>))}
+            </div>
+          )}
         </div>
         <div className="row yes-no-container">
           <button type="button" 
@@ -317,6 +368,7 @@ const mapStateToProps = (state) => ({
   goal: state.goal,
   sprite: state.sprite,
   errors: state.errors,
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, { addGoal, checkGoal, updateSprite })(withRouter(CreateGoal));

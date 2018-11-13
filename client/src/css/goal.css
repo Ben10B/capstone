@@ -1,6 +1,6 @@
-.progressbar-container{
-  /* border: .5px solid #000; */
-}
+/* .progressbar-container{
+  border: .5px solid #000;
+} */
 #progressbar{
   background-color: #c00;
   font-weight: bolder;
@@ -63,7 +63,6 @@ display: none;
 #LevelUp button:hover{
   transform: scale(1.1);
 }
-
 .detail-container{
   display: none;
   background-color: rgba(255, 255, 255, 0.507);
@@ -71,21 +70,29 @@ display: none;
 .details textarea{
   overflow-y: hidden;
 }
-.detailImg{
+.detailImg, .partnerImg{
   background-repeat: no-repeat;
   background-position: center;
   background-size: auto;
   padding: 5% 0;
 }
-
-@media all and (max-width: 500px){
-  .detailImg{
-      padding: 8% 0;
-  }
-  .detail-container{
-      overflow: auto;
-  }
+.partners{
+  display: flex;
+  flex-direction: row;
+  margin: 1% 0;
 }
-.display-block{
-  display: block;
+.partner-card{
+  max-height: 10px;
+  display: inline-block;
+  margin: auto;
+}
+.partnerImg{ padding: 25% 0;
+}
+@media all and (max-width: 500px){
+  .detailImg{ padding: 8% 0;
+  }
+  /* .partnerImg{ padding: 25% 0;
+  } */
+  .detail-container{ overflow: auto;
+  }
 }

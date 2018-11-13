@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 // Create Schema
 const GoalSchema = new Schema({
@@ -33,10 +34,14 @@ const GoalSchema = new Schema({
   },
   partners: [
     {
-      user: {
+      profile: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
-      }
+        ref: 'profile'
+      },
+      sprite: {
+        type: Schema.Types.ObjectId,
+        ref: 'sprite'
+      },
     }
   ],
   date: {
@@ -58,5 +63,10 @@ const GoalSchema = new Schema({
     default: 'Grindin'
   }
 });
-
+GoalSchema.plugin(deepPopulate, {
+  whitelist: [
+    'partners.profile',
+    'partners.sprite',
+  ]
+});
 module.exports = Goal = mongoose.model('goal', GoalSchema);

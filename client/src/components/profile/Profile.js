@@ -32,7 +32,7 @@ class Profile extends Component {
     if (profile === null || profileHandle === null || loading) {
       profileContent = <Spinner />;
     } else {
-      if(profile !== null){
+      if(profile !== null && profileHandle !== null){
         let hasRequested = '';
         profile.friends.forEach(friend => {
           if(friend.profile._id === profileHandle._id){

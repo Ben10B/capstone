@@ -180,9 +180,15 @@ summary{ outline: none;
 }
 #dashImg:hover{ box-shadow: 0 0 10px #008fc5;
 }
+#dashboard button{
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
 .sortingDiv{
   display: flex;
   flex-direction: row;
+  margin-top: 3%;
 }
 .sortingDiv p{ 
   font-weight: bold;

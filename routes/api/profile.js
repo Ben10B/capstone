@@ -89,36 +89,41 @@ router.get('/handle/:handle', (req, res) => {
 // @access  Private
 router.post('/handle/:handle/requestby/:userid', passport.authenticate('jwt', { session: false }), (req, res) => {
   const errors = {};
-  //Find requestee by handle
+  //Find requestee profile by handle
   Profile.findOne({ handle: req.params.handle })
     .then(profile => {
       if (!profile) {
         errors.noprofile = 'There is no profile for this user';
         res.status(404).json(errors);
       }
-      //Find requester; user
-      Profile.findOne({ _id: req.params.userid })
+      //Find requestee sprite by handle
+      Sprite.findOne({ user: profile.user }).then(sprite => {
+        //Find requester; user
+        Profile.findOne({ _id: req.params.userid })
         .then(user_profile => {
-          user_profile.friends.unshift({ profile: profile });
+          user_profile.friends.unshift({ profile: profile, sprite: sprite });
           user_profile.save();
           // console.log(user_profile.friends);
         }).catch(err => res.status(404).json({ err: 'Can not find your profile' }));
+      }).catch(err => res.status(404).json({ err: 'Can not find requestee sprite' }));
     })
     .catch(err => res.status(404).json({ err: 'Can not find requestee' }));
-  //Find requestee by handle
+  //Find requestee profile by handle
   Profile.findOne({ handle: req.params.handle })
     .then(profile => {
       if (!profile) {
         errors.noprofile = 'There is no profile for this user';
         res.status(404).json(errors);
       }
-      //Find requester; user
-      Profile.findOne({ _id: req.params.userid })
+      //Find requester sprite by handle
+      Sprite.findOne({ user: req.user.id }).then(sprite => { //console.log(sprite);
+        //Find requester; user
+        Profile.findOne({ _id: req.params.userid })
         .then(user_profile => {
-          profile.friends.unshift({ profile: user_profile, request: true });
+          profile.friends.unshift({ profile: user_profile, sprite: sprite, request: true });
           profile.save().then(profile => res.json(profile));
-          // console.log(profile.friends);
         }).catch(err => res.status(404).json({ err: 'Can not find your profile' }));
+      }).catch(err => res.status(404).json({ err: 'Can not find your sprite' }));
     })
     .catch(err => res.status(404).json({ err: 'Can not find requestee' }));
 });
@@ -459,7 +464,7 @@ router.delete(
           friend.save();
         });
       });
-    }).catch(err => res.status(404).json({ friendsnotfound: 'No friends found' }));;
+    }).catch(err => res.status(404).json({ friendsnotfound: 'No friends found' }));
     Sprite.findOneAndRemove({ user: req.user.id }).then(() => {
       Profile.findOneAndRemove({ user: req.user.id }).then(() => {
         User.findOneAndRemove({ _id: req.user.id }).then(() =>

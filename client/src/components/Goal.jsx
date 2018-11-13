@@ -173,7 +173,7 @@ class Goal extends Component {
             </span>
             <button type="button" className="btn1" onClick={()=>this.props.click('')}>Back to Dashboard</button>
           </div>
-          <div className="pad-2">
+          <div className="pad-2 row">
             {this.state.selectedGoal.description}
             {this.state.selectedGoal.reward ? 
               <details><summary>REWARD</summary> {this.state.selectedGoal.reward}</details> : ''}
@@ -193,6 +193,9 @@ class Goal extends Component {
           />
           <Review show={this.state.reviewDay} handleClose={this.hideDetails} selectedDay={this.state.selectedDay}
             sprite={sprite} />
+          <Partners havePartners={(this.state.selectedGoal.partners.length === 0)?false:true}
+            partners={this.state.selectedGoal.partners}
+          />
           <ProgressBar progress={this.props.selectedGoal}/>
           <Calendar selectedGoal={this.props.selectedGoal} updateCal={this.state.updateCalendar}
            showModalClick={this.showDetails} calUpdated={this.calendarUpdated}/>
@@ -200,7 +203,29 @@ class Goal extends Component {
       )
   }
 }
-
+class Partners extends Component {
+  render(){
+    let show = (this.props.havePartners) ? 'partners' : 'display-none';
+    const partners = this.props.partners;
+    return(
+      <details className={show}>
+        <summary>PARTNERS</summary>
+        <div>
+          {partners.length === 0 ? '' : 
+            partners.map(partner => (
+              <span key={partner.profile._id} className="partner-card">
+                <div className="partnerImg" style={{
+                  backgroundImage: `url(${(partner.sprite.gender === "Female") ? idleF : idleM})`
+                }}></div>
+                <p>{partner.profile.handle}</p>
+              </span>
+            ))
+          }
+        </div>
+      </details>
+    );
+  }
+}
 const Details = ({handleClose, show, calendarState, selectedDay, showCW}) => {
   const showHideClassName = show ? 'detail-container modal display-block' : 'detail-container modal display-none';
   const isCalendarNull = (calendarState === null) ? true : false;

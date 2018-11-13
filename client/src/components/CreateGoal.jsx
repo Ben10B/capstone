@@ -43,6 +43,13 @@ class CreateGoal extends Component {
     if (this.props.goal.isValid !== prevProps.goal.isValid && this.props.goal.isValid === true){
       this.showModal();
     }
+    let buttons = document.getElementsByClassName('prospect');
+    const homies = this.state.partners;
+    if(homies.length !== 0){
+      for(var i =0; i < buttons.length; i++){
+        if(buttons.item(i).id === homies[i].name){ buttons.item(i).classList.add('selected'); }
+      }
+    }
   }
   showModal = () => {
     this.setState({ show: true });
@@ -56,21 +63,21 @@ class CreateGoal extends Component {
   hideFriends = () =>{
     this.setState({addFriends: false});
   }
-  recruit = (handle) => {
+  recruit = (handle, id) => {
     let list = this.state.partners;
     if(list.length !== 0){
       for(var i =0; i < list.length; i++){
-        if(list[i] === handle){
+        if(list[i].name === handle){
           list.splice(i, 1);
           document.getElementById(handle).classList.remove('selected');
         }
         else{
-          list.push(handle);
+          list.push({name: handle, id: id});
           document.getElementById(handle).classList.add('selected');
         }
       }
     } else {
-      list.push(handle);
+      list.push({name: handle, id: id});
       document.getElementById(handle).classList.add('selected');
     }
     this.setState({partners: list});
@@ -194,8 +201,9 @@ class CreateGoal extends Component {
     let friends;
     if(profile.friends.length > 0) {
       friends = profile.friends.map(friend => (
-        <button key={friend._id} className="btn1 prospect" id={friend.profile.handle} onClick={()=>this.recruit(friend.profile.handle)}>{friend.profile.handle}</button>
-      ));
+        <button key={friend._id} className="btn1 prospect" id={friend.profile.handle}
+        onClick={()=>this.recruit(friend.profile.handle, friend.profile._id)}>{friend.profile.handle}</button>
+      )); 
     } else { friends = <div>No Friends Yet</div>}
     if(!this.state.addFriends){
       view = (
@@ -329,10 +337,10 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
             <p>Daily Penalty: -{cgState.difficulty} HP</p>
             <p>Goal Completion: {this.addExp(cgState.difficulty)} EXP, {this.receiveReward(cgState.difficulty)} Gold * BONUS</p>
           </div>
-          {cgState.partners === 0 ? "" : (
+          {cgState.partners.length === 0 ? "" : (
             <div>
               <label>Friends</label>
-              {cgState.partners.map(friend => (<p key={friend}>{friend}</p>))}
+              {cgState.partners.map(friend => (<p key={friend.id}>{friend.name}</p>))}
             </div>
           )}
         </div>
@@ -343,8 +351,13 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
             sprite.goalsCreated++;
             if(sprite.goalsCreated === 1){
               sprite.achievements.push({name: 'Create 1 Goal', acquired: true});
-              updateSprite(sprite, sprite._id);
             }
+            sprite.achievements.forEach(reward => {
+              if(cgState.partners > 0 && reward.name !== 'Partner Up!'){
+                sprite.achievements.push({name: 'Partner Up!', acquired: true});
+              }
+            });
+            updateSprite(sprite, sprite._id);
           }} 
           className="btn1 green"><i className="fas fa-check"></i> Looks good</button>
           <button type="button" 

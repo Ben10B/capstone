@@ -122,6 +122,10 @@ const ProfileSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'profile'
       },
+      sprite: {
+        type: Schema.Types.ObjectId,
+        ref: 'sprite'
+      },
       request: {
         type: Boolean,
       },
@@ -133,7 +137,8 @@ const ProfileSchema = new Schema({
 });
 ProfileSchema.plugin(deepPopulate, {
   whitelist: [
-    'friends.profile'
+    'friends.profile',
+    'friends.sprite'
   ]
 });
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

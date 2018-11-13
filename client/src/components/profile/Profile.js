@@ -16,7 +16,7 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.profile.profileHandle === null && this.props.profile.loading) {
+    if (nextProps.profile.profile === null && nextProps.profile.profileHandle === null && this.props.profile.loading) {
       this.props.history.push('/not-found');
     }
   }
@@ -32,7 +32,7 @@ class Profile extends Component {
     if (profile === null || profileHandle === null || loading) {
       profileContent = <Spinner />;
     } else {
-      if(profile !== null && profileHandle !== null){
+      // if(profile !== null && profileHandle !== null){
         let hasRequested = '';
         profile.friends.forEach(friend => {
           if(friend.profile._id === profileHandle._id){
@@ -45,11 +45,11 @@ class Profile extends Component {
         profileContent = (
           <div className="column">
           <Link to="/profiles" className="btn1"> Back To Profiles </Link>
-          <ProfileHeader requestClick={this.sendFriendRequest} profileHandle={profileHandle} 
+          <ProfileHeader requestClick={this.sendFriendRequest} profileHandle={profileHandle}
             request={hasRequested} request2={this.state.friendRequest}/>          
         </div>
         );
-      }
+      // }
     }
 
     return (

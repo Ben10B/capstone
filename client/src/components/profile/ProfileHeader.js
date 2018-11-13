@@ -2,17 +2,27 @@ import React, { Component } from 'react';
 import isEmpty from '../../validation/is-empty';
 import image from '../../Assets/img/Idle-Login.png';
 
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getSpriteByUser } from '../../actions/spriteActions';
+
 class ProfileHeader extends Component {
+  componentDidMount(){
+    const { profileHandle } = this.props;
+    this.props.getSpriteByUser(profileHandle.user._id);
+  }
   render() {
     const { profileHandle } = this.props;
+    const { sprite } = this.props.sprite;
 
     return (
-      <div className="row">
+      <div className="">
         <div className="card column">
           <div className="profile-image" 
             style={{ backgroundImage: `url(${image})`}} />
           <div className="txt-center">
-            <h1 className="display-4 txt-center">{profileHandle.user.name}</h1>
+            <h1 className="txt-center">{profileHandle.user.name}</h1>
+            <p className="txt-center margn-5">{profileHandle.bio}</p>
             {isEmpty(profileHandle.location) ? null : <p>{profileHandle.location}</p>}
             <p>
               {isEmpty(profileHandle.website) ? null : (
@@ -84,9 +94,36 @@ class ProfileHeader extends Component {
           {this.props.request === 'linked' ? <button className="btn1">Friends</button>:""}
           
         </div>
+        <div className="card row">
+          <span className="column">
+            <h6>Stats</h6>
+            <p>Level: {sprite.level}</p>
+            <p>Exp: {sprite.experience}/{sprite.experienceLimit}</p>
+            <p>Goals Created: {sprite.goalsCreated}</p>
+            <p>Goals Completed: {sprite.goalsCompleted}</p>
+          </span>
+          <span className="column">
+            <h6>Achievements</h6>
+            {sprite.achievements === undefined ? '' :
+              sprite.achievements.map(reward => (
+                <p>{reward.name}</p>
+              ))
+            }
+          </span>
+        </div>
       </div>
     );
   }
 }
 
-export default ProfileHeader;
+ProfileHeader.propTypes = {
+  getSpriteByUser: PropTypes.func.isRequired,
+  sprite: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  sprite: state.sprite
+});
+
+export default connect(mapStateToProps, { getSpriteByUser })(ProfileHeader);
+

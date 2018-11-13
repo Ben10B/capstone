@@ -48,11 +48,12 @@ const GoalDetail = ({ goal, clickFunction, deleteFunction, homeState }) => {
         <p>Difficulty: <i>{goal.difficulty}</i></p>
       </div>
       <div className="flex-5" onClick={() => clickFunction(goal)}>
-        <p>End Date: {moment(goal.date, 'YYYY-MM-DD').format('MMM Do, YYYY')}</p>
         <p>Health: <i>{goal.health}/{goal.maxHealth}</i></p>
+        <p>{moment(goal.date, 'YYYY-MM-DD').format('MMM Do, YYYY')}</p>
+        {/* <p>End Date: {moment(goal.date, 'YYYY-MM-DD').format('MMM Do, YYYY')}</p> */}
       </div>
-      {homeState.selectedSort === "sort1" ?
-        (<div className="delBTN" onClick={() => deleteFunction(goal._id)}><i className="fas fa-trash" style={{ padding: '5px' }}></i></div>)
+      {homeState.selectedSort ?
+        (<div className="delBTN" onClick={() => deleteFunction(goal._id)}><i className="fas fa-trash"></i></div>)
         : null
       }
     </div>

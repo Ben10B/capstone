@@ -174,7 +174,7 @@ class Goal extends Component {
             <button type="button" className="btn1" onClick={()=>this.props.click('')}>Back to Dashboard</button>
           </div>
           <div className="pad-2 row">
-            {this.state.selectedGoal.description}
+            <p>{this.state.selectedGoal.description}</p>
             {this.state.selectedGoal.reward ? 
               <details><summary>REWARD</summary> {this.state.selectedGoal.reward}</details> : ''}
             {this.state.selectedGoal.punishment ? 

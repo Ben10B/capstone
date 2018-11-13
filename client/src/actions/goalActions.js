@@ -165,8 +165,8 @@ export const getGoal = id => dispatch => {
 
 // Delete Goal
 export const deleteGoal = id => dispatch => {
-  axios
-    .delete(`/api/goal/${id}`)
+  if (window.confirm('Are you sure? This can NOT be undone!')) {
+    axios.delete(`/api/goal/${id}`)
     .then(res =>
       dispatch({
         type: DELETE_GOAL,
@@ -179,6 +179,7 @@ export const deleteGoal = id => dispatch => {
         payload: err.response.data
       })
     );
+  }
 };
 
 // Set loading state

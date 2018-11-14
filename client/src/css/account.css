@@ -10,7 +10,9 @@
   display: block;
   margin: auto;
 }
-#edit form{ margin-bottom: 25%;
+#edit label{ font-weight: bold;
+}
+#edit form{ margin-bottom: 10%;
 }
 .themeDiv{
   display: flex;

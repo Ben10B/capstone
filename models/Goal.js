@@ -61,6 +61,10 @@ const GoalSchema = new Schema({
   result: {
     type: String,
     default: 'Grindin'
+  },
+  friendlyFire: {
+    type: Boolean,
+    default: false
   }
 });
 GoalSchema.plugin(deepPopulate, {

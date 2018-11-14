@@ -31,6 +31,7 @@ class CreateGoal extends Component {
       show: false,
       addFriends: false,
       numberOfDays: 0,
+      friendlyFire: false,
       message: '',
     };
     this.onChange = this.onChange.bind(this);
@@ -48,6 +49,17 @@ class CreateGoal extends Component {
     if(homies.length !== 0){
       for(var i =0; i < buttons.length; i++){
         if(buttons.item(i).id === homies[i].name){ buttons.item(i).classList.add('selected'); }
+      }
+    }
+    //Checkboxes should be checked when true
+    let checkboxes = document.getElementsByTagName('input');
+    const boxes = ["sun", "mon", "tue", "wed", "th", "fri", "sat", "friendlyFire"];
+    if(checkboxes.length !== 0){
+      for(var i =0; i < checkboxes.length; i++){
+        if (checkboxes.namedItem(boxes[i]) !== null && checkboxes.namedItem(boxes[i]).type === 'checkbox') {
+          // console.log(checkboxes.namedItem(boxes[i]).checked);
+          // checkboxes.namedItem(boxes[i]).checked = `${checkboxes.namedItem(boxes[i]).checked}`;
+        }
       }
     }
   }
@@ -118,6 +130,7 @@ class CreateGoal extends Component {
       partners: this.state.partners,
       date: this.state.date,
       days: days,
+      friendlyFire: this.state.friendlyFire,
       sun: this.state.sun,
       mon: this.state.mon,
       tue: this.state.tue,
@@ -279,6 +292,10 @@ class CreateGoal extends Component {
     } else {
       view = (<div>
         <label>Friends</label>
+        <p>
+          <input type="checkbox" name="friendlyFire" onChange={this.onCheck} value={this.state.friendlyFire} />Friendly Fire
+          <i className="far fa-question-circle hint" title="Your friends can influence your goal!"></i>
+        </p>
         <div className="pad-5">
           {friends}
         </div>
@@ -287,7 +304,7 @@ class CreateGoal extends Component {
     }
     return (
       <div className="column">
-        <div className="margn-bottom-3">
+        <div>
           <span className="row">
             <h1>Goal Creation</h1>
             <button type="button" className="btn1" onClick={this.props.click}>Back to Dashboard</button>
@@ -339,7 +356,8 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
           </div>
           {cgState.partners.length === 0 ? "" : (
             <div>
-              <label>Friends</label>
+              {/* <p>Friends</p> */}
+              <p>Friendly Fire: {cgState.friendlyFire ? 'ON' : 'OFF'}</p>
               {cgState.partners.map(friend => (<p key={friend.id}>{friend.name}</p>))}
             </div>
           )}

@@ -134,30 +134,28 @@ router.post('/handle/:handle/requestby/:userid', passport.authenticate('jwt', { 
 router.post('/decline/:handle', passport.authenticate('jwt', { session: false }), (req, res) => {
   const errors = {};
   //Find requestee by handle
-  Profile.findOne({ handle: req.params.handle })
-    .then(profile => {
-      if (!profile) {
-        errors.noprofile = 'There is no profile for this user';
-        res.status(404).json(errors);
-      }
-      //Find requester; user
-      Profile.findOne({ user: req.user.id })
-        .then(user_profile => {
-          // Delete user from requestee's friend list
-          for (var i = 0; i < profile.friends.length; i++) {
-            if (profile.friends[i].profile.toString() === user_profile._id.toString()) {
-              // Splice out of array
-              profile.friends.splice(i, 1);
-            }
+  Profile.findOne({ handle: req.params.handle }).then(profile => {
+    if (!profile) {
+      errors.noprofile = 'There is no profile for this user';
+      res.status(404).json(errors);
+    }
+    //Find requester; user
+    Profile.findOne({ user: req.user.id })
+      .then(user_profile => {
+        // Delete user from requestee's friend list
+        for (var i = 0; i < profile.friends.length; i++) {
+          if (profile.friends[i].profile.toString() === user_profile._id.toString()) {
+            // Splice out of array
+            profile.friends.splice(i, 1);
           }
-          profile.save();
-        }).catch(err => res.status(404).json({ err: 'Can not find your profile' }));
-    })
-    .catch(err => res.status(404).json({ err: 'Can not find requestee' }));
+        }
+        profile.save();
+      }).catch(err => res.status(404).json({ err: 'Can not find your profile' }));
+  })
+  .catch(err => res.status(404).json({ err: 'Can not find requestee' }));
 
   //Find requestee by handle
-  Profile.findOne({ handle: req.params.handle })
-    .then(profile => {
+  Profile.findOne({ handle: req.params.handle }).then(profile => {
       if (!profile) {
         errors.noprofile = 'There is no profile for this user';
         res.status(404).json(errors);
@@ -175,8 +173,8 @@ router.post('/decline/:handle', passport.authenticate('jwt', { session: false })
           }
           user_profile.save().then(profile => res.json(profile));
         }).catch(err => res.status(404).json({ err: 'Can not find your profile' }));
-    })
-    .catch(err => res.status(404).json({ err: 'Can not find requestee' }));
+  })
+  .catch(err => res.status(404).json({ err: 'Can not find requestee' }));
 });
 
 // @route   GET api/profile/accept/:handle

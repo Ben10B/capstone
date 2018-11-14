@@ -1,5 +1,6 @@
 .cgForm label{
   margin-top: 1.5%;
+  font-weight: bolder;
 }
 .cgForm input[type=date]{
   border: 0;

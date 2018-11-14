@@ -226,4 +226,34 @@ router.delete('/:id',
     });
   }
 );
+
+// @route   POST api/goal/:handle/:user
+// @desc    Remove friends from collaborative goals
+// @access  Private
+router.post('/remove/:handle/:user',
+  passport.authenticate('jwt', { session: false }), (req, res) => {
+    Profile.findOne({ handle: req.params.handle }).then(profile => {
+      Goal.find({ user: req.user.id, result: 'Grindin', $where: 'this.partners.length>0' }).then(goals => {
+        goals.forEach(goal => {
+          goal.partners.forEach(partner => {
+            if(partner.profile.toString() === profile._id.toString()){
+              partner.remove();
+            }goal.save();
+          });
+        });
+      }).catch(err => res.status(404).json({ err: 'No goals together' }));
+    });
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Goal.find({ user: req.params.user, result: 'Grindin', $where: 'this.partners.length>0' }).then(goals => {
+        goals.forEach(goal => {
+          goal.partners.forEach(partner => {
+            if(partner.profile.toString() === profile._id.toString()){
+              partner.remove();
+            }goal.save();
+          });
+        });
+      }).catch(err => res.status(404).json({ err: 'No goals together' }));
+    });
+  }
+);
 module.exports = router;

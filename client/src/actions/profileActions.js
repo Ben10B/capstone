@@ -89,8 +89,8 @@ export const acceptFriendRequest = (handle) => dispatch => {
 
 // Decline Request
 export const declineFriendRequest = (handle) => dispatch => {
-  axios
-    .post(`/api/profile/decline/${handle}`)
+  if (window.confirm('Are you sure? This can NOT be undone!')) {
+    axios.post(`/api/profile/decline/${handle}`)
     .then(res =>
       dispatch({
         type: DECLINE_FRIEND_REQUEST,
@@ -103,6 +103,7 @@ export const declineFriendRequest = (handle) => dispatch => {
         payload: null
       })
     );
+  }
 };
 
 // Create Profile

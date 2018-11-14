@@ -182,6 +182,17 @@ export const deleteGoal = id => dispatch => {
   }
 };
 
+// Remove friend from goal
+export const removeGoalFriend = (handle, user) => dispatch => {
+  axios.post(`/api/goal/remove/${handle}/${user}`)
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Set loading state
 export const setGoalLoading = () => {
   return {

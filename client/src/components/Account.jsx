@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { editProfile, acceptFriendRequest, declineFriendRequest } from '../actions/profileActions';
+import { removeGoalFriend } from '../actions/goalActions';
 import isEmpty from '../validation/is-empty';
 
 class Account extends Component {
@@ -122,7 +123,9 @@ class Account extends Component {
   acceptRequest = (handle) => {
     this.props.acceptFriendRequest(handle);
   }
-  declineRequest = (handle) => {
+  declineRequest = (handle, user, friend) => {
+    if(friend){ this.props.removeGoalFriend(handle, user);
+    }
     this.props.declineFriendRequest(handle);
   }
   componentWillReceiveProps(nextProps) {
@@ -277,7 +280,8 @@ class Friend extends Component {
                 View Profile
               </Link>
               <button className="btn1 margn-right-1">Friends</button>
-              <button className="delBTN" onClick={()=>this.props.decline(this.props.friend.profile.handle)}>Remove Friend</button>
+              <button className="delBTN" onClick={()=>
+                this.props.decline(this.props.friend.profile.handle, this.props.friend.profile.user, this.props.friend.requestAccepted)}>Remove Friend</button>
             </div>
           ) : (
             <div><button className="btn1">Waiting...</button></div>
@@ -294,6 +298,7 @@ Account.propTypes = {
   editProfile: PropTypes.func.isRequired,
   acceptFriendRequest: PropTypes.func.isRequired,
   declineFriendRequest: PropTypes.func.isRequired,
+  removeGoalFriend: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -301,4 +306,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { editProfile, acceptFriendRequest, declineFriendRequest })(withRouter(Account));
+export default connect(mapStateToProps, { editProfile, acceptFriendRequest, declineFriendRequest, removeGoalFriend })(withRouter(Account));

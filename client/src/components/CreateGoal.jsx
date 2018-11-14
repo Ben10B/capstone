@@ -349,7 +349,7 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
           onClick={()=>{
             addGoal();
             sprite.goalsCreated++;
-            if(sprite.goalsCreated === 1){
+            if(sprite.goalsCreated === 1 && sprite.goalsCompleted === 0){
               sprite.achievements.push({name: 'Create 1 Goal', acquired: true});
             }
             sprite.achievements.forEach(reward => {

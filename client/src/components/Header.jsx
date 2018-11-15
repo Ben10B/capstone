@@ -64,43 +64,35 @@ class Header extends Component {
       privateLinks = (<div>
           <li className={this.state.active[0][0] ? `pageOpt active` : `pageOpt`} 
           onClick={() => {this.props.click('home'); this.togglePage(0, this.state.active[0][0])}}>
-            <i className="fas fa-home"></i>
-            <a>{this.state.titles[0]}</a>
+            <div><i className="fas fa-home"></i> {this.state.titles[0]}</div>
           </li>
           <li className={this.state.active[1][0] ? `pageOpt active` : `pageOpt`} 
           onClick={() => {this.props.click('account'); this.togglePage(1, this.state.active[1][0])}}>
-            <i className="fas fa-user-circle"></i>
-            <a>{this.state.titles[1]}</a>
+            <div><i className="fas fa-user-circle"></i> {this.state.titles[1]}</div>
           </li>
           <li className={this.state.active[2][0] ? `pageOpt active` : `pageOpt`} 
           onClick={() => {this.props.click('sprite'); this.togglePage(2, this.state.active[2][0])}}>
-            <i className="fas fa-user"></i>
-            <a>{this.state.titles[2]}</a>
+            <div><i className="fas fa-user"></i> {this.state.titles[2]}</div>
           </li>
           <li className={this.state.active[3][0] ? `pageOpt active` : `pageOpt`} 
           onClick={() => {this.props.click('model'); this.togglePage(3, this.state.active[3][0])}}>
-            <i className="fas fa-flask"></i>
-            <a>{this.state.titles[3]}</a>
+            <div><i className="fas fa-flask"></i> {this.state.titles[3]}</div>
           </li>
           <li className={this.state.active[4][0] ? `pageOpt active` : `pageOpt`} 
           onClick={() => {this.props.click('teach'); this.togglePage(4, this.state.active[4][0])}}>
-            <i className="fas fa-list-ol"></i>
-            <a>{this.state.titles[4]}</a>
+            <div><i className="fas fa-list-ol"></i> {this.state.titles[4]}</div>
           </li>
           <li className={this.state.active[5][0] ? `pageOpt active` : `pageOpt`} 
           onClick={() => {this.props.click('rewards'); this.togglePage(5, this.state.active[5][0])}}>
-            <i className="fas fa-trophy"></i>
-            <a>{this.state.titles[5]}</a>
+            <div><i className="fas fa-trophy"></i> {this.state.titles[5]}</div>
           </li>
           <li className={this.state.active[6][0] ? `pageOpt active` : `pageOpt`} 
           onClick={this.onProfilesClick.bind(this)}>
-            <i className="fas fa-users"></i>
-            <a to={`/profiles`}>{this.state.titles[6]}</a>
+            <div><i className="fas fa-users"></i> {this.state.titles[6]}</div>
           </li>
           <li className={this.state.active[7][0] ? `pageOpt active` : `pageOpt`}
           onClick={this.onfeedClick.bind(this)}>
-            <i className="fas fa-comments"></i>
-            <a>{this.state.titles[7]}</a>
+            <div><i className="fas fa-comments"></i> {this.state.titles[7]}</div>
           </li>
       </div>)
     }
@@ -113,8 +105,7 @@ class Header extends Component {
           {privateLinks}
           <li className={`pageOpt`} 
           onClick={this.onLogoutClick.bind(this)}>
-            <i className="fas fa-sign-out-alt"></i>
-            <a>{this.state.titles[8]}</a>
+            <div><i className="fas fa-sign-out-alt"></i> {this.state.titles[8]}</div>
           </li>
         </ul>
       </header>

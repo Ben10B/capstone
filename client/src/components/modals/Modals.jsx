@@ -37,7 +37,7 @@ export const GoalResult = ({show, sprite, goal, history, updateSprite, updateGoa
 
 export const LevelUp = ({show, sprite}) => {
   const showHideClassName = show ? 'detail-container modal display-block z-index' : 'detail-container modal display-none';
-  this.closeLvlUp = () => {
+  const closeLvlUp = () =>{
     document.getElementById('LevelUp').className = "detail-container modal display-none";
   }
   return (
@@ -48,7 +48,7 @@ export const LevelUp = ({show, sprite}) => {
         <div className="detailImg" style={{ 
           backgroundImage: `url(${sprite.gender === "Female" ? powerUpF : powerUpM})` }}
         ></div>
-        <button className="btn1" onClick={this.closeLvlUp}><i className="far fa-thumbs-up"></i> I'M THE BEST! </button>
+        <button className="btn1" onClick={closeLvlUp}><i className="far fa-thumbs-up"></i> I'M THE BEST! </button>
       </div>
     </div>
   );

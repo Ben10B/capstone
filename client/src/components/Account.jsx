@@ -249,12 +249,10 @@ class Account extends Component {
       <div className={`App-intro${this.props.appState.theme} pad-top-1`}>
         <ul className="card row">
           <li className={(this.state.view === 'edit') ? 'pageOpt active' : 'pageOpt'} onClick={() => this.changeView('edit')}>
-            <i className="fas fa-id-card-alt"></i>
-            <a> Edit Profile</a>
+            <div><i className="fas fa-id-card-alt"></i> Edit Profile</div>
           </li>
           <li className={(this.state.view === 'friends') ? 'pageOpt active' : 'pageOpt'} onClick={() => this.changeView('friends')}>
-            <i className="fas fa-address-book"></i>
-            <a> Friends</a>
+            <div><i className="fas fa-address-book"></i> Friends</div>
           </li>
         </ul>
         {view}

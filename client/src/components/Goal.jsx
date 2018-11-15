@@ -234,7 +234,7 @@ const Details = ({handleClose, show, calendarState, selectedDay, showCW, friendl
   const isCalendarNull = (calendarState === null) ? true : false;
   const isDayNull = (selectedDay === null) ? true : false;
 
-  this.onChange=(e)=>{
+  const onChange=(e)=>{
     selectedDay.details = e.target.value;
   }
   return (
@@ -244,14 +244,14 @@ const Details = ({handleClose, show, calendarState, selectedDay, showCW, friendl
         <div className="">Was today Successful?
           <textarea name="details"
             placeholder="OPTIONAL: As a reminder, write some details about today."
-            onChange={this.onChange}
+            onChange={onChange}
           />
         </div>
         <div className="detailImg" style={{ 
           backgroundImage: `url(${isCalendarNull ? '' :
           (calendarState.sprite.gender === "Female") ? idleF : idleM})` }}
         ></div>
-        {friendlyFire ? (
+        {/* {friendlyFire ? ( */}
           <div className="yes-no-container">
             <button type="button" 
             onClick={() => showCW('complete')} 
@@ -260,7 +260,7 @@ const Details = ({handleClose, show, calendarState, selectedDay, showCW, friendl
             onClick={() => showCW('incomplete')} 
             className="btn1 red"><i className="fas fa-times"></i></button>
           </div>
-        ) : ''}
+        {/* ) : ''} */}
         <button className="btn1" onClick={handleClose}> Close </button>
       </div>
     </div>
@@ -268,7 +268,7 @@ const Details = ({handleClose, show, calendarState, selectedDay, showCW, friendl
 }
 const Confirmation = ({show, close, sprite, update, status, selectedGoal}) => {
   const showHideClassName = show ? 'detail-container modal display-block z-index' : 'detail-container modal display-none';
-  this.showEXP = (diff) => {
+  const showEXP = (diff) => {
     switch (diff) {
       case 1: return 10;
       case 2: return 20;
@@ -276,7 +276,7 @@ const Confirmation = ({show, close, sprite, update, status, selectedGoal}) => {
       default: return 0;
     }
   }
-  this.showReward = (diff) => {
+   const showReward = (diff) => {
     switch (diff) {
       case 1: return 25;
       case 2: return 50;
@@ -290,8 +290,8 @@ const Confirmation = ({show, close, sprite, update, status, selectedGoal}) => {
         {(status === 'complete') ? 
           <div className="">
             <p>Are you sure it was successful?</p>
-            <p>+{this.showReward(selectedGoal.difficulty)} Gold</p>
-            <p>+{this.showEXP(selectedGoal.difficulty)} EXP</p>
+            <p>+{showReward(selectedGoal.difficulty)} Gold</p>
+            <p>+{showEXP(selectedGoal.difficulty)} EXP</p>
           </div> : 
           <div className=""><p>Are you sure it wasn't successful?</p><p>-{selectedGoal.difficulty}HP</p></div>}
         <div className="detailImg" 

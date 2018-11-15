@@ -313,7 +313,7 @@ class CreateGoal extends Component {
 
 const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) => {
   const showHideClassName = show ? 'detail-container modal display-block' : 'detail-container modal display-none';
-  this.receiveReward = (diff) => {
+  const receiveReward = (diff) => {
     switch (diff) {
       case 1: return 25;
       case 2: return 50;
@@ -321,7 +321,7 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
       default: return 0;
     }
   }
-  this.addExp = (diff) => {
+  const addExp = (diff) => {
     switch (diff) {
       case 1: return 10;
       case 2: return 20;
@@ -343,9 +343,9 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
           <div className="column">
             <p>Difficulty: {cgState.difficulty}</p>
             <p>Total Day(s): {cgState.numberOfDays}</p>
-            <p>Daily Reward: +{this.receiveReward(cgState.difficulty)} Gold</p>
+            <p>Daily Reward: +{receiveReward(cgState.difficulty)} Gold</p>
             <p>Daily Penalty: -{cgState.difficulty} HP</p>
-            <p>Goal Completion: {this.addExp(cgState.difficulty)} EXP, {this.receiveReward(cgState.difficulty)} Gold * BONUS</p>
+            <p>Goal Completion: {addExp(cgState.difficulty)} EXP, {receiveReward(cgState.difficulty)} Gold * BONUS</p>
           </div>
           {cgState.partners.length === 0 ? "" : (
             <div>

@@ -34,7 +34,7 @@
   cursor: pointer;
   box-shadow: 0 0 10px #000;
 }
-.pageOpt, a:hover{ color: #fff;
+.pageOpt{ color: #fff;
 }
 .pageOpt{
   text-decoration: none;

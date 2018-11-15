@@ -136,6 +136,7 @@ router.post('/', passport.authenticate('jwt', { session: false }),
               maxHealth: req.body.maxHealth,
               days: req.body.days,
               date: req.body.date,
+              friendlyFire: req.body.friendlyFire,
               result: 'Grindin'
             });
             newGoal.save().then(goal => res.json(goal));
@@ -157,6 +158,7 @@ router.post('/', passport.authenticate('jwt', { session: false }),
         maxHealth: req.body.maxHealth,
         days: req.body.days,
         date: req.body.date,
+        friendlyFire: req.body.friendlyFire,
         result: 'Grindin'
       });
       newGoal.save().then(goal => res.json(goal));

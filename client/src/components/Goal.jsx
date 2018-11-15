@@ -20,6 +20,7 @@ import propTypes from 'prop-types';
 class Goal extends Component {
   state = { 
     selectedGoal: this.props.selectedGoal,
+    friendlyFire: this.props.selectedGoal.friendlyFire,
     show: false,
     reviewDay: false,
     showConfirmWindow: false,
@@ -38,7 +39,6 @@ class Goal extends Component {
   }
   showDetails = (day, status, calendarState) => {
     this.setState({updateCalendar: false});
-    // console.log(status);
     if (status === "unresolved" || status === "unresolved-today") {
       this.setState({ selectedDay: day });
       this.setState({ calendarState: calendarState });
@@ -170,6 +170,9 @@ class Goal extends Component {
           <div className="row">
             <span>
                 <h1>{this.props.selectedGoal.title}</h1>
+                {this.props.selectedGoal.partners.length > 0 ? (
+                  <div><p>Friendly Fire: {this.state.friendlyFire ? 'ON' : 'OFF'}</p></div>
+                ) : ''}
             </span>
             <button type="button" className="btn1" onClick={()=>this.props.click('')}>Back to Dashboard</button>
           </div>
@@ -189,7 +192,7 @@ class Goal extends Component {
           {/* Opens modal when user clicks on day */}
           <Details show={this.state.show} handleClose={this.hideDetails}
             calendarState={this.state.calendarState} selectedDay={this.state.selectedDay}
-            showCW={this.showConfirm}
+            showCW={this.showConfirm} friendlyFire={this.state.friendlyFire}
           />
           <Review show={this.state.reviewDay} handleClose={this.hideDetails} selectedDay={this.state.selectedDay}
             sprite={sprite} />
@@ -226,7 +229,7 @@ class Partners extends Component {
     );
   }
 }
-const Details = ({handleClose, show, calendarState, selectedDay, showCW}) => {
+const Details = ({handleClose, show, calendarState, selectedDay, showCW, friendlyFire}) => {
   const showHideClassName = show ? 'detail-container modal display-block' : 'detail-container modal display-none';
   const isCalendarNull = (calendarState === null) ? true : false;
   const isDayNull = (selectedDay === null) ? true : false;
@@ -248,14 +251,16 @@ const Details = ({handleClose, show, calendarState, selectedDay, showCW}) => {
           backgroundImage: `url(${isCalendarNull ? '' :
           (calendarState.sprite.gender === "Female") ? idleF : idleM})` }}
         ></div>
-        <div className="yes-no-container">
-          <button type="button" 
-          onClick={() => showCW('complete')} 
-          className="btn1 green"><i className="fas fa-check"></i></button>
-          <button type="button" 
-          onClick={() => showCW('incomplete')} 
-          className="btn1 red"><i className="fas fa-times"></i></button>
-        </div>
+        {friendlyFire ? (
+          <div className="yes-no-container">
+            <button type="button" 
+            onClick={() => showCW('complete')} 
+            className="btn1 green"><i className="fas fa-check"></i></button>
+            <button type="button" 
+            onClick={() => showCW('incomplete')} 
+            className="btn1 red"><i className="fas fa-times"></i></button>
+          </div>
+        ) : ''}
         <button className="btn1" onClick={handleClose}> Close </button>
       </div>
     </div>

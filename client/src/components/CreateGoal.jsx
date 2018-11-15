@@ -26,6 +26,8 @@ class CreateGoal extends Component {
       th: false,
       fri: false,
       sat: false,
+      weekends: false,
+      weekdays: false,
       custom: false,
       errors: {},
       show: false,
@@ -49,17 +51,6 @@ class CreateGoal extends Component {
     if(homies.length !== 0){
       for(var i =0; i < buttons.length; i++){
         if(buttons.item(i).id === homies[i].name){ buttons.item(i).classList.add('selected'); }
-      }
-    }
-    //Checkboxes should be checked when true
-    let checkboxes = document.getElementsByTagName('input');
-    const boxes = ["sun", "mon", "tue", "wed", "th", "fri", "sat", "friendlyFire"];
-    if(checkboxes.length !== 0){
-      for(var i =0; i < checkboxes.length; i++){
-        if (checkboxes.namedItem(boxes[i]) !== null && checkboxes.namedItem(boxes[i]).type === 'checkbox') {
-          // console.log(checkboxes.namedItem(boxes[i]).checked);
-          // checkboxes.namedItem(boxes[i]).checked = `${checkboxes.namedItem(boxes[i]).checked}`;
-        }
       }
     }
   }
@@ -101,12 +92,14 @@ class CreateGoal extends Component {
     if(e.target.name === 'weekends'){
       this.setState({ sat: e.target.checked });
       this.setState({ sun: e.target.checked });
+      this.setState({ weekends: e.target.checked });
     } else if(e.target.name === 'weekdays'){
       this.setState({ mon: e.target.checked });
       this.setState({ tue: e.target.checked });
       this.setState({ wed: e.target.checked });
       this.setState({ th: e.target.checked });
       this.setState({ fri: e.target.checked });
+      this.setState({ weekdays: e.target.checked });
     } else {
       this.setState({ [e.target.name]: e.target.checked });
     }
@@ -266,19 +259,19 @@ class CreateGoal extends Component {
             <div className="row" style={{ display: 'flex', flexDirection: 'row' }} error={errors.daysOftheWeek}>
               {this.state.custom === false ? (
                 <div className="row">
-                  <p><input type="checkbox" name="weekends" onChange={this.onCheck} />Weekends</p>
-                  <p><input type="checkbox" name="weekdays" onChange={this.onCheck} />Weekdays</p>
+                  <p><input type="checkbox" name="weekends" onChange={this.onCheck} checked={this.state.weekends}/>Weekends</p>
+                  <p><input type="checkbox" name="weekdays" onChange={this.onCheck} checked={this.state.weekdays}/>Weekdays</p>
                   <p className="btn1" onClick={this.switchDays}>Custom</p>
                 </div>
               ) : (
                   <div className="checkboxes">
-                    <p><input type="checkbox" name="sun" onChange={this.onCheck} />Sun</p>
-                    <p><input type="checkbox" name="mon" onChange={this.onCheck} />Mon</p>
-                    <p><input type="checkbox" name="tue" onChange={this.onCheck} />Tue</p>
-                    <p><input type="checkbox" name="wed" onChange={this.onCheck} />Wed</p>
-                    <p><input type="checkbox" name="th" onChange={this.onCheck} />Th</p>
-                    <p><input type="checkbox" name="fri" onChange={this.onCheck} />Fri</p>
-                    <p><input type="checkbox" name="sat" onChange={this.onCheck} />Sat</p>
+                    <p><input type="checkbox" name="sun" onChange={this.onCheck} checked={this.state.sun}/>Sun</p>
+                    <p><input type="checkbox" name="mon" onChange={this.onCheck} checked={this.state.mon}/>Mon</p>
+                    <p><input type="checkbox" name="tue" onChange={this.onCheck} checked={this.state.tue}/>Tue</p>
+                    <p><input type="checkbox" name="wed" onChange={this.onCheck} checked={this.state.wed}/>Wed</p>
+                    <p><input type="checkbox" name="th" onChange={this.onCheck} checked={this.state.th}/>Th</p>
+                    <p><input type="checkbox" name="fri" onChange={this.onCheck} checked={this.state.fri}/>Fri</p>
+                    <p><input type="checkbox" name="sat" onChange={this.onCheck} checked={this.state.sat}/>Sat</p>
                     <p className="btn1" onClick={this.switchDays}><i className="fas fa-angle-right"></i></p>
                   </div>
                 )}
@@ -293,7 +286,7 @@ class CreateGoal extends Component {
       view = (<div>
         <label>Friends</label>
         <p>
-          <input type="checkbox" name="friendlyFire" onChange={this.onCheck} value={this.state.friendlyFire} />Friendly Fire
+          <input type="checkbox" name="friendlyFire" onChange={this.onCheck} checked={this.state.friendlyFire} />Friendly Fire
           <i className="far fa-question-circle hint" title="Your friends can influence your goal!"></i>
         </p>
         <div className="pad-5">

@@ -36,6 +36,15 @@ class Body extends Component {
     // else if(this.props.appState.page === 'profiles'){
     //   return <Profiles profile={this.props.profile} appState={this.props.appState}/>;
     // } 
+
+    this.props.profile.friends.forEach(person => {
+      if(person.request){
+        Push.create("New Friend Request", {
+          body: `${person.profile.handle} wants to be your friend.`,
+          timeout: 4000,
+        });
+      }
+    });
     return (
       <Home profile={this.props.profile} appState={this.props.appState}/>
     )
@@ -43,14 +52,16 @@ class Body extends Component {
 }
 
 class App extends Component {
-  state = {
-    page: '',
-    theme: ''
-  }
-  
-  componentDidMount() {
+  constructor(props){
+    super(props);
+    this.state = {
+      page: '',
+      theme: ''
+    }
     this.props.getCurrentProfile();
   }
+  
+  componentDidMount() {  }
   onDeleteClick = (e) => {
     this.props.deleteAccount();
   }
@@ -86,13 +97,14 @@ class App extends Component {
         grindinContent = (
           <div className="App">
             <Header appState={this.state} click={this.selectPage} renderTheme={this.renderTheme}/>
-            <div className={`App-intro${this.state.theme} flex-8 pad-top-10`}>
+            <div className={`App-intro${this.state.theme} no-profile-container`}>
               <h1>Welcome to Grindin' Goals!</h1>
-              <p>The purpose of this application is to help you stay motivated in completing your
-                goals with a gaming element to it. In the future, you can join your friends' goals.
+              <p className="margn-5">The purpose of this application is to help you stay motivated in completing your
+                goals with a gaming element to it. You don't have to do it alone though. 
+                Your friends can join you along the way!
+                <h6 className="margn-top-2">Let's Start GRINDIN'!!</h6>
               </p>
-              <h6>Let's Start GRINDIN'!!</h6>
-              <Link className="likeBTN margn-1" to="/create-profile">Create Profile</Link>
+              <Link className="likeBTN margn-1 button" to="/create-profile">Click to Create a Profile</Link>
             </div>
           </div>
         )

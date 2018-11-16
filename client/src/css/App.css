@@ -227,14 +227,24 @@ summary{ outline: none;
   }
   .btn1:hover{ font-size: 10pt;
   }
-  #Header{
-    flex: 0.1;
+  #Header{ flex: 0.1;
   }
-  #Header a{
-    display: none;
+  #Header a{ display: none;
   }
 }
-
+/* App.jsx */
+.no-profile-container{
+  flex: 8;
+  padding-top: 10%;
+}
+.no-profile-container .button{ color: black;
+}
+.no-profile-container p{
+  font-weight: 800;
+  padding: 2%;
+  background-color: rgba(255, 255, 255, 0.212);
+  box-shadow: 0 0 7px #fff;
+}
 
 /* Header */
 #Header li a { color: #fff; }

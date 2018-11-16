@@ -19,8 +19,6 @@ class CreateProfile extends Component {
       displaySocialInputs: false,
       handle: '',
       location: '',
-      status: '',
-      skills: '',
       bio: '',
       gender: '',
       twitter: '',
@@ -46,7 +44,6 @@ class CreateProfile extends Component {
     const profileData = {
       handle: this.state.handle.trim(),
       location: this.state.location.trim(),
-      status: this.state.status,
       gender: this.state.gender,
       bio: this.state.bio.trim(),
       twitter: this.state.twitter.trim(),
@@ -138,11 +135,11 @@ class CreateProfile extends Component {
       <div className="App">
         <Header appState={{theme: ''}}/>
         <div className={`App-intro flex-8 create-profile`}>
-          <h1 className="display-4 text-center">Create Your Profile</h1>
-          <p className="lead text-center">
+          <h1 className="txt-center">Create Your Profile</h1>
+          <p className="txt-center">
             Let's setup your profile
                 </p>
-          <small className="d-block pb-3">* = required fields</small>
+          <small className="pad-bottom-3">* = required fields</small>
           <form onSubmit={this.onSubmit}>
             <TextFieldGroup
               placeholder="* Profile Handle"
@@ -153,15 +150,6 @@ class CreateProfile extends Component {
               info="A unique handle for your profile URL. Your full name, company name, nickname"
             />
             {errors.handle && (<div className="err invalid-feedback">{errors.handle}</div>)}
-            {/* <TextFieldGroup
-              placeholder="Skills"
-              name="skills"
-              value={this.state.skills}
-              onChange={this.onChange}
-              error={errors.skills}
-              info="Please use comma separated values (eg.
-                HTML,CSS,JavaScript,PHP"
-            /> */}
             <SelectListGroup
               placeholder="gender"
               name="gender"
@@ -206,7 +194,7 @@ class CreateProfile extends Component {
             <input
               type="submit"
               value="Submit"
-              className="btn btn-info btn-block mt-4"
+              className="margn-top-4"
             />
           </form>
         </div>

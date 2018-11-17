@@ -19,6 +19,10 @@ module.exports = function validateProfileInput(data) {
     errors.gender = 'Gender is required';
   }
 
+  if (data.gender !== 'Male' || data.gender !== 'Female') {
+    errors.gender = 'Choose between Male and Female.';
+  }
+
   if (!isEmpty(data.website)) {
     if (!Validator.isURL(data.website)) {
       errors.website = 'Not a valid URL';

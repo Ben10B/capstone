@@ -138,7 +138,7 @@ class CreateProfile extends Component {
           <h1 className="txt-center">Create Your Profile</h1>
           <p className="txt-center">
             Let's setup your profile
-                </p>
+          </p>
           <small className="pad-bottom-3">* = required fields</small>
           <form onSubmit={this.onSubmit}>
             <TextFieldGroup
@@ -157,7 +157,7 @@ class CreateProfile extends Component {
               onChange={this.onChange}
               options={options}
               error={errors.gender}
-              info="This will be your sprite's gender"
+              // info="This will be your sprite's gender"
             />
             <TextFieldGroup
               placeholder="Location"
@@ -173,7 +173,7 @@ class CreateProfile extends Component {
               value={this.state.bio}
               onChange={this.onChange}
               error={errors.bio}
-              info="Tell us a little about yourself"
+              // info="Tell us a little about yourself"
             />
 
             <div className="margn-bottom-3">
@@ -184,10 +184,10 @@ class CreateProfile extends Component {
                     displaySocialInputs: !prevState.displaySocialInputs
                   }));
                 }}
-                className="likeBTN"
+                className="likeBTN margn-top-3"
               >
                 Add Social Network Links
-                    </button>
+              </button>
               <span className="text-muted">Optional</span>
             </div>
             {socialInputs}

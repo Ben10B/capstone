@@ -49,9 +49,9 @@ label{
 :-moz-placeholder { font-size: smaller; /* Firefox 18- */
 }
 .prospect{
-  display: block;
+  display: inline-block;
   background-color: rgba(0, 0, 0, 0.5);
-  margin: auto;
+  margin: 0 1%;
   color: #fff;
   padding: 2%;
   box-shadow: 0 0 2px #000;

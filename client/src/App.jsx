@@ -52,20 +52,17 @@ class Body extends Component {
 }
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
+  state = {
       page: '',
       theme: ''
-    }
-    this.props.getCurrentProfile();
   }
   
-  componentDidMount() {  }
+  componentDidMount() {
+    this.props.getCurrentProfile();
+  }
   onDeleteClick = (e) => {
     this.props.deleteAccount();
   }
- 
   selectPage = (link) => {
     this.setState({ page: link });
   }

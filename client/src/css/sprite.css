@@ -3,7 +3,31 @@
   background-repeat: no-repeat, no-repeat;
   background-position: bottom center, center center;
   background-size: 7em, contain;
-  box-shadow: 0 15px 30px #000;
+  box-shadow: 0 5px 10px #000;
+}
+.inventory{ font-weight: bold;
+}
+.inventory li{
+  margin: 0.5%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: border 0.4s, background-color 0.4s, box-shadow 0.4s;
+}
+.inventory li:hover{ 
+  box-shadow: 0 0 10px #fff;
+  border: 1px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+.inventory .itemImage{
+  background: no-repeat center/contain;
+}
+
+.mySlides{
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.014);
 }
 @media all and (max-height: 565px){
   #sprite{

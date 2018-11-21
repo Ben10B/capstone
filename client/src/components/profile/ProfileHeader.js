@@ -107,7 +107,7 @@ class ProfileHeader extends Component {
             <h6>Achievements</h6>
             {sprite.achievements === undefined ? '' :
               sprite.achievements.map(reward => (
-                <p>{reward.name}</p>
+                <p key={reward.name}>{reward.name}</p>
               ))
             }
           </span>

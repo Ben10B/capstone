@@ -216,11 +216,11 @@ class Partners extends Component {
         <div>
           {partners.length === 0 ? '' : 
             partners.map(partner => (
-              <span key={partner.profile._id} className="partner-card">
+              <span key={partner.profile === undefined ? '' : partner.profile._id} className="partner-card">
                 <div className="partnerImg" style={{
-                  backgroundImage: `url(${(partner.sprite.gender === "Female") ? idleF : idleM})`
+                  backgroundImage: `url(${(partner.sprite === undefined) ? '' : (partner.sprite.gender === "Female") ? idleF : idleM})`
                 }}></div>
-                <p>{partner.profile.handle}</p>
+                <p>{partner.profile === undefined ? '' : partner.profile.handle}</p>
               </span>
             ))
           }

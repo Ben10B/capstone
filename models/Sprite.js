@@ -44,6 +44,77 @@ const SpriteSchema = new Schema({
         default: false
       }
     }
-  ]
+  ],
+  items: {
+    hand: [
+      {
+        name: {
+          type: String
+        },
+        description: {
+          type: String
+        },
+        equipped: {
+          type: Boolean,
+          default: false
+        },
+        location: {
+          type: String
+        }
+      }
+    ],
+    head: [
+      {
+        name: {
+          type: String
+        },
+        description: {
+          type: String
+        },
+        equipped: {
+          type: Boolean,
+          default: false
+        },
+        location: {
+          type: String
+        }
+      }
+    ],
+    body: [
+      {
+        name: {
+          type: String,
+          default: 'Default'
+        },
+        description: {
+          type: String
+        },
+        equipped: {
+          type: Boolean,
+          default: false
+        },
+        location: {
+          type: String
+        }
+      }
+    ],
+    accessory: [
+      {
+        name: {
+          type: String
+        },
+        description: {
+          type: String
+        },
+        equipped: {
+          type: Boolean,
+          default: false
+        },
+        location: {
+          type: String
+        }
+      }
+    ],
+  }
 });
 module.exports = Sprite = mongoose.model('sprite', SpriteSchema);

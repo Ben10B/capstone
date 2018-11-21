@@ -18,6 +18,7 @@ export default class Tutorial extends Component {
       { label: 'Difficulty', value: 'Difficulty' },
       { label: 'Estimated End Date', value: 'Date' },
       { label: 'Days of the Week', value: 'Days' },
+      { label: 'Friendly Fire', value: 'FF' },
     ];
     let selectedSubject;
     switch(this.state.teach){
@@ -26,6 +27,7 @@ export default class Tutorial extends Component {
       case 'Difficulty': selectedSubject = <Difficulty/>; break;
       case 'Date': selectedSubject = <Date/>; break;
       case 'Days': selectedSubject = <Days/>; break;
+      case 'FF': selectedSubject = <FriendlyFire/>; break;
       default: selectedSubject = <div></div>; break;
     }
     return (
@@ -143,6 +145,27 @@ const Days = () => {
         You will be able to update each day every time you view your goal.
       </details>
       <strong>Note: Depending on duration of goal, selected days will repeat.</strong>
+    </div>
+  )
+}
+const FriendlyFire = () => {
+  return (
+    <div className="subjectContainer flex-9">
+      <h4>BE FRIENDLY<strong>.</strong></h4>
+      <div>
+        <p><i className="fas fa-times"></i> You want to work alone.</p>
+        <p><i className="fas fa-check"></i> You have partners.</p>
+      </div>
+      <details>
+        <summary>Click for more details</summary>
+        Choose to either go solo or in a squad. 
+        <hr/>
+        With friendly fire ON, your friends are allowed to update the goal.
+        With friendly fire OFF, your friends can't update the goal; they are your motivators.
+        If friendly fire is ON, your friends will recieve the same rewards you do.
+        If friendly fire is OFF, your friends won't recieve the same rewards you do.
+      </details>
+      <strong>Note: You can only recruit your friends.</strong>
     </div>
   )
 }

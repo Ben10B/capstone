@@ -46,11 +46,13 @@ class CreateGoal extends Component {
     if (this.props.goal.isValid !== prevProps.goal.isValid && this.props.goal.isValid === true){
       this.showModal();
     }
-    let buttons = document.getElementsByClassName('prospect');
-    const homies = this.state.partners;
-    if(homies.length !== 0){
-      for(var i =0; i < buttons.length; i++){
-        if(buttons.item(i).id === homies[i].name){ buttons.item(i).classList.add('selected'); }
+    if(prevState !== this.state){
+      let buttons = document.getElementsByClassName('prospect');
+      const homies = this.state.partners;
+      if(homies.length !== 0 && buttons.length !== 0){
+        for(var i =0; i < homies.length; i++){
+          if(buttons.item(i).id === homies[i].name){ buttons.item(i).classList.add('selected'); }
+        }
       }
     }
   }
@@ -68,18 +70,11 @@ class CreateGoal extends Component {
   }
   recruit = (handle, id) => {
     let list = this.state.partners;
-    if(list.length !== 0){
-      for(var i =0; i < list.length; i++){
-        if(list[i].name === handle){
-          list.splice(i, 1);
-          document.getElementById(handle).classList.remove('selected');
-        }
-        else{
-          list.push({name: handle, id: id});
-          document.getElementById(handle).classList.add('selected');
-        }
-      }
-    } else {
+    if(document.getElementById(handle).classList.contains('selected')){
+      let index = list.findIndex(homie => homie.name === handle);
+      list.splice(index, 1);
+      document.getElementById(handle).classList.remove('selected');
+    }else{
       list.push({name: handle, id: id});
       document.getElementById(handle).classList.add('selected');
     }
@@ -207,7 +202,7 @@ class CreateGoal extends Component {
     let friends;
     if(profile.friends.length > 0) {
       friends = profile.friends.map(friend => (
-        <button key={friend._id} className="btn1 prospect" id={friend.profile.handle}
+        <button key={friend._id} className={`btn1 prospect`} id={friend.profile.handle}
         onClick={()=>this.recruit(friend.profile.handle, friend.profile._id)}>{friend.profile.handle}</button>
       )); 
     } else { friends = <div>No Friends Yet</div>}
@@ -348,7 +343,7 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
             <p>Goal Completion: {addExp(cgState.difficulty)} EXP, {receiveReward(cgState.difficulty)} Gold * BONUS</p>
           </div>
           {cgState.partners.length === 0 ? "" : (
-            <div>
+            <div key={Math.random()+Math.random()}>
               {/* <p>Friends</p> */}
               <p>Friendly Fire: {cgState.friendlyFire ? 'ON' : 'OFF'}</p>
               {cgState.partners.map(friend => (<p key={friend.id}>{friend.name}</p>))}

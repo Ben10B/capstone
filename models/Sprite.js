@@ -60,6 +60,9 @@ const SpriteSchema = new Schema({
         },
         location: {
           type: String
+        },
+        src: {
+          type: String
         }
       }
     ],
@@ -76,6 +79,9 @@ const SpriteSchema = new Schema({
           default: false
         },
         location: {
+          type: String
+        },
+        src: {
           type: String
         }
       }
@@ -95,6 +101,9 @@ const SpriteSchema = new Schema({
         },
         location: {
           type: String
+        },
+        src: {
+          type: String
         }
       }
     ],
@@ -111,6 +120,9 @@ const SpriteSchema = new Schema({
           default: false
         },
         location: {
+          type: String
+        },
+        src: {
           type: String
         }
       }

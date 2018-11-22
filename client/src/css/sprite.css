@@ -27,7 +27,13 @@
 
 .mySlides{
   min-height: 100%;
-  background-color: rgba(0, 0, 0, 0.014);
+  /* background-color: rgba(0, 0, 0, 0.089); */
+  /* background-color: rgba(0, 0, 0, 0.014); */
+}
+.itemName{
+  background-color: rgba(255, 255, 255, 0.87);
+  color: #000;
+  font-weight: bold;
 }
 @media all and (max-height: 565px){
   #sprite{

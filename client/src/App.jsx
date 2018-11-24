@@ -11,10 +11,12 @@ import Tutorial from './components/Tutorial';
 import Achievements from './components/Achievements';
 import Header from './components/Header.jsx';
 import Spinner from './components/common/Spinner.jsx';
-
+import { Steps } from 'intro.js-react';
+import './css/introjs.css';
+import './css/introjs-dark.css';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile, deleteAccount } from './actions/profileActions';
+import { getCurrentProfile, deleteAccount, finishedTour } from './actions/profileActions';
 
 class Body extends Component {
   render(){
@@ -53,8 +55,41 @@ class Body extends Component {
 
 class App extends Component {
   state = {
-      page: '',
-      theme: ''
+    page: '',
+    theme: '',
+    stepsEnabled: true,
+    initialStep: 0,
+    steps: [
+      { intro: 'Welcome! Take a quick tour?', },
+      { element: '#step1',
+        intro: 'Click on this button to create a goal.',
+        tooltipPosition: 'auto', },
+      { element: '#goalList',
+        intro: 'Your goals that you create will appear here.',
+        tooltipPosition: 'auto', },
+      { element: '#step2',
+        intro: 'Click to edit your account and friends.',
+        tooltipPosition: 'auto', },
+      { element: '#step3',
+        intro: 'Click to edit your character.',
+        tooltipPosition: 'auto', },
+      { element: '#step4',
+        intro: "Click to view BJ Fogg's behavior model.",
+        tooltipPosition: 'auto', },
+      { element: '#step5',
+        intro: 'Click to learn how properly create a goal and other things.',
+        tooltipPosition: 'auto', },  
+      { element: '#step6',
+        intro: 'Click to view your achievements.',
+        tooltipPosition: 'auto', },
+      { element: '#step7',
+        intro: 'Click to see other people that are Grindin.',
+        tooltipPosition: 'auto', },
+      { element: '#step8',
+        intro: 'Click to go on a public comment thread.',
+        tooltipPosition: 'auto', },
+      { intro: 'This concludes the end of the tour. Thank you for registering and trying to improve yourself!', }
+    ],
   }
   
   componentDidMount() {
@@ -72,6 +107,14 @@ class App extends Component {
   renderTheme = (t) => {
     this.setState({ theme: t });
   }
+  onExit = () => {
+    this.setState(() => ({ stepsEnabled: false }));
+    this.props.finishedTour();
+  }
+  onComplete = () => {
+    this.setState(() => ({ stepsEnabled: false }));
+    this.props.finishedTour();
+  }
   render() {
     // const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
@@ -84,13 +127,29 @@ class App extends Component {
       if(Object.keys(profile).length > 0){
         grindinContent = (
           <div className="App">
+            {profile.tourFinished ? '' : (
+              <Steps
+                enabled={this.state.stepsEnabled}
+                steps={this.state.steps}
+                initialStep={this.state.initialStep}
+                onComplete={this.onComplete}
+                onExit={this.onExit}
+                options={{disableInteraction: true,
+                  showBullets: true,
+                  showProgress: true,
+                  exitOnOverlayClick: false,
+                  overlayOpacity: .1,
+                  doneLabel: "Complete",
+                  skipLabel: "I'll figure it out."
+                }}
+              />
+            )}
             <Header appState={this.state} click={this.selectPage} renderTheme={this.renderTheme}/>
             <Body appState={this.state} profile={profile} click={this.selectTheme} deleteAccountClick={this.onDeleteClick}/>
           </div>
         )
       } else {
         //User is logged in but has no profile
-        //TODO: use Tutorial.js
         grindinContent = (
           <div className="App">
             <Header appState={this.state} click={this.selectPage} renderTheme={this.renderTheme}/>
@@ -117,6 +176,7 @@ class App extends Component {
 }
 App.propTypes = {
   getCurrentProfile: propTypes.func.isRequired,
+  finishedTour: propTypes.func.isRequired,
   deleteAccount: propTypes.func.isRequired,
   auth: propTypes.object.isRequired,
   profile: propTypes.object.isRequired
@@ -127,4 +187,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(App);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, finishedTour })(App);

@@ -132,6 +132,18 @@ export const editProfile = (profileData, history) => dispatch => {
     );
 };
 
+// Tour is finished
+export const finishedTour = () => dispatch => {
+  axios
+    .post('/api/profile/tourFinished')
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: null
+      })
+    );
+};
+
 // Get all profiles
 export const getProfiles = () => dispatch => {
   dispatch(setProfileLoading());

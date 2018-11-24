@@ -34,7 +34,7 @@ class Dashboard extends Component {
           <p>Gold: {this.props.sprite.gold}</p>
         </span>
         <div className="flex-1">
-          <button type="button" className="btn1" onClick={this.props.click}>Create Goal</button>
+          <button id="step1" type="button" className="btn1" onClick={this.props.click}>Create Goal</button>
         </div>
       </div>
     );

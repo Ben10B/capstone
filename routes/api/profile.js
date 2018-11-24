@@ -316,6 +316,22 @@ router.post(
   }
 );
 
+// @route   POST api/profile/tourFinished
+// @desc    Edit user profile
+// @access  Private
+router.post('/tourFinished',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      if (profile) {
+        profile.tourFinished = true;
+        profile.save().then(profile => res.json(profile));
+      } 
+    });
+  }
+);
+
 // @route   POST api/profile/experience
 // @desc    Add experience to profile
 // @access  Private

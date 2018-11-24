@@ -10,6 +10,7 @@ import powerUpM from '../Assets/img/PowerUp-Male.gif';
 import aura from '../Assets/img/Aura.gif';
 import powerUpF from '../Assets/img/PowerUp-Female.gif';
 import idleF from '../Assets/img/Idle-Female.gif';
+import NA from '../Assets/img/NA.png';
 
 class Sprite extends Component {
   state = {
@@ -30,11 +31,11 @@ class Sprite extends Component {
   toggleShowItem = (part) => {
     this.setState({showItem: !this.state.showItem });
     this.setState({part: part });
-    // const { sprite } = this.props.sprite;
-    // if(part==='Hand')this.setState({itemList: sprite.items.hand});
-    // else if(part==='Head')this.setState({itemList: sprite.items.head});
-    // else if(part==='Body')this.setState({itemList: sprite.items.body});
-    // else if(part==='Acc1')this.setState({itemList: sprite.items.accessory});
+    const { sprite } = this.props.sprite;
+    if(part==='Hand')this.setState({itemList: sprite.items.hand});
+    else if(part==='Head')this.setState({itemList: sprite.items.head});
+    else if(part==='Body')this.setState({itemList: sprite.items.body});
+    else if(part==='Accessory')this.setState({itemList: sprite.items.accessory});
   }
   hover = () => { const { sprite } = this.props.sprite;
     document.getElementById('sprite').style.backgroundImage = `url(${(sprite.gender === "Female") ? powerUpF : powerUpM}), url(${aura})`; };
@@ -45,10 +46,10 @@ class Sprite extends Component {
     const { profile } = this.props.profile;
     var req = require.context("../Assets/img", false, /.*\.*$/);
     
-    let handEquip = (sprite.items.hand.find(item => item.equipped === true) === undefined) ? '' : sprite.items.hand.find(item => item.equipped === true);
-    let headEquip = (sprite.items.head.find(item => item.equipped === true) === undefined) ? '' : sprite.items.head.find(item => item.equipped === true);
-    let bodyEquip = (sprite.items.body.find(item => item.equipped === true) === undefined) ? '' : sprite.items.body.find(item => item.equipped === true);
-    let accEquip = (sprite.items.accessory.find(item => item.equipped === true) === undefined) ? '' : sprite.items.accessory.find(item => item.equipped === true);
+    let handEquip = (sprite.items.hand.find(item => item.equipped === true) === undefined) ? NA : sprite.items.hand.find(item => item.equipped === true);
+    let headEquip = (sprite.items.head.find(item => item.equipped === true) === undefined) ? NA : sprite.items.head.find(item => item.equipped === true);
+    let bodyEquip = (sprite.items.body.find(item => item.equipped === true) === undefined) ? NA : sprite.items.body.find(item => item.equipped === true);
+    let accEquip = (sprite.items.accessory.find(item => item.equipped === true) === undefined) ? NA : sprite.items.accessory.find(item => item.equipped === true);
     req.keys().forEach(function(key){
       if(key.toString().includes(handEquip.name)) handEquip = req(key);
       if(key.toString().includes(headEquip.name)) headEquip = req(key);
@@ -75,7 +76,7 @@ class Sprite extends Component {
               <p>Body</p>
               <div className="itemImage" style={{ backgroundImage: `url(${bodyEquip})` }}></div>
             </li>
-            <li id="acc1" onClick={()=>this.toggleShowItem('Acc1')}>
+            <li id="acc1" onClick={()=>this.toggleShowItem('Accessory')}>
               <p>Accessory</p>
               <div className="itemImage" style={{ backgroundImage: `url(${accEquip})` }}></div>
             </li>

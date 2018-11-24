@@ -6,7 +6,7 @@ import noM from '../../Assets/img/Incompleted-Male.png';
 import powerUpM from '../../Assets/img/PowerUp-Male.gif';
 // import aura from '../../Assets/img/Aura.gif';
 import powerUpF from '../../Assets/img/PowerUp-Female.gif';
-// import subImage from '../../Assets/img/Idle-Login.png';
+import subImage from '../../Assets/img/Idle-Login.png';
 
 export const GoalResult = ({show, sprite, goal, history, updateSprite, updateGoal}) => {
   const showHideClassName = show ? 'detail-container modal display-block z-index' : 'detail-container modal display-none';
@@ -60,63 +60,47 @@ export const ViewItem = ({show, toggleView, sprite, images, part}) => {
   let itemList = [];
   let items = [];
   let icon = "";
-  // switch(part) {
-  //   case 'Hand': icon = "fas fa-hand-paper"; break;
-  //   case 'Head': icon = "fas fa-hat-wizard"; break;
-  //   case 'Body': icon = "fas fa-tshirt"; break;
-  //   case 'Acc1': icon = "fas fa-ring"; break;
-  //   default: break;
-  // }
+
   switch(part) {
     case 'Hand': itemList = sprite.items.hand; icon = "fas fa-hand-paper"; break;
     case 'Head': itemList = sprite.items.head; icon = "fas fa-hat-wizard"; break;
     case 'Body': itemList = sprite.items.body; icon = "fas fa-tshirt"; break;
-    case 'Acc1': itemList = sprite.items.accessory; icon = "fas fa-ring"; break;
+    case 'Accessory': itemList = sprite.items.accessory; icon = "fas fa-ring"; break;
     default: break;
   }
 
-  // items = itemList.map(item => (
-  //   <div key={item.name} className="detailImg mySlides" style={{ 
-  //     backgroundImage: `url(${subImage})` }}
-  //   ><p className="itemName">{item.name}</p></div>
-  // ));
-  
-  // console.log(itemList);
+  // images.forEach(img => {
+  //   itemList.forEach(item => {
+  //     if(img.location.toString().includes(item.name)){
+  //       if(item.equipped){
+  //         items.unshift(<div key={item.name} className="detailImg mySlides" style={{ 
+  //           backgroundImage: `url(${img.src})` }} title={item.description}
+  //         ><p className="itemName">{item.name}</p></div>);
+  //       } else {
+  //         items.push(<div key={item.name} className="detailImg mySlides" style={{ 
+  //           backgroundImage: `url(${img.src})` }} title={item.description}
+  //         ><p className="itemName">{item.name}</p></div>);
+  //       }
+  //     }
+  //   });
+  // });
+
   images.forEach(img => {
     itemList.forEach(item => {
       if(img.location.toString().includes(item.name)){
         if(item.equipped){
-          items.unshift(<div key={item.name} className="detailImg mySlides" style={{ 
-            backgroundImage: `url(${img.src})` }} title={item.description}
-          ><p className="itemName">{item.name}</p></div>);
+          items.unshift({name: item.name, src: img.src, description: item.description});
         } else {
-          items.push(<div key={item.name} className="detailImg mySlides" style={{ 
-            backgroundImage: `url(${img.src})` }} title={item.description}
-          ><p className="itemName">{item.name}</p></div>);
+          items.push({name: item.name, src: img.src, description: item.description});
         }
       }
     });
   });
 
-  // images.forEach(img => {
-  //   sprite.items.hand.forEach(item => {
-  //     if(img.location.toString().includes(item.name)){
-  //       if(item.equipped){
-  //         items.unshift({name: item.name, src: img.src, description: item.description});
-  //       } else {
-  //         items.push({name: item.name, src: img.src, description: item.description});
-  //       }
-  //     }
-  //   });
-  // });
-  // let mainItems = items.map(item => (
-  //   <div key={item.name} className="detailImg mySlides" style={{ 
-  //     backgroundImage: `url(${item.src})` }} title={item.description}
-  //   ><p className="itemName">{item.name}</p></div>
-  // ));
   //Slideshow
-  let slide = 2;
+  let slide = 1;
   const slideShow = (index) => {
+    document.getElementsByClassName("detailImg")[0].style.display = "none";
     let slides = document.getElementsByClassName("mySlides");
     for (let i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
@@ -127,13 +111,14 @@ export const ViewItem = ({show, toggleView, sprite, images, part}) => {
     if(slides[slide - 1] !== undefined) slides[slide - 1].style.display = "block";
 
     document.getElementById("slideCount").innerText = 
-      ((itemList.length === 0) ? 0 : slide) +"/"+itemList.length;
+      ((itemList.length === 0) ? 0 : slide) +"/"+items.length;
   }
   if (document.getElementsByClassName("slideShow-container").length !== 0 && show) {
-    // console.log(itemList);
     slideShow(slide);
   }
-  const toggle = (x) => { slideShow(slide += x);
+  const toggle = (x) => { 
+    if(items.length !== 0)
+      slideShow(slide += x);
   }
   
   return(
@@ -141,12 +126,19 @@ export const ViewItem = ({show, toggleView, sprite, images, part}) => {
       <div className="details modal-main column">
         <h6 className="detailsHeading"><i className={icon}></i> {part}</h6>
         <div className="slideShow-container wdth-100 hght-100">
-            {items}
+          <div key={part} className="detailImg" style={{ 
+            backgroundImage: `url(${subImage})` }}
+          ></div>
+            {items.map(item=>(
+              <div key={item.name} className="detailImg mySlides" style={{ 
+                backgroundImage: `url(${item.src})` }} title={item.description}
+              ><p className="itemName">{item.name}</p></div>
+            ))}
             <label id="slideCount"></label>
             <p className="prev" onClick={()=>toggle(-1)}>&#10094;</p>
             <p className="next" onClick={()=>toggle(1)}>&#10095;</p>
         </div>
-        <button className="btn1 wdth-50" onClick={()=>toggleView('')}> Close </button>
+        <button onClick={()=>toggleView('')}> Close </button>
       </div>
     </div>
   );

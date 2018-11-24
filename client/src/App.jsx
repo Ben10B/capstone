@@ -138,7 +138,7 @@ class App extends Component {
                   showBullets: true,
                   showProgress: true,
                   exitOnOverlayClick: false,
-                  overlayOpacity: .1,
+                  overlayOpacity: .3,
                   doneLabel: "Complete",
                   skipLabel: "I'll figure it out."
                 }}

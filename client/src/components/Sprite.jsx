@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSpriteByUser } from '../actions/spriteActions';
+import { equipItem } from '../actions/spriteActions';
 import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { ViewItem } from './modals/Modals'
@@ -31,11 +31,6 @@ class Sprite extends Component {
   toggleShowItem = (part) => {
     this.setState({showItem: !this.state.showItem });
     this.setState({part: part });
-    const { sprite } = this.props.sprite;
-    if(part==='Hand')this.setState({itemList: sprite.items.hand});
-    else if(part==='Head')this.setState({itemList: sprite.items.head});
-    else if(part==='Body')this.setState({itemList: sprite.items.body});
-    else if(part==='Accessory')this.setState({itemList: sprite.items.accessory});
   }
   hover = () => { const { sprite } = this.props.sprite;
     document.getElementById('sprite').style.backgroundImage = `url(${(sprite.gender === "Female") ? powerUpF : powerUpM}), url(${aura})`; };
@@ -90,14 +85,14 @@ class Sprite extends Component {
           </ul>
         </div>
         <ViewItem show={this.state.showItem} toggleView={this.toggleShowItem} sprite={sprite}
-          images={this.state.images} part={this.state.part} itemList={this.state.itemList}/>
+          images={this.state.images} part={this.state.part} equip={this.props.equipItem}/>
       </div>
     );
   }
 }
 
 Sprite.propTypes = {
-  getSpriteByUser: propTypes.func.isRequired,
+  equipItem: propTypes.func.isRequired,
   sprite: propTypes.object.isRequired,
   profile: propTypes.object.isRequired,
 }
@@ -107,4 +102,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getSpriteByUser })(withRouter(Sprite));
+export default connect(mapStateToProps, { equipItem })(withRouter(Sprite));

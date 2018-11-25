@@ -55,7 +55,7 @@ export const LevelUp = ({show, sprite}) => {
   );
 }
 
-export const ViewItem = ({show, toggleView, sprite, images, part}) => {
+export const ViewItem = ({show, toggleView, sprite, images, part, equip}) => {
   const showHideClassName = show ? 'detail-container modal display-block z-index' : 'detail-container modal display-none';
   let itemList = [];
   let items = [];
@@ -89,9 +89,9 @@ export const ViewItem = ({show, toggleView, sprite, images, part}) => {
     itemList.forEach(item => {
       if(img.location.toString().includes(item.name)){
         if(item.equipped){
-          items.unshift({name: item.name, src: img.src, description: item.description});
+          items.unshift({name: item.name, src: img.src, description: item.description, eq: item.equipped});
         } else {
-          items.push({name: item.name, src: img.src, description: item.description});
+          items.push({name: item.name, src: img.src, description: item.description, eq: item.equipped});
         }
       }
     });
@@ -117,8 +117,7 @@ export const ViewItem = ({show, toggleView, sprite, images, part}) => {
     slideShow(slide);
   }
   const toggle = (x) => { 
-    if(items.length !== 0)
-      slideShow(slide += x);
+    if(items.length !== 0) slideShow(slide += x);
   }
   
   return(
@@ -130,15 +129,21 @@ export const ViewItem = ({show, toggleView, sprite, images, part}) => {
             backgroundImage: `url(${subImage})` }}
           ></div>
             {items.map(item=>(
-              <div key={item.name} className="detailImg mySlides" style={{ 
-                backgroundImage: `url(${item.src})` }} title={item.description}
-              ><p className="itemName">{item.name}</p></div>
+              <div key={item.name} className="mySlides">
+                <p className="itemName">{item.name}</p>
+                <div className="detailImg" style={{ 
+                backgroundImage: `url(${item.src})` }} title={item.description}/>
+                <p className="itemName">{item.eq ? 
+                  (<button onClick={()=>{equip({part: part, name: item.name, eq: false}); toggleView('');}} className="btn1 equipped">Equipped</button>) : 
+                  (<button onClick={()=>{equip({part: part, name: item.name, eq: true}); toggleView('');}} className="btn1 unequipped">Unequipped</button>)}
+                </p>
+              </div>
             ))}
             <label id="slideCount"></label>
             <p className="prev" onClick={()=>toggle(-1)}>&#10094;</p>
             <p className="next" onClick={()=>toggle(1)}>&#10095;</p>
         </div>
-        <button onClick={()=>toggleView('')}> Close </button>
+        <button className="btn1" onClick={()=>toggleView('')}> Close </button>
       </div>
     </div>
   );

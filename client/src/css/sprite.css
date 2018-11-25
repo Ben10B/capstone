@@ -30,33 +30,46 @@
   /* background-color: rgba(0, 0, 0, 0.089); */
   /* background-color: rgba(0, 0, 0, 0.014); */
 }
+.mySlides *{ display: inline-flex;
+}
+.mySlides .detailImg{
+  min-width: 75px;
+  min-height: 25px;
+}
 .itemName{
   background-color: rgba(255, 255, 255, 0.87);
   color: #000;
   font-weight: bold;
 }
+.equipped:hover{
+  background-color: rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+.equipped:hover::after{ content: ' X';
+}
+.unequipped:hover{
+  background-color: rgba(0, 255, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+.unequipped:hover::after{ content: ' \2713';
+}
 @media all and (max-height: 565px){
-  #sprite{
-    background-size: 6em, contain;
+  #sprite{ background-size: 6em, contain;
   }
 }
 @media all and (max-height: 480px){
-  #sprite{
-    background-size: 5em, contain;
+  #sprite{ background-size: 5em, contain;
   }
 }
 @media all and (max-height: 388px){
-  #sprite{
-    background-size: 4em, contain;
+  #sprite{ background-size: 4em, contain;
   }
 }
 @media all and (max-height: 320px){
-  #sprite{
-    background-size: 3em, contain;
+  #sprite{ background-size: 3em, contain;
   }
 }
 @media all and (max-height: 275px){
-  #sprite{
-    background-size: 10%, contain;
+  #sprite{ background-size: 10%, contain;
   }
 }

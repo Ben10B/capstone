@@ -67,6 +67,49 @@ router.post('/update/:id', passport.authenticate('jwt', { session: false }), (re
     );
 });
 
+// @route   POST api/sprite/eqItem
+// @desc    Update sprite's weapon/item
+// @access  Public
+router.post('/eqItem', passport.authenticate('jwt', { session: false }), (req, res) => {
+  let part = req.body.part;
+  let name = req.body.name;
+  let equipped = req.body.eq;
+
+  Sprite.findOne({user: req.user.id})
+    .then(sprite => {
+      if(sprite){
+        if(part === 'Hand'){
+          sprite.items.hand.forEach(item => {
+            if(item.name === name) item.equipped = equipped;
+            else item.equipped = false;
+          });
+        }
+        if(part === 'Head'){
+          sprite.items.head.forEach(item => {
+            if(item.name === name) item.equipped = equipped;
+            else item.equipped = false;
+          });
+        }
+        if(part === 'Body'){
+          sprite.items.body.forEach(item => {
+            if(item.name === name) item.equipped = equipped;
+            else item.equipped = false;
+          });
+        }
+        if(part === 'Accessory'){
+          sprite.items.accessory.forEach(item => {
+            if(item.name === name) item.equipped = equipped;
+            else item.equipped = false;
+          });
+        }
+        sprite.save().then(sprite => res.json(sprite));
+      }
+    })
+    .catch(err =>
+      res.status(404).json({ nospritefound: 'No sprite found' })
+    );
+});
+
 // @route   DELETE api/sprite/:id
 // @desc    Delete sprite
 // @access  Private

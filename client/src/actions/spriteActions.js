@@ -42,6 +42,24 @@ export const updateSprite = (spriteData, id) => dispatch => {
     ); 
 };
 
+// Update item
+export const equipItem = (spriteData) => dispatch => {
+  axios
+    .post(`api/sprite/eqItem`, spriteData)
+    .then(res => 
+      dispatch({
+        type: UPDATE_SPRITE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: UPDATE_SPRITE,
+        payload: null
+      })
+    ); 
+};
+
 // Get Sprite By User
 export const getSpriteByUser = (user_id) => dispatch => {
   axios

@@ -56,6 +56,7 @@ const GoalSchema = new Schema({
       dayOfMonth: { type: String },
       date: { type: Date },
       details: { type: String },
+      item: { type: String }
     }
   ],
   result: {

@@ -104,11 +104,11 @@ class CreateGoal extends Component {
   }
   onSubmit = (e) => {
     e.preventDefault();
-    const days = this.calendar(this.state.date);
+    const { sprite } = this.props.sprite;
+    const days = this.calendar(this.state.date, sprite);
     const maxHealth = days.length;
     this.setState({numberOfDays: maxHealth});
     let diff = this.calcDifficulty(maxHealth);
-    const { sprite } = this.props.sprite;
     const goalData = {
       title: this.state.title,
       description: this.state.description,
@@ -133,7 +133,7 @@ class CreateGoal extends Component {
     this.props.checkGoal(goalData);
     this.setState({goalData: goalData});
   }
-  calendar = (endDate) => {
+  calendar = (endDate, sprite) => {
     let current = new Date();
     let cMonth = current.getMonth();
     let cYear = current.getFullYear();
@@ -176,6 +176,11 @@ class CreateGoal extends Component {
         tempArray.push({ status: "inactive", year: newDate.year(), month: newDate.month(), dayOfMonth: newDate.date(), date: moment(newDate, 'YYYY-MM-DD') });
       }
       i++;
+    }
+    //If this is the first goal add guaranteed item
+    if(sprite.goalsCreated === 0){
+      let gItem = Math.floor(Math.random() * tempArray.length);
+      tempArray[gItem].item = 'Virtuous';
     }
     
     return tempArray;
@@ -344,7 +349,6 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
           </div>
           {cgState.partners.length === 0 ? "" : (
             <div key={Math.random()+Math.random()}>
-              {/* <p>Friends</p> */}
               <p>Friendly Fire: {cgState.friendlyFire ? 'ON' : 'OFF'}</p>
               {cgState.partners.map(friend => (<p key={friend.id}>{friend.name}</p>))}
             </div>

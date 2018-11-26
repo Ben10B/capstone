@@ -22,6 +22,7 @@ class Calendar extends Component {
       selectedDay: '',
       selectedGoal: this.props.selectedGoal,
       sprite: this.props.sprite.sprite,
+      images: [],
     }
     this.switchMonths = this.switchMonths.bind(this);
     this.getDays = this.getDays.bind(this);
@@ -145,7 +146,6 @@ class Calendar extends Component {
             </tbody>
           </table>
         </div>
-        {/* <Details calendarState={this.state} click={this.updateStatus} /> */}
       </div>
     );
   }
@@ -159,7 +159,7 @@ class Day extends Component {
       isToday: '',
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     let currentGoalDay = moment(this.props.date, 'YYYY-MM-DD');
     if (currentGoalDay.isSame(this.props.calendarState.today)) {
       this.setState({ isToday: '-today' });
@@ -176,10 +176,18 @@ class Day extends Component {
     }
   }
   render() {
+    let item = (this.state.dailyGoal.item === '') ? '' : this.state.dailyGoal.item;
+      let req = require.context("../Assets/img", false, /.*\.*$/);
+      req.keys().forEach(function(key){
+        if(key.toString().includes(item)){ item = {location: key, src: req(key)};}
+      });
     return (
       <td className={`day ${this.state.dailyGoal.status}${this.state.isToday}`}
         onClick={() => this.props.showModalClick(this.props.element, this.state.dailyGoal.status, this.props.calendarState)}>
         {this.props.dateString}
+        {item !== undefined ? (
+          <div className="item" style={{ backgroundImage: `url(${item.src})` }}></div>
+        ) : ''}
       </td>
     );
   }

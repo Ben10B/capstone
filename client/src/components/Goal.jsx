@@ -157,6 +157,7 @@ class Goal extends Component {
     updatedSprite.goalsCompleted++; //Increase goal record
     if(updatedSprite.goalsCompleted === 1){
       updatedSprite.achievements.push({name: 'Complete 1 Goal', acquired: true});
+      updatedSprite.items.hand.push({name: 'Virtuous', equipped: false, description: 'The Strongest Katana'});
     }
     updatedSprite.gold += Math.round(this.receiveReward(diff) * 1.5); //Add gold * bonus
 

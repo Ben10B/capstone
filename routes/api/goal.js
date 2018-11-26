@@ -136,6 +136,7 @@ router.post('/', passport.authenticate('jwt', { session: false }),
               maxHealth: req.body.maxHealth,
               days: req.body.days,
               date: req.body.date,
+              item: req.body.date,
               friendlyFire: req.body.friendlyFire,
               result: 'Grindin'
             });
@@ -158,6 +159,7 @@ router.post('/', passport.authenticate('jwt', { session: false }),
         maxHealth: req.body.maxHealth,
         days: req.body.days,
         date: req.body.date,
+        item: req.body.date,
         friendlyFire: req.body.friendlyFire,
         result: 'Grindin'
       });

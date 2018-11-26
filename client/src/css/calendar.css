@@ -96,4 +96,12 @@
  .complete:hover, .complete-today:hover,
  .incomplete:hover, .incomplete-today:hover{ cursor: pointer;
 }
-/* -------------------------------------------------------------------- */
+
+.item{
+  background-repeat: no-repeat;
+  background-position: center;
+  min-width: 15px;
+  min-height: 15px;
+  background-size: cover;
+  float: right;
+}

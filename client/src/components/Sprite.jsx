@@ -81,6 +81,7 @@ class Sprite extends Component {
             <li>Experience: {sprite.experience}/{sprite.experienceLimit}</li>
             <li>Gold: {sprite.gold}</li>
             <li>Goals Completed: {sprite.goalsCompleted}</li>
+            <li>Goals Created: {sprite.goalsCreated}</li>
             <li>Achievements Obtained: {sprite.achievements.length}</li>
           </ul>
         </div>

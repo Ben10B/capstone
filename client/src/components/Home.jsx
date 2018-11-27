@@ -49,8 +49,8 @@ const GoalDetail = ({ goal, clickFunction, deleteFunction, homeState }) => {
       </div>
       <div className="flex-5" onClick={() => clickFunction(goal)}>
         <p>Health: <i>{goal.health}/{goal.maxHealth}</i></p>
-        <p>{moment(goal.date, 'YYYY-MM-DD').format('MMM Do, YYYY')}</p>
-        {/* <p>End Date: {moment(goal.date, 'YYYY-MM-DD').format('MMM Do, YYYY')}</p> */}
+        {/* <p>{moment(goal.date, 'YYYY-MM-DD').format('MMM Do, YYYY')}</p> */}
+        <p>Finish: {moment(goal.date).format('MMM Do YYYY')}</p>
       </div>
       {homeState.selectedSort ?
         (<div className="delBTN" onClick={() => deleteFunction(goal._id)}><i className="fas fa-trash"></i></div>)
@@ -129,7 +129,7 @@ class Home extends Component {
         <div className="sortingDiv">
           <p>SORT: </p>
           <button id={this.state.selectedSort === 'sort1'?'sort1':null} className="btn1" onClick={this.getGoalsInProgress}>In Progress</button>
-          <button id={this.state.selectedSort === 'sort2'?'sort2':null} className="btn1 green" onClick={this.getCompletedGoals}>Complete</button>
+          <button id={this.state.selectedSort === 'sort2'?'sort2':null} className="btn1 green" onClick={this.getCompletedGoals}>Completed</button>
           <button id={this.state.selectedSort === 'sort3'?'sort3':null} className="btn1 red" onClick={this.getIncompletedGoals}>Incomplete</button>
         </div>
         <GoalList homeState={this.state} goalList={goals} click={this.showGoal} delete={this.deleteGoal} />

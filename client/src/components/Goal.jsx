@@ -179,6 +179,7 @@ class Goal extends Component {
           </div>
           <div className="pad-2 row">
             <p>{this.state.selectedGoal.description}</p>
+            <p>Finish By: {moment(this.props.selectedGoal.date, 'YYYY-MM-DD').format('MMM Do, YYYY')}</p>
             {this.state.selectedGoal.reward ? 
               <details><summary>REWARD</summary> {this.state.selectedGoal.reward}</details> : ''}
             {this.state.selectedGoal.punishment ? 

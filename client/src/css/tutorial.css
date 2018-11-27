@@ -2,7 +2,7 @@
   font-weight: bold;
 }
 .subjectContainer{
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.35);
   box-shadow: 0 0 50px #000;
   color: #fff;
   display: flex;
@@ -14,8 +14,8 @@
 .subjectContainer h4, .subjectContainer details{
   margin-bottom: 5px;
 }
-.subjectContainer details{
-  
+summary{ background-color: rgba(0, 0, 0, 0.3);
+  padding: 2px;
 }
 .subjectContainer strong{
   color: #00aeef;

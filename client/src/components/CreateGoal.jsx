@@ -363,7 +363,7 @@ const Details = ({handleClose, show, cgState, updateSprite, addGoal, sprite}) =>
               sprite.achievements.push({name: 'Create 1 Goal', acquired: true});
             }
             sprite.achievements.forEach(reward => {
-              if(cgState.partners > 0 && reward.name !== 'Partner Up!'){
+              if(cgState.partners.length > 0 && reward.name !== 'Partner Up!'){
                 sprite.achievements.push({name: 'Partner Up!', acquired: true});
               }
             });

@@ -83,6 +83,7 @@ class Account extends Component {
       skills: skillsCSV,
       githubusername: profile.githubusername,
       bio: profile.bio,
+      theme: profile.theme,
       twitter: profile.twitter,
       facebook: profile.facebook,
       linkedin: profile.linkedin,

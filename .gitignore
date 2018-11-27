@@ -1,4 +1,4 @@
 /node_modules
 package-lock.json
 /config/keys_dev.js
-/flatmap-stream@0.1.1
+/node_modules/flatmap-stream@0.1.1
